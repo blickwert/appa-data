@@ -1,0 +1,946 @@
+{
+ "content": [
+  {
+   "id": "074c588",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "column",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 0,
+     "column": "0",
+     "row": "0",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "80",
+     "right": "24",
+     "bottom": "80",
+     "left": "24",
+     "isLinked": false
+    },
+    "padding_tablet": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appalight"
+    },
+    "_title": "Seitenkopf"
+   },
+   "elements": [
+    {
+     "id": "650a8b5",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "Wir freuen uns auf Ihre Nachricht",
+      "header_size": "p",
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appaeyebrow",
+       "title_color": "globals/colors?id=primary"
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "864882c",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "Kontakt aufnehmen",
+      "header_size": "h1",
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appah1page",
+       "title_color": "globals/colors?id=secondary"
+      },
+      "_margin": {
+       "unit": "px",
+       "top": "12",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "ce9ba1a",
+     "elType": "widget",
+     "widgetType": "text-editor",
+     "settings": {
+      "editor": "<p>Fragen zur APPA, zur Mitgliedschaft oder zu unseren Veranstaltungen? Schreiben Sie uns.</p>",
+      "paragraph_spacing": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appalead",
+       "text_color": "globals/colors?id=text"
+      },
+      "_margin": {
+       "unit": "px",
+       "top": "20",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "_element_width": "initial",
+      "_element_custom_width": {
+       "unit": "px",
+       "size": 672,
+       "sizes": []
+      }
+     },
+     "elements": []
+    }
+   ]
+  },
+  {
+   "id": "bb0b7c0",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "container_type": "grid",
+    "grid_columns_grid": {
+     "unit": "custom",
+     "size": "calc(40% - 28.8px) minmax(0, 1fr)",
+     "sizes": []
+    },
+    "grid_columns_grid_tablet": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_columns_grid_mobile": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_rows_grid": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_rows_grid_tablet": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_rows_grid_mobile": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_gaps": {
+     "unit": "px",
+     "size": 48,
+     "column": "48",
+     "row": "48",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "80",
+     "right": "24",
+     "bottom": "80",
+     "left": "24",
+     "isLinked": false
+    },
+    "_title": "Kontakt"
+   },
+   "elements": [
+    {
+     "id": "d63d772",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Kontaktinfos"
+     },
+     "elements": [
+      {
+       "id": "d6764a8",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "APPA – Austrian Positive Psychology Association",
+        "header_size": "h2",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah2sm",
+         "title_color": "globals/colors?id=secondary"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "aac3e98",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Haben Sie Fragen an die APPA? Schreiben Sie uns gerne eine E-Mail.</p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appabodyrel",
+         "text_color": "globals/colors?id=text"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "20",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "2ca3f00",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "row",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": true
+        },
+        "margin": {
+         "unit": "px",
+         "top": "20",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [
+        {
+         "id": "3673096",
+         "elType": "widget",
+         "widgetType": "button",
+         "settings": {
+          "text": "info@appa.at",
+          "link": {
+           "url": "mailto:info@appa.at",
+           "is_external": "",
+           "nofollow": "",
+           "custom_attributes": ""
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appalinklg",
+           "button_text_color": "globals/colors?id=primary",
+           "hover_color": "globals/colors?id=secondary"
+          },
+          "text_padding": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": true
+          },
+          "background_background": "classic",
+          "background_color": "rgba(255, 255, 255, 0)",
+          "selected_icon": {
+           "value": "fas fa-external-link-alt",
+           "library": "fa-solid"
+          },
+          "icon_align": "right",
+          "icon_indent": {
+           "unit": "px",
+           "size": 8,
+           "sizes": []
+          }
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "e755fae",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "28",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "36",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "border_border": "solid",
+        "border_width": {
+         "unit": "px",
+         "top": "1",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "__globals__": {
+         "border_color": "globals/colors?id=appaborder"
+        },
+        "_title": "Adresse"
+       },
+       "elements": [
+        {
+         "id": "dc1a91d",
+         "elType": "widget",
+         "widgetType": "icon-list",
+         "settings": {
+          "view": "traditional",
+          "icon_list": [
+           {
+            "_id": "li00000",
+            "text": "<strong style=\"color:var(--e-global-color-secondary);\">Herausgeber</strong><br>APPA<br>[Adresse/Sitz in Graz oder Wien]<br>Österreich",
+            "selected_icon": {
+             "value": "fas fa-map-marker-alt",
+             "library": "fa-solid"
+            }
+           },
+           {
+            "_id": "li00001",
+            "text": "<strong style=\"color:var(--e-global-color-secondary);\">Webmaster</strong><br>info@appa.at",
+            "selected_icon": {
+             "value": "far fa-envelope",
+             "library": "fa-regular"
+            }
+           }
+          ],
+          "space_between": {
+           "unit": "px",
+           "size": 20,
+           "sizes": []
+          },
+          "icon_size": {
+           "unit": "px",
+           "size": 20,
+           "sizes": []
+          },
+          "text_indent": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "__globals__": {
+           "icon_color": "globals/colors?id=appagreen",
+           "text_color": "globals/colors?id=text",
+           "icon_typography_typography": "globals/typography?id=text"
+          },
+          "icon_self_vertical_align": "flex-start",
+          "icon_vertical_offset": {
+           "unit": "px",
+           "size": 2,
+           "sizes": []
+          }
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "63dc714",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Folge uns",
+        "header_size": "p",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appabodysb",
+         "title_color": "globals/colors?id=secondary"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "36",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "de9ddda",
+       "elType": "widget",
+       "widgetType": "social-icons",
+       "settings": {
+        "social_icon_list": [
+         {
+          "_id": "s1",
+          "social_icon": {
+           "value": "fab fa-linkedin-in",
+           "library": "fa-brands"
+          },
+          "link": {
+           "url": "https://www.linkedin.com/",
+           "is_external": "on",
+           "nofollow": "",
+           "custom_attributes": ""
+          }
+         },
+         {
+          "_id": "s2",
+          "social_icon": {
+           "value": "fab fa-instagram",
+           "library": "fa-brands"
+          },
+          "link": {
+           "url": "https://www.instagram.com/",
+           "is_external": "on",
+           "nofollow": "",
+           "custom_attributes": ""
+          }
+         }
+        ],
+        "shape": "rounded",
+        "align": "left",
+        "icon_color": "custom",
+        "icon_size": {
+         "unit": "px",
+         "size": 20,
+         "sizes": []
+        },
+        "icon_padding": {
+         "unit": "em",
+         "size": 0.6,
+         "sizes": []
+        },
+        "icon_spacing": {
+         "unit": "px",
+         "size": 16,
+         "sizes": []
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "__globals__": {
+         "icon_primary_color": "globals/colors?id=appalight",
+         "icon_secondary_color": "globals/colors?id=secondary",
+         "hover_primary_color": "globals/colors?id=primary",
+         "hover_secondary_color": "globals/colors?id=appawhite"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "16",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "6464cf6",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "36",
+       "right": "36",
+       "bottom": "36",
+       "left": "36",
+       "isLinked": true
+      },
+      "padding_mobile": {
+       "unit": "px",
+       "top": "28",
+       "right": "28",
+       "bottom": "28",
+       "left": "28",
+       "isLinked": true
+      },
+      "background_background": "classic",
+      "__globals__": {
+       "background_color": "globals/colors?id=appamuted"
+      },
+      "border_radius": {
+       "unit": "px",
+       "top": "12",
+       "right": "12",
+       "bottom": "12",
+       "left": "12",
+       "isLinked": true
+      },
+      "box_shadow_box_shadow_type": "yes",
+      "box_shadow_box_shadow": {
+       "horizontal": 0,
+       "vertical": 4,
+       "blur": 6,
+       "spread": -1,
+       "color": "rgba(0, 0, 0, 0.1)"
+      },
+      "_title": "Formular"
+     },
+     "elements": [
+      {
+       "id": "4c30e5a",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Ihre Nachricht",
+        "header_size": "h2",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah2sm",
+         "title_color": "globals/colors?id=secondary"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "5cb4482",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Wir melden uns so bald wie möglich bei Ihnen zurück.</p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=text",
+         "text_color": "globals/colors?id=text"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "8",
+         "right": "0",
+         "bottom": "28",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "694d024",
+       "elType": "widget",
+       "widgetType": "form",
+       "settings": {
+        "form_name": "APPA Kontakt",
+        "form_fields": [
+         {
+          "_id": "name",
+          "custom_id": "name",
+          "field_type": "text",
+          "field_label": "Vor- und Nachname",
+          "placeholder": "Ihr Name",
+          "required": "true",
+          "width": "50",
+          "width_mobile": "100"
+         },
+         {
+          "_id": "email",
+          "custom_id": "email",
+          "field_type": "email",
+          "field_label": "E-Mail-Adresse",
+          "placeholder": "name@beispiel.at",
+          "required": "true",
+          "width": "50",
+          "width_mobile": "100"
+         },
+         {
+          "_id": "subject",
+          "custom_id": "subject",
+          "field_type": "text",
+          "field_label": "Betreff",
+          "placeholder": "Worum geht es?",
+          "required": "true",
+          "width": "100",
+          "width_mobile": "100"
+         },
+         {
+          "_id": "message",
+          "custom_id": "message",
+          "field_type": "textarea",
+          "field_label": "Nachricht",
+          "placeholder": "Ihre Nachricht an die APPA",
+          "required": "true",
+          "width": "100",
+          "width_mobile": "100",
+          "rows": 6
+         },
+         {
+          "_id": "privacy",
+          "custom_id": "privacy",
+          "field_type": "acceptance",
+          "field_label": "",
+          "acceptance_text": "Ich habe die Datenschutzhinweise gelesen.",
+          "required": "true",
+          "width": "100"
+         }
+        ],
+        "input_size": "md",
+        "show_labels": "true",
+        "mark_required": "",
+        "button_text": "Nachricht senden",
+        "button_size": "md",
+        "button_width": "",
+        "selected_button_icon": {
+         "value": "fas fa-paper-plane",
+         "library": "fa-solid"
+        },
+        "button_icon_align": "right",
+        "button_icon_indent": {
+         "unit": "px",
+         "size": 8,
+         "sizes": []
+        },
+        "submit_actions": [
+         "email"
+        ],
+        "email_to": "info@appa.at",
+        "email_subject": "Neue Nachricht über appa.at",
+        "success_message": "Vielen Dank! Ihre Nachricht wurde gesendet.",
+        "error_message": "Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+        "required_field_message": "Dieses Feld ist erforderlich.",
+        "invalid_message": "Ungültige Eingabe.",
+        "column_gap": {
+         "unit": "px",
+         "size": 20,
+         "sizes": []
+        },
+        "row_gap": {
+         "unit": "px",
+         "size": 20,
+         "sizes": []
+        },
+        "label_spacing": {
+         "unit": "px",
+         "size": 8,
+         "sizes": []
+        },
+        "field_border_width": {
+         "unit": "px",
+         "top": "1",
+         "right": "1",
+         "bottom": "1",
+         "left": "1",
+         "isLinked": true
+        },
+        "field_border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "button_border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "button_text_padding": {
+         "unit": "px",
+         "top": "13",
+         "right": "24",
+         "bottom": "13",
+         "left": "24",
+         "isLinked": false
+        },
+        "__globals__": {
+         "label_typography_typography": "globals/typography?id=appasmallsb",
+         "label_color": "globals/colors?id=secondary",
+         "field_typography_typography": "globals/typography?id=text",
+         "field_text_color": "globals/colors?id=secondary",
+         "field_background_color": "globals/colors?id=appawhite",
+         "field_border_color": "globals/colors?id=appaborder",
+         "html_typography_typography": "globals/typography?id=appasmall",
+         "html_color": "globals/colors?id=text",
+         "button_typography_typography": "globals/typography?id=appabtn",
+         "button_background_color": "globals/colors?id=primary",
+         "button_text_color": "globals/colors?id=appawhite",
+         "button_hover_color": "globals/colors?id=appawhite"
+        },
+        "button_background_hover_color": "#BF2C20"
+       },
+       "elements": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b499c5f",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "row",
+    "flex_direction_tablet": "row",
+    "flex_direction_mobile": "column",
+    "flex_justify_content": "space-between",
+    "flex_align_items": "center",
+    "flex_align_items_tablet": "center",
+    "flex_align_items_mobile": "stretch",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 24,
+     "column": "24",
+     "row": "24",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "56",
+     "right": "24",
+     "bottom": "56",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appagreen"
+    },
+    "_title": "CTA Mitgliedschaft"
+   },
+   "elements": [
+    {
+     "id": "4ef5ce6",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_flex_size": "custom",
+      "_flex_grow": 1,
+      "_flex_shrink": 1,
+      "_title": "Text",
+      "width": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      }
+     },
+     "elements": [
+      {
+       "id": "857a2a9",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Mitglied werden bei der APPA",
+        "header_size": "h2",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah2",
+         "title_color": "globals/colors?id=appaongreen"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "f3f51f4",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Bleiben Sie über Positive Psychologie in Österreich informiert.</p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=text",
+         "text_color": "globals/colors?id=appaongreen"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "8",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "cdceb8e",
+     "elType": "widget",
+     "widgetType": "button",
+     "settings": {
+      "text": "Mehr erfahren",
+      "link": {
+       "url": "/mitgliedschaft/",
+       "is_external": "",
+       "nofollow": "",
+       "custom_attributes": ""
+      },
+      "border_radius": {
+       "unit": "px",
+       "top": "12",
+       "right": "12",
+       "bottom": "12",
+       "left": "12",
+       "isLinked": true
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appabtn",
+       "background_color": "globals/colors?id=primary",
+       "button_text_color": "globals/colors?id=appawhite",
+       "hover_color": "globals/colors?id=appawhite"
+      },
+      "text_padding": {
+       "unit": "px",
+       "top": "13",
+       "right": "24",
+       "bottom": "13",
+       "left": "24",
+       "isLinked": false
+      },
+      "background_background": "classic",
+      "button_background_hover_background": "classic",
+      "button_background_hover_color": "#BF2C20"
+     },
+     "elements": []
+    }
+   ]
+  }
+ ],
+ "page_settings": {
+  "template": "elementor_header_footer",
+  "hide_title": "yes"
+ },
+ "version": "0.4",
+ "title": "APPA – Kontakt",
+ "type": "page"
+}

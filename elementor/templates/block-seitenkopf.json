@@ -1,0 +1,126 @@
+{
+ "content": [
+  {
+   "id": "5e8de2d",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "column",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 0,
+     "column": "0",
+     "row": "0",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "80",
+     "right": "24",
+     "bottom": "80",
+     "left": "24",
+     "isLinked": false
+    },
+    "padding_tablet": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appalight"
+    },
+    "_title": "Seitenkopf"
+   },
+   "elements": [
+    {
+     "id": "9fa4265",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "Eyebrow",
+      "header_size": "p",
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appaeyebrow",
+       "title_color": "globals/colors?id=primary"
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "d50d130",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "Seitentitel",
+      "header_size": "h1",
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appah1page",
+       "title_color": "globals/colors?id=secondary"
+      },
+      "_margin": {
+       "unit": "px",
+       "top": "12",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "8e6dd0c",
+     "elType": "widget",
+     "widgetType": "text-editor",
+     "settings": {
+      "editor": "<p>Kurzer einleitender Text zur Seite.</p>",
+      "paragraph_spacing": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appalead",
+       "text_color": "globals/colors?id=text"
+      },
+      "_margin": {
+       "unit": "px",
+       "top": "20",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "_element_width": "initial",
+      "_element_custom_width": {
+       "unit": "px",
+       "size": 672,
+       "sizes": []
+      }
+     },
+     "elements": []
+    }
+   ]
+  }
+ ],
+ "page_settings": [],
+ "version": "0.4",
+ "title": "APPA – Block: Seitenkopf",
+ "type": "section"
+}

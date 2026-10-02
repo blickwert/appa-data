@@ -1,0 +1,1440 @@
+{
+ "content": [
+  {
+   "id": "9fdfe89",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "column",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 0,
+     "column": "0",
+     "row": "0",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "80",
+     "right": "24",
+     "bottom": "80",
+     "left": "24",
+     "isLinked": false
+    },
+    "padding_tablet": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appalight"
+    },
+    "_title": "Seitenkopf"
+   },
+   "elements": [
+    {
+     "id": "184c996",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "APPA Kalender",
+      "header_size": "p",
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appaeyebrow",
+       "title_color": "globals/colors?id=primary"
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "4c4e1af",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "Veranstaltungen",
+      "header_size": "h1",
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appah1page",
+       "title_color": "globals/colors?id=secondary"
+      },
+      "_margin": {
+       "unit": "px",
+       "top": "12",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "aafc8bc",
+     "elType": "widget",
+     "widgetType": "text-editor",
+     "settings": {
+      "editor": "<p>Impulse aus Forschung und Praxis, neue Perspektiven und Begegnung innerhalb der Positiven Psychologie.</p>",
+      "paragraph_spacing": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appalead",
+       "text_color": "globals/colors?id=text"
+      },
+      "_margin": {
+       "unit": "px",
+       "top": "20",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "_element_width": "initial",
+      "_element_custom_width": {
+       "unit": "px",
+       "size": 672,
+       "sizes": []
+      }
+     },
+     "elements": []
+    }
+   ]
+  },
+  {
+   "id": "64bd548",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "container_type": "grid",
+    "grid_columns_grid": {
+     "unit": "fr",
+     "size": 2,
+     "sizes": []
+    },
+    "grid_columns_grid_tablet": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_columns_grid_mobile": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_rows_grid": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_rows_grid_tablet": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_rows_grid_mobile": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_gaps": {
+     "unit": "px",
+     "size": 32,
+     "column": "32",
+     "row": "32",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "_title": "Termine"
+   },
+   "elements": [
+    {
+     "id": "e653f2f",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "background_background": "classic",
+      "__globals__": {
+       "background_color": "globals/colors?id=appawhite",
+       "border_color": "globals/colors?id=appaborder"
+      },
+      "border_border": "solid",
+      "border_width": {
+       "unit": "px",
+       "top": "1",
+       "right": "1",
+       "bottom": "1",
+       "left": "1",
+       "isLinked": true
+      },
+      "border_radius": {
+       "unit": "px",
+       "top": "12",
+       "right": "12",
+       "bottom": "12",
+       "left": "12",
+       "isLinked": true
+      },
+      "box_shadow_box_shadow_type": "yes",
+      "box_shadow_box_shadow": {
+       "horizontal": 0,
+       "vertical": 4,
+       "blur": 6,
+       "spread": -1,
+       "color": "rgba(0, 0, 0, 0.1)"
+      },
+      "overflow": "hidden",
+      "html_tag": "article",
+      "_title": "Event-Karte"
+     },
+     "elements": [
+      {
+       "id": "9963755",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "https://uxmagic.blob.core.windows.net/public/agent-images/appa-event-1-1787310427059-0ox6xea5ag88.png",
+         "id": "",
+         "alt": "Speaker presenting at a positive psychology lecture",
+         "source": "library",
+         "size": ""
+        },
+        "image_size": "full",
+        "width": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        },
+        "align": "left",
+        "height": {
+         "unit": "custom",
+         "size": "auto; aspect-ratio: 16 / 9",
+         "sizes": []
+        },
+        "object-fit": "cover"
+       },
+       "elements": []
+      },
+      {
+       "id": "23a2cab",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "28",
+         "right": "28",
+         "bottom": "28",
+         "left": "28",
+         "isLinked": true
+        },
+        "_title": "Inhalt"
+       },
+       "elements": [
+        {
+         "id": "a49733f",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "row",
+          "flex_align_items": "center",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 12,
+           "column": "12",
+           "row": "12",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": true
+          },
+          "_title": "Datum"
+         },
+         "elements": [
+          {
+           "id": "45fbc09",
+           "elType": "widget",
+           "widgetType": "heading",
+           "settings": {
+            "title": "Di., [Datum]",
+            "header_size": "span",
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appabodysb",
+             "title_color": "globals/colors?id=secondary",
+             "_background_color": "globals/colors?id=appalight"
+            },
+            "_background_background": "classic",
+            "_padding": {
+             "unit": "px",
+             "top": "8",
+             "right": "12",
+             "bottom": "8",
+             "left": "12",
+             "isLinked": false
+            },
+            "_border_radius": {
+             "unit": "px",
+             "top": "12",
+             "right": "12",
+             "bottom": "12",
+             "left": "12",
+             "isLinked": true
+            },
+            "_element_width": "auto"
+           },
+           "elements": []
+          },
+          {
+           "id": "0ebe2ef",
+           "elType": "widget",
+           "widgetType": "heading",
+           "settings": {
+            "title": "[Uhrzeit]",
+            "header_size": "span",
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appabodysb",
+             "title_color": "globals/colors?id=primary"
+            }
+           },
+           "elements": []
+          }
+         ]
+        },
+        {
+         "id": "41e4624",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Öffentlicher Vortrag: Positive Psychologie im Berufsalltag",
+          "header_size": "h2",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appah2sm",
+           "title_color": "globals/colors?id=secondary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "20",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "244381c",
+         "elType": "widget",
+         "widgetType": "icon-list",
+         "settings": {
+          "view": "traditional",
+          "icon_list": [
+           {
+            "_id": "li00000",
+            "text": "Live-Stream via Zoom",
+            "selected_icon": {
+             "value": "fas fa-desktop",
+             "library": "fa-solid"
+            }
+           }
+          ],
+          "space_between": {
+           "unit": "px",
+           "size": 16,
+           "sizes": []
+          },
+          "icon_size": {
+           "unit": "px",
+           "size": 20,
+           "sizes": []
+          },
+          "text_indent": {
+           "unit": "px",
+           "size": 8,
+           "sizes": []
+          },
+          "__globals__": {
+           "icon_color": "globals/colors?id=appagreen",
+           "text_color": "globals/colors?id=text",
+           "icon_typography_typography": "globals/typography?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "16",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "c0c5146",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Wie stärken wir Wohlbefinden, Beziehungen und Leistung im Arbeitsalltag? Ein öffentlicher Impuls mit anschliessendem Austausch.</p>",
+          "paragraph_spacing": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabodyrel",
+           "text_color": "globals/colors?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "20",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "00b3139",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "row",
+          "flex_wrap": "wrap",
+          "flex_wrap_tablet": "wrap",
+          "flex_wrap_mobile": "wrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 12,
+           "column": "12",
+           "row": "12",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": true
+          },
+          "margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "_title": "Buttons"
+         },
+         "elements": [
+          {
+           "id": "6e1552c",
+           "elType": "widget",
+           "widgetType": "button",
+           "settings": {
+            "text": "Anmelden",
+            "link": {
+             "url": "#",
+             "is_external": "",
+             "nofollow": "",
+             "custom_attributes": ""
+            },
+            "border_radius": {
+             "unit": "px",
+             "top": "12",
+             "right": "12",
+             "bottom": "12",
+             "left": "12",
+             "isLinked": true
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appabtn",
+             "background_color": "globals/colors?id=primary",
+             "button_text_color": "globals/colors?id=appawhite",
+             "hover_color": "globals/colors?id=appawhite"
+            },
+            "text_padding": {
+             "unit": "px",
+             "top": "13",
+             "right": "20",
+             "bottom": "13",
+             "left": "20",
+             "isLinked": false
+            },
+            "background_background": "classic",
+            "button_background_hover_background": "classic",
+            "button_background_hover_color": "#BF2C20"
+           },
+           "elements": []
+          },
+          {
+           "id": "4cb0c5c",
+           "elType": "widget",
+           "widgetType": "button",
+           "settings": {
+            "text": "Details",
+            "link": {
+             "url": "#",
+             "is_external": "",
+             "nofollow": "",
+             "custom_attributes": ""
+            },
+            "border_radius": {
+             "unit": "px",
+             "top": "12",
+             "right": "12",
+             "bottom": "12",
+             "left": "12",
+             "isLinked": true
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appabtn",
+             "button_text_color": "globals/colors?id=secondary",
+             "border_color": "globals/colors?id=appaborder",
+             "hover_color": "globals/colors?id=primary",
+             "button_hover_border_color": "globals/colors?id=primary"
+            },
+            "text_padding": {
+             "unit": "px",
+             "top": "13",
+             "right": "20",
+             "bottom": "13",
+             "left": "20",
+             "isLinked": false
+            },
+            "background_background": "classic",
+            "background_color": "rgba(255, 255, 255, 0)",
+            "border_border": "solid",
+            "border_width": {
+             "unit": "px",
+             "top": "1",
+             "right": "1",
+             "bottom": "1",
+             "left": "1",
+             "isLinked": true
+            }
+           },
+           "elements": []
+          }
+         ]
+        },
+        {
+         "id": "9a9a57f",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "row",
+          "flex_justify_content": "space-between",
+          "flex_align_items": "center",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 0,
+           "column": "0",
+           "row": "0",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "20",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "border_border": "solid",
+          "border_width": {
+           "unit": "px",
+           "top": "1",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "__globals__": {
+           "border_color": "globals/colors?id=appaborder"
+          },
+          "_title": "Teilen"
+         },
+         "elements": [
+          {
+           "id": "e7ca4a6",
+           "elType": "widget",
+           "widgetType": "heading",
+           "settings": {
+            "title": "Teilen",
+            "header_size": "span",
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appasmall",
+             "title_color": "globals/colors?id=text"
+            }
+           },
+           "elements": []
+          },
+          {
+           "id": "5425f1d",
+           "elType": "widget",
+           "widgetType": "share-buttons",
+           "settings": {
+            "share_buttons": [
+             {
+              "_id": "sb1",
+              "button": "facebook"
+             },
+             {
+              "_id": "sb2",
+              "button": "twitter"
+             },
+             {
+              "_id": "sb3",
+              "button": "linkedin"
+             }
+            ],
+            "view": "icon",
+            "skin": "minimal",
+            "shape": "square",
+            "columns": "0",
+            "alignment": "right",
+            "button_size": {
+             "unit": "",
+             "size": 1.1,
+             "sizes": []
+            },
+            "icon_size": {
+             "unit": "em",
+             "size": 1.25,
+             "sizes": []
+            },
+            "color_source": "custom",
+            "column_gap": {
+             "unit": "px",
+             "size": 4,
+             "sizes": []
+            },
+            "row_gap": {
+             "unit": "px",
+             "size": 0,
+             "sizes": []
+            },
+            "primary_color": "rgba(255, 255, 255, 0)",
+            "__globals__": {
+             "secondary_color": "globals/colors?id=secondary",
+             "secondary_color_hover": "globals/colors?id=primary"
+            },
+            "primary_color_hover": "rgba(255, 255, 255, 0)"
+           },
+           "elements": []
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "a2b0545",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "background_background": "classic",
+      "__globals__": {
+       "background_color": "globals/colors?id=appawhite",
+       "border_color": "globals/colors?id=appaborder"
+      },
+      "border_border": "solid",
+      "border_width": {
+       "unit": "px",
+       "top": "1",
+       "right": "1",
+       "bottom": "1",
+       "left": "1",
+       "isLinked": true
+      },
+      "border_radius": {
+       "unit": "px",
+       "top": "12",
+       "right": "12",
+       "bottom": "12",
+       "left": "12",
+       "isLinked": true
+      },
+      "box_shadow_box_shadow_type": "yes",
+      "box_shadow_box_shadow": {
+       "horizontal": 0,
+       "vertical": 4,
+       "blur": 6,
+       "spread": -1,
+       "color": "rgba(0, 0, 0, 0.1)"
+      },
+      "overflow": "hidden",
+      "html_tag": "article",
+      "_title": "Event-Karte"
+     },
+     "elements": [
+      {
+       "id": "bb11343",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "https://uxmagic.blob.core.windows.net/public/agent-images/appa-event-2-1787310440508-o2my4nignp.png",
+         "id": "",
+         "alt": "Attendees networking at a psychology conference",
+         "source": "library",
+         "size": ""
+        },
+        "image_size": "full",
+        "width": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        },
+        "align": "left",
+        "height": {
+         "unit": "custom",
+         "size": "auto; aspect-ratio: 16 / 9",
+         "sizes": []
+        },
+        "object-fit": "cover"
+       },
+       "elements": []
+      },
+      {
+       "id": "c821d9c",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "28",
+         "right": "28",
+         "bottom": "28",
+         "left": "28",
+         "isLinked": true
+        },
+        "_title": "Inhalt"
+       },
+       "elements": [
+        {
+         "id": "2046f9e",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "row",
+          "flex_align_items": "center",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 12,
+           "column": "12",
+           "row": "12",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": true
+          },
+          "_title": "Datum"
+         },
+         "elements": [
+          {
+           "id": "5be1fcf",
+           "elType": "widget",
+           "widgetType": "heading",
+           "settings": {
+            "title": "[Datum]",
+            "header_size": "span",
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appabodysb",
+             "title_color": "globals/colors?id=secondary",
+             "_background_color": "globals/colors?id=appalight"
+            },
+            "_background_background": "classic",
+            "_padding": {
+             "unit": "px",
+             "top": "8",
+             "right": "12",
+             "bottom": "8",
+             "left": "12",
+             "isLinked": false
+            },
+            "_border_radius": {
+             "unit": "px",
+             "top": "12",
+             "right": "12",
+             "bottom": "12",
+             "left": "12",
+             "isLinked": true
+            },
+            "_element_width": "auto"
+           },
+           "elements": []
+          },
+          {
+           "id": "f92b4c3",
+           "elType": "widget",
+           "widgetType": "heading",
+           "settings": {
+            "title": "[Uhrzeit]",
+            "header_size": "span",
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appabodysb",
+             "title_color": "globals/colors?id=primary"
+            }
+           },
+           "elements": []
+          }
+         ]
+        },
+        {
+         "id": "66e03c2",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "APPA Fachtagung: Wohlbefinden, Resilienz und Gesundheit",
+          "header_size": "h2",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appah2sm",
+           "title_color": "globals/colors?id=secondary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "20",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "a7ff130",
+         "elType": "widget",
+         "widgetType": "icon-list",
+         "settings": {
+          "view": "traditional",
+          "icon_list": [
+           {
+            "_id": "li00000",
+            "text": "[Universität/Ort in Österreich]",
+            "selected_icon": {
+             "value": "fas fa-map-marker-alt",
+             "library": "fa-solid"
+            }
+           }
+          ],
+          "space_between": {
+           "unit": "px",
+           "size": 16,
+           "sizes": []
+          },
+          "icon_size": {
+           "unit": "px",
+           "size": 20,
+           "sizes": []
+          },
+          "text_indent": {
+           "unit": "px",
+           "size": 8,
+           "sizes": []
+          },
+          "__globals__": {
+           "icon_color": "globals/colors?id=appagreen",
+           "text_color": "globals/colors?id=text",
+           "icon_typography_typography": "globals/typography?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "16",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "249845e",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Save the date! Wissenschaftliche Perspektiven auf Wohlbefinden, Resilienz und Gesundheit. Informationen zu Programm und Anmeldung folgen.</p>",
+          "paragraph_spacing": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabodyrel",
+           "text_color": "globals/colors?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "20",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "801d8c2",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "row",
+          "flex_wrap": "wrap",
+          "flex_wrap_tablet": "wrap",
+          "flex_wrap_mobile": "wrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 12,
+           "column": "12",
+           "row": "12",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": true
+          },
+          "margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "_title": "Buttons"
+         },
+         "elements": [
+          {
+           "id": "56bc6d0",
+           "elType": "widget",
+           "widgetType": "button",
+           "settings": {
+            "text": "Details",
+            "link": {
+             "url": "#",
+             "is_external": "",
+             "nofollow": "",
+             "custom_attributes": ""
+            },
+            "border_radius": {
+             "unit": "px",
+             "top": "12",
+             "right": "12",
+             "bottom": "12",
+             "left": "12",
+             "isLinked": true
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appabtn",
+             "background_color": "globals/colors?id=primary",
+             "button_text_color": "globals/colors?id=appawhite",
+             "hover_color": "globals/colors?id=appawhite"
+            },
+            "text_padding": {
+             "unit": "px",
+             "top": "13",
+             "right": "20",
+             "bottom": "13",
+             "left": "20",
+             "isLinked": false
+            },
+            "background_background": "classic",
+            "button_background_hover_background": "classic",
+            "button_background_hover_color": "#BF2C20"
+           },
+           "elements": []
+          },
+          {
+           "id": "69c6946",
+           "elType": "widget",
+           "widgetType": "button",
+           "settings": {
+            "text": "Termin vormerken",
+            "link": {
+             "url": "#",
+             "is_external": "",
+             "nofollow": "",
+             "custom_attributes": ""
+            },
+            "border_radius": {
+             "unit": "px",
+             "top": "12",
+             "right": "12",
+             "bottom": "12",
+             "left": "12",
+             "isLinked": true
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appabtn",
+             "button_text_color": "globals/colors?id=secondary",
+             "border_color": "globals/colors?id=appaborder",
+             "hover_color": "globals/colors?id=primary",
+             "button_hover_border_color": "globals/colors?id=primary"
+            },
+            "text_padding": {
+             "unit": "px",
+             "top": "13",
+             "right": "20",
+             "bottom": "13",
+             "left": "20",
+             "isLinked": false
+            },
+            "background_background": "classic",
+            "background_color": "rgba(255, 255, 255, 0)",
+            "border_border": "solid",
+            "border_width": {
+             "unit": "px",
+             "top": "1",
+             "right": "1",
+             "bottom": "1",
+             "left": "1",
+             "isLinked": true
+            }
+           },
+           "elements": []
+          }
+         ]
+        },
+        {
+         "id": "e04b861",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "row",
+          "flex_justify_content": "space-between",
+          "flex_align_items": "center",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 0,
+           "column": "0",
+           "row": "0",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "20",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "border_border": "solid",
+          "border_width": {
+           "unit": "px",
+           "top": "1",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "__globals__": {
+           "border_color": "globals/colors?id=appaborder"
+          },
+          "_title": "Teilen"
+         },
+         "elements": [
+          {
+           "id": "7f2c45b",
+           "elType": "widget",
+           "widgetType": "heading",
+           "settings": {
+            "title": "Teilen",
+            "header_size": "span",
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appasmall",
+             "title_color": "globals/colors?id=text"
+            }
+           },
+           "elements": []
+          },
+          {
+           "id": "b62bed0",
+           "elType": "widget",
+           "widgetType": "share-buttons",
+           "settings": {
+            "share_buttons": [
+             {
+              "_id": "sb1",
+              "button": "facebook"
+             },
+             {
+              "_id": "sb2",
+              "button": "twitter"
+             },
+             {
+              "_id": "sb3",
+              "button": "linkedin"
+             }
+            ],
+            "view": "icon",
+            "skin": "minimal",
+            "shape": "square",
+            "columns": "0",
+            "alignment": "right",
+            "button_size": {
+             "unit": "",
+             "size": 1.1,
+             "sizes": []
+            },
+            "icon_size": {
+             "unit": "em",
+             "size": 1.25,
+             "sizes": []
+            },
+            "color_source": "custom",
+            "column_gap": {
+             "unit": "px",
+             "size": 4,
+             "sizes": []
+            },
+            "row_gap": {
+             "unit": "px",
+             "size": 0,
+             "sizes": []
+            },
+            "primary_color": "rgba(255, 255, 255, 0)",
+            "__globals__": {
+             "secondary_color": "globals/colors?id=secondary",
+             "secondary_color_hover": "globals/colors?id=primary"
+            },
+            "primary_color_hover": "rgba(255, 255, 255, 0)"
+           },
+           "elements": []
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "711cc24",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "row",
+    "flex_direction_mobile": "column",
+    "flex_justify_content": "space-between",
+    "flex_align_items": "center",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 28,
+     "column": "28",
+     "row": "28",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appamuted"
+    },
+    "_title": "Newsletter"
+   },
+   "elements": [
+    {
+     "id": "d36b542",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Text",
+      "width": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      }
+     },
+     "elements": [
+      {
+       "id": "22101c3",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Keine Termine verpassen",
+        "header_size": "p",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appaeyebrow",
+         "title_color": "globals/colors?id=primary"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "db0afb6",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "APPA-News direkt ins Postfach",
+        "header_size": "h2",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah2",
+         "title_color": "globals/colors?id=secondary"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "8",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "9d6af92",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Erhalten Sie Hinweise zu neuen Veranstaltungen und aktuellen Entwicklungen.</p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=text",
+         "text_color": "globals/colors?id=text"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "12",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "2e02f08",
+     "elType": "widget",
+     "widgetType": "button",
+     "settings": {
+      "text": "Mitglied werden",
+      "link": {
+       "url": "/mitgliedschaft/",
+       "is_external": "",
+       "nofollow": "",
+       "custom_attributes": ""
+      },
+      "border_radius": {
+       "unit": "px",
+       "top": "12",
+       "right": "12",
+       "bottom": "12",
+       "left": "12",
+       "isLinked": true
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appabtn",
+       "background_color": "globals/colors?id=primary",
+       "button_text_color": "globals/colors?id=appawhite",
+       "hover_color": "globals/colors?id=appawhite"
+      },
+      "text_padding": {
+       "unit": "px",
+       "top": "13",
+       "right": "24",
+       "bottom": "13",
+       "left": "24",
+       "isLinked": false
+      },
+      "background_background": "classic",
+      "button_background_hover_background": "classic",
+      "button_background_hover_color": "#BF2C20"
+     },
+     "elements": []
+    }
+   ]
+  }
+ ],
+ "page_settings": {
+  "template": "elementor_header_footer",
+  "hide_title": "yes"
+ },
+ "version": "0.4",
+ "title": "APPA – Veranstaltungen",
+ "type": "page"
+}

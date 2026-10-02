@@ -1,0 +1,153 @@
+{
+ "content": [
+  {
+   "id": "ddcade8",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "row",
+    "flex_direction_mobile": "column",
+    "flex_justify_content": "space-between",
+    "flex_align_items": "center",
+    "flex_align_items_mobile": "flex-start",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 20,
+     "column": "20",
+     "row": "20",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "36",
+     "right": "24",
+     "bottom": "36",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=secondary"
+    },
+    "html_tag": "footer",
+    "_title": "Footer"
+   },
+   "elements": [
+    {
+     "id": "aab1c6c",
+     "elType": "widget",
+     "widgetType": "text-editor",
+     "settings": {
+      "editor": "<p>© 2026 APPA · Austrian Positive Psychology Association</p>",
+      "paragraph_spacing": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appasmall",
+       "text_color": "globals/colors?id=appawhite"
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "bf7e65a",
+     "elType": "widget",
+     "widgetType": "icon-list",
+     "settings": {
+      "view": "inline",
+      "icon_list": [
+       {
+        "_id": "li00000",
+        "text": "Home",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       },
+       {
+        "_id": "li00001",
+        "text": "Kontakt",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/kontakt/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       },
+       {
+        "_id": "li00002",
+        "text": "Datenschutz",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/datenschutz/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       },
+       {
+        "_id": "li00003",
+        "text": "Impressum",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/impressum/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       }
+      ],
+      "space_between": {
+       "unit": "px",
+       "size": 20,
+       "sizes": []
+      },
+      "icon_size": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "text_indent": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "__globals__": {
+       "icon_color": "globals/colors?id=appagreen",
+       "text_color": "globals/colors?id=appawhite",
+       "icon_typography_typography": "globals/typography?id=appasmall",
+       "text_color_hover": "globals/colors?id=accent"
+      }
+     },
+     "elements": []
+    }
+   ]
+  }
+ ],
+ "page_settings": [],
+ "version": "0.4",
+ "title": "APPA – Footer (kompakt)",
+ "type": "footer"
+}

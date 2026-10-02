@@ -1,0 +1,2105 @@
+{
+ "content": [
+  {
+   "id": "7fec5d4",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "container_type": "grid",
+    "grid_columns_grid": {
+     "unit": "fr",
+     "size": 2,
+     "sizes": []
+    },
+    "grid_columns_grid_tablet": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_columns_grid_mobile": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_rows_grid": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_rows_grid_tablet": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_rows_grid_mobile": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_gaps": {
+     "unit": "px",
+     "size": 48,
+     "column": "48",
+     "row": "48",
+     "isLinked": true
+    },
+    "grid_align_items": "center",
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "80",
+     "right": "24",
+     "bottom": "80",
+     "left": "24",
+     "isLinked": false
+    },
+    "padding_tablet": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "_title": "Intro"
+   },
+   "elements": [
+    {
+     "id": "190ea86",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Text"
+     },
+     "elements": [
+      {
+       "id": "5b29085",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Teil der APPA werden",
+        "header_size": "p",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appaeyebrow",
+         "title_color": "globals/colors?id=primary"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "52e2d4a",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Informationen zur Mitgliedschaft",
+        "header_size": "h1",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah1page",
+         "title_color": "globals/colors?id=secondary"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "12",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "56e7545",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Vernetzen Sie sich mit Menschen, die Positive Psychologie in Österreich erforschen, anwenden und weiterdenken.</p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appaleadlong",
+         "text_color": "globals/colors?id=text"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "24",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "9242bc5",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "row",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": true
+        },
+        "margin": {
+         "unit": "px",
+         "top": "32",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [
+        {
+         "id": "464188d",
+         "elType": "widget",
+         "widgetType": "button",
+         "settings": {
+          "text": "Jetzt anmelden",
+          "link": {
+           "url": "#mitgliedschaft-arten",
+           "is_external": "",
+           "nofollow": "",
+           "custom_attributes": ""
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabtn",
+           "background_color": "globals/colors?id=primary",
+           "button_text_color": "globals/colors?id=appawhite",
+           "hover_color": "globals/colors?id=appawhite"
+          },
+          "text_padding": {
+           "unit": "px",
+           "top": "13",
+           "right": "24",
+           "bottom": "13",
+           "left": "24",
+           "isLinked": false
+          },
+          "background_background": "classic",
+          "button_background_hover_background": "classic",
+          "button_background_hover_color": "#BF2C20",
+          "selected_icon": {
+           "value": "fas fa-arrow-right",
+           "library": "fa-solid"
+          },
+          "icon_align": "right",
+          "icon_indent": {
+           "unit": "px",
+           "size": 8,
+           "sizes": []
+          }
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "86e869e",
+     "elType": "widget",
+     "widgetType": "image",
+     "settings": {
+      "image": {
+       "url": "https://uxmagic.blob.core.windows.net/public/agent-images/appa-membership-1787310465584-kbm2jmjt5ns.png",
+       "id": "",
+       "alt": "Two professionals discussing research notes in a library",
+       "source": "library",
+       "size": ""
+      },
+      "image_size": "full",
+      "width": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "align": "left",
+      "height": {
+       "unit": "custom",
+       "size": "auto; aspect-ratio: 4 / 3",
+       "sizes": []
+      },
+      "object-fit": "cover",
+      "object-position": "top center",
+      "image_border_radius": {
+       "unit": "px",
+       "top": "12",
+       "right": "12",
+       "bottom": "12",
+       "left": "12",
+       "isLinked": true
+      },
+      "image_box_shadow_box_shadow_type": "yes",
+      "image_box_shadow_box_shadow": {
+       "horizontal": 0,
+       "vertical": 4,
+       "blur": 6,
+       "spread": -1,
+       "color": "rgba(0, 0, 0, 0.1)"
+      }
+     },
+     "elements": []
+    }
+   ]
+  },
+  {
+   "id": "162499a",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "container_type": "grid",
+    "grid_columns_grid": {
+     "unit": "fr",
+     "size": 2,
+     "sizes": []
+    },
+    "grid_columns_grid_tablet": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_columns_grid_mobile": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_rows_grid": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_rows_grid_tablet": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_rows_grid_mobile": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_gaps": {
+     "unit": "px",
+     "size": 48,
+     "column": "48",
+     "row": "48",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "64",
+     "right": "24",
+     "bottom": "64",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appalight"
+    },
+    "_title": "Informationen"
+   },
+   "elements": [
+    {
+     "id": "d94609b",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Allgemein"
+     },
+     "elements": [
+      {
+       "id": "15d3452",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Allgemeine Informationen",
+        "header_size": "h2",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah2",
+         "title_color": "globals/colors?id=secondary"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "c82d001",
+       "elType": "widget",
+       "widgetType": "icon-list",
+       "settings": {
+        "view": "traditional",
+        "icon_list": [
+         {
+          "_id": "li00000",
+          "text": "Für Teilnehmende und Absolvent:innen relevanter österreichischer Lehrgänge kann das erste Jahr gratis sein. [Bitte bestätigen]",
+          "selected_icon": {
+           "value": "fas fa-check",
+           "library": "fa-solid"
+          }
+         },
+         {
+          "_id": "li00001",
+          "text": "Die Mitgliedschaft verlängert sich automatisch um ein weiteres Jahr.",
+          "selected_icon": {
+           "value": "fas fa-check",
+           "library": "fa-solid"
+          }
+         },
+         {
+          "_id": "li00002",
+          "text": "Eine Kündigung ist bis Ende des Kalenderjahres schriftlich per E-Mail mitzuteilen.",
+          "selected_icon": {
+           "value": "fas fa-check",
+           "library": "fa-solid"
+          }
+         }
+        ],
+        "space_between": {
+         "unit": "px",
+         "size": 16,
+         "sizes": []
+        },
+        "icon_size": {
+         "unit": "px",
+         "size": 20,
+         "sizes": []
+        },
+        "text_indent": {
+         "unit": "px",
+         "size": 12,
+         "sizes": []
+        },
+        "__globals__": {
+         "icon_color": "globals/colors?id=appagreen",
+         "text_color": "globals/colors?id=text",
+         "icon_typography_typography": "globals/typography?id=text"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "28",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "icon_self_vertical_align": "flex-start",
+        "icon_vertical_offset": {
+         "unit": "px",
+         "size": 2,
+         "sizes": []
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "4d0acbf",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Vorteile"
+     },
+     "elements": [
+      {
+       "id": "93f5805",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Ihre Vorteile",
+        "header_size": "h2",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah2",
+         "title_color": "globals/colors?id=secondary"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "785a3ca",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "container_type": "grid",
+        "grid_columns_grid": {
+         "unit": "fr",
+         "size": 2,
+         "sizes": []
+        },
+        "grid_columns_grid_tablet": {
+         "unit": "fr",
+         "size": 2,
+         "sizes": []
+        },
+        "grid_columns_grid_mobile": {
+         "unit": "fr",
+         "size": 1,
+         "sizes": []
+        },
+        "grid_rows_grid": {
+         "unit": "custom",
+         "size": "auto",
+         "sizes": []
+        },
+        "grid_rows_grid_tablet": {
+         "unit": "custom",
+         "size": "auto",
+         "sizes": []
+        },
+        "grid_rows_grid_mobile": {
+         "unit": "custom",
+         "size": "auto",
+         "sizes": []
+        },
+        "grid_gaps": {
+         "unit": "px",
+         "size": 16,
+         "column": "16",
+         "row": "16",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": true
+        },
+        "margin": {
+         "unit": "px",
+         "top": "28",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "_title": "Vorteile-Grid"
+       },
+       "elements": [
+        {
+         "id": "44e9d09",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "column",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 0,
+           "column": "0",
+           "row": "0",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "16",
+           "right": "16",
+           "bottom": "16",
+           "left": "16",
+           "isLinked": true
+          },
+          "background_background": "classic",
+          "__globals__": {
+           "background_color": "globals/colors?id=appawhite"
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "_title": "Vorteil"
+         },
+         "elements": [
+          {
+           "id": "7296507",
+           "elType": "widget",
+           "widgetType": "text-editor",
+           "settings": {
+            "editor": "<p>Aktueller Newsletter und internationaler Ausblick</p>",
+            "paragraph_spacing": {
+             "unit": "px",
+             "size": 0,
+             "sizes": []
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=text",
+             "text_color": "globals/colors?id=text"
+            }
+           },
+           "elements": []
+          }
+         ]
+        },
+        {
+         "id": "d1b3868",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "column",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 0,
+           "column": "0",
+           "row": "0",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "16",
+           "right": "16",
+           "bottom": "16",
+           "left": "16",
+           "isLinked": true
+          },
+          "background_background": "classic",
+          "__globals__": {
+           "background_color": "globals/colors?id=appawhite"
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "_title": "Vorteil"
+         },
+         "elements": [
+          {
+           "id": "047f3a5",
+           "elType": "widget",
+           "widgetType": "text-editor",
+           "settings": {
+            "editor": "<p>Zugang zu Forschungsarbeiten und Videomaterial</p>",
+            "paragraph_spacing": {
+             "unit": "px",
+             "size": 0,
+             "sizes": []
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=text",
+             "text_color": "globals/colors?id=text"
+            }
+           },
+           "elements": []
+          }
+         ]
+        },
+        {
+         "id": "cb0f5a6",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "column",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 0,
+           "column": "0",
+           "row": "0",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "16",
+           "right": "16",
+           "bottom": "16",
+           "left": "16",
+           "isLinked": true
+          },
+          "background_background": "classic",
+          "__globals__": {
+           "background_color": "globals/colors?id=appawhite"
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "_title": "Vorteil"
+         },
+         "elements": [
+          {
+           "id": "a3bd1d5",
+           "elType": "widget",
+           "widgetType": "text-editor",
+           "settings": {
+            "editor": "<p>Vergünstigte APPA-Veranstaltungen und Fachtagung</p>",
+            "paragraph_spacing": {
+             "unit": "px",
+             "size": 0,
+             "sizes": []
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=text",
+             "text_color": "globals/colors?id=text"
+            }
+           },
+           "elements": []
+          }
+         ]
+        },
+        {
+         "id": "96cfba3",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "column",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 0,
+           "column": "0",
+           "row": "0",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "16",
+           "right": "16",
+           "bottom": "16",
+           "left": "16",
+           "isLinked": true
+          },
+          "background_background": "classic",
+          "__globals__": {
+           "background_color": "globals/colors?id=appawhite"
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "_title": "Vorteil"
+         },
+         "elements": [
+          {
+           "id": "6c0c661",
+           "elType": "widget",
+           "widgetType": "text-editor",
+           "settings": {
+            "editor": "<p>Vernetzung und Eintrag im Mitgliederverzeichnis</p>",
+            "paragraph_spacing": {
+             "unit": "px",
+             "size": 0,
+             "sizes": []
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=text",
+             "text_color": "globals/colors?id=text"
+            }
+           },
+           "elements": []
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "0505481",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "column",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 36,
+     "column": "36",
+     "row": "36",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "80",
+     "right": "24",
+     "bottom": "80",
+     "left": "24",
+     "isLinked": false
+    },
+    "_element_id": "mitgliedschaft-arten",
+    "_title": "Arten der Mitgliedschaft"
+   },
+   "elements": [
+    {
+     "id": "9e685be",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "width": {
+       "unit": "px",
+       "size": 672,
+       "sizes": []
+      },
+      "width_tablet": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "width_mobile": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "_title": "Titel"
+     },
+     "elements": [
+      {
+       "id": "ca36ab9",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Passende Form wählen",
+        "header_size": "p",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appaeyebrow",
+         "title_color": "globals/colors?id=primary"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "aac4722",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Arten der Mitgliedschaft",
+        "header_size": "h2",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah2",
+         "title_color": "globals/colors?id=secondary"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "8",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "aa748b6",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "container_type": "grid",
+      "grid_columns_grid": {
+       "unit": "fr",
+       "size": 3,
+       "sizes": []
+      },
+      "grid_columns_grid_tablet": {
+       "unit": "fr",
+       "size": 1,
+       "sizes": []
+      },
+      "grid_columns_grid_mobile": {
+       "unit": "fr",
+       "size": 1,
+       "sizes": []
+      },
+      "grid_rows_grid": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      },
+      "grid_rows_grid_tablet": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      },
+      "grid_rows_grid_mobile": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      },
+      "grid_gaps": {
+       "unit": "px",
+       "size": 24,
+       "column": "24",
+       "row": "24",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Karten"
+     },
+     "elements": [
+      {
+       "id": "ca38670",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "28",
+         "right": "28",
+         "bottom": "28",
+         "left": "28",
+         "isLinked": true
+        },
+        "border_border": "solid",
+        "border_width": {
+         "unit": "px",
+         "top": "1",
+         "right": "1",
+         "bottom": "1",
+         "left": "1",
+         "isLinked": true
+        },
+        "__globals__": {
+         "border_color": "globals/colors?id=appaborder"
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "html_tag": "article",
+        "_title": "Ordentliche Mitgliedschaft"
+       },
+       "elements": [
+        {
+         "id": "67b46ad",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Ordentliche Mitgliedschaft",
+          "header_size": "h3",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appah3",
+           "title_color": "globals/colors?id=secondary"
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "2a7646a",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Für Psycholog:innen mit Hochschulabschluss und österreichischem Bezug.</p>",
+          "paragraph_spacing": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabodyrel",
+           "text_color": "globals/colors?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "12",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "216a6b2",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "€ [Betrag] <span style=\"font-size:14px;font-weight:400;color:var(--e-global-color-text);\">/ Jahr</span>",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appaprice",
+           "title_color": "globals/colors?id=primary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "95a8804",
+         "elType": "widget",
+         "widgetType": "button",
+         "settings": {
+          "text": "Mitglied werden",
+          "link": {
+           "url": "#",
+           "is_external": "",
+           "nofollow": "",
+           "custom_attributes": ""
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabtn",
+           "button_text_color": "globals/colors?id=secondary",
+           "border_color": "globals/colors?id=appaborder",
+           "hover_color": "globals/colors?id=primary",
+           "button_hover_border_color": "globals/colors?id=primary"
+          },
+          "text_padding": {
+           "unit": "px",
+           "top": "13",
+           "right": "0",
+           "bottom": "13",
+           "left": "0",
+           "isLinked": false
+          },
+          "background_background": "classic",
+          "background_color": "rgba(255, 255, 255, 0)",
+          "border_border": "solid",
+          "border_width": {
+           "unit": "px",
+           "top": "1",
+           "right": "1",
+           "bottom": "1",
+           "left": "1",
+           "isLinked": true
+          },
+          "align": "justify",
+          "_margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "e503277",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "28",
+         "right": "28",
+         "bottom": "28",
+         "left": "28",
+         "isLinked": true
+        },
+        "border_border": "solid",
+        "border_width": {
+         "unit": "px",
+         "top": "2",
+         "right": "2",
+         "bottom": "2",
+         "left": "2",
+         "isLinked": true
+        },
+        "__globals__": {
+         "border_color": "globals/colors?id=primary"
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "box_shadow_box_shadow_type": "yes",
+        "box_shadow_box_shadow": {
+         "horizontal": 0,
+         "vertical": 4,
+         "blur": 6,
+         "spread": -1,
+         "color": "rgba(0, 0, 0, 0.1)"
+        },
+        "html_tag": "article",
+        "_title": "Assoziierte Mitgliedschaft"
+       },
+       "elements": [
+        {
+         "id": "994efad",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "FÜR DIE PRAXIS",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appasmallsb",
+           "title_color": "globals/colors?id=primary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "12",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "843d71e",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Assoziierte Mitgliedschaft",
+          "header_size": "h3",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appah3",
+           "title_color": "globals/colors?id=secondary"
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "34d8bdf",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Für Berufstätige mit Bezug zu Positiver Psychologie, etwa Pädagogik, Sozialarbeit, Coaching oder Beratung.</p>",
+          "paragraph_spacing": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabodyrel",
+           "text_color": "globals/colors?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "12",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "4a2f90d",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "€ [Betrag] <span style=\"font-size:14px;font-weight:400;color:var(--e-global-color-text);\">/ Jahr</span>",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appaprice",
+           "title_color": "globals/colors?id=primary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "f38f097",
+         "elType": "widget",
+         "widgetType": "button",
+         "settings": {
+          "text": "Mitglied werden",
+          "link": {
+           "url": "#",
+           "is_external": "",
+           "nofollow": "",
+           "custom_attributes": ""
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabtn",
+           "background_color": "globals/colors?id=primary",
+           "button_text_color": "globals/colors?id=appawhite",
+           "hover_color": "globals/colors?id=appawhite"
+          },
+          "text_padding": {
+           "unit": "px",
+           "top": "13",
+           "right": "0",
+           "bottom": "13",
+           "left": "0",
+           "isLinked": false
+          },
+          "background_background": "classic",
+          "button_background_hover_background": "classic",
+          "button_background_hover_color": "#BF2C20",
+          "align": "justify",
+          "_margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "cb1925e",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "28",
+         "right": "28",
+         "bottom": "28",
+         "left": "28",
+         "isLinked": true
+        },
+        "border_border": "solid",
+        "border_width": {
+         "unit": "px",
+         "top": "1",
+         "right": "1",
+         "bottom": "1",
+         "left": "1",
+         "isLinked": true
+        },
+        "__globals__": {
+         "border_color": "globals/colors?id=appaborder"
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "html_tag": "article",
+        "_title": "Studentische Mitgliedschaft"
+       },
+       "elements": [
+        {
+         "id": "54abc54",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Studentische Mitgliedschaft",
+          "header_size": "h3",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appah3",
+           "title_color": "globals/colors?id=secondary"
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "a120dc4",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Für Psychologiestudierende, die in Österreich studieren und einen Abschluss anstreben.</p>",
+          "paragraph_spacing": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabodyrel",
+           "text_color": "globals/colors?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "12",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "95bb51a",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "€ [Betrag] <span style=\"font-size:14px;font-weight:400;color:var(--e-global-color-text);\">/ Jahr</span>",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appaprice",
+           "title_color": "globals/colors?id=primary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "f7ab008",
+         "elType": "widget",
+         "widgetType": "button",
+         "settings": {
+          "text": "Mitglied werden",
+          "link": {
+           "url": "#",
+           "is_external": "",
+           "nofollow": "",
+           "custom_attributes": ""
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabtn",
+           "button_text_color": "globals/colors?id=secondary",
+           "border_color": "globals/colors?id=appaborder",
+           "hover_color": "globals/colors?id=primary",
+           "button_hover_border_color": "globals/colors?id=primary"
+          },
+          "text_padding": {
+           "unit": "px",
+           "top": "13",
+           "right": "0",
+           "bottom": "13",
+           "left": "0",
+           "isLinked": false
+          },
+          "background_background": "classic",
+          "background_color": "rgba(255, 255, 255, 0)",
+          "border_border": "solid",
+          "border_width": {
+           "unit": "px",
+           "top": "1",
+           "right": "1",
+           "bottom": "1",
+           "left": "1",
+           "isLinked": true
+          },
+          "align": "justify",
+          "_margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b930229",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "column",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 32,
+     "column": "32",
+     "row": "32",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "80",
+     "right": "24",
+     "bottom": "80",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appamuted"
+    },
+    "_title": "Mitgliederverzeichnis"
+   },
+   "elements": [
+    {
+     "id": "bf7d708",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "row",
+      "flex_direction_mobile": "column",
+      "flex_justify_content": "space-between",
+      "flex_align_items": "flex-end",
+      "flex_align_items_mobile": "stretch",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 16,
+       "column": "16",
+       "row": "16",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Kopf"
+     },
+     "elements": [
+      {
+       "id": "d13bd4e",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": true
+        },
+        "_title": "Titel",
+        "width": {
+         "unit": "custom",
+         "size": "auto",
+         "sizes": []
+        }
+       },
+       "elements": [
+        {
+         "id": "6f36c6b",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Öffentliches Mitgliederverzeichnis",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appaeyebrow",
+           "title_color": "globals/colors?id=primary"
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "09d7a82",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Expertise sichtbar machen",
+          "header_size": "h2",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appah2",
+           "title_color": "globals/colors?id=secondary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "8",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "062a0d8",
+       "elType": "widget",
+       "widgetType": "button",
+       "settings": {
+        "text": "Mitglieder suchen",
+        "link": {
+         "url": "#",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appabtn",
+         "background_color": "globals/colors?id=appawhite",
+         "button_text_color": "globals/colors?id=secondary",
+         "border_color": "globals/colors?id=appaborder",
+         "hover_color": "globals/colors?id=primary",
+         "button_hover_border_color": "globals/colors?id=primary"
+        },
+        "text_padding": {
+         "unit": "px",
+         "top": "13",
+         "right": "20",
+         "bottom": "13",
+         "left": "20",
+         "isLinked": false
+        },
+        "background_background": "classic",
+        "border_border": "solid",
+        "border_width": {
+         "unit": "px",
+         "top": "1",
+         "right": "1",
+         "bottom": "1",
+         "left": "1",
+         "isLinked": true
+        },
+        "selected_icon": {
+         "value": "fas fa-search",
+         "library": "fa-solid"
+        },
+        "icon_align": "left",
+        "icon_indent": {
+         "unit": "px",
+         "size": 8,
+         "sizes": []
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "54744cd",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "container_type": "grid",
+      "grid_columns_grid": {
+       "unit": "fr",
+       "size": 3,
+       "sizes": []
+      },
+      "grid_columns_grid_tablet": {
+       "unit": "fr",
+       "size": 3,
+       "sizes": []
+      },
+      "grid_columns_grid_mobile": {
+       "unit": "fr",
+       "size": 1,
+       "sizes": []
+      },
+      "grid_rows_grid": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      },
+      "grid_rows_grid_tablet": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      },
+      "grid_rows_grid_mobile": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      },
+      "grid_gaps": {
+       "unit": "px",
+       "size": 20,
+       "column": "20",
+       "row": "20",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Mitglieder-Grid"
+     },
+     "elements": [
+      {
+       "id": "a14d506",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "24",
+         "right": "24",
+         "bottom": "24",
+         "left": "24",
+         "isLinked": true
+        },
+        "background_background": "classic",
+        "__globals__": {
+         "background_color": "globals/colors?id=appawhite"
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "html_tag": "article",
+        "_title": "Mitglied"
+       },
+       "elements": [
+        {
+         "id": "aed6312",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "[Name]",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabodysb",
+           "title_color": "globals/colors?id=secondary"
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "6174474",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "[Titel/Funktion] · [Ort]",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appasmall",
+           "title_color": "globals/colors?id=primary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "4",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "c210371",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Profil und Kontakt folgen, sobald Mitgliederdaten vorliegen.</p>",
+          "paragraph_spacing": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appasmall",
+           "text_color": "globals/colors?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "16",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "f30c2be",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "24",
+         "right": "24",
+         "bottom": "24",
+         "left": "24",
+         "isLinked": true
+        },
+        "background_background": "classic",
+        "__globals__": {
+         "background_color": "globals/colors?id=appawhite"
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "html_tag": "article",
+        "_title": "Mitglied"
+       },
+       "elements": [
+        {
+         "id": "e012b3a",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "[Name]",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabodysb",
+           "title_color": "globals/colors?id=secondary"
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "f4fa4b9",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "[Titel/Funktion] · [Ort]",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appasmall",
+           "title_color": "globals/colors?id=primary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "4",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "4e19730",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Profil und Kontakt folgen, sobald Mitgliederdaten vorliegen.</p>",
+          "paragraph_spacing": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appasmall",
+           "text_color": "globals/colors?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "16",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "299890c",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "24",
+         "right": "24",
+         "bottom": "24",
+         "left": "24",
+         "isLinked": true
+        },
+        "background_background": "classic",
+        "__globals__": {
+         "background_color": "globals/colors?id=appawhite"
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "html_tag": "article",
+        "_title": "Mitglied"
+       },
+       "elements": [
+        {
+         "id": "9c8e538",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "[Name]",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabodysb",
+           "title_color": "globals/colors?id=secondary"
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "7223aea",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "[Titel/Funktion] · [Ort]",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appasmall",
+           "title_color": "globals/colors?id=primary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "4",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "93a5149",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Profil und Kontakt folgen, sobald Mitgliederdaten vorliegen.</p>",
+          "paragraph_spacing": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appasmall",
+           "text_color": "globals/colors?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "16",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "page_settings": {
+  "template": "elementor_header_footer",
+  "hide_title": "yes"
+ },
+ "version": "0.4",
+ "title": "APPA – Mitgliedschaft",
+ "type": "page"
+}
