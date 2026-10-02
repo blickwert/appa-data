@@ -1,0 +1,243 @@
+{
+ "content": [
+  {
+   "id": "03bde66",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "row",
+    "flex_direction_mobile": "column",
+    "flex_justify_content": "space-between",
+    "flex_align_items": "flex-start",
+    "flex_wrap": "wrap",
+    "flex_wrap_tablet": "wrap",
+    "flex_wrap_mobile": "wrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 24,
+     "column": "24",
+     "row": "24",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "40",
+     "right": "24",
+     "bottom": "40",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=secondary"
+    },
+    "html_tag": "footer",
+    "_title": "Footer"
+   },
+   "elements": [
+    {
+     "id": "8db9a15",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Marke",
+      "width": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      }
+     },
+     "elements": [
+      {
+       "id": "de4cf5c",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "APPA.",
+        "header_size": "div",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appalogo",
+         "title_color": "globals/colors?id=appawhite"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "b945049",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Austrian Positive Psychology Association</p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appasmall"
+        },
+        "text_color": "rgba(255, 255, 255, 0.8)",
+        "_margin": {
+         "unit": "px",
+         "top": "8",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "270674d",
+     "elType": "widget",
+     "widgetType": "icon-list",
+     "settings": {
+      "view": "inline",
+      "icon_list": [
+       {
+        "_id": "li00000",
+        "text": "Home",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       },
+       {
+        "_id": "li00001",
+        "text": "Über uns",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/ueber-uns/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       },
+       {
+        "_id": "li00002",
+        "text": "Veranstaltungen",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/veranstaltungen/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       },
+       {
+        "_id": "li00003",
+        "text": "Mitgliedschaft",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/mitgliedschaft/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       },
+       {
+        "_id": "li00004",
+        "text": "Kontakt",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/kontakt/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       }
+      ],
+      "space_between": {
+       "unit": "px",
+       "size": 20,
+       "sizes": []
+      },
+      "icon_size": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "text_indent": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "__globals__": {
+       "icon_color": "globals/colors?id=appagreen",
+       "text_color": "globals/colors?id=appawhite",
+       "icon_typography_typography": "globals/typography?id=appasmall",
+       "text_color_hover": "globals/colors?id=accent"
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "2d39ed5",
+     "elType": "widget",
+     "widgetType": "text-editor",
+     "settings": {
+      "editor": "<p>© 2026 APPA · <a href=\"/datenschutz/\">Datenschutz</a> · <a href=\"/impressum/\">Impressum</a></p>",
+      "paragraph_spacing": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appasmall"
+      },
+      "text_color": "rgba(255, 255, 255, 0.8)",
+      "link_color": "rgba(255, 255, 255, 0.8)",
+      "link_hover_color": "rgba(255, 255, 255, 0.8)"
+     },
+     "elements": []
+    }
+   ]
+  }
+ ],
+ "page_settings": [],
+ "version": "0.4",
+ "title": "APPA – Footer (Home)",
+ "type": "footer"
+}

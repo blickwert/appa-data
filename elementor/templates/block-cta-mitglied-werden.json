@@ -1,0 +1,194 @@
+{
+ "content": [
+  {
+   "id": "907c16f",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "row",
+    "flex_direction_tablet": "column",
+    "flex_direction_mobile": "column",
+    "flex_justify_content": "space-between",
+    "flex_align_items": "center",
+    "flex_align_items_tablet": "stretch",
+    "flex_align_items_mobile": "stretch",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 28,
+     "column": "28",
+     "row": "28",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "56",
+     "right": "24",
+     "bottom": "56",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appagreen"
+    },
+    "_title": "CTA Mitgliedschaft"
+   },
+   "elements": [
+    {
+     "id": "4a866f0",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_flex_size": "custom",
+      "_flex_grow": 1,
+      "_flex_shrink": 1,
+      "_title": "Text",
+      "width": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      }
+     },
+     "elements": [
+      {
+       "id": "f4fb2f5",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Teil der Community werden",
+        "header_size": "p",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appaeyebrow",
+         "title_color": "globals/colors?id=appaongreen"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "491e505",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Mitglied werden bei der APPA",
+        "header_size": "h2",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah2",
+         "title_color": "globals/colors?id=appaongreen"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "8",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "d0231b5",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Bleiben Sie mit unserem Newsletter, Forschung und neuen Weiterbildungsangeboten verbunden.</p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=text",
+         "text_color": "globals/colors?id=appaongreen"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "12",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "_element_width": "initial",
+        "_element_custom_width": {
+         "unit": "px",
+         "size": 672,
+         "sizes": []
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "7a7f189",
+     "elType": "widget",
+     "widgetType": "button",
+     "settings": {
+      "text": "Mehr erfahren",
+      "link": {
+       "url": "/mitgliedschaft/",
+       "is_external": "",
+       "nofollow": "",
+       "custom_attributes": ""
+      },
+      "border_radius": {
+       "unit": "px",
+       "top": "12",
+       "right": "12",
+       "bottom": "12",
+       "left": "12",
+       "isLinked": true
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appabtn",
+       "background_color": "globals/colors?id=primary",
+       "button_text_color": "globals/colors?id=appawhite",
+       "hover_color": "globals/colors?id=appawhite"
+      },
+      "text_padding": {
+       "unit": "px",
+       "top": "13",
+       "right": "24",
+       "bottom": "13",
+       "left": "24",
+       "isLinked": false
+      },
+      "background_background": "classic",
+      "button_background_hover_background": "classic",
+      "button_background_hover_color": "#BF2C20"
+     },
+     "elements": []
+    }
+   ]
+  }
+ ],
+ "page_settings": [],
+ "version": "0.4",
+ "title": "APPA – Block: CTA Mitglied werden",
+ "type": "section"
+}

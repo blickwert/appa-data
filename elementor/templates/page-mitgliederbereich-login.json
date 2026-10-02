@@ -1,0 +1,757 @@
+{
+ "content": [
+  {
+   "id": "a318d6d",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "row",
+    "flex_justify_content": "space-between",
+    "flex_align_items": "center",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 0,
+     "column": "0",
+     "row": "0",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "20",
+     "right": "24",
+     "bottom": "20",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appawhite",
+     "border_color": "globals/colors?id=appaborder"
+    },
+    "border_border": "solid",
+    "border_width": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "1",
+     "left": "0",
+     "isLinked": false
+    },
+    "html_tag": "header",
+    "_title": "Header Mitgliederbereich"
+   },
+   "elements": [
+    {
+     "id": "f8a8aaa",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "APPA<span style=\"color: var(--e-global-color-primary);\">.</span>",
+      "header_size": "div",
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appalogo",
+       "title_color": "globals/colors?id=secondary"
+      },
+      "link": {
+       "url": "/",
+       "is_external": "",
+       "nofollow": "",
+       "custom_attributes": ""
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "aa1513c",
+     "elType": "widget",
+     "widgetType": "button",
+     "settings": {
+      "text": "Zur Website",
+      "link": {
+       "url": "/",
+       "is_external": "",
+       "nofollow": "",
+       "custom_attributes": ""
+      },
+      "border_radius": {
+       "unit": "px",
+       "top": "12",
+       "right": "12",
+       "bottom": "12",
+       "left": "12",
+       "isLinked": true
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appabtn",
+       "button_text_color": "globals/colors?id=secondary",
+       "hover_color": "globals/colors?id=secondary"
+      },
+      "text_padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "background_background": "classic",
+      "background_color": "rgba(255, 255, 255, 0)",
+      "selected_icon": {
+       "value": "fas fa-arrow-left",
+       "library": "fa-solid"
+      },
+      "icon_align": "left",
+      "icon_indent": {
+       "unit": "px",
+       "size": 8,
+       "sizes": []
+      }
+     },
+     "elements": []
+    }
+   ]
+  },
+  {
+   "id": "0eba13a",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "column",
+    "flex_justify_content": "center",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 0,
+     "column": "0",
+     "row": "0",
+     "isLinked": true
+    },
+    "content_width": "full",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appamuted"
+    },
+    "_title": "Login-Bereich",
+    "min_height": {
+     "unit": "custom",
+     "size": "calc(100vh - 130px)",
+     "sizes": []
+    }
+   },
+   "elements": [
+    {
+     "id": "01d83d2",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "boxed",
+      "boxed_width": {
+       "unit": "px",
+       "size": 400,
+       "sizes": []
+      },
+      "padding": {
+       "unit": "px",
+       "top": "56",
+       "right": "24",
+       "bottom": "56",
+       "left": "24",
+       "isLinked": false
+      },
+      "_title": "Login-Spalte"
+     },
+     "elements": [
+      {
+       "id": "a241ab9",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_align_items": "flex-start",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "36",
+         "right": "36",
+         "bottom": "36",
+         "left": "36",
+         "isLinked": true
+        },
+        "padding_mobile": {
+         "unit": "px",
+         "top": "28",
+         "right": "28",
+         "bottom": "28",
+         "left": "28",
+         "isLinked": true
+        },
+        "background_background": "classic",
+        "__globals__": {
+         "background_color": "globals/colors?id=appawhite",
+         "border_color": "globals/colors?id=appaborder"
+        },
+        "border_border": "solid",
+        "border_width": {
+         "unit": "px",
+         "top": "1",
+         "right": "1",
+         "bottom": "1",
+         "left": "1",
+         "isLinked": true
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "box_shadow_box_shadow_type": "yes",
+        "box_shadow_box_shadow": {
+         "horizontal": 0,
+         "vertical": 4,
+         "blur": 6,
+         "spread": -1,
+         "color": "rgba(0, 0, 0, 0.1)"
+        },
+        "_title": "Login-Karte"
+       },
+       "elements": [
+        {
+         "id": "07e0984",
+         "elType": "widget",
+         "widgetType": "icon",
+         "settings": {
+          "selected_icon": {
+           "value": "fas fa-lock",
+           "library": "fa-solid"
+          },
+          "view": "stacked",
+          "align": "left",
+          "size": {
+           "unit": "px",
+           "size": 24,
+           "sizes": []
+          },
+          "__globals__": {
+           "primary_color": "globals/colors?id=appalight",
+           "secondary_color": "globals/colors?id=primary"
+          },
+          "shape": "square",
+          "icon_padding": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "44bcb06",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Geschützter Bereich",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appaeyebrow",
+           "title_color": "globals/colors?id=primary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "24",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "c30eb77",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Mitgliederbereich",
+          "header_size": "h1",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appah2",
+           "title_color": "globals/colors?id=secondary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "8",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "ecfb65e",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Melden Sie sich an, um Ihre Mitgliedschaft, exklusive Inhalte und Veranstaltungen zu verwalten.</p>",
+          "paragraph_spacing": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=text",
+           "text_color": "globals/colors?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "12",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "d5c6dfb",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "column",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 0,
+           "column": "0",
+           "row": "0",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": true
+          },
+          "margin": {
+           "unit": "px",
+           "top": "32",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "_title": "Login"
+         },
+         "elements": [
+          {
+           "id": "658d3e0",
+           "elType": "widget",
+           "widgetType": "login",
+           "settings": {
+            "show_labels": "yes",
+            "custom_labels": "yes",
+            "user_label": "E-Mail-Adresse",
+            "user_placeholder": "name@beispiel.at",
+            "password_label": "Passwort",
+            "password_placeholder": "Ihr Passwort",
+            "button_text": "Anmelden",
+            "button_size": "md",
+            "show_lost_password": "yes",
+            "show_register": "",
+            "show_remember_me": "",
+            "show_logged_in_message": "yes",
+            "redirect_after_login": "yes",
+            "redirect_url": {
+             "url": "/mitgliederbereich-uebersicht/",
+             "is_external": "",
+             "nofollow": "",
+             "custom_attributes": ""
+            },
+            "align": "justify",
+            "row_gap": {
+             "unit": "px",
+             "size": 20,
+             "sizes": []
+            },
+            "field_border_width": {
+             "unit": "px",
+             "size": 1,
+             "sizes": []
+            },
+            "field_border_radius": {
+             "unit": "px",
+             "size": 12,
+             "sizes": []
+            },
+            "button_border_radius": {
+             "unit": "px",
+             "size": 12,
+             "sizes": []
+            },
+            "button_text_padding": {
+             "unit": "px",
+             "top": "13",
+             "right": "24",
+             "bottom": "13",
+             "left": "24",
+             "isLinked": false
+            },
+            "links_spacing": {
+             "unit": "px",
+             "size": 0,
+             "sizes": []
+            },
+            "__globals__": {
+             "label_typography_typography": "globals/typography?id=appasmallsb",
+             "label_color": "globals/colors?id=secondary",
+             "field_typography_typography": "globals/typography?id=text",
+             "field_text_color": "globals/colors?id=secondary",
+             "field_background_color": "globals/colors?id=appawhite",
+             "field_border_color": "globals/colors?id=appaborder",
+             "button_typography_typography": "globals/typography?id=appabtn",
+             "button_background_color": "globals/colors?id=primary",
+             "button_text_color": "globals/colors?id=appawhite",
+             "links_typography_typography": "globals/typography?id=appasmallsb",
+             "links_color": "globals/colors?id=primary",
+             "links_hover_color": "globals/colors?id=secondary"
+            },
+            "button_background_hover_color": "#BF2C20"
+           },
+           "elements": []
+          }
+         ]
+        },
+        {
+         "id": "b126bf5",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "row",
+          "flex_align_items": "flex-start",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 12,
+           "column": "12",
+           "row": "12",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "24",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "margin": {
+           "unit": "px",
+           "top": "28",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "border_border": "solid",
+          "border_width": {
+           "unit": "px",
+           "top": "1",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "__globals__": {
+           "border_color": "globals/colors?id=appaborder"
+          },
+          "_title": "Hinweis"
+         },
+         "elements": [
+          {
+           "id": "d1dba1c",
+           "elType": "widget",
+           "widgetType": "icon",
+           "settings": {
+            "selected_icon": {
+             "value": "fas fa-info-circle",
+             "library": "fa-solid"
+            },
+            "view": "default",
+            "align": "left",
+            "size": {
+             "unit": "px",
+             "size": 18,
+             "sizes": []
+            },
+            "__globals__": {
+             "primary_color": "globals/colors?id=appagreen"
+            }
+           },
+           "elements": []
+          },
+          {
+           "id": "75b2f7b",
+           "elType": "widget",
+           "widgetType": "text-editor",
+           "settings": {
+            "editor": "<p>Nur für APPA-Mitglieder. Bei Fragen zu Ihrem Zugang kontaktieren Sie bitte <a href=\"mailto:info@appa.at\" style=\"font-weight:600;\">info@appa.at</a>.</p>",
+            "paragraph_spacing": {
+             "unit": "px",
+             "size": 0,
+             "sizes": []
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appasmall",
+             "text_color": "globals/colors?id=text",
+             "link_color": "globals/colors?id=primary",
+             "link_hover_color": "globals/colors?id=primary"
+            },
+            "_flex_size": "custom",
+            "_flex_grow": 1,
+            "_flex_shrink": 1
+           },
+           "elements": []
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "id": "cb955ee",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Noch nicht Mitglied? <a href=\"/mitgliedschaft/\" style=\"font-weight:600;\">Informationen zur Mitgliedschaft</a></p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appasmall",
+         "text_color": "globals/colors?id=text",
+         "link_color": "globals/colors?id=text",
+         "link_hover_color": "globals/colors?id=text"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "24",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "align": "center"
+       },
+       "elements": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d2c6d28",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "row",
+    "flex_direction_mobile": "column",
+    "flex_justify_content": "space-between",
+    "flex_align_items": "center",
+    "flex_align_items_mobile": "flex-start",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 12,
+     "column": "12",
+     "row": "12",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "24",
+     "right": "24",
+     "bottom": "24",
+     "left": "24",
+     "isLinked": true
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appawhite",
+     "border_color": "globals/colors?id=appaborder"
+    },
+    "border_border": "solid",
+    "border_width": {
+     "unit": "px",
+     "top": "1",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "html_tag": "footer",
+    "_title": "Footer Mitgliederbereich"
+   },
+   "elements": [
+    {
+     "id": "9f4be5a",
+     "elType": "widget",
+     "widgetType": "text-editor",
+     "settings": {
+      "editor": "<p>© 2026 APPA · Austrian Positive Psychology Association</p>",
+      "paragraph_spacing": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appasmall",
+       "text_color": "globals/colors?id=text"
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "e07fb2b",
+     "elType": "widget",
+     "widgetType": "icon-list",
+     "settings": {
+      "view": "inline",
+      "icon_list": [
+       {
+        "_id": "li00000",
+        "text": "Kontakt",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/kontakt/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       },
+       {
+        "_id": "li00001",
+        "text": "Datenschutz",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/datenschutz/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       },
+       {
+        "_id": "li00002",
+        "text": "Impressum",
+        "selected_icon": {
+         "value": "",
+         "library": ""
+        },
+        "link": {
+         "url": "/impressum/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        }
+       }
+      ],
+      "space_between": {
+       "unit": "px",
+       "size": 20,
+       "sizes": []
+      },
+      "icon_size": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "text_indent": {
+       "unit": "px",
+       "size": 0,
+       "sizes": []
+      },
+      "__globals__": {
+       "icon_color": "globals/colors?id=appagreen",
+       "text_color": "globals/colors?id=text",
+       "icon_typography_typography": "globals/typography?id=appasmall",
+       "text_color_hover": "globals/colors?id=primary"
+      }
+     },
+     "elements": []
+    }
+   ]
+  }
+ ],
+ "page_settings": {
+  "template": "elementor_canvas",
+  "hide_title": "yes"
+ },
+ "version": "0.4",
+ "title": "APPA – Mitgliederbereich Login",
+ "type": "page"
+}

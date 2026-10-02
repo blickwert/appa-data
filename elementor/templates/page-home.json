@@ -1,0 +1,1747 @@
+{
+ "content": [
+  {
+   "id": "244c72d",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "row",
+    "flex_direction_tablet": "column",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 0,
+     "column": "0",
+     "row": "0",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "boxed_width": {
+     "unit": "px",
+     "size": 1152,
+     "sizes": []
+    },
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "min_height": {
+     "unit": "px",
+     "size": 520,
+     "sizes": []
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appalight"
+    },
+    "overflow": "hidden",
+    "_title": "Hero"
+   },
+   "elements": [
+    {
+     "id": "d41e8e1",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_justify_content": "center",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "width": {
+       "unit": "%",
+       "size": 50,
+       "sizes": []
+      },
+      "width_tablet": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "width_mobile": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "padding": {
+       "unit": "px",
+       "top": "96",
+       "right": "24",
+       "bottom": "96",
+       "left": "24",
+       "isLinked": false
+      },
+      "padding_tablet": {
+       "unit": "px",
+       "top": "64",
+       "right": "24",
+       "bottom": "64",
+       "left": "24",
+       "isLinked": false
+      },
+      "z_index": 1,
+      "_title": "Hero Text"
+     },
+     "elements": [
+      {
+       "id": "b76271c",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Austrian Positive Psychology Association",
+        "header_size": "p",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appaeyebrow",
+         "title_color": "globals/colors?id=primary"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "a1c1fa2",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Österreichische Gesellschaft für Positive Psychologie",
+        "header_size": "h1",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah1hero",
+         "title_color": "globals/colors?id=secondary"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "0924cba",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Austrian Positive Psychology Association</p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appalead",
+         "text_color": "globals/colors?id=text"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "24",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "_element_width": "initial",
+        "_element_custom_width": {
+         "unit": "px",
+         "size": 576,
+         "sizes": []
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "07a596e",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "row",
+        "flex_wrap": "wrap",
+        "flex_wrap_tablet": "wrap",
+        "flex_wrap_mobile": "wrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 12,
+         "column": "12",
+         "row": "12",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": true
+        },
+        "margin": {
+         "unit": "px",
+         "top": "36",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "_title": "Buttons"
+       },
+       "elements": [
+        {
+         "id": "089aac7",
+         "elType": "widget",
+         "widgetType": "button",
+         "settings": {
+          "text": "Die APPA kennenlernen",
+          "link": {
+           "url": "/ueber-uns/",
+           "is_external": "",
+           "nofollow": "",
+           "custom_attributes": ""
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabtn",
+           "background_color": "globals/colors?id=primary",
+           "button_text_color": "globals/colors?id=appawhite",
+           "hover_color": "globals/colors?id=appawhite"
+          },
+          "text_padding": {
+           "unit": "px",
+           "top": "13",
+           "right": "24",
+           "bottom": "13",
+           "left": "24",
+           "isLinked": false
+          },
+          "background_background": "classic",
+          "button_background_hover_background": "classic",
+          "button_background_hover_color": "#BF2C20",
+          "selected_icon": {
+           "value": "fas fa-arrow-right",
+           "library": "fa-solid"
+          },
+          "icon_align": "right",
+          "icon_indent": {
+           "unit": "px",
+           "size": 8,
+           "sizes": []
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "cc040c9",
+         "elType": "widget",
+         "widgetType": "button",
+         "settings": {
+          "text": "Veranstaltungen",
+          "link": {
+           "url": "/veranstaltungen/",
+           "is_external": "",
+           "nofollow": "",
+           "custom_attributes": ""
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabtn",
+           "button_text_color": "globals/colors?id=secondary",
+           "border_color": "globals/colors?id=appaborder",
+           "hover_color": "globals/colors?id=primary",
+           "button_hover_border_color": "globals/colors?id=primary"
+          },
+          "text_padding": {
+           "unit": "px",
+           "top": "13",
+           "right": "24",
+           "bottom": "13",
+           "left": "24",
+           "isLinked": false
+          },
+          "background_background": "classic",
+          "background_color": "rgba(255, 255, 255, 0)",
+          "border_border": "solid",
+          "border_width": {
+           "unit": "px",
+           "top": "1",
+           "right": "1",
+           "bottom": "1",
+           "left": "1",
+           "isLinked": true
+          }
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "e0a4944",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_justify_content": "flex-end",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "width": {
+       "unit": "%",
+       "size": 50,
+       "sizes": []
+      },
+      "width_tablet": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "width_mobile": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "padding": {
+       "unit": "px",
+       "top": "32",
+       "right": "24",
+       "bottom": "32",
+       "left": "24",
+       "isLinked": false
+      },
+      "min_height_tablet": {
+       "unit": "px",
+       "size": 280,
+       "sizes": []
+      },
+      "background_background": "classic",
+      "background_image": {
+       "url": "https://uxmagic.blob.core.windows.net/public/agent-images/appa-hero-1787310408423-mr0edyb5t2r.png",
+       "id": "",
+       "size": "",
+       "alt": "",
+       "source": "library"
+      },
+      "background_position": "center center",
+      "background_repeat": "no-repeat",
+      "background_size": "cover",
+      "_title": "Hero Bild"
+     },
+     "elements": [
+      {
+       "id": "e94a254",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "20",
+         "right": "20",
+         "bottom": "20",
+         "left": "20",
+         "isLinked": true
+        },
+        "background_background": "classic",
+        "__globals__": {
+         "background_color": "globals/colors?id=appawhite"
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "box_shadow_box_shadow_type": "yes",
+        "box_shadow_box_shadow": {
+         "horizontal": 0,
+         "vertical": 4,
+         "blur": 6,
+         "spread": -1,
+         "color": "rgba(0, 0, 0, 0.1)"
+        },
+        "_title": "Bild-Karte"
+       },
+       "elements": [
+        {
+         "id": "5e66ffe",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Austausch von Wissenschaft und Praxis",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appacardttl",
+           "title_color": "globals/colors?id=secondary"
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "848f874",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Positives Wissen wirksam in den Alltag bringen.</p>",
+          "paragraph_spacing": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appasmall",
+           "text_color": "globals/colors?id=text"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "4",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b360dc6",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "container_type": "grid",
+    "grid_columns_grid": {
+     "unit": "custom",
+     "size": "calc(33.333% - 26.667px) minmax(0, 1fr)",
+     "sizes": []
+    },
+    "grid_columns_grid_tablet": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_columns_grid_mobile": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_rows_grid": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_rows_grid_tablet": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_rows_grid_mobile": {
+     "unit": "custom",
+     "size": "auto",
+     "sizes": []
+    },
+    "grid_gaps": {
+     "unit": "px",
+     "size": 40,
+     "column": "40",
+     "row": "40",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "80",
+     "right": "24",
+     "bottom": "80",
+     "left": "24",
+     "isLinked": false
+    },
+    "_title": "Die APPA"
+   },
+   "elements": [
+    {
+     "id": "220903f",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Titel"
+     },
+     "elements": [
+      {
+       "id": "c4bbb65",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Die APPA",
+        "header_size": "p",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appaeyebrow",
+         "title_color": "globals/colors?id=primary"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "62c3d16",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Wissen, das Menschen stärkt.",
+        "header_size": "h2",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah2",
+         "title_color": "globals/colors?id=secondary"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "12",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "865ab15",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Text"
+     },
+     "elements": [
+      {
+       "id": "3fa9f87",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Die Austrian Positive Psychology Association fördert den Austausch von Wissenschaft und Praxis der Positiven Psychologie in Österreich. Wir verbinden Forschende, Praktizierende und Interessierte durch Weiterbildung, Veranstaltungen und fachlichen Dialog. Die Austrian Positive Psychology Association fördert den Austausch von Wissenschaft und Praxis der Positiven Psychologie in Österreich. Wir verbinden Forschende, Praktizierende und Interessierte durch Weiterbildung, Veranstaltungen und fachlichen Dialog.</p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appaleadlong",
+         "text_color": "globals/colors?id=text"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "0746c4b",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "row",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": true
+        },
+        "margin": {
+         "unit": "px",
+         "top": "28",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [
+        {
+         "id": "cda2821",
+         "elType": "widget",
+         "widgetType": "button",
+         "settings": {
+          "text": "Mehr erfahren",
+          "link": {
+           "url": "/ueber-uns/",
+           "is_external": "",
+           "nofollow": "",
+           "custom_attributes": ""
+          },
+          "border_radius": {
+           "unit": "px",
+           "top": "12",
+           "right": "12",
+           "bottom": "12",
+           "left": "12",
+           "isLinked": true
+          },
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appabtn",
+           "button_text_color": "globals/colors?id=primary",
+           "hover_color": "globals/colors?id=secondary"
+          },
+          "text_padding": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": true
+          },
+          "background_background": "classic",
+          "background_color": "rgba(255, 255, 255, 0)",
+          "selected_icon": {
+           "value": "fas fa-arrow-right",
+           "library": "fa-solid"
+          },
+          "icon_align": "right",
+          "icon_indent": {
+           "unit": "px",
+           "size": 8,
+           "sizes": []
+          }
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "5e0e8fc",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "column",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 36,
+     "column": "36",
+     "row": "36",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "80",
+     "right": "24",
+     "bottom": "80",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appamuted"
+    },
+    "_title": "Veranstaltungen"
+   },
+   "elements": [
+    {
+     "id": "62f90fc",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "row",
+      "flex_justify_content": "space-between",
+      "flex_align_items": "flex-end",
+      "flex_wrap": "wrap",
+      "flex_wrap_tablet": "wrap",
+      "flex_wrap_mobile": "wrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 16,
+       "column": "16",
+       "row": "16",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Kopf"
+     },
+     "elements": [
+      {
+       "id": "6248e6d",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": true
+        },
+        "_title": "Titel",
+        "width": {
+         "unit": "custom",
+         "size": "auto",
+         "sizes": []
+        }
+       },
+       "elements": [
+        {
+         "id": "231f816",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Nächste Termine",
+          "header_size": "p",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appaeyebrow",
+           "title_color": "globals/colors?id=primary"
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "bfff0be",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Veranstaltungen",
+          "header_size": "h2",
+          "__globals__": {
+           "typography_typography": "globals/typography?id=appah2",
+           "title_color": "globals/colors?id=secondary"
+          },
+          "_margin": {
+           "unit": "px",
+           "top": "8",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          }
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "5829d3e",
+       "elType": "widget",
+       "widgetType": "button",
+       "settings": {
+        "text": "Alle Veranstaltungen",
+        "link": {
+         "url": "/veranstaltungen/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appabtn",
+         "button_text_color": "globals/colors?id=primary",
+         "hover_color": "globals/colors?id=secondary"
+        },
+        "text_padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": true
+        },
+        "background_background": "classic",
+        "background_color": "rgba(255, 255, 255, 0)",
+        "selected_icon": {
+         "value": "fas fa-arrow-right",
+         "library": "fa-solid"
+        },
+        "icon_align": "right",
+        "icon_indent": {
+         "unit": "px",
+         "size": 8,
+         "sizes": []
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "010bac2",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "container_type": "grid",
+      "grid_columns_grid": {
+       "unit": "fr",
+       "size": 2,
+       "sizes": []
+      },
+      "grid_columns_grid_tablet": {
+       "unit": "fr",
+       "size": 2,
+       "sizes": []
+      },
+      "grid_columns_grid_mobile": {
+       "unit": "fr",
+       "size": 1,
+       "sizes": []
+      },
+      "grid_rows_grid": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      },
+      "grid_rows_grid_tablet": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      },
+      "grid_rows_grid_mobile": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      },
+      "grid_gaps": {
+       "unit": "px",
+       "size": 28,
+       "column": "28",
+       "row": "28",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_title": "Karten"
+     },
+     "elements": [
+      {
+       "id": "197852b",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": true
+        },
+        "background_background": "classic",
+        "__globals__": {
+         "background_color": "globals/colors?id=appawhite"
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "box_shadow_box_shadow_type": "yes",
+        "box_shadow_box_shadow": {
+         "horizontal": 0,
+         "vertical": 4,
+         "blur": 6,
+         "spread": -1,
+         "color": "rgba(0, 0, 0, 0.1)"
+        },
+        "overflow": "hidden",
+        "html_tag": "article",
+        "_title": "Event-Karte"
+       },
+       "elements": [
+        {
+         "id": "82e4960",
+         "elType": "widget",
+         "widgetType": "image",
+         "settings": {
+          "image": {
+           "url": "https://uxmagic.blob.core.windows.net/public/agent-images/appa-event-1-1787310427059-0ox6xea5ag88.png",
+           "id": "",
+           "alt": "Speaker presenting at a positive psychology lecture",
+           "source": "library",
+           "size": ""
+          },
+          "image_size": "full",
+          "width": {
+           "unit": "%",
+           "size": 100,
+           "sizes": []
+          },
+          "align": "left",
+          "height": {
+           "unit": "custom",
+           "size": "auto; aspect-ratio: 16 / 9",
+           "sizes": []
+          },
+          "object-fit": "cover"
+         },
+         "elements": []
+        },
+        {
+         "id": "7bd117d",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "column",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 0,
+           "column": "0",
+           "row": "0",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "24",
+           "right": "24",
+           "bottom": "24",
+           "left": "24",
+           "isLinked": true
+          },
+          "_title": "Inhalt"
+         },
+         "elements": [
+          {
+           "id": "3b02e59",
+           "elType": "widget",
+           "widgetType": "heading",
+           "settings": {
+            "title": "[Datum] · Live-Stream via Zoom",
+            "header_size": "p",
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appasmallsb",
+             "title_color": "globals/colors?id=primary"
+            }
+           },
+           "elements": []
+          },
+          {
+           "id": "7691d2d",
+           "elType": "widget",
+           "widgetType": "heading",
+           "settings": {
+            "title": "Öffentlicher Vortrag: Positive Psychologie im Berufsalltag",
+            "header_size": "h3",
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appah3",
+             "title_color": "globals/colors?id=secondary"
+            },
+            "_margin": {
+             "unit": "px",
+             "top": "12",
+             "right": "0",
+             "bottom": "0",
+             "left": "0",
+             "isLinked": false
+            }
+           },
+           "elements": []
+          },
+          {
+           "id": "fde56b6",
+           "elType": "widget",
+           "widgetType": "text-editor",
+           "settings": {
+            "editor": "<p>[Uhrzeit] · Online</p>",
+            "paragraph_spacing": {
+             "unit": "px",
+             "size": 0,
+             "sizes": []
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=text",
+             "text_color": "globals/colors?id=text"
+            },
+            "_margin": {
+             "unit": "px",
+             "top": "12",
+             "right": "0",
+             "bottom": "0",
+             "left": "0",
+             "isLinked": false
+            }
+           },
+           "elements": []
+          },
+          {
+           "id": "68603a7",
+           "elType": "container",
+           "isInner": true,
+           "settings": {
+            "flex_direction": "row",
+            "flex_wrap": "nowrap",
+            "flex_wrap_tablet": "nowrap",
+            "flex_wrap_mobile": "nowrap",
+            "flex_gap": {
+             "unit": "px",
+             "size": 0,
+             "column": "0",
+             "row": "0",
+             "isLinked": true
+            },
+            "content_width": "full",
+            "padding": {
+             "unit": "px",
+             "top": "24",
+             "right": "0",
+             "bottom": "0",
+             "left": "0",
+             "isLinked": false
+            }
+           },
+           "elements": [
+            {
+             "id": "118b85b",
+             "elType": "widget",
+             "widgetType": "button",
+             "settings": {
+              "text": "Anmelden",
+              "link": {
+               "url": "/veranstaltungen/",
+               "is_external": "",
+               "nofollow": "",
+               "custom_attributes": ""
+              },
+              "border_radius": {
+               "unit": "px",
+               "top": "12",
+               "right": "12",
+               "bottom": "12",
+               "left": "12",
+               "isLinked": true
+              },
+              "__globals__": {
+               "typography_typography": "globals/typography?id=appabtn",
+               "background_color": "globals/colors?id=primary",
+               "button_text_color": "globals/colors?id=appawhite",
+               "hover_color": "globals/colors?id=appawhite"
+              },
+              "text_padding": {
+               "unit": "px",
+               "top": "13",
+               "right": "20",
+               "bottom": "13",
+               "left": "20",
+               "isLinked": false
+              },
+              "background_background": "classic",
+              "button_background_hover_background": "classic",
+              "button_background_hover_color": "#BF2C20"
+             },
+             "elements": []
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "id": "38e35bf",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_wrap": "nowrap",
+        "flex_wrap_tablet": "nowrap",
+        "flex_wrap_mobile": "nowrap",
+        "flex_gap": {
+         "unit": "px",
+         "size": 0,
+         "column": "0",
+         "row": "0",
+         "isLinked": true
+        },
+        "content_width": "full",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": true
+        },
+        "background_background": "classic",
+        "__globals__": {
+         "background_color": "globals/colors?id=appawhite"
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "12",
+         "right": "12",
+         "bottom": "12",
+         "left": "12",
+         "isLinked": true
+        },
+        "box_shadow_box_shadow_type": "yes",
+        "box_shadow_box_shadow": {
+         "horizontal": 0,
+         "vertical": 4,
+         "blur": 6,
+         "spread": -1,
+         "color": "rgba(0, 0, 0, 0.1)"
+        },
+        "overflow": "hidden",
+        "html_tag": "article",
+        "_title": "Event-Karte"
+       },
+       "elements": [
+        {
+         "id": "1ebc0ca",
+         "elType": "widget",
+         "widgetType": "image",
+         "settings": {
+          "image": {
+           "url": "https://uxmagic.blob.core.windows.net/public/agent-images/appa-event-2-1787310440508-o2my4nignp.png",
+           "id": "",
+           "alt": "Attendees networking at a psychology conference",
+           "source": "library",
+           "size": ""
+          },
+          "image_size": "full",
+          "width": {
+           "unit": "%",
+           "size": 100,
+           "sizes": []
+          },
+          "align": "left",
+          "height": {
+           "unit": "custom",
+           "size": "auto; aspect-ratio: 16 / 9",
+           "sizes": []
+          },
+          "object-fit": "cover"
+         },
+         "elements": []
+        },
+        {
+         "id": "e898fc9",
+         "elType": "container",
+         "isInner": true,
+         "settings": {
+          "flex_direction": "column",
+          "flex_wrap": "nowrap",
+          "flex_wrap_tablet": "nowrap",
+          "flex_wrap_mobile": "nowrap",
+          "flex_gap": {
+           "unit": "px",
+           "size": 0,
+           "column": "0",
+           "row": "0",
+           "isLinked": true
+          },
+          "content_width": "full",
+          "padding": {
+           "unit": "px",
+           "top": "24",
+           "right": "24",
+           "bottom": "24",
+           "left": "24",
+           "isLinked": true
+          },
+          "_title": "Inhalt"
+         },
+         "elements": [
+          {
+           "id": "61feaf8",
+           "elType": "widget",
+           "widgetType": "heading",
+           "settings": {
+            "title": "[Datum] · [Universität/Ort]",
+            "header_size": "p",
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appasmallsb",
+             "title_color": "globals/colors?id=primary"
+            }
+           },
+           "elements": []
+          },
+          {
+           "id": "a263b1b",
+           "elType": "widget",
+           "widgetType": "heading",
+           "settings": {
+            "title": "APPA Fachtagung: Wohlbefinden, Resilienz und Gesundheit",
+            "header_size": "h3",
+            "__globals__": {
+             "typography_typography": "globals/typography?id=appah3",
+             "title_color": "globals/colors?id=secondary"
+            },
+            "_margin": {
+             "unit": "px",
+             "top": "12",
+             "right": "0",
+             "bottom": "0",
+             "left": "0",
+             "isLinked": false
+            }
+           },
+           "elements": []
+          },
+          {
+           "id": "2c55362",
+           "elType": "widget",
+           "widgetType": "text-editor",
+           "settings": {
+            "editor": "<p>Save the date · Programm folgt</p>",
+            "paragraph_spacing": {
+             "unit": "px",
+             "size": 0,
+             "sizes": []
+            },
+            "__globals__": {
+             "typography_typography": "globals/typography?id=text",
+             "text_color": "globals/colors?id=text"
+            },
+            "_margin": {
+             "unit": "px",
+             "top": "12",
+             "right": "0",
+             "bottom": "0",
+             "left": "0",
+             "isLinked": false
+            }
+           },
+           "elements": []
+          },
+          {
+           "id": "29de00f",
+           "elType": "container",
+           "isInner": true,
+           "settings": {
+            "flex_direction": "row",
+            "flex_wrap": "nowrap",
+            "flex_wrap_tablet": "nowrap",
+            "flex_wrap_mobile": "nowrap",
+            "flex_gap": {
+             "unit": "px",
+             "size": 0,
+             "column": "0",
+             "row": "0",
+             "isLinked": true
+            },
+            "content_width": "full",
+            "padding": {
+             "unit": "px",
+             "top": "24",
+             "right": "0",
+             "bottom": "0",
+             "left": "0",
+             "isLinked": false
+            }
+           },
+           "elements": [
+            {
+             "id": "8246356",
+             "elType": "widget",
+             "widgetType": "button",
+             "settings": {
+              "text": "Details",
+              "link": {
+               "url": "/veranstaltungen/",
+               "is_external": "",
+               "nofollow": "",
+               "custom_attributes": ""
+              },
+              "border_radius": {
+               "unit": "px",
+               "top": "12",
+               "right": "12",
+               "bottom": "12",
+               "left": "12",
+               "isLinked": true
+              },
+              "__globals__": {
+               "typography_typography": "globals/typography?id=appabtn",
+               "button_text_color": "globals/colors?id=secondary",
+               "border_color": "globals/colors?id=appaborder",
+               "hover_color": "globals/colors?id=primary",
+               "button_hover_border_color": "globals/colors?id=primary"
+              },
+              "text_padding": {
+               "unit": "px",
+               "top": "13",
+               "right": "20",
+               "bottom": "13",
+               "left": "20",
+               "isLinked": false
+              },
+              "background_background": "classic",
+              "background_color": "rgba(255, 255, 255, 0)",
+              "border_border": "solid",
+              "border_width": {
+               "unit": "px",
+               "top": "1",
+               "right": "1",
+               "bottom": "1",
+               "left": "1",
+               "isLinked": true
+              }
+             },
+             "elements": []
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c7d415d",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "column",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 0,
+     "column": "0",
+     "row": "0",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "boxed_width": {
+     "unit": "px",
+     "size": 848,
+     "sizes": []
+    },
+    "padding": {
+     "unit": "px",
+     "top": "80",
+     "right": "24",
+     "bottom": "80",
+     "left": "24",
+     "isLinked": false
+    },
+    "_title": "Zitat"
+   },
+   "elements": [
+    {
+     "id": "9291eb2",
+     "elType": "widget",
+     "widgetType": "icon",
+     "settings": {
+      "selected_icon": {
+       "value": "fas fa-quote-left",
+       "library": "fa-solid"
+      },
+      "view": "default",
+      "align": "center",
+      "size": {
+       "unit": "px",
+       "size": 32,
+       "sizes": []
+      },
+      "__globals__": {
+       "primary_color": "globals/colors?id=accent"
+      }
+     },
+     "elements": []
+    },
+    {
+     "id": "0cfc363",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "„Das Ziel der Positiven Psychologie ist es, das Leben der Menschen zu verbessern, indem wir ihre Stärken erkennen und fördern.“",
+      "header_size": "blockquote",
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appaquote",
+       "title_color": "globals/colors?id=secondary"
+      },
+      "_margin": {
+       "unit": "px",
+       "top": "20",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "align": "center"
+     },
+     "elements": []
+    },
+    {
+     "id": "c67e10a",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "— Martin Seligman",
+      "header_size": "p",
+      "__globals__": {
+       "typography_typography": "globals/typography?id=text",
+       "title_color": "globals/colors?id=text"
+      },
+      "_margin": {
+       "unit": "px",
+       "top": "20",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "align": "center"
+     },
+     "elements": []
+    }
+   ]
+  },
+  {
+   "id": "1e90178",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "flex_direction": "row",
+    "flex_direction_tablet": "column",
+    "flex_direction_mobile": "column",
+    "flex_justify_content": "space-between",
+    "flex_align_items": "center",
+    "flex_align_items_tablet": "stretch",
+    "flex_align_items_mobile": "stretch",
+    "flex_wrap": "nowrap",
+    "flex_wrap_tablet": "nowrap",
+    "flex_wrap_mobile": "nowrap",
+    "flex_gap": {
+     "unit": "px",
+     "size": 28,
+     "column": "28",
+     "row": "28",
+     "isLinked": true
+    },
+    "content_width": "boxed",
+    "padding": {
+     "unit": "px",
+     "top": "56",
+     "right": "24",
+     "bottom": "56",
+     "left": "24",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "__globals__": {
+     "background_color": "globals/colors?id=appagreen"
+    },
+    "_title": "CTA Mitgliedschaft"
+   },
+   "elements": [
+    {
+     "id": "e3ebbe6",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_wrap": "nowrap",
+      "flex_wrap_tablet": "nowrap",
+      "flex_wrap_mobile": "nowrap",
+      "flex_gap": {
+       "unit": "px",
+       "size": 0,
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "content_width": "full",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      },
+      "_flex_size": "custom",
+      "_flex_grow": 1,
+      "_flex_shrink": 1,
+      "_title": "Text",
+      "width": {
+       "unit": "custom",
+       "size": "auto",
+       "sizes": []
+      }
+     },
+     "elements": [
+      {
+       "id": "c499267",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Teil der Community werden",
+        "header_size": "p",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appaeyebrow",
+         "title_color": "globals/colors?id=appaongreen"
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "9adb9ee",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Mitglied werden bei der APPA",
+        "header_size": "h2",
+        "__globals__": {
+         "typography_typography": "globals/typography?id=appah2",
+         "title_color": "globals/colors?id=appaongreen"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "8",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "f7019d3",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Bleiben Sie mit unserem Newsletter, Forschung und neuen Weiterbildungsangeboten verbunden.</p>",
+        "paragraph_spacing": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "__globals__": {
+         "typography_typography": "globals/typography?id=text",
+         "text_color": "globals/colors?id=appaongreen"
+        },
+        "_margin": {
+         "unit": "px",
+         "top": "12",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "_element_width": "initial",
+        "_element_custom_width": {
+         "unit": "px",
+         "size": 672,
+         "sizes": []
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "d80b797",
+     "elType": "widget",
+     "widgetType": "button",
+     "settings": {
+      "text": "Mehr erfahren",
+      "link": {
+       "url": "/mitgliedschaft/",
+       "is_external": "",
+       "nofollow": "",
+       "custom_attributes": ""
+      },
+      "border_radius": {
+       "unit": "px",
+       "top": "12",
+       "right": "12",
+       "bottom": "12",
+       "left": "12",
+       "isLinked": true
+      },
+      "__globals__": {
+       "typography_typography": "globals/typography?id=appabtn",
+       "background_color": "globals/colors?id=primary",
+       "button_text_color": "globals/colors?id=appawhite",
+       "hover_color": "globals/colors?id=appawhite"
+      },
+      "text_padding": {
+       "unit": "px",
+       "top": "13",
+       "right": "24",
+       "bottom": "13",
+       "left": "24",
+       "isLinked": false
+      },
+      "background_background": "classic",
+      "button_background_hover_background": "classic",
+      "button_background_hover_color": "#BF2C20"
+     },
+     "elements": []
+    }
+   ]
+  }
+ ],
+ "page_settings": {
+  "template": "elementor_header_footer",
+  "hide_title": "yes"
+ },
+ "version": "0.4",
+ "title": "APPA – Home",
+ "type": "page"
+}
