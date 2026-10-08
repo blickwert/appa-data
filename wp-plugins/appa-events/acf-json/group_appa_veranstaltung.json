@@ -1,0 +1,184 @@
+{
+    "key": "group_appa_veranstaltung",
+    "title": "Veranstaltung",
+    "fields": [
+        {
+            "key": "field_appa_ev_datum_von",
+            "label": "Datum von",
+            "name": "datum_von",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "Erster Veranstaltungstag. Leer lassen, wenn der Termin noch nicht feststeht.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y",
+            "return_format": "Ymd",
+            "first_day": 1,
+            "default_value": ""
+        },
+        {
+            "key": "field_appa_ev_datum_bis",
+            "label": "Datum bis",
+            "name": "datum_bis",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "Letzter Tag bei mehrtägigen Veranstaltungen, sonst leer.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y",
+            "return_format": "Ymd",
+            "first_day": 1,
+            "default_value": ""
+        },
+        {
+            "key": "field_appa_ev_uhrzeit",
+            "label": "Uhrzeit",
+            "name": "uhrzeit",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "z. B. 18:00–19:30 Uhr. Wird nur mit Datum angezeigt.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_appa_ev_datum_hinweis",
+            "label": "Hinweis zum Termin",
+            "name": "datum_hinweis",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Wird an die Terminzeile angehängt, z. B. „vorläufig geplant“. Ohne Datum steht nur dieser Hinweis, z. B. „In Vorbereitung“.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_appa_ev_ort",
+            "label": "Ort",
+            "name": "ort",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "z. B. Live-Stream via Zoom oder Universität Graz.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_appa_ev_beschreibung",
+            "label": "Beschreibung",
+            "name": "beschreibung",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Kurzer Text auf der Karte.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 5,
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_appa_ev_button_text",
+            "label": "Button-Text",
+            "name": "button_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Beschriftung des Buttons auf der Karte.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Mehr erfahren",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_appa_ev_button_link",
+            "label": "Button-Link",
+            "name": "button_link",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Web-Adresse (https://…) oder E-Mail-Link (mailto:info@appa.net?subject=Interesse an der Fachtagung).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "https://",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "veranstaltung"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1791500000
+}
