@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace BW\WooMembership\Modules\Documents\Controller;
 
 use BW\WooMembership\Modules\Documents\Repository\DocumentRepository;
-use BW\WooMembership\Modules\Documents\Service\ProtectedFolder;
+use BW\WooMembership\Support\ProtectedFolder;
 
 /**
  * Files uploaded on a document's screen go to the protected folder with an unguessable name.

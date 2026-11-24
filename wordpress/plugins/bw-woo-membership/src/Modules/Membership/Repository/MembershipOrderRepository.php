@@ -85,6 +85,24 @@ final class MembershipOrderRepository {
 	}
 
 	/**
+	 * Customers with a membership order that is not paid yet (they have no member number yet).
+	 *
+	 * @return int[]
+	 */
+	public function customers_with_open_orders(): array {
+		if ( ! function_exists( 'wc_get_orders' ) ) {
+			return array();
+		}
+		$ids = array();
+		foreach ( wc_get_orders( array( 'status' => array( 'wc-pending', 'wc-on-hold' ), 'limit' => 200, 'type' => 'shop_order' ) ) as $order ) {
+			if ( $order instanceof WC_Order && $order->get_customer_id() > 0 && '' !== $this->order_type( $order ) ) {
+				$ids[] = $order->get_customer_id();
+			}
+		}
+		return array_values( array_unique( $ids ) );
+	}
+
+	/**
 	 * The user's membership subscription as plain data (WooCommerce Subscriptions), or null.
 	 *
 	 * @return array{type: string, status: string, start: ?string, end: ?string, next: ?string, manual: bool}|null

@@ -15,7 +15,7 @@ use BW\WooMembership\Modules\Documents\Controller\DownloadController;
 use BW\WooMembership\Modules\Documents\Controller\PostTypeController;
 use BW\WooMembership\Modules\Documents\Controller\UploadController;
 use BW\WooMembership\Modules\Documents\Repository\DocumentRepository;
-use BW\WooMembership\Modules\Documents\Service\ProtectedFolder;
+use BW\WooMembership\Support\ProtectedFolder;
 
 /**
  * Member documents: post type, protected files, checked downloads, list block.

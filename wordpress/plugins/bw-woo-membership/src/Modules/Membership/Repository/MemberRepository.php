@@ -24,6 +24,28 @@ final class MemberRepository {
 	public const OPTION_SEQUENCE   = 'bw_wm_number_sequence';
 
 	/**
+	 * IDs of users who are or were members (member number or manual membership).
+	 *
+	 * @return int[]
+	 */
+	public function member_ids(): array {
+		return array_map(
+			'intval',
+			get_users(
+				array(
+					'fields'     => 'ID',
+					'number'     => -1,
+					'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- association with a few hundred members.
+						'relation' => 'OR',
+						array( 'key' => self::META_NUMBER, 'compare' => 'EXISTS' ),
+						array( 'key' => self::META_MANUAL_TYPE, 'compare' => 'EXISTS' ),
+					),
+				)
+			)
+		);
+	}
+
+	/**
 	 * Member number or empty string.
 	 */
 	public function number( int $user_id ): string {

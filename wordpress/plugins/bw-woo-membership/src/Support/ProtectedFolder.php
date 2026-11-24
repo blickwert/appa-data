@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace BW\WooMembership\Modules\Documents\Service;
+namespace BW\WooMembership\Support;
 
 /**
- * The folder below wp-content/uploads that holds member documents, closed for direct requests.
+ * Folders below wp-content/uploads that are closed for direct requests (member documents, student proofs).
  */
 final class ProtectedFolder {
 
@@ -19,8 +19,8 @@ final class ProtectedFolder {
 	/**
 	 * Creates the folder with deny rules (Apache) and an empty index. nginx needs its own rule, see readme.
 	 */
-	public static function ensure( string $basedir ): string {
-		$dir = $basedir . self::SUBDIR;
+	public static function ensure( string $basedir, string $subdir = self::SUBDIR ): string {
+		$dir = $basedir . $subdir;
 		if ( ! is_dir( $dir ) ) {
 			wp_mkdir_p( $dir );
 		}
