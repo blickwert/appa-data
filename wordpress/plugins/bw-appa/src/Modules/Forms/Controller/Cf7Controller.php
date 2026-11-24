@@ -13,6 +13,7 @@ use BW\Appa\Modules\Forms\Repository\FormRepository;
 use BW\Appa\Modules\Forms\Repository\RateLimitRepository;
 use BW\Appa\Modules\Forms\Repository\SettingsRepository;
 use BW\Appa\Modules\Forms\Service\FormToken;
+use BW\Appa\Modules\Forms\Service\MailSender;
 use BW\Appa\Modules\Forms\Service\SpamGuard;
 use WPCF7_ContactForm;
 use WPCF7_Submission;
@@ -117,12 +118,15 @@ final class Cf7Controller {
 	}
 
 	/**
-	 * Sends the APPA forms to the configured recipient.
+	 * Sends the APPA forms to the configured recipient and makes every CF7 sender name safe for mail().
 	 *
 	 * @param array<string, mixed> $components Mail components.
 	 * @return array<string, mixed>
 	 */
 	public function route_mail( array $components, WPCF7_ContactForm $form, object $mail ): array {
+		if ( isset( $components['sender'] ) && is_string( $components['sender'] ) ) {
+			$components['sender'] = MailSender::clean( $components['sender'] );
+		}
 		if ( 'mail' !== ( method_exists( $mail, 'name' ) ? $mail->name() : '' ) ) {
 			return $components;
 		}
