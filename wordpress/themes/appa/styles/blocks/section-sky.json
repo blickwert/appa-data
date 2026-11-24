@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Abschnitt Hellblau",
+	"slug": "section-sky",
+	"blockTypes": [
+		"core/group"
+	],
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--sky)",
+			"text": "var(--wp--preset--color--slate)"
+		},
+		"elements": {
+			"heading": {
+				"color": {
+					"text": "var(--wp--preset--color--navy)"
+				}
+			}
+		}
+	}
+}

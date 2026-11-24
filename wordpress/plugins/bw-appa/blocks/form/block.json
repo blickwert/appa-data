@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bw-appa/form",
+	"title": "APPA-Formular",
+	"category": "widgets",
+	"icon": "feedback",
+	"description": "Kontaktformular oder Mitgliedsantrag der APPA.",
+	"textdomain": "bw-appa",
+	"attributes": {
+		"form": { "type": "string", "enum": [ "contact", "membership" ], "default": "contact" }
+	},
+	"supports": { "html": false, "multiple": true },
+	"editorScript": "file:./index.js",
+	"style": "file:./style.css"
+}

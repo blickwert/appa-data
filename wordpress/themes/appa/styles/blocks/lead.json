@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Lead",
+	"slug": "lead",
+	"blockTypes": [
+		"core/paragraph"
+	],
+	"styles": {
+		"typography": {
+			"fontSize": "var(--wp--preset--font-size--lg)",
+			"lineHeight": "var(--wp--custom--line-height--relaxed)"
+		}
+	}
+}

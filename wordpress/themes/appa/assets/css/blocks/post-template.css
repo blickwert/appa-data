@@ -1,0 +1,9 @@
+/* core/post-template – event cards in query loops */
+
+.wp-block-post-template.is-layout-grid > li {
+	display: flex;
+}
+
+.wp-block-post-template .is-style-card {
+	inline-size: 100%;
+}

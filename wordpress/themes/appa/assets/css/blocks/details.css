@@ -1,0 +1,32 @@
+/* core/details – accordion with plus/minus marker */
+
+.wp-block-details > summary {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: var(--wp--preset--spacing--4);
+	color: var(--wp--preset--color--navy);
+	font-weight: 600;
+	cursor: pointer;
+	list-style: none;
+}
+
+.wp-block-details > summary::-webkit-details-marker {
+	display: none;
+}
+
+.wp-block-details > summary::after {
+	content: "+";
+	flex: none;
+	color: var(--wp--preset--color--red);
+	font-size: var(--wp--preset--font-size--xl);
+	line-height: 1;
+}
+
+.wp-block-details[open] > summary::after {
+	content: "–";
+}
+
+.wp-block-details > :not(summary) {
+	margin-block-start: var(--wp--preset--spacing--3);
+}

@@ -1,0 +1,17 @@
+/* core/button – arrow variant (style "Link mit Pfeil"); colours come from styles/blocks/arrow.json */
+
+.wp-block-button.is-style-arrow > .wp-block-button__link::after {
+	content: "";
+	display: inline-block;
+	inline-size: 1em;
+	block-size: 1em;
+	margin-inline-start: 0.4em;
+	vertical-align: -0.15em;
+	background: currentColor;
+	mask: url("../../icons/arrow-right.svg") center / contain no-repeat;
+	transition: transform var(--wp--custom--transition);
+}
+
+.wp-block-button.is-style-arrow > .wp-block-button__link:hover::after {
+	transform: translateX(0.2em);
+}

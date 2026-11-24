@@ -1,0 +1,95 @@
+/* APPA – base styles that theme.json cannot express. Tokens only (presets / --wp--custom--*). */
+
+/* Base ------------------------------------------------------------------ */
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: var(--wp--preset--spacing--20);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+:where(h1, h2, h3, h4) {
+	text-wrap: balance;
+}
+
+:where(p) {
+	text-wrap: pretty;
+}
+
+:focus-visible {
+	outline: 2px solid var(--wp--preset--color--blue);
+	outline-offset: 2px;
+}
+
+/* Header ---------------------------------------------------------------- */
+.bw-site-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	border-block-end: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
+}
+
+.admin-bar .bw-site-header {
+	top: var(--wp-admin--admin-bar--height, 0);
+}
+
+.bw-site-logo img {
+	display: block;
+	inline-size: auto;
+	block-size: 2.5rem;
+}
+
+/* Footer ---------------------------------------------------------------- */
+.bw-site-footer {
+	border-block-start: 4px solid transparent;
+	border-image: var(--wp--preset--gradient--logo-stripe) 1;
+}
+
+.bw-site-footer a {
+	text-decoration: none;
+}
+
+.bw-site-footer a:hover {
+	text-decoration: underline;
+}
+
+.bw-footer-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--2) var(--wp--preset--spacing--5);
+	padding: 0;
+	list-style: none;
+}
+
+/* Jump navigation below page headers */
+.bw-jump-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--2) var(--wp--preset--spacing--6);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: 600;
+}
+
+.bw-jump-nav a {
+	color: var(--wp--preset--color--navy);
+	text-decoration: none;
+}
+
+.bw-jump-nav a:hover {
+	color: var(--wp--preset--color--red);
+}
+
+/* Template parts and main content sit flush (no global block gap between header, main and footer) */
+.wp-site-blocks > * + * {
+	margin-block-start: 0;
+}

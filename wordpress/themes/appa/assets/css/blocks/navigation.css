@@ -1,0 +1,15 @@
+/* core/navigation – current page and mobile overlay */
+
+.wp-block-navigation .current-menu-item > a,
+.wp-block-navigation a[aria-current="page"] {
+	color: var(--wp--preset--color--red);
+}
+
+.wp-block-navigation__responsive-container.is-menu-open {
+	padding: var(--wp--preset--spacing--6);
+}
+
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content {
+	gap: var(--wp--preset--spacing--4);
+	font-size: var(--wp--preset--font-size--lg);
+}
