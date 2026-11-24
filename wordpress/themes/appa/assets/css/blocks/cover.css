@@ -3,6 +3,15 @@
 .wp-block-cover.bw-page-photo {
 	min-block-size: 24rem;
 	padding-block: var(--wp--preset--spacing--12);
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+}
+
+/* The box lines up with the content column (logo, jump navigation, sections), not with the photo edge. */
+/* Repeated class: core resets width and margin for custom content positions with up to five classes. */
+.wp-block-cover.bw-page-photo.bw-page-photo.bw-page-photo.bw-page-photo .wp-block-cover__inner-container {
+	inline-size: 100%;
+	max-inline-size: var(--wp--style--global--wide-size);
+	margin-inline: auto;
 }
 
 .bw-page-photo__box {
