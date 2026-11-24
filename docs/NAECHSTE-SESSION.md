@@ -14,7 +14,7 @@ Zugang: Bridge-Client `tools/wp_bridge.py` aus `blickwert/bw-wp-bridge`, `--site
 
 - WordPress 7.1.5, Deutsch, Permalinks `/%postname%/`. Aktiv: Theme `appa`, Plugins `bw-appa`, Contact Form 7 (mit deutscher Übersetzung), BW WP Bridge. Elementor & Co. sind installiert, aber inaktiv.
 - Seiten, Startseite und Hauptmenü per `import_pages.py`; CF7-Formulare „APPA – Kontakt“ und „APPA – Mitgliedsantrag“ angelegt. Kontaktformular getestet: wird versendet.
-- Layout an die Elementor-Seite angeglichen (Typografie des Block-Themes bleibt), Mitgliederbereich (Anmeldung + Übersicht) als eigene Vorlagen; Theme 0.2.3, Plugin 0.1.2.
+- Layout an die Elementor-Seite angeglichen (Typografie des Block-Themes bleibt), Mitgliederbereich (Anmeldung + Übersicht) als eigene Vorlagen; Theme 0.2.4, Plugin 0.1.2.
 - Die CF7-Formulare legt `bw-appa` bei `admin_init` an. Ohne Anmeldung auslösen: `…/wp-admin/admin-ajax.php?action=bw_noop` aufrufen (ohne `action` endet admin-ajax vor `admin_init`).
 - Empfänger: Standard = Admin-E-Mail `bw-cms@blickwert.at` (Einstellungen › APPA Formulare ist noch leer). Umstellen auf `info@appa.net` im Backend.
 - Drei Beispiel-Veranstaltungen (Fachtagung 8. 10. 2027, zwei Online-Termine mit Platzhalter-Zoom-Link `zoom.us/j/0000000000`).
@@ -63,6 +63,6 @@ App-Passwort für `import_pages.py`: `$W user application-password create admin 
 - Turnstile-Schlüssel, endgültiger Formular-Empfänger.
 - Datenschutzerklärung, Statuten-PDF, ZVR-Zahl und Vereinsbehörde (Impressum).
 - „Mehr Gelb“ im Design (Meeting 9. 10.): wo genau.
-- Mitgliederbereich: Texte dort in „Sie“-Form (wie Elementor/Mockup), die übrige Website duzt – vereinheitlichen? E-Mail dort `info@appa.net` statt `info@appa.at` (Elementor).
+- Mitgliederbereich: Analyse der statischen und dynamischen Elemente in `docs/MITGLIEDERBEREICH.md` (offene Fragen dort). Texte duzen wie die übrige Website.
 - Danach: Mitgliederbereich und Mitgliedschaft mit Zahlung im eigenen Plugin `bw-woo-membership` (Konzept „APPA – Mitgliedschaft online“, Meeting 9. 10.: WooCommerce + Subscriptions, Stripe, Staffel Juni ½ / Oktober ⅓ / Dezember gratis, Studierendennachweis jährlich, vier Mitgliedsarten).
 - Die alte Elementor-Seite `2603-appa` nutzt noch `wp-plugins/appa-loop-query`; nach Umstieg kann der Ordner entfallen.

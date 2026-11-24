@@ -34,7 +34,7 @@ $bw_items = array(
 <!-- wp:html -->
 <div class="bw-member-help">
 	<span class="bw-member-help__icon"><?php echo Icons::svg( 'help-circle' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static theme SVG. ?></span>
-	<p><strong><?php esc_html_e( 'Brauchen Sie Hilfe?', 'appa' ); ?></strong><br><a href="<?php echo esc_url( home_url( '/kontakt/' ) ); ?>"><?php esc_html_e( 'Kontakt aufnehmen', 'appa' ); ?></a></p>
+	<p><strong><?php esc_html_e( 'Brauchst du Hilfe?', 'appa' ); ?></strong><br><a href="<?php echo esc_url( home_url( '/kontakt/' ) ); ?>"><?php esc_html_e( 'Kontakt aufnehmen', 'appa' ); ?></a></p>
 </div>
 <a class="bw-member-exit" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo Icons::svg( 'log-out' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static theme SVG. ?><span><?php esc_html_e( 'Zur öffentlichen Website', 'appa' ); ?></span></a>
 <!-- /wp:html -->

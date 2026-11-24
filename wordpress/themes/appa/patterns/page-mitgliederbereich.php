@@ -29,7 +29,7 @@ declare(strict_types=1);
 		<!-- /wp:heading -->
 
 		<!-- wp:paragraph -->
-		<p>Melden Sie sich an, um Ihre Mitgliedschaft, exklusive Inhalte und Veranstaltungen zu verwalten.</p>
+		<p>Melde dich an, um deine Mitgliedschaft, exklusive Inhalte und Veranstaltungen zu verwalten.</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
@@ -49,7 +49,7 @@ declare(strict_types=1);
 		<!-- wp:bw/icon {"icon":"info","size":"s","tone":"green"} /-->
 
 		<!-- wp:paragraph {"fontSize":"sm"} -->
-		<p class="has-sm-font-size">Nur für APPA-Mitglieder. Bei Fragen zu Ihrem Zugang kontaktieren Sie bitte <a href="mailto:info@appa.net">info@appa.net</a>.</p>
+		<p class="has-sm-font-size">Nur für APPA-Mitglieder. Bei Fragen zu deinem Zugang schreib uns an <a href="mailto:info@appa.net">info@appa.net</a>.</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->

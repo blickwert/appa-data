@@ -613,13 +613,13 @@ MEMBER_LOGIN = join(
     group(join(
         icon("lock", tone="red", shape="tile"),
         stack(join(eyebrow("Geschützter Bereich"), heading("Mitgliederbereich", 1, size="xxx-large"),
-                   p("Melden Sie sich an, um Ihre Mitgliedschaft, exklusive Inhalte und Veranstaltungen zu "
+                   p("Melde dich an, um deine Mitgliedschaft, exklusive Inhalte und Veranstaltungen zu "
                      "verwalten.")), gap="2"),
         '<!-- wp:loginout {"displayLoginAsForm":true,"redirectToCurrent":true,"className":"bw-login-form"} /-->',
         p('<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>">Passwort vergessen?</a>', size="sm"),
         separator(wide=True),
         row(join(icon("info", "s", "green"),
-                 p("Nur für APPA-Mitglieder. Bei Fragen zu Ihrem Zugang kontaktieren Sie bitte "
+                 p("Nur für APPA-Mitglieder. Bei Fragen zu deinem Zugang schreib uns an "
                    "<a href=\"mailto:info@appa.net\">info@appa.net</a>.", size="sm")),
             justify="left", align="top", gap="2", wrap=False),
     ), variation="card", cls="bw-login-card", gap="6", layout={"type": "default"}),
@@ -667,7 +667,7 @@ DASH_RECORDING = card(row(join(
 MEMBER_DASHBOARD = join(
     group(join(
         row(join(stack(join(eyebrow("Mitgliederbereich"), heading("Willkommen zurück", 1, size="xxx-large"),
-                            p("Hier finden Sie Ihre wichtigsten Informationen auf einen Blick.")), gap="2"),
+                            p("Hier findest du deine wichtigsten Informationen auf einen Blick.")), gap="2"),
                  p('<span class="bw-status">Mitgliedschaft aktiv</span>', size="sm")), align="center"),
         '<!-- wp:html -->\n<nav class="bw-member-tabs" aria-label="Bereiche"><a href="#top" aria-current="page">Übersicht'
         '</a><a href="#veranstaltungen">Veranstaltungen</a><a href="#dokumente">Dokumente</a><a href="#profil">Profil</a>'
@@ -689,12 +689,12 @@ MEMBER_DASHBOARD = join(
                 widths=["58%", "42%"], gap="8"),
         group(join(
             row(join(stack(join(heading("Mein Profil", anchor="profil", size="xl"),
-                                p("Ihre Kontaktdaten und Sichtbarkeit im öffentlichen Mitgliederverzeichnis.", size="sm")),
+                                p("Deine Kontaktdaten und Sichtbarkeit im öffentlichen Mitgliederverzeichnis.", size="sm")),
                            gap="1"),
                      buttons(button("Profil bearbeiten", "#")))),
             separator(wide=True),
             row(join(stack(join(heading("Im öffentlichen Verzeichnis sichtbar", 3, size="base"),
-                                p("Sie können von Interessierten und Fachkolleg:innen gefunden werden.", size="sm")),
+                                p("Interessierte und Fachkolleg:innen können dich finden.", size="sm")),
                            gap="1"),
                      p('<span class="bw-toggle" aria-hidden="true"></span>'))),
         ), variation="card-tint", cls="bw-profile-panel", gap="5", layout={"type": "default"}),

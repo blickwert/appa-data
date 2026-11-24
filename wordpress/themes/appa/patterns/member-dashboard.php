@@ -26,7 +26,7 @@ declare(strict_types=1);
 			<!-- /wp:heading -->
 
 			<!-- wp:paragraph -->
-			<p>Hier finden Sie Ihre wichtigsten Informationen auf einen Blick.</p>
+			<p>Hier findest du deine wichtigsten Informationen auf einen Blick.</p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
@@ -326,7 +326,7 @@ declare(strict_types=1);
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph {"fontSize":"sm"} -->
-				<p class="has-sm-font-size">Ihre Kontaktdaten und Sichtbarkeit im öffentlichen Mitgliederverzeichnis.</p>
+				<p class="has-sm-font-size">Deine Kontaktdaten und Sichtbarkeit im öffentlichen Mitgliederverzeichnis.</p>
 				<!-- /wp:paragraph -->
 			</div>
 			<!-- /wp:group -->
@@ -354,7 +354,7 @@ declare(strict_types=1);
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph {"fontSize":"sm"} -->
-				<p class="has-sm-font-size">Sie können von Interessierten und Fachkolleg:innen gefunden werden.</p>
+				<p class="has-sm-font-size">Interessierte und Fachkolleg:innen können dich finden.</p>
 				<!-- /wp:paragraph -->
 			</div>
 			<!-- /wp:group -->
