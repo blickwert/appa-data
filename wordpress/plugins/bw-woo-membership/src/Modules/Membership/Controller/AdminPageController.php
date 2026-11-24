@@ -11,6 +11,7 @@ namespace BW\WooMembership\Modules\Membership\Controller;
 
 use BW\WooMembership\Core\Setup;
 use BW\WooMembership\Modules\Membership\Service\MemberAdminService;
+use BW\WooMembership\Modules\Membership\Service\JournalService;
 use BW\WooMembership\Modules\Membership\Service\ProofService;
 use BW\WooMembership\Support\Csv;
 
@@ -27,6 +28,7 @@ final class AdminPageController {
 	public function __construct(
 		private readonly MemberAdminService $admin,
 		private readonly ProofService $proofs,
+		private readonly JournalService $journal,
 	) {
 	}
 
@@ -37,6 +39,7 @@ final class AdminPageController {
 		add_action( 'admin_menu', array( $this, 'menu' ), 9 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'admin_post_bw_wm_export', array( $this, 'export' ) );
+		add_action( 'admin_post_bw_wm_journal', array( $this, 'journal' ) );
 		add_action( 'admin_post_bw_wm_proof_file', array( $this, 'proof_file' ) );
 		add_filter( 'bw_wm_admin_menu_parent', static fn(): string => self::SLUG );
 	}
@@ -81,6 +84,7 @@ final class AdminPageController {
 					'page'      => admin_url( 'admin.php?page=' . self::SLUG ),
 					// add_query_arg, not wp_nonce_url: the latter escapes "&" for HTML output.
 					'exportUrl' => add_query_arg( array( 'action' => 'bw_wm_export', '_wpnonce' => wp_create_nonce( 'bw_wm_export' ) ), admin_url( 'admin-post.php' ) ),
+					'journalUrl' => add_query_arg( array( 'action' => 'bw_wm_journal', '_wpnonce' => wp_create_nonce( 'bw_wm_journal' ) ), admin_url( 'admin-post.php' ) ),
 					'proofUrl'  => add_query_arg( array( 'action' => 'bw_wm_proof_file', '_wpnonce' => wp_create_nonce( 'bw_wm_proof_file' ) ), admin_url( 'admin-post.php' ) ),
 					'docsUrl'   => admin_url( 'edit.php?post_type=bw_member_doc' ),
 				)
@@ -102,6 +106,27 @@ final class AdminPageController {
 		$out = fopen( 'php://output', 'w' );
 		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- streaming the export.
 		foreach ( $this->admin->csv() as $row ) {
+			fputcsv( $out, array_map( array( Csv::class, 'safe' ), $row ), ';' );
+		}
+		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+		exit;
+	}
+
+	/**
+	 * Fee journal of a month for the bookkeeping (CSV, UTF-8 with BOM, semicolon separated).
+	 */
+	public function journal(): void {
+		if ( ! current_user_can( Setup::CAPABILITY ) || ! check_admin_referer( 'bw_wm_journal' ) ) {
+			wp_die( esc_html__( 'Nicht erlaubt.', 'bw-woo-membership' ), '', array( 'response' => 403 ) );
+		}
+		$month  = isset( $_GET['month'] ) ? sanitize_text_field( wp_unslash( $_GET['month'] ) ) : '';
+		$export = $this->journal->export( $month );
+		nocache_headers();
+		header( 'Content-Type: text/csv; charset=utf-8' );
+		header( 'Content-Disposition: attachment; filename="appa-beitragsjournal-' . $export['label'] . '.csv"' );
+		$out = fopen( 'php://output', 'w' );
+		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- streaming the export.
+		foreach ( $export['rows'] as $row ) {
 			fputcsv( $out, array_map( array( Csv::class, 'safe' ), $row ), ';' );
 		}
 		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose

@@ -31,6 +31,8 @@ Menü **Mitglieder** (Berechtigung `bw_wm_manage_members`, vergeben an Administr
 
 Konten mit Redaktionsrechten (`edit_posts`) können dort nicht bearbeitet werden.
 
+**Beitragsjournal** (Kopf der Mitgliederliste, Monat wählen): CSV mit allen Zahlungen eines Monats (Zahlungsdatum, Bestellung, Art, Mitgliedsnummer, Name, E-Mail, Betrag, Erstattet, Zahlungsart, Stripe-Gebühr, Netto, Transaktions-ID) und einer Summenzeile. Grundlage für Sammelbuchungen in der Buchhaltung; Stripe-Gebühr und Netto stammen aus den Bestelldaten des Stripe-Plugins (`_stripe_fee`, `_stripe_net`). Download über `admin-post.php?action=bw_wm_journal&month=JJJJ-MM`.
+
 ## Studiennachweis
 
 Studierende laden den Nachweis im Mitgliederbereich hoch (PDF/JPG/PNG, max. 5 MB, Ordner `uploads/bw-member-proofs/`). Das Office gibt frei oder lehnt ab; die Datei wird danach gelöscht, gespeichert bleiben Status, gültig bis, Prüfdatum und Prüfer:in. 28 Tage vor Ablauf kommt eine Erinnerung. Ohne gültigen Nachweis kann die studentische Mitgliedschaft nicht verlängert werden.

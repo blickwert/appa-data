@@ -1,6 +1,6 @@
 {
 	"name": "bw-woo-membership",
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"private": true,
 	"description": "Verwaltung der APPA-Mitglieder im WordPress-Admin.",
 	"license": "GPL-2.0-or-later",

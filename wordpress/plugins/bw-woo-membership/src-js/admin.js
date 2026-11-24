@@ -67,6 +67,23 @@ const STATUS_FILTERS = [
 	[ 'expired', 'Abgelaufen', 'expired' ],
 ];
 
+/**
+ * Fee journal of a month for the bookkeeping (CSV download).
+ */
+function JournalExport() {
+	const last = new Date();
+	last.setDate( 1 );
+	last.setMonth( last.getMonth() - 1 );
+	const [ month, setMonth ] = useState( `${ last.getFullYear() }-${ String( last.getMonth() + 1 ).padStart( 2, '0' ) }` );
+	return (
+		<span className="bwo-journal">
+			<label htmlFor="bwo-journal-month">Beitragsjournal</label>
+			<input id="bwo-journal-month" type="month" value={ month } onChange={ ( e ) => setMonth( e.target.value ) } />
+			<Button variant="secondary" href={ addQueryArgs( config.journalUrl, { month } ) }>Herunterladen (CSV)</Button>
+		</span>
+	);
+}
+
 function MemberList( { go } ) {
 	const [ status, setStatus ] = useState( '' );
 	const [ type, setType ] = useState( '' );
@@ -94,6 +111,7 @@ function MemberList( { go } ) {
 			<Header title="Mitglieder">
 				<Button variant="secondary" onClick={ () => go( '/new' ) }>Ehren- oder institutionelles Mitglied anlegen</Button>
 				<Button variant="secondary" href={ config.exportUrl }>Export (CSV)</Button>
+				<JournalExport />
 			</Header>
 			<ErrorNotice error={ error } />
 			{ data && data.counts.proofs > 0 && (

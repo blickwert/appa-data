@@ -110,7 +110,7 @@ declare(strict_types=1);
 		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group">
 			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size">So funktioniert der Beitritt: Du legst an der Kasse dein Konto an und bezahlst den Jahresbeitrag mit Karte oder per Überweisung. Danach hast du sofort Zugang zum Mitgliederbereich. Als Student:in lädst du dort deinen Studiennachweis hoch.</p>
+			<p class="has-sm-font-size">So funktioniert der Beitritt: Du legst an der Kasse dein Konto an und bezahlst den Jahresbeitrag online mit Karte oder SEPA-Lastschrift. Danach hast du sofort Zugang zum Mitgliederbereich. Als Student:in lädst du dort deinen Studiennachweis hoch.</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:paragraph {"fontSize":"sm"} -->

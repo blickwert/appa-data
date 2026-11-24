@@ -505,8 +505,8 @@ MEMBER_PRICES = section(join(
                      variation="card-highlight" if n == "Studierende" else "card-flat")
                 for n, t, price, b in PRICES])),
     narrow(stack(join(
-        p("So funktioniert der Beitritt: Du legst an der Kasse dein Konto an und bezahlst den Jahresbeitrag mit Karte "
-          "oder per Überweisung. Danach hast du sofort Zugang zum Mitgliederbereich. Als Student:in lädst du dort "
+        p("So funktioniert der Beitritt: Du legst an der Kasse dein Konto an und bezahlst den Jahresbeitrag online mit "
+          "Karte oder SEPA-Lastschrift. Danach hast du sofort Zugang zum Mitgliederbereich. Als Student:in lädst du dort "
           "deinen Studiennachweis hoch.", size="sm"),
         p(f"Über die Aufnahme entscheidet der Vorstand; lehnt er sie ab, erstatten wir den Beitrag. Die Rechte und "
           f"Pflichten der Mitglieder regeln die <a href=\"{url('ueber-uns/#statuten')}\">Statuten</a>. Bis zur "

@@ -29,6 +29,7 @@ use BW\WooMembership\Support\Mailer;
 use BW\WooMembership\Modules\Membership\Service\MemberAdminService;
 use BW\WooMembership\Modules\Membership\Service\ProofService;
 use BW\WooMembership\Modules\Membership\Service\DashboardModel;
+use BW\WooMembership\Modules\Membership\Service\JournalService;
 use BW\WooMembership\Modules\Membership\Service\MemberPages;
 use BW\WooMembership\Modules\Membership\Service\MembershipService;
 use BW\WooMembership\Modules\Membership\Service\MembershipSync;
@@ -77,7 +78,7 @@ final class MembershipModule extends AbstractModule {
 		( new PurchaseController( $memberships, $orders, $proofs ) )->register();
 		( new JoinController( $memberships, $orders, $members, new MemberPages() ) )->register();
 		( new AdminRestController( $admin, $proof ) )->register();
-		( new AdminPageController( $admin, $proof ) )->register();
+		( new AdminPageController( $admin, $proof, new JournalService( $orders, $members ) ) )->register();
 		add_action( 'bw_wm_setup', array( $sync, 'sync_all' ) );
 	}
 }

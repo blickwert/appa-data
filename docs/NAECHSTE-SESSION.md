@@ -37,6 +37,13 @@ cd ../plugins && zip -qr <scratchpad>/bw-appa.zip bw-appa -x 'bw-appa/vendor/*' 
 zip -qr <scratchpad>/bw-woo-membership.zip bw-woo-membership -x 'bw-woo-membership/vendor/*' 'bw-woo-membership/tests/*' 'bw-woo-membership/composer.*' 'bw-woo-membership/phpunit.xml.dist' 'bw-woo-membership/node_modules/*' 'bw-woo-membership/src-js/*' 'bw-woo-membership/package*.json'
 ```
 
+## Checkliste Live-Betrieb (vor dem Start)
+
+- Stripe verbinden (Live-Schlüssel), Karte und SEPA-Lastschrift aktivieren; **Banküberweisung deaktivieren** (Entscheidung David, 24. 11.).
+- WooCommerce Subscriptions: Produkte jährlich, synchron zum 1. 1., Staffel beim ersten Beitrag; Zahlungsbestätigung als PDF.
+- „Shop demnächst verfügbar“ aus, Testpreise der Fachtagung durch echte ersetzen, Testdaten löschen.
+- AGB/Beitragsordnung und Datenschutzseite in WooCommerce hinterlegen.
+
 ## Lokale Prüfumgebung neu aufsetzen (Container ist frisch)
 
 ```bash
