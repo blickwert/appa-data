@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bw-woo-membership/user",
+	"title": "Mitglied: Name und Art",
+	"category": "widgets",
+	"icon": "groups",
+	"description": "Name und Mitgliedsart des angemeldeten Mitglieds (Kopfzeile).",
+	"textdomain": "bw-woo-membership",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"multiple": false
+	},
+	"editorScript": "bw-wm-blocks",
+	"style": "bw-wm-dashboard"
+}

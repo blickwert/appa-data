@@ -1,0 +1,24 @@
+{
+	"name": "blickwert/bw-woo-membership",
+	"description": "Mitgliederbereich der APPA auf Basis von WooCommerce.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"require": {
+		"php": ">=8.3"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^11.5",
+		"brain/monkey": "^2.6"
+	},
+	"autoload": {
+		"psr-4": { "BW\\WooMembership\\": "src/" }
+	},
+	"autoload-dev": {
+		"psr-4": { "BW\\WooMembership\\Tests\\": "tests/" }
+	},
+	"scripts": {
+		"test": "phpunit",
+		"lint": "find src templates blocks -name '*.php' -print0 | xargs -0 -n1 php -l"
+	},
+	"config": { "sort-packages": true }
+}

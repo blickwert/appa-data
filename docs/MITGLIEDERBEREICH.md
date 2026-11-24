@@ -2,7 +2,16 @@
 
 Stand: 24. November 2026. Grundlage: die Vorschau im Theme (`page-member`, `page-member-dashboard`, Pattern `member-login`, `member-dashboard`) und die Besprechungen vom 2. und 9. Oktober 2026. Die Funktion kommt mit dem eigenen Plugin `bw-woo-membership` (WooCommerce + Subscriptions, Stripe).
 
-Heute ist die Übersicht eine **statische Vorschau**: Alle Werte (Status, Datum, Termine, Dokumente) sind Beispieltext, die Seite ist nicht geschützt.
+## Umsetzungsstand
+
+| Stufe | Inhalt | Stand |
+|---|---|---|
+| 1 | Plugin `bw-woo-membership`: Status aus Bestellung bzw. Abo, Mitgliedsnummer, geschützte Übersicht, Login-Weiterleitung, Blöcke (Kopf, Übersicht, Veranstaltungen, Dokumente, Profil), Profil und Verzeichnis-Einwilligung, Mitgliedsbestätigung zum Drucken, Mitglieder-Dokumente mit geschütztem Download | umgesetzt (24. 11. 2026) |
+| 2 | Verwaltung im Backend wie Mockup: Mitgliederliste, Mitglied bearbeiten (Ehren-/institutionelle Mitglieder), Studiennachweis hochladen, prüfen, erinnern, umstellen | offen |
+| 3 | Veranstaltungen: Feld „Art“ (nur Mitglieder / offen / für Mitglieder gratis), Anmeldung über verstecktes WooCommerce-Produkt mit Mitgliederpreis, „Meine Anmeldungen“, Aufzeichnungen | offen |
+| – | WooCommerce Subscriptions (Lizenz) für automatische Verlängerung; Staffel Juni ½ / Oktober ⅓ / Dezember gratis beim ersten Beitrag | offen |
+
+Ohne WooCommerce Subscriptions gilt eine bezahlte Mitgliedschaftsbestellung für das Kalenderjahr (Dezember: bis Ende des Folgejahres).
 
 ## 1. Statische Elemente (Theme, ändern sich nicht pro Mitglied)
 

@@ -628,78 +628,17 @@ MEMBER_LOGIN = join(
 )
 
 
-def stat_card(label, value, sub, dot=False):
-    value_html = f'<span class="bw-dot" aria-hidden="true"></span>{value}' if dot else value
-    return card(join(p(label, cls="bw-label", size="xs"), p(f"<strong>{value_html}</strong>", color="navy", size="lg"),
-                     p(sub, size="sm")), variation="card-flat", gap="2")
-
-
-def dash_head(title, link_text, link, anchor=None):
-    return row(join(heading(title, anchor=anchor, size="xl"), p(f'<a href="{link}"><strong>{link_text}</strong></a>',
-                                                                size="sm", cls="bw-dash-link")), align="center")
-
-
-def doc_row(icon_name, title, meta):
-    return row(join(row(join(icon(icon_name, "s", "red", "tile"),
-                             stack(join(p(f"<strong>{title}</strong>", color="navy"), p(meta, size="xs")), gap="0")),
-                        justify="left", gap="4", wrap=False),
-                    icon("download", "s", "red")), cls="bw-doc-row", wrap=False)
-
-
-DASH_EVENT = card(row(join(
-    row(join(p("14<br><strong>OKT</strong><br>2026", cls="bw-date-tile", size="xs", align="center"),
-             stack(join(p('<span class="bw-pill bw-pill--green">Exklusiv für Mitglieder</span> '
-                          '<span class="bw-pill">Online</span>', size="xs"),
-                        heading("Werkstattgespräch: Stärkenorientierte Führung", 3, size="lg"),
-                        p("18:00–19:30 Uhr · Live-Stream via Zoom", size="sm")), gap="2")),
-        justify="left", align="top", gap="5", wrap=False),
-    buttons(button("Anmelden", url("veranstaltungen/")))), align="top", wrap=False, cls="bw-dash-event"),
-    variation="card-flat")
-DASH_RECORDING = card(row(join(
-    row(join(icon("play", "l", "gold", "square"),
-             stack(join(p("Aufzeichnung", cls="bw-label", size="xs"),
-                        heading("Positive Psychologie im Berufsalltag", 3, size="lg"),
-                        p("Vortrag vom 18. Juni 2026 · 52 Minuten", size="sm")), gap="1")),
-        justify="left", align="center", gap="5", wrap=False),
-    buttons(button("Ansehen", "#", "secondary"))), align="center", wrap=False, cls="bw-dash-event"),
-    variation="card-flat")
-
-MEMBER_DASHBOARD = join(
-    group(join(
-        row(join(stack(join(eyebrow("Mitgliederbereich"), heading("Willkommen zurück", 1, size="xxx-large"),
-                            p("Hier findest du deine wichtigsten Informationen auf einen Blick.")), gap="2"),
-                 p('<span class="bw-status">Mitgliedschaft aktiv</span>', size="sm")), align="center"),
-        '<!-- wp:html -->\n<nav class="bw-member-tabs" aria-label="Bereiche"><a href="#top" aria-current="page">Übersicht'
-        '</a><a href="#veranstaltungen">Veranstaltungen</a><a href="#dokumente">Dokumente</a><a href="#profil">Profil</a>'
-        '</nav>\n<!-- /wp:html -->',
-        stack(join(dash_head("Meine Mitgliedschaft", "Details anzeigen", "#profil"),
-                   grid(join(stat_card("Status", "Aktiv", "Mitglied seit 2023", dot=True),
-                             stat_card("Mitgliedschaftsart", "Ordentliche Mitgliedschaft", "Jahresbeitrag entrichtet"),
-                             stat_card("Nächste Verlängerung", "01. Jänner 2027", "Automatische Verlängerung")),
-                        min_width="14rem", gap="4"),
-                   buttons(button("Mitgliedsbestätigung herunterladen <small>PDF</small>", "#", "secondary"),
-                           cls="bw-download")), gap="4"),
-        columns(stack(join(dash_head("Veranstaltungen für Mitglieder", "Alle Veranstaltungen", url("veranstaltungen/"),
-                                     anchor="veranstaltungen"), DASH_EVENT, DASH_RECORDING), gap="4"),
-                stack(join(dash_head("Dokumente & Downloads", "Alle", "#dokumente", anchor="dokumente"),
-                           group(join(doc_row("file-text", "Tagungsunterlagen 2026", "PDF · 4,2 MB"),
-                                      doc_row("book-open", "APPA Jahresbericht 2025", "PDF · 1,8 MB"),
-                                      doc_row("file", "Statuten der APPA", "PDF · 320 KB")),
-                                 cls="bw-doc-list", gap="0", layout={"type": "default"})), gap="4"),
-                widths=["58%", "42%"], gap="8"),
-        group(join(
-            row(join(stack(join(heading("Mein Profil", anchor="profil", size="xl"),
-                                p("Deine Kontaktdaten und Sichtbarkeit im öffentlichen Mitgliederverzeichnis.", size="sm")),
-                           gap="1"),
-                     buttons(button("Profil bearbeiten", "#")))),
-            separator(wide=True),
-            row(join(stack(join(heading("Im öffentlichen Verzeichnis sichtbar", 3, size="base"),
-                                p("Interessierte und Fachkolleg:innen können dich finden.", size="sm")),
-                           gap="1"),
-                     p('<span class="bw-toggle" aria-hidden="true"></span>'))),
-        ), variation="card-tint", cls="bw-profile-panel", gap="5", layout={"type": "default"}),
-    ), cls="bw-dashboard", gap="10", layout={"type": "default"}),
-)
+# Overview: the dynamic parts come from the plugin "APPA Mitgliedschaft" (bw-woo-membership); without the plugin
+# the blocks render nothing and only the navigation remains.
+MEMBER_DASHBOARD = group(join(
+    '<!-- wp:html -->\n<nav class="bw-member-tabs" aria-label="Bereiche"><a href="#top" aria-current="page">Übersicht'
+    '</a><a href="#veranstaltungen">Veranstaltungen</a><a href="#dokumente">Dokumente</a><a href="#profil">Profil</a>'
+    '</nav>\n<!-- /wp:html -->',
+    '<!-- wp:bw-woo-membership/overview /-->',
+    columns('<!-- wp:bw-woo-membership/events {"limit":3} /-->',
+            '<!-- wp:bw-woo-membership/documents {"limit":3} /-->', widths=["58%", "42%"], gap="8"),
+    '<!-- wp:bw-woo-membership/profile /-->',
+), cls="bw-dashboard", gap="10", layout={"type": "default"})
 
 # ── Pattern registry ────────────────────────────────────────────────────────
 # slug: (title, category, markup, extra header lines)

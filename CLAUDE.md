@@ -10,6 +10,7 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 
 - Theme `wordpress/themes/appa/` (Slug `appa`, Namespace `BW\AppaTheme`, Hooks `bw_appa_theme_`)
 - Plugin `wordpress/plugins/bw-appa/` (Slug `bw-appa`, Namespace `BW\Appa`, Hooks/Optionen `bw_appa_`, Konstanten `BW_APPA_*`)
+- Plugin `wordpress/plugins/bw-woo-membership/` (Slug `bw-woo-membership`, Namespace `BW\WooMembership`, Hooks/Optionen `bw_wm_`, CSS `bwm-`): Mitgliederbereich auf WooCommerce-Basis, siehe dessen `README.md` und `docs/MITGLIEDERBEREICH.md`
 - Neue Dev-Installation: `2603b-appa` (Block-Theme). Die Elementor-Seite `2603-appa` bleibt zum Vergleich.
 
 ## Regeln
@@ -25,7 +26,7 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 
 - Pro Änderung: Branch, Commit, Pull Request.
 - Sichtbare Änderungen lokal prüfen (WordPress + SQLite, Chromium/Playwright, 1440 px und 390 px) und im Block-Editor auf ungültige Blöcke prüfen.
-- Plugin: `composer install && composer test` (PHPUnit), `composer lint`.
+- Plugins: `composer install && composer test` (PHPUnit), `composer lint` – je Plugin-Ordner.
 
 ## Wichtige Dateien
 
@@ -37,5 +38,6 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 | `scripts/import_pages.py` | Seiten, Startseite und Hauptmenü per REST anlegen/aktualisieren |
 | `wordpress/themes/appa/styles/blocks/` | Blockstil-Varianten (Abschnitte, Karten, Buttons, Eyebrow …) |
 | `wordpress/plugins/bw-appa/src/Modules/` | Module `events` (Veranstaltungen) und `forms` (CF7-Formulare, Spamschutz) |
+| `wordpress/plugins/bw-woo-membership/src/Modules/` | Module `membership` (Status, Nummer, Zugang, Blöcke, Profil) und `documents` (Mitglieder-Dokumente) |
 | `elementor/`, `APPA-Mockup/` | Alte Elementor-Umsetzung und Mockup (nur Referenz) |
 | `meeting/` | Besprechungsprotokolle |
