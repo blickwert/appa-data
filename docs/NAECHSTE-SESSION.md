@@ -14,8 +14,9 @@ Zugang: Bridge-Client `tools/wp_bridge.py` aus `blickwert/bw-wp-bridge`, `--site
 
 - WordPress 7.1.5, Deutsch, Permalinks `/%postname%/`. Aktiv: Theme `appa`, Plugins `bw-appa`, Contact Form 7 (mit deutscher Übersetzung), BW WP Bridge. Elementor & Co. sind installiert, aber inaktiv.
 - Seiten, Startseite und Hauptmenü per `import_pages.py`; CF7-Formulare „APPA – Kontakt“ und „APPA – Mitgliedsantrag“ angelegt. Kontaktformular getestet: wird versendet.
-- Layout an die Elementor-Seite angeglichen (Typografie des Block-Themes bleibt), Mitgliederbereich (Anmeldung + Übersicht) als eigene Vorlagen; Theme 0.2.4, Plugin 0.1.2.
-- Plugins aufgeräumt (24. 11.): aktiv sind nur `bw-appa`, BW WP Bridge, Contact Form 7, WooCommerce 11.3 und WooCommerce Stripe Gateway 11.2; alle übrigen (Elementor & Co., ACF Pro, UpdraftPlus …) gelöscht.
+- Layout an die Elementor-Seite angeglichen (Typografie des Block-Themes bleibt), Mitgliederbereich (Anmeldung + Übersicht) als eigene Vorlagen; Theme 0.3.0, Plugin 0.1.2.
+- Mitgliederbereich Stufe 1 live (Plugin `bw-woo-membership`): Übersicht geschützt, Daten aus WooCommerce, Mitglieder-Dokumente geschützt (direkter Dateiaufruf auf 2603b liefert 403). Produkte 52/53 haben die Mitgliedsart `regular`/`student`. Nächste Stufen siehe `docs/MITGLIEDERBEREICH.md`.
+- Plugins aufgeräumt (24. 11.): aktiv sind nur `bw-appa`, `bw-woo-membership` 0.1.0, BW WP Bridge, Contact Form 7, WooCommerce 11.3 und WooCommerce Stripe Gateway 11.2; alle übrigen (Elementor & Co., ACF Pro, UpdraftPlus …) gelöscht.
 - WooCommerce: Graz/EUR (1.234,56 €), keine Steuern, kein Versand, keine Gutscheine, Kauf nur mit Konto (Konto wird an der Kasse angelegt). Seiten `warenkorb`, `kasse`, `mein-konto`, `shop`. Banküberweisung aktiv (Bankdaten noch Platzhalter), Stripe im Testmodus, aber noch nicht verbunden. Produkte (virtuell, im Shop ausgeblendet): „Mitgliedschaft (ordentlich)“ 96 € (ID 52), „Mitgliedschaft (Studierende)“ 35 € (ID 53) – werden zu Abo-Produkten, sobald WooCommerce Subscriptions installiert ist.
 - Die CF7-Formulare legt `bw-appa` bei `admin_init` an. Ohne Anmeldung auslösen: `…/wp-admin/admin-ajax.php?action=bw_noop` aufrufen (ohne `action` endet admin-ajax vor `admin_init`).
 - Empfänger: Standard = Admin-E-Mail `bw-cms@blickwert.at` (Einstellungen › APPA Formulare ist noch leer). Umstellen auf `info@appa.net` im Backend.
