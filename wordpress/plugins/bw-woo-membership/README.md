@@ -24,6 +24,7 @@ Mitgliederbereich der APPA auf Basis von WooCommerce. PHP 8.3, WordPress 7.x, Wo
 - An der Kasse wird das Konto angelegt. Zusätzliche Felder der Block-Kasse, nur wenn eine Mitgliedschaft im Warenkorb liegt: Beruf/Studienrichtung (Pflicht), Fachgruppe (freiwillig), „Statuten gelesen, Aufnahme beantragt“ (Pflicht). Bemerkungen gehen in die Bestellnotiz.
 - Die Angaben landen am Konto: `bw_wm_occupation`, `bw_wm_statutes_accepted` (Datum), Fachgruppe im Profil; sichtbar in der Verwaltung unter „Angaben beim Beitritt“.
 - Das frühere Antragsformular (Contact Form 7) entfällt.
+- **Staffel beim ersten Beitrag** (nur wer noch nie Mitglied war): Jänner–Mai voller Beitrag, Juni–September die Hälfte, Oktober–November ein Drittel; Beitritt im Dezember zum vollen Beitrag, gültig bis Ende des Folgejahres. Umgesetzt als Abzugszeile im Warenkorb (`JoinDiscount`), nicht als geänderter Preis – Verlängerungen und ein späteres Abo bleiben beim vollen Beitrag.
 
 ## Verwaltung (Backend)
 

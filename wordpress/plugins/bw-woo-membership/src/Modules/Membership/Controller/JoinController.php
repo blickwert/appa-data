@@ -11,6 +11,7 @@ namespace BW\WooMembership\Modules\Membership\Controller;
 
 use BW\WooMembership\Modules\Membership\Repository\MemberRepository;
 use BW\WooMembership\Modules\Membership\Repository\MembershipOrderRepository;
+use BW\WooMembership\Modules\Membership\Service\JoinDiscount;
 use BW\WooMembership\Modules\Membership\Service\MemberPages;
 use BW\WooMembership\Modules\Membership\Service\MembershipService;
 use BW\WooMembership\Modules\Membership\Service\ProfileFields;
@@ -48,6 +49,34 @@ final class JoinController {
 		add_action( 'template_redirect', array( $this, 'join' ) );
 		add_action( 'woocommerce_init', array( $this, 'register_fields' ) );
 		add_action( 'woocommerce_store_api_checkout_order_processed', array( $this, 'apply_to_account' ) );
+		add_action( 'woocommerce_cart_calculate_fees', array( $this, 'join_discount' ) );
+	}
+
+	/**
+	 * Reduced first fee by month of joining (JoinDiscount) for people who were never members. A fee line, not a
+	 * changed price, so that renewals (and a later subscription) keep the full yearly fee.
+	 *
+	 * @param \WC_Cart $cart Cart.
+	 */
+	public function join_discount( $cart ): void {
+		if ( ! is_object( $cart ) || ! empty( $cart->recurring_cart_key ) ) {
+			return; // WooCommerce Subscriptions: never on the recurring cart.
+		}
+		$user_id = get_current_user_id();
+		if ( $user_id > 0 && '' !== $this->members->number( $user_id ) ) {
+			return; // Has been a member before: no join discount.
+		}
+		$month = (int) current_time( 'n' );
+		foreach ( $cart->get_cart() as $item ) {
+			$product = $item['data'] ?? null;
+			if ( ! $product instanceof \WC_Product || '' === $this->orders->product_type( (int) ( $item['product_id'] ?? 0 ) ) ) {
+				continue;
+			}
+			$discount = JoinDiscount::discount( (float) $product->get_price() * (int) ( $item['quantity'] ?? 1 ), $month );
+			if ( $discount > 0 ) {
+				$cart->add_fee( JoinDiscount::label( $month ), -$discount, false );
+			}
+		}
 	}
 
 	/**
