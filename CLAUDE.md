@@ -4,6 +4,8 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 
 ## Aktuelle Aufgabe
 
+**Neue Session? Zuerst [`docs/NAECHSTE-SESSION.md`](docs/NAECHSTE-SESSION.md) lesen** – dort stehen der Stand, die nächsten Schritte (Übertragung auf `2603b-appa`) und wie die lokale Prüfumgebung aufgebaut wird.
+
 **WordPress-Umsetzung als Block-Theme + Funktions-Plugin, ohne Elementor** (Vorbild: Repo `blickwert/perma-data`). Arbeitsstand, Entscheidungen und Ablauf: [`docs/WP-UMSETZUNG.md`](docs/WP-UMSETZUNG.md).
 
 - Theme `wordpress/themes/appa/` (Slug `appa`, Namespace `BW\AppaTheme`, Hooks `bw_appa_theme_`)
