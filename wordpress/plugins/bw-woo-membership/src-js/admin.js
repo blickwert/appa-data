@@ -258,6 +258,19 @@ function MemberEdit( { id, go } ) {
 							<TextareaControl label="Kurzprofil" value={ form.profile.bio } onChange={ setProfile( 'bio' ) } __nextHasNoMarginBottom />
 						</CardBody>
 					</Card>
+					{ member.application && ( member.application.occupation || member.application.statutes ) && (
+						<Card>
+							<CardHeader><h2>Angaben beim Beitritt</h2></CardHeader>
+							<CardBody>
+								<dl className="bwo-facts">
+									<dt>Beruf / Studienrichtung</dt>
+									<dd>{ member.application.occupation || '–' }</dd>
+									<dt>Statuten bestätigt</dt>
+									<dd>{ member.application.statutes ? member.application.statutes.split( '-' ).reverse().join( '.' ) : '–' }</dd>
+								</dl>
+							</CardBody>
+						</Card>
+					) }
 					<Card>
 						<CardHeader><h2>Bestellungen</h2></CardHeader>
 						<CardBody>

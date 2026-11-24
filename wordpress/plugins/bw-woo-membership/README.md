@@ -18,6 +18,13 @@ Mitgliederbereich der APPA auf Basis von WooCommerce. PHP 8.3, WordPress 7.x, Wo
 - **Ehren- und institutionelle Mitglieder:** Benutzerfelder `bw_wm_manual_type` (und optional `bw_wm_manual_until`, Y-m-d). Verwaltung im Backend unter **Mitglieder** (Liste, Filter, Bearbeiten, Neu, CSV-Export).
 - Mitgliedsnummer `A-0001` …, vergeben bei der ersten bezahlten Mitgliedschaft, bleibt für immer (auch bei Austritt und Wiedereintritt). Deinstallieren löscht keine Mitgliedsdaten.
 
+## Beitritt
+
+- Links `?bw_wm_join=regular` bzw. `?bw_wm_join=student` (Seite Mitgliedschaft) legen das Produkt der Mitgliedsart in den Warenkorb (eine andere Mitgliedschaft fliegt raus) und öffnen die Kasse. Aktive Mitglieder landen stattdessen im Mitgliederbereich.
+- An der Kasse wird das Konto angelegt. Zusätzliche Felder der Block-Kasse, nur wenn eine Mitgliedschaft im Warenkorb liegt: Beruf/Studienrichtung (Pflicht), Fachgruppe (freiwillig), „Statuten gelesen, Aufnahme beantragt“ (Pflicht). Bemerkungen gehen in die Bestellnotiz.
+- Die Angaben landen am Konto: `bw_wm_occupation`, `bw_wm_statutes_accepted` (Datum), Fachgruppe im Profil; sichtbar in der Verwaltung unter „Angaben beim Beitritt“.
+- Das frühere Antragsformular (Contact Form 7) entfällt.
+
 ## Verwaltung (Backend)
 
 Menü **Mitglieder** (Berechtigung `bw_wm_manage_members`, vergeben an Administrator und Shop-Manager): Mitgliederliste mit Filter und Suche, Mitglied bearbeiten (Art, gültig bis, manuelle Mitgliedschaft), Ehren- und institutionelle Mitglieder anlegen, CSV-Export, Unterseite **Nachweise prüfen**. Die Oberfläche ist eine React-App (`src-js/admin.js`, gebaut mit `@wordpress/scripts`) auf der REST-Schnittstelle `bw-wm/v1`.

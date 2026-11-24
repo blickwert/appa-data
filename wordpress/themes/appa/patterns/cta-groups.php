@@ -30,7 +30,7 @@ declare(strict_types=1);
 		<!-- wp:buttons -->
 		<div class="wp-block-buttons">
 			<!-- wp:button -->
-			<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Gründungsmitglied werden</a></div>
+			<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Gründungsmitglied werden</a></div>
 			<!-- /wp:button -->
 		</div>
 		<!-- /wp:buttons -->

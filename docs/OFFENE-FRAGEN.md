@@ -8,7 +8,7 @@ Die Annahmen wurden mit einem zweiten Claude-Agenten gegengeprüft (Abgleich mit
 
 | # | Frage | Arbeitsannahme (umgesetzt) | Antwort |
 |---|---|---|---|
-| M1 | Muss eine neue Mitgliedschaft vom Vorstand freigegeben werden? | Nein. Laut Meeting 9. 10. muss der Verein für alle offen sein; einzige Prüfung ist der Studiennachweis. Wer bezahlt, ist Mitglied. | |
+| M1 | Muss eine neue Mitgliedschaft vom Vorstand freigegeben werden? | Beitritt direkt über die Kasse (kein Antragsformular mehr); wer bezahlt, hat sofort Zugang. Laut Statuten entscheidet der Vorstand über die Aufnahme – deshalb Hinweis auf der Seite: „lehnt er sie ab, erstatten wir den Beitrag“. Bitte bestätigen. | |
 | M2 | Studierende beim Beitritt: erst Nachweis, dann Kauf – oder Kauf mit Nachweis-Frist? | Kauf möglich, Nachweis innerhalb von 30 Tagen im Mitgliederbereich hochladen. Ohne gültigen Nachweis ist die nächste Verlängerung die ordentliche Mitgliedschaft. | |
 | M3 | Wer prüft Nachweise und verwaltet Mitglieder? Wohin gehen Benachrichtigungen? | Rolle „Shop-Manager“ (und Administrator) mit eigener Berechtigung „Mitglieder verwalten“. Benachrichtigungen an die Admin-E-Mail (derzeit bw-cms@blickwert.at, später info@appa.net). | |
 | M4 | Bei Umstellung Studierende → ordentlich: Differenz sofort nachzahlen? | Nein, erst ab der nächsten Verlängerung. | |

@@ -155,6 +155,10 @@ final class MemberAdminService {
 			'email'   => $user->user_email,
 			'manual'  => array( 'type' => $manual['type'] ?? '', 'until' => $manual['until'] ?? '' ),
 			'profile' => $this->members->profile( $user_id ),
+			'application' => array(
+				'occupation' => (string) get_user_meta( $user_id, \BW\WooMembership\Modules\Membership\Controller\JoinController::META_JOB, true ),
+				'statutes'   => (string) get_user_meta( $user_id, \BW\WooMembership\Modules\Membership\Controller\JoinController::META_STATUTES, true ),
+			),
 			'valid'   => MembershipPeriod::format( $m->valid_until ),
 			'proof'   => array(
 				'status'      => $proof['status'],

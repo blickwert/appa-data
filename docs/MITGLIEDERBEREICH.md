@@ -9,6 +9,7 @@ Stand: 24. November 2026. Grundlage: die Vorschau im Theme (`page-member`, `page
 | 1 | Plugin `bw-woo-membership`: Status aus Bestellung bzw. Abo, Mitgliedsnummer, geschützte Übersicht, Login-Weiterleitung, Blöcke (Kopf, Übersicht, Veranstaltungen, Dokumente, Profil), Profil und Verzeichnis-Einwilligung, Mitgliedsbestätigung zum Drucken, Mitglieder-Dokumente mit geschütztem Download | umgesetzt (24. 11. 2026) |
 | 2 | Verwaltung im Backend wie Mockup: Mitgliederliste, Mitglied bearbeiten (Ehren-/institutionelle Mitglieder), Studiennachweis hochladen, prüfen, erinnern, umstellen | umgesetzt (24. 11. 2026, Plugin 0.2.0) |
 | 3 | Veranstaltungen: Feld „Art“ (nur Mitglieder / offen / für Mitglieder gratis), Anmeldung über verstecktes WooCommerce-Produkt mit Mitgliederpreis, „Meine Anmeldungen“, Teilnehmerliste | umgesetzt (24. 11. 2026, Plugin 0.3.0, `bw-appa` 0.2.0); Aufzeichnungen offen (Frage V5) |
+| – | Beitritt über die Kasse statt Antragsformular: Buttons „Gründungsmitglied werden“/„Als Student:in beitreten“ öffnen die Kasse, Antragsfelder in der Kasse | umgesetzt (24. 11. 2026, Plugin 0.4.0) |
 | – | WooCommerce Subscriptions (Lizenz) für automatische Verlängerung; Staffel Juni ½ / Oktober ⅓ / Dezember gratis beim ersten Beitrag | offen |
 
 Ohne WooCommerce Subscriptions gilt eine bezahlte Mitgliedschaftsbestellung für das Kalenderjahr (Dezember: bis Ende des Folgejahres).

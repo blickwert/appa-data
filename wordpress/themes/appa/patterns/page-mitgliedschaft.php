@@ -37,7 +37,7 @@ declare(strict_types=1);
 				<!-- wp:buttons -->
 				<div class="wp-block-buttons">
 					<!-- wp:button -->
-					<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#antrag">Gründungsmitglied werden</a></div>
+					<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#beitrag">Gründungsmitglied werden</a></div>
 					<!-- /wp:button -->
 				</div>
 				<!-- /wp:buttons -->
@@ -181,7 +181,7 @@ declare(strict_types=1);
 				<!-- wp:buttons -->
 				<div class="wp-block-buttons">
 					<!-- wp:button -->
-					<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#antrag">Gründungsmitglied werden</a></div>
+					<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#beitrag">Gründungsmitglied werden</a></div>
 					<!-- /wp:button -->
 				</div>
 				<!-- /wp:buttons -->
@@ -463,7 +463,7 @@ declare(strict_types=1);
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"width":100,"className":"is-style-secondary"} -->
-				<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-secondary"><a class="wp-block-button__link wp-element-button" href="#antrag">Gründungsmitglied werden</a></div>
+				<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-secondary"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/?bw_wm_join=regular' ) ); ?>">Gründungsmitglied werden</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -487,7 +487,7 @@ declare(strict_types=1);
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"width":100} -->
-				<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link wp-element-button" href="#antrag">Als Student:in beitreten</a></div>
+				<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/?bw_wm_join=student' ) ); ?>">Als Student:in beitreten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -519,30 +519,20 @@ declare(strict_types=1);
 		<!-- /wp:group -->
 	</div>
 	<!-- /wp:group -->
-</section>
-<!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","anchor":"antrag","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
-<section id="antrag" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
+	<!-- wp:group {"layout":{"type":"constrained","justifyContent":"left"}} -->
 	<div class="wp-block-group">
-		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
-		<p class="is-style-eyebrow">Beitritt</p>
-		<!-- /wp:paragraph -->
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group">
+			<!-- wp:paragraph {"fontSize":"sm"} -->
+			<p class="has-sm-font-size">So funktioniert der Beitritt: Du legst an der Kasse dein Konto an und bezahlst den Jahresbeitrag mit Karte oder per Überweisung. Danach hast du sofort Zugang zum Mitgliederbereich. Als Student:in lädst du dort deinen Studiennachweis hoch.</p>
+			<!-- /wp:paragraph -->
 
-		<!-- wp:heading -->
-		<h2 class="wp-block-heading">Ich bin von Anfang an dabei.</h2>
-		<!-- /wp:heading -->
-
-		<!-- wp:paragraph -->
-		<p>Beantrage deine Mitgliedschaft und sag uns gerne, welche Themen dich interessieren. Nach Eingang deines Antrags meldet sich unser Vorstand mit den nächsten Schritten bei dir.</p>
-		<!-- /wp:paragraph -->
-
-		<!-- wp:bw-appa/form {"form":"membership"} /-->
-
-		<!-- wp:paragraph {"fontSize":"sm"} -->
-		<p class="has-sm-font-size">Über die Aufnahme entscheidet der Vorstand. Die Rechte und Pflichten der Mitglieder regeln die <a href="<?php echo esc_url( home_url( '/ueber-uns/#statuten' ) ); ?>">Statuten</a>. Bis zur Entstehung des Vereins erfolgt die Aufnahme vorläufig. Die Mitgliedschaft wird mit der Entstehung des Vereins wirksam.</p>
-		<!-- /wp:paragraph -->
+			<!-- wp:paragraph {"fontSize":"sm"} -->
+			<p class="has-sm-font-size">Über die Aufnahme entscheidet der Vorstand; lehnt er sie ab, erstatten wir den Beitrag. Die Rechte und Pflichten der Mitglieder regeln die <a href="<?php echo esc_url( home_url( '/ueber-uns/#statuten' ) ); ?>">Statuten</a>. Bis zur Entstehung des Vereins erfolgt die Aufnahme vorläufig. Die Mitgliedschaft wird mit der Entstehung des Vereins wirksam.</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
 	</div>
 	<!-- /wp:group -->
 </section>

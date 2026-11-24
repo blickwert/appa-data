@@ -66,7 +66,7 @@ declare(strict_types=1);
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -96,7 +96,7 @@ declare(strict_types=1);
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -126,7 +126,7 @@ declare(strict_types=1);
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -156,7 +156,7 @@ declare(strict_types=1);
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -186,7 +186,7 @@ declare(strict_types=1);
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -216,7 +216,7 @@ declare(strict_types=1);
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->

@@ -20,7 +20,7 @@ use BW\Appa\Modules\Forms\Service\FormDefinitions;
 use BW\Appa\Modules\Forms\Service\FormToken;
 
 /**
- * Contact form and membership application on top of Contact Form 7, with honeypot, fill time and rate limit.
+ * Contact form on top of Contact Form 7 (membership: WooCommerce, plugin bw-woo-membership), with honeypot, fill time and rate limit.
  */
 final class FormsModule extends AbstractModule {
 

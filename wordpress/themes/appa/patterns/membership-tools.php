@@ -42,7 +42,7 @@ declare(strict_types=1);
 				<!-- wp:buttons -->
 				<div class="wp-block-buttons">
 					<!-- wp:button -->
-					<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#antrag">Gründungsmitglied werden</a></div>
+					<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#beitrag">Gründungsmitglied werden</a></div>
 					<!-- /wp:button -->
 				</div>
 				<!-- /wp:buttons -->

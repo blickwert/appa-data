@@ -15,6 +15,7 @@ use BW\WooMembership\Modules\Membership\Controller\AdminPageController;
 use BW\WooMembership\Modules\Membership\Controller\AdminRestController;
 use BW\WooMembership\Modules\Membership\Controller\ProofController;
 use BW\WooMembership\Modules\Membership\Controller\PurchaseController;
+use BW\WooMembership\Modules\Membership\Controller\JoinController;
 use BW\WooMembership\Modules\Membership\Controller\BlocksController;
 use BW\WooMembership\Modules\Membership\Controller\ConfirmationController;
 use BW\WooMembership\Modules\Membership\Controller\OrderController;
@@ -74,6 +75,7 @@ final class MembershipModule extends AbstractModule {
 		( new SyncController( $sync, $orders ) )->register();
 		( new ProofController( $proof, $proofs, $memberships, $mailer ) )->register();
 		( new PurchaseController( $memberships, $orders, $proofs ) )->register();
+		( new JoinController( $memberships, $orders, $members, new MemberPages() ) )->register();
 		( new AdminRestController( $admin, $proof ) )->register();
 		( new AdminPageController( $admin, $proof ) )->register();
 		add_action( 'bw_wm_setup', array( $sync, 'sync_all' ) );

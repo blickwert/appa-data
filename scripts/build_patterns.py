@@ -245,13 +245,13 @@ ABOUT_GROUPS = join(
         "einbringen."], anchor="fachgruppen"),
     card_grid([card(join(icon(i, tone=TONES[k]), heading(n, 3),
                          stack(join(p(f"<strong>{s}</strong>", size="sm"), p(t)), gap="2"),
-                         arrow("Diese Fachgruppe mitgestalten", url("mitgliedschaft/#antrag"))))
+                         arrow("Diese Fachgruppe mitgestalten", url("mitgliedschaft/#beitrag"))))
                for k, (i, n, s, t) in enumerate(GROUPS)], variation="section-mist"),
 )
 
 ABOUT_GROUPS_CTA = cta("Deine Perspektive gehört dazu.",
                        "Die Themen stehen fest. Was daraus entsteht, gestalten wir gemeinsam. Werde Gründungsmitglied "
-                       "und bring ein, was dir wichtig ist.", "Gründungsmitglied werden", url("mitgliedschaft/#antrag"))
+                       "und bring ein, was dir wichtig ist.", "Gründungsmitglied werden", url("mitgliedschaft/#beitrag"))
 
 BOARD = [("Dr. Martin Wammerl", "Präsident"), ("Brigitte Wiesner Kulovits, BA, MA, MA", "Vizepräsidentin und Finanzreferentin"),
          ("Mag. Michael Wohlkönig", "Generalsekretär")]
@@ -382,7 +382,7 @@ MEMBER_INTRO = section(columns(
                  "von Beginn an mitgestalten. Vernetze dich mit anderen, entwickle deine Fachgruppe mit und freue dich "
                  "auf digitale Tools, die deine Arbeit in Coaching, Pädagogik und Therapie unterstützen.",
                  variation="lead"),
-               buttons(button("Gründungsmitglied werden", "#antrag"))), gap="5"),
+               buttons(button("Gründungsmitglied werden", "#beitrag"))), gap="5"),
     image(asset("assets/images/membership.webp"), "Zwei Menschen im Gespräch", cls="bw-image--landscape"),
     widths=["50%", "50%"], valign="center"), pad=("16", "16"))
 
@@ -420,7 +420,7 @@ MEMBER_TOOLS = section(columns(
                  "Vorschläge für weitere Werkzeuge einbringen."),
                p("<em>Wähle das Verfahren passend zur Zielgruppe und Fragestellung. Die automatische Auswertung "
                  "unterstützt deine Arbeit; die fachliche Einordnung der Ergebnisse bleibt bei dir.</em>", size="sm"),
-               buttons(button("Gründungsmitglied werden", "#antrag"))), gap="4"),
+               buttons(button("Gründungsmitglied werden", "#beitrag"))), gap="4"),
     stack(join(heading("Mit diesen sechs Tools starten wir", 3),
                grid(join(*[card(heading(t, 4), variation="card-white", gap="0") for t in TOOLS]),
                     columns=2, min_width="12rem", gap="3")), gap="5"),
@@ -488,10 +488,10 @@ MEMBER_QUESTIONNAIRES = section(join(
 PRICES = [
     ("Mitgliedschaft", "Für alle, die den Vereinszweck unterstützen und Positive Psychologie in Österreich mitgestalten "
      "möchten. Aus Wissenschaft und Praxis oder aus persönlichem Interesse.", "96 Euro <small>pro Jahr</small>",
-     button("Gründungsmitglied werden", "#antrag", "secondary", full=True)),
+     button("Gründungsmitglied werden", url("?bw_wm_join=regular"), "secondary", full=True)),
     ("Studierende", "Du studierst und begeisterst dich für Positive Psychologie? Bring deine Fragen und Ideen ein und "
      "werde zum ermäßigten Beitrag Teil der APPA.", "35 Euro <small>pro Jahr</small>",
-     button("Als Student:in beitreten", "#antrag", full=True)),
+     button("Als Student:in beitreten", url("?bw_wm_join=student"), full=True)),
     ("Organisationen", "Auch juristische Personen können Mitglied werden. Wir freuen uns über Einrichtungen und "
      "Organisationen, die den Vereinszweck unterstützen möchten.", "Mitgliedschaft anfragen",
      button("Kontakt aufnehmen", mailto("Mitgliedschaft für Organisationen"), "secondary", full=True)),
@@ -504,17 +504,16 @@ MEMBER_PRICES = section(join(
     grid(join(*[card(join(heading(n, 3), p(t), p(price, size="xx-large", color="red", cls="bw-price"), buttons(b)),
                      variation="card-highlight" if n == "Studierende" else "card-flat")
                 for n, t, price, b in PRICES])),
+    narrow(stack(join(
+        p("So funktioniert der Beitritt: Du legst an der Kasse dein Konto an und bezahlst den Jahresbeitrag mit Karte "
+          "oder per Überweisung. Danach hast du sofort Zugang zum Mitgliederbereich. Als Student:in lädst du dort "
+          "deinen Studiennachweis hoch.", size="sm"),
+        p(f"Über die Aufnahme entscheidet der Vorstand; lehnt er sie ab, erstatten wir den Beitrag. Die Rechte und "
+          f"Pflichten der Mitglieder regeln die <a href=\"{url('ueber-uns/#statuten')}\">Statuten</a>. Bis zur "
+          f"Entstehung des Vereins erfolgt die Aufnahme vorläufig. Die Mitgliedschaft wird mit der Entstehung des "
+          f"Vereins wirksam.", size="sm"),
+    ), gap="2")),
 ), anchor="beitrag", gap="10")
-
-MEMBER_FORM = section(stack(join(
-    eyebrow("Beitritt"), heading("Ich bin von Anfang an dabei."),
-    p("Beantrage deine Mitgliedschaft und sag uns gerne, welche Themen dich interessieren. Nach Eingang deines Antrags "
-      "meldet sich unser Vorstand mit den nächsten Schritten bei dir."),
-    form_block("membership"),
-    p(f"Über die Aufnahme entscheidet der Vorstand. Die Rechte und Pflichten der Mitglieder regeln die "
-      f"<a href=\"{url('ueber-uns/#statuten')}\">Statuten</a>. Bis zur Entstehung des Vereins erfolgt die Aufnahme "
-      f"vorläufig. Die Mitgliedschaft wird mit der Entstehung des Vereins wirksam.", size="sm"),
-), gap="4"), anchor="antrag")
 
 FAQ = [
     ("Wer kann Mitglied werden?", "Die Mitgliedschaft steht grundsätzlich allen natürlichen und juristischen Personen "
@@ -677,7 +676,6 @@ SECTIONS = {
     "membership-tools": ("Mitgliedschaft: Toolbereich", MEMBER_TOOLS),
     "membership-questionnaires": ("Mitgliedschaft: Fragebögen", MEMBER_QUESTIONNAIRES),
     "membership-prices": ("Mitgliedschaft: Beiträge", MEMBER_PRICES),
-    "membership-form": ("Mitgliedschaft: Antrag", MEMBER_FORM),
     "membership-faq": ("Mitgliedschaft: Häufige Fragen", MEMBER_FAQ),
     "cta-groups-membership": ("Aufruf: Fachgruppen kennenlernen", MEMBER_GROUPS_CTA),
     "contact-header": ("Kontakt: Seitenkopf", CONTACT_HEADER),
@@ -699,7 +697,7 @@ PAGES = {
                                                                     "pp-examples", "pp-sources", "cta-discussion"]),
     "mitgliedschaft": ("Seiteninhalt: Mitgliedschaft", ["membership-intro", "membership-benefits", "membership-tools",
                                                         "membership-questionnaires", "membership-prices",
-                                                        "membership-form", "membership-faq", "cta-groups-membership"]),
+                                                        "membership-faq", "cta-groups-membership"]),
     "kontakt": ("Seiteninhalt: Kontakt", ["contact-header", "contact", "cta-contact"]),
     "impressum": ("Seiteninhalt: Impressum", ["imprint"]),
     "datenschutz": ("Seiteninhalt: Datenschutz", ["privacy"]),
