@@ -49,6 +49,7 @@ def api(method, path, data=None):
 def main():
     patterns = {p["name"]: p["content"] for p in api("GET", "wp/v2/block-patterns/patterns")}
     ids = {}
+    links_by_slug = {}
     for slug, title, pattern in PAGES:
         if pattern not in patterns:
             sys.exit(f"Pattern {pattern} fehlt – ist das Theme 'appa' aktiv?")
@@ -60,6 +61,7 @@ def main():
             continue
         page = api("POST", f"wp/v2/pages/{found[0]['id']}" if found else "wp/v2/pages", data)
         ids[slug] = page["id"]
+        links_by_slug[slug] = page["link"]
         print(("aktualisiert" if found else "angelegt"), slug, page["id"])
     if DRY:
         return
@@ -74,7 +76,9 @@ def main():
                                      "kind": "custom"}, ensure_ascii=False).join(("<!-- wp:navigation-link ", " /-->")))
         else:
             title = next(t for s, t, _ in PAGES if s == slug)
-            links.append(json.dumps({"label": title, "type": "page", "id": ids[slug], "kind": "post-type"},
+            # "url" is required: core/navigation-link renders no href without it, even when "id" is set.
+            links.append(json.dumps({"label": title, "type": "page", "id": ids[slug], "url": links_by_slug[slug],
+                                     "kind": "post-type"},
                                     ensure_ascii=False).join(("<!-- wp:navigation-link ", " /-->")))
     menus = api("GET", "wp/v2/navigation?per_page=100&status=publish,draft&_fields=id,title")
     menu = next((m for m in menus if m["title"]["rendered"] == "Hauptmenü"), None)
