@@ -14,7 +14,7 @@ Zugang: Bridge-Client `tools/wp_bridge.py` aus `blickwert/bw-wp-bridge`, `--site
 
 - WordPress 7.1.5, Deutsch, Permalinks `/%postname%/`. Aktiv: Theme `appa`, Plugins `bw-appa`, Contact Form 7 (mit deutscher Übersetzung), BW WP Bridge. Elementor & Co. sind installiert, aber inaktiv.
 - Seiten, Startseite und Hauptmenü per `import_pages.py`; CF7-Formulare „APPA – Kontakt“ und „APPA – Mitgliedsantrag“ angelegt. Kontaktformular getestet: wird versendet.
-- Layout an die Elementor-Seite angeglichen (Typografie des Block-Themes bleibt), Mitgliederbereich (Anmeldung + Übersicht) als eigene Vorlagen; Theme 0.2.1, Plugin 0.1.2.
+- Layout an die Elementor-Seite angeglichen (Typografie des Block-Themes bleibt), Mitgliederbereich (Anmeldung + Übersicht) als eigene Vorlagen; Theme 0.2.3, Plugin 0.1.2.
 - Die CF7-Formulare legt `bw-appa` bei `admin_init` an. Ohne Anmeldung auslösen: `…/wp-admin/admin-ajax.php?action=bw_noop` aufrufen (ohne `action` endet admin-ajax vor `admin_init`).
 - Empfänger: Standard = Admin-E-Mail `bw-cms@blickwert.at` (Einstellungen › APPA Formulare ist noch leer). Umstellen auf `info@appa.net` im Backend.
 - Drei Beispiel-Veranstaltungen (Fachtagung 8. 10. 2027, zwei Online-Termine mit Platzhalter-Zoom-Link `zoom.us/j/0000000000`).

@@ -340,6 +340,10 @@
 	color: var(--wp--preset--color--on-green);
 }
 
+.bw-dashboard .is-style-card-flat {
+	padding: var(--wp--preset--spacing--5);
+}
+
 .bw-dash-event > :first-child,
 .bw-dash-event > :first-child > :last-child {
 	flex: 1;
@@ -384,7 +388,7 @@
 }
 
 .bw-profile-panel .wp-block-separator {
-	margin: 0;
+	margin-inline: 0;
 	border: 0;
 	border-block-start: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
 	opacity: 1;
