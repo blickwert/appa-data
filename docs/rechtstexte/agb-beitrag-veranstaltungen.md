@@ -31,13 +31,13 @@
 
 ## 3. Beitritt über die Website
 
-3.1 Du wirst Mitglied, indem du die gewünschte Mitgliedsart in der Kasse auswählst, ein Kundenkonto anlegst, die Pflichtangaben machst (z. B. Beruf oder Studienrichtung), bestätigst, die Statuten gelesen zu haben, und den ersten Beitrag bezahlst.
+3.1 Du wirst Mitglied, indem du die gewünschte Mitgliedsart in der Kasse auswählst (bei der studentischen Mitgliedschaft nach dem Hochladen deines Studiennachweises), ein Kundenkonto anlegst, die Pflichtangaben machst (z. B. Beruf oder Studienrichtung), bestätigst, die Statuten gelesen zu haben, und den ersten Beitrag bezahlst.
 
 3.2 Mit Eingang der Zahlung ist deine Mitgliedschaft aktiv. Du erhältst eine Mitgliedsnummer und Zugang zum Mitgliederbereich.
 
-3.3 [Platzhalter: Falls die Statuten eine Aufnahme durch den Vorstand vorsehen: „Der Vorstand kann die Aufnahme ohne Angabe von Gründen ablehnen. In diesem Fall erstatten wir den bezahlten Beitrag vollständig.“]
+3.3 Natürliche Personen werden ohne gesonderte Freigabe durch den Vorstand Mitglied. Organisationen siehe Punkt 2.4.
 
-> **Prüfhinweis:** Laut Entscheidung vom 24. 11. 2026 keine Freigabe natürlicher Personen durch den Vorstand. Mit den Statuten abgleichen; ggf. Statuten ändern oder Absatz 3.3 übernehmen.
+> **Prüfhinweis:** Entscheidung vom 24. 11. 2026: keine Freigabe natürlicher Personen durch den Vorstand. Die Statuten sehen bisher eine Entscheidung des Vorstands über die Aufnahme vor („Über Aufnahmeanträge entscheidet der Vorstand“) – Statuten anpassen oder einen Vorstandsbeschluss fassen, der Beitritte über die Website allgemein annimmt.
 
 ## 4. Laufzeit, erster Beitrag und Verlängerung
 
