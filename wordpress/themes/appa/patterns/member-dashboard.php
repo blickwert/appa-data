@@ -19,6 +19,8 @@ declare(strict_types=1);
 
 	<!-- wp:bw-woo-membership/overview /-->
 
+	<!-- wp:bw-woo-membership/proof /-->
+
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|8","left":"var:preset|spacing|8"}}}} -->
 	<div class="wp-block-columns">
 		<!-- wp:column {"width":"58%"} -->

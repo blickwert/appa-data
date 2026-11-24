@@ -1,0 +1,169 @@
+/* Admin app "Mitglieder" – scoped to the app container, colours from the admin scheme. */
+.bwo-app .bwo-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+	margin: 0 0 16px;
+}
+
+.bwo-app .bwo-header h1 {
+	margin: 0;
+	padding: 0;
+}
+
+.bwo-app .bwo-header__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.bwo-app .bwo-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin: 12px 0;
+}
+
+.bwo-app .subsubsub {
+	float: none;
+	margin: 0;
+}
+
+.bwo-app .subsubsub .components-button.is-link {
+	text-decoration: none;
+}
+
+.bwo-app .subsubsub .current {
+	color: #1d2327;
+	font-weight: 600;
+}
+
+.bwo-app .bwo-filters {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.bwo-app .bwo-filters .components-search-control {
+	min-width: 240px;
+}
+
+.bwo-app .bwo-muted {
+	color: #646970;
+}
+
+.bwo-app .bwo-badge {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 3px;
+	background: #f0f0f1;
+	color: #50575e;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.bwo-app .bwo-badge--active {
+	background: #edfaef;
+	color: #00450c;
+}
+
+.bwo-app .bwo-badge--pending,
+.bwo-app .bwo-badge--on-hold {
+	background: #fcf9e8;
+	color: #614200;
+}
+
+.bwo-app .bwo-badge--expired {
+	background: #fcf0f1;
+	color: #8a2424;
+}
+
+.bwo-app .bwo-pager {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 12px;
+}
+
+.bwo-app .bwo-columns {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 320px;
+	gap: 20px;
+	align-items: start;
+}
+
+.bwo-app .bwo-main,
+.bwo-app .bwo-side,
+.bwo-app .bwo-stack {
+	display: grid;
+	gap: 16px;
+}
+
+.bwo-app .bwo-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+}
+
+.bwo-app .components-card h2 {
+	margin: 0;
+	font-size: 14px;
+}
+
+.bwo-app .bwo-facts {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 6px 12px;
+	margin: 0;
+}
+
+.bwo-app .bwo-facts dt {
+	color: #646970;
+}
+
+.bwo-app .bwo-facts dd {
+	margin: 0;
+}
+
+.bwo-app .bwo-checks {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 20px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.bwo-app .bwo-checks legend {
+	margin-bottom: 8px;
+	font-weight: 500;
+}
+
+.bwo-app .bwo-narrow {
+	max-width: 520px;
+}
+
+.bwo-app .bwo-proof {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+	gap: 20px;
+	align-items: start;
+}
+
+.bwo-app .bwo-proof__actions {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 8px 12px;
+	align-items: end;
+}
+
+@media (max-width: 960px) {
+	.bwo-app .bwo-columns,
+	.bwo-app .bwo-proof {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}

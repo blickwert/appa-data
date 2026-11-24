@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bw-woo-membership/proof",
+	"title": "Mitglied: Studiennachweis",
+	"category": "widgets",
+	"icon": "welcome-learn-more",
+	"description": "Status und Upload des Studiennachweises (nur für studentische Mitglieder sichtbar).",
+	"textdomain": "bw-woo-membership",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"multiple": false
+	},
+	"editorScript": "bw-wm-blocks",
+	"style": "bw-wm-dashboard"
+}

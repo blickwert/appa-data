@@ -1,0 +1,136 @@
+<?php
+/**
+ * Admin page "Mitglieder".
+ *
+ * @package BW\WooMembership
+ */
+
+declare(strict_types=1);
+
+namespace BW\WooMembership\Modules\Membership\Controller;
+
+use BW\WooMembership\Core\Setup;
+use BW\WooMembership\Modules\Membership\Service\MemberAdminService;
+use BW\WooMembership\Modules\Membership\Service\ProofService;
+
+/**
+ * Menu "Mitglieder" with the admin app, CSV export and access to pending proof files.
+ */
+final class AdminPageController {
+
+	public const SLUG = 'bw-wm-members';
+
+	/**
+	 * Builds the controller.
+	 */
+	public function __construct(
+		private readonly MemberAdminService $admin,
+		private readonly ProofService $proofs,
+	) {
+	}
+
+	/**
+	 * Registers hooks.
+	 */
+	public function register(): void {
+		add_action( 'admin_menu', array( $this, 'menu' ), 9 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
+		add_action( 'admin_post_bw_wm_export', array( $this, 'export' ) );
+		add_action( 'admin_post_bw_wm_proof_file', array( $this, 'proof_file' ) );
+		add_filter( 'bw_wm_admin_menu_parent', static fn(): string => self::SLUG );
+	}
+
+	/**
+	 * Menu and submenus.
+	 */
+	public function menu(): void {
+		$counts = $this->admin->counts();
+		$bubble = $counts['proofs'] > 0 ? ' <span class="awaiting-mod">' . (int) $counts['proofs'] . '</span>' : '';
+		add_menu_page( __( 'Mitglieder', 'bw-woo-membership' ), __( 'Mitglieder', 'bw-woo-membership' ) . $bubble, Setup::CAPABILITY, self::SLUG, array( $this, 'render' ), 'dashicons-groups', 21 );
+		add_submenu_page( self::SLUG, __( 'Alle Mitglieder', 'bw-woo-membership' ), __( 'Alle Mitglieder', 'bw-woo-membership' ), Setup::CAPABILITY, self::SLUG, array( $this, 'render' ) );
+		add_submenu_page( self::SLUG, __( 'Nachweise prüfen', 'bw-woo-membership' ), __( 'Nachweise prüfen', 'bw-woo-membership' ) . $bubble, Setup::CAPABILITY, 'admin.php?page=' . self::SLUG . '&path=/proofs' );
+	}
+
+	/**
+	 * App container.
+	 */
+	public function render(): void {
+		echo '<div class="wrap"><div id="bw-wm-admin" class="bwo-app"><p>' . esc_html__( 'Lädt …', 'bw-woo-membership' ) . '</p></div></div>';
+	}
+
+	/**
+	 * App script and styles on the page only.
+	 */
+	public function enqueue( string $hook ): void {
+		if ( 'toplevel_page_' . self::SLUG !== $hook ) {
+			return;
+		}
+		$asset_file = BW_WM_DIR . '/build/admin.asset.php';
+		if ( ! is_readable( $asset_file ) ) {
+			return;
+		}
+		$asset = require $asset_file;
+		wp_enqueue_script( 'bw-wm-admin', plugins_url( 'build/admin.js', BW_WM_FILE ), $asset['dependencies'], $asset['version'], true );
+		wp_enqueue_style( 'wp-components' );
+		wp_enqueue_style( 'bw-wm-admin', plugins_url( 'assets/admin.css', BW_WM_FILE ), array( 'wp-components' ), BW_WM_VERSION );
+		wp_add_inline_script(
+			'bw-wm-admin',
+			'window.bwWmAdmin = ' . wp_json_encode(
+				array(
+					'page'      => admin_url( 'admin.php?page=' . self::SLUG ),
+					// add_query_arg, not wp_nonce_url: the latter escapes "&" for HTML output.
+					'exportUrl' => add_query_arg( array( 'action' => 'bw_wm_export', '_wpnonce' => wp_create_nonce( 'bw_wm_export' ) ), admin_url( 'admin-post.php' ) ),
+					'proofUrl'  => add_query_arg( array( 'action' => 'bw_wm_proof_file', '_wpnonce' => wp_create_nonce( 'bw_wm_proof_file' ) ), admin_url( 'admin-post.php' ) ),
+					'docsUrl'   => admin_url( 'edit.php?post_type=bw_member_doc' ),
+				)
+			) . ';',
+			'before'
+		);
+	}
+
+	/**
+	 * CSV export of all members (UTF-8 with BOM for Excel, semicolon separated).
+	 */
+	public function export(): void {
+		if ( ! current_user_can( Setup::CAPABILITY ) || ! check_admin_referer( 'bw_wm_export' ) ) {
+			wp_die( esc_html__( 'Nicht erlaubt.', 'bw-woo-membership' ), '', array( 'response' => 403 ) );
+		}
+		nocache_headers();
+		header( 'Content-Type: text/csv; charset=utf-8' );
+		header( 'Content-Disposition: attachment; filename="appa-mitglieder-' . gmdate( 'Y-m-d' ) . '.csv"' );
+		$out = fopen( 'php://output', 'w' );
+		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- streaming the export.
+		foreach ( $this->admin->csv() as $row ) {
+			fputcsv( $out, array_map( array( self::class, 'csv_safe' ), $row ), ';' );
+		}
+		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+		exit;
+	}
+
+	/**
+	 * Shows a pending proof file to the office.
+	 */
+	public function proof_file(): void {
+		if ( ! current_user_can( Setup::CAPABILITY ) || ! check_admin_referer( 'bw_wm_proof_file' ) ) {
+			wp_die( esc_html__( 'Nicht erlaubt.', 'bw-woo-membership' ), '', array( 'response' => 403 ) );
+		}
+		$file = $this->proofs->file( isset( $_GET['user'] ) ? absint( $_GET['user'] ) : 0 );
+		if ( '' === $file ) {
+			wp_die( esc_html__( 'Kein Nachweis vorhanden (nach der Prüfung wird er gelöscht).', 'bw-woo-membership' ), '', array( 'response' => 404 ) );
+		}
+		$type = wp_check_filetype( $file );
+		nocache_headers();
+		header( 'Content-Type: ' . ( $type['type'] ? $type['type'] : 'application/octet-stream' ) );
+		header( 'Content-Disposition: inline; filename="studiennachweis.' . $type['ext'] . '"' );
+		header( 'X-Content-Type-Options: nosniff' );
+		readfile( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile -- protected file.
+		exit;
+	}
+
+	/**
+	 * Prevents formula injection in spreadsheet programs.
+	 */
+	public static function csv_safe( string $value ): string {
+		return 1 === preg_match( '/^[=+\-@\t\r]/', $value ) ? "'" . $value : $value;
+	}
+}

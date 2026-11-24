@@ -34,6 +34,7 @@ final class Plugin {
 	 * Discovers and registers all modules.
 	 */
 	public function boot(): void {
+		Setup::register();
 		$this->modules = ( new ModuleManager() )->discover();
 		foreach ( $this->modules as $module ) {
 			$module->register();
@@ -55,6 +56,7 @@ final class Plugin {
 		foreach ( self::instance()->modules as $module ) {
 			$module->activate();
 		}
+		Setup::run();
 		flush_rewrite_rules();
 	}
 
@@ -62,6 +64,7 @@ final class Plugin {
 	 * Deactivation: remove the modules' rewrite rules.
 	 */
 	public static function deactivate(): void {
+		Setup::deactivate();
 		flush_rewrite_rules();
 	}
 }

@@ -48,6 +48,9 @@ defined( 'ABSPATH' ) || exit;
 				</div>
 			<?php endforeach; ?>
 		</div>
+		<?php if ( '' !== $data['renew_url'] ) : ?>
+			<p><a class="bwm-button" href="<?php echo esc_url( $data['renew_url'] ); ?>">Mitgliedschaft verlängern</a></p>
+		<?php endif; ?>
 		<?php if ( '' !== $data['confirmation'] ) : ?>
 			<p><a class="bwm-button bwm-button--outline bwm-button--download" href="<?php echo esc_url( $data['confirmation'] ); ?>" target="_blank" rel="noopener">Mitgliedsbestätigung <small>zum Drucken oder als PDF</small></a></p>
 		<?php endif; ?>

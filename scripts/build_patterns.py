@@ -635,6 +635,7 @@ MEMBER_DASHBOARD = group(join(
     '</a><a href="#veranstaltungen">Veranstaltungen</a><a href="#dokumente">Dokumente</a><a href="#profil">Profil</a>'
     '</nav>\n<!-- /wp:html -->',
     '<!-- wp:bw-woo-membership/overview /-->',
+    '<!-- wp:bw-woo-membership/proof /-->',
     columns('<!-- wp:bw-woo-membership/events {"limit":3} /-->',
             '<!-- wp:bw-woo-membership/documents {"limit":3} /-->', widths=["58%", "42%"], gap="8"),
     '<!-- wp:bw-woo-membership/profile /-->',

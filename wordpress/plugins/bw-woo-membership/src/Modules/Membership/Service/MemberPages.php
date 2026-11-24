@@ -18,7 +18,7 @@ final class MemberPages {
 	/**
 	 * Blocks that need a logged-in user.
 	 */
-	public const PROTECTED_BLOCKS = array( 'bw-woo-membership/overview', 'bw-woo-membership/events', 'bw-woo-membership/documents', 'bw-woo-membership/profile' );
+	public const PROTECTED_BLOCKS = array( 'bw-woo-membership/overview', 'bw-woo-membership/events', 'bw-woo-membership/documents', 'bw-woo-membership/profile', 'bw-woo-membership/proof' );
 
 	/**
 	 * ID of the login page (0 = none).

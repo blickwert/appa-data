@@ -11,6 +11,8 @@ namespace BW\WooMembership\Modules\Membership\Service;
 
 use BW\WooMembership\Modules\Membership\Model\Membership;
 use BW\WooMembership\Modules\Membership\Repository\MemberRepository;
+use BW\WooMembership\Modules\Membership\Repository\MembershipOrderRepository;
+use BW\WooMembership\Modules\Membership\Repository\ProofRepository;
 
 /**
  * Prepares the values the member area templates print (texts, dates, URLs).
@@ -40,6 +42,8 @@ final class DashboardModel {
 	public function __construct(
 		private readonly MembershipService $memberships,
 		private readonly MemberRepository $members,
+		private readonly MembershipOrderRepository $orders,
+		private readonly ProofRepository $proofs,
 	) {
 	}
 
@@ -100,7 +104,29 @@ final class DashboardModel {
 			'join_url'     => home_url( '/mitgliedschaft/' ),
 			'account_url'  => function_exists( 'wc_get_page_permalink' ) ? (string) wc_get_page_permalink( 'myaccount' ) : '',
 			'confirmation' => $m->grants_access() ? add_query_arg( 'bw_wm_confirmation', '1', home_url( '/' ) ) : '',
+			'renew_url'    => $this->renew_url( $m ),
 		);
+	}
+
+	/**
+	 * Checkout link for renewing (order-based memberships without automatic renewal): within 45 days before the end
+	 * of the period or after it. Students renew as students only with a proof for the next period.
+	 */
+	private function renew_url( Membership $m ): string {
+		if ( $m->auto_renew || 'manual' === $m->source || '' === $m->type || ! function_exists( 'wc_get_checkout_url' ) ) {
+			return '';
+		}
+		$today = current_time( 'Y-m-d' );
+		if ( Membership::STATUS_ACTIVE === $m->status && null !== $m->valid_until && ( new \DateTimeImmutable( $today ) )->diff( new \DateTimeImmutable( $m->valid_until ) )->days > 45 ) {
+			return '';
+		}
+		if ( ! in_array( $m->status, array( Membership::STATUS_ACTIVE, Membership::STATUS_EXPIRED ), true ) ) {
+			return '';
+		}
+		$next = null !== $m->valid_until ? MembershipPeriod::next_renewal( $m->valid_until ) : $today;
+		$type = 'student' === $m->type && ProofRules::valid_on( $this->proofs->get( $m->user_id ), max( $next, $today ) ) ? 'student' : ( 'student' === $m->type ? 'regular' : $m->type );
+		$product = $this->orders->product_for_type( $type );
+		return $product ? add_query_arg( 'add-to-cart', $product, wc_get_checkout_url() ) : '';
 	}
 
 	/**

@@ -34,6 +34,24 @@ final class MembershipOrderRepository {
 	}
 
 	/**
+	 * First published product of a membership type (0 = none).
+	 */
+	public function product_for_type( string $type ): int {
+		$ids = get_posts(
+			array(
+				'post_type'     => 'product',
+				'post_status'   => 'publish',
+				'meta_key'      => self::META_PRODUCT_TYPE, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- few products.
+				'meta_value'    => $type, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'fields'        => 'ids',
+				'numberposts'   => 1,
+				'no_found_rows' => true,
+			)
+		);
+		return (int) ( $ids[0] ?? 0 );
+	}
+
+	/**
 	 * Membership type contained in an order (empty when none).
 	 */
 	public function order_type( WC_Order $order ): string {

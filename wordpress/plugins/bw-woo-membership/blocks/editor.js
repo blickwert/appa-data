@@ -4,7 +4,7 @@
 	const { useBlockProps, InspectorControls } = wp.blockEditor;
 	const { PanelBody, RangeControl, Notice } = wp.components;
 	const ServerSideRender = wp.serverSideRender;
-	const names = [ 'user', 'overview', 'events', 'profile', 'documents' ];
+	const names = [ 'user', 'overview', 'events', 'profile', 'documents', 'proof' ];
 
 	names.forEach( ( name ) => {
 		wp.blocks.registerBlockType( 'bw-woo-membership/' + name, {

@@ -23,6 +23,12 @@ final class MemberRepository {
 	public const META_PROFILE      = 'bw_wm_profile';
 	public const OPTION_SEQUENCE   = 'bw_wm_number_sequence';
 
+	// Snapshot of the resolved membership, kept up to date by MembershipSync (list, filters, export).
+	public const META_STATUS      = 'bw_wm_status';
+	public const META_TYPE        = 'bw_wm_type';
+	public const META_VALID_UNTIL = 'bw_wm_valid_until';
+	public const META_NEXT        = 'bw_wm_next_renewal';
+
 	/**
 	 * IDs of users who are or were members (member number or manual membership).
 	 *
@@ -43,6 +49,40 @@ final class MemberRepository {
 				)
 			)
 		);
+	}
+
+	/**
+	 * IDs of users that have a membership snapshot.
+	 *
+	 * @return int[]
+	 */
+	public function snapshot_ids(): array {
+		return array_map( 'intval', get_users( array( 'fields' => 'ID', 'number' => -1, 'meta_key' => self::META_STATUS ) ) ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- few hundred users.
+	}
+
+	/**
+	 * Stores the snapshot of a resolved membership.
+	 *
+	 * @param array{status: string, type: string, valid_until: ?string, next: ?string} $snapshot Values.
+	 */
+	public function store_snapshot( int $user_id, array $snapshot ): void {
+		update_user_meta( $user_id, self::META_STATUS, $snapshot['status'] );
+		update_user_meta( $user_id, self::META_TYPE, $snapshot['type'] );
+		update_user_meta( $user_id, self::META_VALID_UNTIL, (string) $snapshot['valid_until'] );
+		update_user_meta( $user_id, self::META_NEXT, (string) $snapshot['next'] );
+	}
+
+	/**
+	 * Sets or clears a manual membership (honorary, institutional).
+	 */
+	public function set_manual( int $user_id, string $type, string $until ): void {
+		if ( '' === $type ) {
+			delete_user_meta( $user_id, self::META_MANUAL_TYPE );
+			delete_user_meta( $user_id, self::META_MANUAL_UNTIL );
+			return;
+		}
+		update_user_meta( $user_id, self::META_MANUAL_TYPE, $type );
+		update_user_meta( $user_id, self::META_MANUAL_UNTIL, $until );
 	}
 
 	/**

@@ -62,6 +62,13 @@ final class MembershipService {
 	}
 
 	/**
+	 * Forgets the cached membership of a user (after a change in this request).
+	 */
+	public function forget( int $user_id ): void {
+		unset( $this->cache[ $user_id ] );
+	}
+
+	/**
 	 * Honorary and institutional memberships managed by the office (no payment, optional end date).
 	 *
 	 * @param array{type: string, until: string}|null $manual Manual data.
