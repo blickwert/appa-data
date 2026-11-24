@@ -58,14 +58,16 @@ final class EventPricing {
 	}
 
 	/**
-	 * People on the waiting list to inform about free places: the first ones not informed yet, as many as places.
+	 * People on the waiting list to inform about free places: the first ones not informed yet, as many as places
+	 * are free beyond those already informed (and still waiting), so one free place never mails the whole list.
 	 *
 	 * @param list<array{user: int, since: string, notified: string}> $list Waiting list.
 	 * @return int[]
 	 */
 	public static function to_notify( array $list, ?int $places_left ): array {
-		$free = null === $places_left ? PHP_INT_MAX : $places_left;
-		$out  = array();
+		$informed = count( array_filter( $list, static fn( array $e ): bool => '' !== $e['notified'] ) );
+		$free     = null === $places_left ? PHP_INT_MAX : max( 0, $places_left - $informed );
+		$out      = array();
 		foreach ( $list as $entry ) {
 			if ( count( $out ) >= $free ) {
 				break;

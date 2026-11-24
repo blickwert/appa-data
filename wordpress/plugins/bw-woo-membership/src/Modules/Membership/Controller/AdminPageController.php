@@ -128,7 +128,9 @@ final class AdminPageController {
 		$out = fopen( 'php://output', 'w' );
 		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- streaming the export.
 		foreach ( $export['rows'] as $row ) {
-			fputcsv( $out, array_map( array( Csv::class, 'safe' ), $row ), ';' );
+			// Amounts (also negative ones) stay numbers for the spreadsheet; only text is protected against formulas.
+			$row = array_map( static fn( string $cell ): string => 1 === preg_match( '/^-?\d+(,\d{2})?$/', $cell ) ? $cell : Csv::safe( $cell ), $row );
+			fputcsv( $out, $row, ';' );
 		}
 		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		exit;

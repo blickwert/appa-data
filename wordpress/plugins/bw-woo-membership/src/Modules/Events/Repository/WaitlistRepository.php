@@ -81,6 +81,20 @@ final class WaitlistRepository {
 	}
 
 	/**
+	 * Forgets earlier notifications (the event is full again, so the next free place is announced anew).
+	 */
+	public function reset_notified( int $event_id ): void {
+		$list = $this->all( $event_id );
+		if ( ! array_filter( $list, static fn( array $e ): bool => '' !== $e['notified'] ) ) {
+			return;
+		}
+		foreach ( $list as $i => $entry ) {
+			$list[ $i ]['notified'] = '';
+		}
+		update_post_meta( $event_id, self::META, $list );
+	}
+
+	/**
 	 * Number of people waiting.
 	 */
 	public function count( int $event_id ): int {

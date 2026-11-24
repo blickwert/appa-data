@@ -67,7 +67,11 @@ final class WaitlistController {
 	 * Places became free: e-mail to the next people on the list (as many as places, each once).
 	 */
 	public function notify( int $event_id, ?int $left ): void {
-		if ( 0 === $left || $this->registrations->is_closed( $event_id ) ) {
+		if ( 0 === $left ) {
+			$this->waitlist->reset_notified( $event_id ); // Full again: the next free place is announced anew.
+			return;
+		}
+		if ( $this->registrations->is_closed( $event_id ) ) {
 			return;
 		}
 		$users = EventPricing::to_notify( $this->waitlist->all( $event_id ), $left );

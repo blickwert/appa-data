@@ -68,9 +68,14 @@ final class ProofService {
 		}
 		if ( str_starts_with( basename( $path ), self::STASH_PREFIX ) ) {
 			$target = dirname( $path ) . '/nachweis-' . $user_id . '-' . wp_generate_password( 16, false ) . '.' . pathinfo( $path, PATHINFO_EXTENSION );
-			if ( rename( $path, $target ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.rename_rename -- same protected folder.
-				$path = $target;
+			// Out of the stash, otherwise cleanup_stash() would delete it while it waits for review.
+			if ( ! rename( $path, $target ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.rename_rename -- same protected folder.
+				if ( ! copy( $path, $target ) ) {
+					return;
+				}
+				wp_delete_file( $path );
 			}
+			$path = $target;
 		}
 		$this->delete_file( $user_id );
 		$this->proofs->update(

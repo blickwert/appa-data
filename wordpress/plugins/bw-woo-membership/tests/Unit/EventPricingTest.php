@@ -48,7 +48,8 @@ final class EventPricingTest extends TestCase {
 			array( 'user' => 2, 'since' => '2027-01-02', 'notified' => '' ),
 			array( 'user' => 3, 'since' => '2027-01-03', 'notified' => '' ),
 		);
-		self::assertSame( array( 2 ), EventPricing::to_notify( $list, 1 ), 'first one not yet informed' );
+		self::assertSame( array(), EventPricing::to_notify( $list, 1 ), 'the one free place was already announced to user 1' );
+		self::assertSame( array( 2 ), EventPricing::to_notify( $list, 2 ), 'second place: next one' );
 		self::assertSame( array( 2, 3 ), EventPricing::to_notify( $list, 5 ) );
 		self::assertSame( array( 2, 3 ), EventPricing::to_notify( $list, null ), 'unlimited' );
 		self::assertSame( array(), EventPricing::to_notify( $list, 0 ) );
