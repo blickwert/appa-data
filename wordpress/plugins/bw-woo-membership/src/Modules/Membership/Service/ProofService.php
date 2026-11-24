@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace BW\WooMembership\Modules\Membership\Service;
 
 use BW\WooMembership\Modules\Membership\Repository\ProofRepository;
+use BW\WooMembership\Support\Mailer;
 use BW\WooMembership\Support\ProtectedFolder;
 use WP_Error;
 

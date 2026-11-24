@@ -24,7 +24,7 @@ use BW\WooMembership\Modules\Membership\Controller\SyncController;
 use BW\WooMembership\Modules\Membership\Repository\MemberRepository;
 use BW\WooMembership\Modules\Membership\Repository\MembershipOrderRepository;
 use BW\WooMembership\Modules\Membership\Repository\ProofRepository;
-use BW\WooMembership\Modules\Membership\Service\Mailer;
+use BW\WooMembership\Support\Mailer;
 use BW\WooMembership\Modules\Membership\Service\MemberAdminService;
 use BW\WooMembership\Modules\Membership\Service\ProofService;
 use BW\WooMembership\Modules\Membership\Service\DashboardModel;

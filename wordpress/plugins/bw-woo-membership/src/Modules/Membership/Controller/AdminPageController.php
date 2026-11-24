@@ -12,6 +12,7 @@ namespace BW\WooMembership\Modules\Membership\Controller;
 use BW\WooMembership\Core\Setup;
 use BW\WooMembership\Modules\Membership\Service\MemberAdminService;
 use BW\WooMembership\Modules\Membership\Service\ProofService;
+use BW\WooMembership\Support\Csv;
 
 /**
  * Menu "Mitglieder" with the admin app, CSV export and access to pending proof files.
@@ -101,7 +102,7 @@ final class AdminPageController {
 		$out = fopen( 'php://output', 'w' );
 		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- streaming the export.
 		foreach ( $this->admin->csv() as $row ) {
-			fputcsv( $out, array_map( array( self::class, 'csv_safe' ), $row ), ';' );
+			fputcsv( $out, array_map( array( Csv::class, 'safe' ), $row ), ';' );
 		}
 		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		exit;
@@ -127,10 +128,4 @@ final class AdminPageController {
 		exit;
 	}
 
-	/**
-	 * Prevents formula injection in spreadsheet programs.
-	 */
-	public static function csv_safe( string $value ): string {
-		return 1 === preg_match( '/^[=+\-@\t\r]/', $value ) ? "'" . $value : $value;
-	}
 }

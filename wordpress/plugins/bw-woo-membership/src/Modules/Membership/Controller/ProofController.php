@@ -11,7 +11,7 @@ namespace BW\WooMembership\Modules\Membership\Controller;
 
 use BW\WooMembership\Core\View;
 use BW\WooMembership\Modules\Membership\Repository\ProofRepository;
-use BW\WooMembership\Modules\Membership\Service\Mailer;
+use BW\WooMembership\Support\Mailer;
 use BW\WooMembership\Modules\Membership\Service\MembershipPeriod;
 use BW\WooMembership\Modules\Membership\Service\MembershipService;
 use BW\WooMembership\Modules\Membership\Service\ProofRules;

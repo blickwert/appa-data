@@ -29,6 +29,8 @@ declare(strict_types=1);
 		<!-- /wp:button -->
 	</div>
 	<!-- /wp:buttons -->
+
+	<!-- wp:bw-woo-membership/event-registration /-->
 </section>
 <!-- /wp:group -->
 

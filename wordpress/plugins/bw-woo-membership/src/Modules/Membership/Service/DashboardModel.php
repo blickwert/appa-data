@@ -158,7 +158,6 @@ final class DashboardModel {
 				'suppress_filters' => false,
 			)
 		);
-		$member = $this->memberships->for_user( $user_id )->grants_access() || user_can( $user_id, 'edit_pages' );
 		$events = array();
 		foreach ( $posts as $post ) {
 			$date = (string) get_post_meta( $post->ID, self::EVENT_DATE, true );
@@ -174,7 +173,9 @@ final class DashboardModel {
 				'meta'      => trim( ( '' !== $time ? $time . ' Uhr' : '' ) . ( '' !== $link ? ' · Online via Zoom' : '' ), ' ·' ),
 				'online'    => '' !== $link,
 				'exclusive' => 'members' === get_post_meta( $post->ID, self::EVENT_AUDIENCE, true ),
-				'zoom'      => $member ? $link : '',
+				/** This filter is documented in the plugin bw-appa (PrivacyController). */
+				'zoom'      => '' !== $link && apply_filters( 'bw_appa_event_private_visible', true, $post->ID, $user_id ) ? $link : '',
+				'registration' => '1' === get_post_meta( $post->ID, 'bw_appa_event_registration', true ),
 			);
 		}
 		return $events;

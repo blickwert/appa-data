@@ -16,6 +16,12 @@ defined( 'ABSPATH' ) || exit;
 			<a class="bwm-link" href="<?php echo esc_url( $data['all_url'] ); ?>">Alle Veranstaltungen</a>
 		<?php endif; ?>
 	</div>
+	<?php
+	/**
+	 * Fires before the list of upcoming events (the events module adds "Meine Anmeldungen").
+	 */
+	do_action( 'bw_wm_events_before_list' );
+	?>
 	<?php if ( ! $data['events'] ) : ?>
 		<p class="bwm-empty">Aktuell sind keine Termine geplant. Sobald es Neuigkeiten gibt, findest du sie hier.</p>
 	<?php endif; ?>
@@ -35,6 +41,8 @@ defined( 'ABSPATH' ) || exit;
 			<p class="bwm-event__action">
 				<?php if ( '' !== $event['zoom'] ) : ?>
 					<a class="bwm-button" href="<?php echo esc_url( $event['zoom'] ); ?>" target="_blank" rel="noopener">Per Zoom teilnehmen</a>
+				<?php elseif ( $event['registration'] ) : ?>
+					<a class="bwm-button" href="<?php echo esc_url( $event['url'] ); ?>">Zur Anmeldung</a>
 				<?php else : ?>
 					<a class="bwm-button bwm-button--outline" href="<?php echo esc_url( $event['url'] ); ?>">Details</a>
 				<?php endif; ?>

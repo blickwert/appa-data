@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace BW\WooMembership\Core;
 
 use BW\WooMembership\Modules\Documents\DocumentsModule;
+use BW\WooMembership\Modules\Events\EventsModule;
 use BW\WooMembership\Modules\Membership\MembershipModule;
 
 /**
@@ -30,7 +31,7 @@ final class ModuleManager {
 	 * @return array<string, Module>
 	 */
 	public function discover(): array {
-		$modules = array( new MembershipModule(), new DocumentsModule() );
+		$modules = array( new MembershipModule(), new DocumentsModule(), new EventsModule() );
 
 		/**
 		 * Filters the list of modules.

@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace BW\WooMembership\Modules\Membership\Service;
+namespace BW\WooMembership\Support;
 
 /**
  * Plain-text mails to members and the office (no attachments: proofs are only reachable in the backend).
