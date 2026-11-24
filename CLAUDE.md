@@ -27,6 +27,7 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 - Pro Änderung: Branch, Commit, Pull Request.
 - Sichtbare Änderungen lokal prüfen (WordPress + SQLite, Chromium/Playwright, 1440 px und 390 px) und im Block-Editor auf ungültige Blöcke prüfen.
 - Plugins: `composer install && composer test` (PHPUnit), `composer lint` – je Plugin-Ordner.
+- `bw-woo-membership`: Backend-App mit `npm install && npm run build` bauen, bevor das ZIP entsteht (`build/` ist nicht im Git).
 
 ## Wichtige Dateien
 
@@ -38,6 +39,7 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 | `scripts/import_pages.py` | Seiten, Startseite und Hauptmenü per REST anlegen/aktualisieren |
 | `wordpress/themes/appa/styles/blocks/` | Blockstil-Varianten (Abschnitte, Karten, Buttons, Eyebrow …) |
 | `wordpress/plugins/bw-appa/src/Modules/` | Module `events` (Veranstaltungen) und `forms` (CF7-Formulare, Spamschutz) |
-| `wordpress/plugins/bw-woo-membership/src/Modules/` | Module `membership` (Status, Nummer, Zugang, Blöcke, Profil) und `documents` (Mitglieder-Dokumente) |
+| `wordpress/plugins/bw-woo-membership/src/Modules/` | Module `membership` (Status, Nummer, Zugang, Blöcke, Profil, Verwaltung, Studiennachweis), `documents` (Mitglieder-Dokumente) und `events` (Anmeldung über WooCommerce) |
+| `docs/OFFENE-FRAGEN.md` | Offene Fragen an APPA mit Arbeitsannahmen |
 | `elementor/`, `APPA-Mockup/` | Alte Elementor-Umsetzung und Mockup (nur Referenz) |
 | `meeting/` | Besprechungsprotokolle |

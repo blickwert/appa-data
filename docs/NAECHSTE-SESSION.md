@@ -16,6 +16,8 @@ Zugang: Bridge-Client `tools/wp_bridge.py` aus `blickwert/bw-wp-bridge`, `--site
 - Seiten, Startseite und Hauptmenü per `import_pages.py`; CF7-Formulare „APPA – Kontakt“ und „APPA – Mitgliedsantrag“ angelegt. Kontaktformular getestet: wird versendet.
 - Layout an die Elementor-Seite angeglichen (Typografie des Block-Themes bleibt), Mitgliederbereich (Anmeldung + Übersicht) als eigene Vorlagen; Theme 0.3.0, Plugin 0.1.2.
 - Mitgliederbereich Stufe 1 live (Plugin `bw-woo-membership`): Übersicht geschützt, Daten aus WooCommerce, Mitglieder-Dokumente geschützt (direkter Dateiaufruf auf 2603b liefert 403). Produkte 52/53 haben die Mitgliedsart `regular`/`student`. Nächste Stufen siehe `docs/MITGLIEDERBEREICH.md`.
+- **Stufe 2 und 3 live (24. 11.):** `bw-woo-membership` 0.3.0, `bw-appa` 0.2.0, Theme 0.4.0. Backend-Menü „Mitglieder“ (Liste, Bearbeiten, Ehren-/institutionelle Mitglieder, CSV, „Nachweise prüfen“), Studiennachweis im Mitgliederbereich, Veranstaltungsanmeldung über WooCommerce (Felder im Editor unter „Anmeldung und Preise“). Bei den drei Beispiel-Veranstaltungen ist die Anmeldung noch aus (Preise fehlen). Lokal Ende-zu-Ende geprüft (Mitgliederpreis, Gratis-Anmeldung, nur Mitglieder, Erstattung, Gastkasse) und von einem zweiten Agenten gegengelesen.
+- **Offene Fragen mit Arbeitsannahmen:** `docs/OFFENE-FRAGEN.md` – Antworten dort eintragen.
 - Plugins aufgeräumt (24. 11.): aktiv sind nur `bw-appa`, `bw-woo-membership` 0.1.0, BW WP Bridge, Contact Form 7, WooCommerce 11.3 und WooCommerce Stripe Gateway 11.2; alle übrigen (Elementor & Co., ACF Pro, UpdraftPlus …) gelöscht.
 - WooCommerce: Graz/EUR (1.234,56 €), keine Steuern, kein Versand, keine Gutscheine, Kauf nur mit Konto (Konto wird an der Kasse angelegt). Seiten `warenkorb`, `kasse`, `mein-konto`, `shop`. Banküberweisung aktiv (Bankdaten noch Platzhalter), Stripe im Testmodus, aber noch nicht verbunden. Produkte (virtuell, im Shop ausgeblendet): „Mitgliedschaft (ordentlich)“ 96 € (ID 52), „Mitgliedschaft (Studierende)“ 35 € (ID 53) – werden zu Abo-Produkten, sobald WooCommerce Subscriptions installiert ist.
 - Die CF7-Formulare legt `bw-appa` bei `admin_init` an. Ohne Anmeldung auslösen: `…/wp-admin/admin-ajax.php?action=bw_noop` aufrufen (ohne `action` endet admin-ajax vor `admin_init`).
@@ -29,6 +31,8 @@ Nach Änderungen neu übertragen: ZIP bauen (siehe unten), `theme-install --zip 
 ```bash
 cd wordpress/themes && zip -qr <scratchpad>/appa.zip appa
 cd ../plugins && zip -qr <scratchpad>/bw-appa.zip bw-appa -x 'bw-appa/vendor/*' 'bw-appa/tests/*' 'bw-appa/composer.*' 'bw-appa/phpunit.xml.dist'
+(cd bw-woo-membership && npm install && npm run build)   # Backend-App, build/ ist nicht im Git
+zip -qr <scratchpad>/bw-woo-membership.zip bw-woo-membership -x 'bw-woo-membership/vendor/*' 'bw-woo-membership/tests/*' 'bw-woo-membership/composer.*' 'bw-woo-membership/phpunit.xml.dist' 'bw-woo-membership/node_modules/*' 'bw-woo-membership/src-js/*' 'bw-woo-membership/package*.json'
 ```
 
 ## Lokale Prüfumgebung neu aufsetzen (Container ist frisch)
@@ -68,6 +72,6 @@ App-Passwort für `import_pages.py`: `$W user application-password create admin 
 - „Mehr Gelb“ im Design (Meeting 9. 10.): wo genau.
 - WooCommerce Subscriptions (kostenpflichtig, Lizenz/ZIP von APPA bzw. blickwert), Stripe verbinden (Backend: WooCommerce › Einstellungen › Zahlungen › Stripe), Bankdaten für die Überweisung, AGB/Beitragsordnung als Seite, Datenschutzseite in WordPress als Datenschutzseite festlegen, Produkt-URL-Basis `/product/` eindeutschen, Shop-Seiten im Theme gestalten.
 - Mockup der Verwaltung (Mitglieder, Dokumente, Veranstaltungen mit Kopplung zum Mitgliederbereich): Claude-Artifact „APPA Mitgliederverwaltung WP“.
-- Mitgliederbereich: Analyse der statischen und dynamischen Elemente in `docs/MITGLIEDERBEREICH.md` (offene Fragen dort). Texte duzen wie die übrige Website.
-- Danach: Mitgliederbereich und Mitgliedschaft mit Zahlung im eigenen Plugin `bw-woo-membership` (Konzept „APPA – Mitgliedschaft online“, Meeting 9. 10.: WooCommerce + Subscriptions, Stripe, Staffel Juni ½ / Oktober ⅓ / Dezember gratis, Studierendennachweis jährlich, vier Mitgliedsarten).
+- Mitgliederbereich: Analyse in `docs/MITGLIEDERBEREICH.md`, offene Fragen in `docs/OFFENE-FRAGEN.md`. Noch offen: WooCommerce Subscriptions und Staffel beim ersten Beitrag, Aufzeichnungen (V5), Anmeldefrist/Warteliste (V6).
+- Lokal: Shop-Basis auf AT stellen und Testkonten eine Adresse geben, sonst scheitert die Block-Kasse an Pflichtfeldern.
 - Die alte Elementor-Seite `2603-appa` nutzt noch `wp-plugins/appa-loop-query`; nach Umstieg kann der Ordner entfallen.
