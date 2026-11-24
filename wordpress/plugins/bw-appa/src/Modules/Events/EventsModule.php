@@ -13,6 +13,7 @@ use BW\Appa\Core\AbstractModule;
 use BW\Appa\Modules\Events\Controller\BindingsController;
 use BW\Appa\Modules\Events\Controller\EditorController;
 use BW\Appa\Modules\Events\Controller\PostTypeController;
+use BW\Appa\Modules\Events\Controller\PrivacyController;
 use BW\Appa\Modules\Events\Controller\QueryController;
 use BW\Appa\Modules\Events\Repository\EventRepository;
 use BW\Appa\Modules\Events\Service\EventFormatter;
@@ -46,6 +47,7 @@ final class EventsModule extends AbstractModule {
 		( new QueryController( new UpcomingQuery() ) )->register();
 		( new BindingsController( $repository, new EventFormatter() ) )->register();
 		( new EditorController() )->register();
+		( new PrivacyController() )->register();
 	}
 
 	/**

@@ -50,4 +50,39 @@ final class EventFields {
 	public static function text( string $value ): string {
 		return trim( (string) preg_replace( '/\s+/', ' ', strip_tags( $value ) ) );
 	}
+
+	/**
+	 * Kind of event: one of EventRepository::AUDIENCES, default "open".
+	 */
+	public static function audience( string $value ): string {
+		$value = trim( $value );
+		return in_array( $value, array( 'open', 'members', 'free_members' ), true ) ? $value : 'open';
+	}
+
+	/**
+	 * Price as decimal string with dot ("35.00"), accepts a comma; '' when empty or invalid.
+	 */
+	public static function price( string $value ): string {
+		$value = str_replace( array( ' ', '€' ), '', trim( $value ) );
+		$value = str_replace( ',', '.', $value );
+		if ( '' === $value || 1 !== preg_match( '/^\d{1,5}(\.\d{1,2})?$/', $value ) ) {
+			return '';
+		}
+		return number_format( (float) $value, 2, '.', '' );
+	}
+
+	/**
+	 * Number of places as string ('' = unlimited).
+	 */
+	public static function capacity( string $value ): string {
+		$value = trim( $value );
+		return 1 === preg_match( '/^\d{1,5}$/', $value ) && (int) $value > 0 ? (string) (int) $value : '';
+	}
+
+	/**
+	 * On/off flag as '1' or ''.
+	 */
+	public static function flag( string $value ): string {
+		return in_array( strtolower( trim( $value ) ), array( '1', 'true', 'yes', 'on' ), true ) ? '1' : '';
+	}
 }

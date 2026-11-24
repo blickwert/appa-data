@@ -63,8 +63,12 @@ final class BindingsController {
 			return null;
 		}
 		$event = $this->events->find( $post_id );
+		$key   = (string) ( $args['key'] ?? '' );
+		if ( in_array( $key, array( 'access', 'zoom_link' ), true ) && ! PrivacyController::private_visible( $post_id ) ) {
+			return '';
+		}
 
-		return match ( $args['key'] ?? '' ) {
+		return match ( $key ) {
 			'when'      => esc_html( $this->formatter->when( $event ) ),
 			'access'    => esc_html( $this->formatter->access( $event ) ),
 			'zoom_link' => esc_url_raw( $event->zoom_link ),

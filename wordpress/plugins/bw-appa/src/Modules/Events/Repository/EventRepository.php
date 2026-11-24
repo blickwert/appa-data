@@ -24,6 +24,21 @@ final class EventRepository {
 	public const META_LINK   = 'bw_appa_event_zoom_link';
 	public const META_ACCESS = 'bw_appa_event_zoom_access';
 
+	public const META_AUDIENCE     = 'bw_appa_event_audience';
+	public const META_PRICE_MEMBER = 'bw_appa_event_price_member';
+	public const META_PRICE_PUBLIC = 'bw_appa_event_price_public';
+	public const META_CAPACITY     = 'bw_appa_event_capacity';
+	public const META_REGISTRATION = 'bw_appa_event_registration';
+
+	/**
+	 * Kinds of events (meeting 9 October 2026).
+	 */
+	public const AUDIENCES = array(
+		'open'         => 'Offen – Mitglieder ermäßigt',
+		'members'      => 'Nur für Mitglieder',
+		'free_members' => 'Für Mitglieder gratis',
+	);
+
 	/**
 	 * Loads the event fields of a post.
 	 */

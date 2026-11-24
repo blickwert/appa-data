@@ -74,6 +74,11 @@ final class PostTypeController {
 			EventRepository::META_TIME   => array( EventFields::class, 'time' ),
 			EventRepository::META_LINK   => array( EventFields::class, 'url' ),
 			EventRepository::META_ACCESS => array( EventFields::class, 'text' ),
+			EventRepository::META_AUDIENCE     => array( EventFields::class, 'audience' ),
+			EventRepository::META_PRICE_MEMBER => array( EventFields::class, 'price' ),
+			EventRepository::META_PRICE_PUBLIC => array( EventFields::class, 'price' ),
+			EventRepository::META_CAPACITY     => array( EventFields::class, 'capacity' ),
+			EventRepository::META_REGISTRATION => array( EventFields::class, 'flag' ),
 		);
 		foreach ( $fields as $key => $sanitize ) {
 			register_post_meta(

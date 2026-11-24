@@ -34,7 +34,7 @@ final class EditorController {
 		wp_enqueue_script(
 			'bw-appa-event-panel',
 			plugins_url( 'assets/js/event-panel.js', BW_APPA_FILE ),
-			array( 'wp-components', 'wp-core-data', 'wp-data', 'wp-editor', 'wp-element', 'wp-plugins' ),
+			array( 'wp-components', 'wp-core-data', 'wp-data', 'wp-editor', 'wp-element', 'wp-hooks', 'wp-plugins' ),
 			BW_APPA_VERSION,
 			array( 'in_footer' => true )
 		);
@@ -46,8 +46,14 @@ final class EditorController {
 					'date'   => EventRepository::META_DATE,
 					'time'   => EventRepository::META_TIME,
 					'link'   => EventRepository::META_LINK,
-					'access' => EventRepository::META_ACCESS,
+					'access'       => EventRepository::META_ACCESS,
+					'audience'     => EventRepository::META_AUDIENCE,
+					'priceMember'  => EventRepository::META_PRICE_MEMBER,
+					'pricePublic'  => EventRepository::META_PRICE_PUBLIC,
+					'capacity'     => EventRepository::META_CAPACITY,
+					'registration' => EventRepository::META_REGISTRATION,
 				),
+				'audiences' => EventRepository::AUDIENCES,
 			)
 		);
 	}
