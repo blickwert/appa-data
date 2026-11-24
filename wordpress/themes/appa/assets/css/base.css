@@ -3,7 +3,6 @@
 /* Base ------------------------------------------------------------------ */
 html {
 	scroll-behavior: smooth;
-	scroll-padding-top: var(--wp--preset--spacing--20);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -29,15 +28,31 @@ body {
 }
 
 /* Header ---------------------------------------------------------------- */
-.bw-site-header {
+/* Sticky on the template-part wrapper: the header itself is as tall as its wrapper and could not stick. */
+.wp-site-blocks > :has(> .bw-site-header) {
 	position: sticky;
-	top: 0;
+	top: var(--bw-admin-bar-h, 0px);
 	z-index: 50;
+}
+
+html:has(> body.admin-bar) {
+	--bw-admin-bar-h: var(--wp-admin--admin-bar--height, 0px);
+}
+
+@media (max-width: 600px) {
+	/* The admin bar scrolls away on small screens. */
+	html:has(> body.admin-bar) {
+		--bw-admin-bar-h: 0px;
+	}
+}
+
+.bw-site-header {
 	border-block-end: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
 }
 
-.admin-bar .bw-site-header {
-	top: var(--wp-admin--admin-bar--height, 0);
+/* Anchor targets stop right below the sticky header and jump navigation (sections bring their own padding). */
+html {
+	scroll-padding-top: calc(var(--bw-admin-bar-h, 0px) + var(--bw-header-h, 4.5rem) + var(--bw-jump-h, 0px));
 }
 
 .bw-site-logo img {
@@ -73,29 +88,48 @@ body {
 	list-style: none;
 }
 
-/* Jump navigation below page headers */
+/* Jump navigation below page headers: one line, scrolls sideways on small screens */
 .bw-jump-nav {
+	position: relative;
 	display: flex;
-	flex-wrap: wrap;
-	gap: var(--wp--preset--spacing--2) var(--wp--preset--spacing--6);
+	gap: var(--wp--preset--spacing--6);
 	margin: 0;
 	padding: 0;
+	overflow-x: auto;
 	list-style: none;
 	font-size: var(--wp--preset--font-size--sm);
 	font-weight: 600;
+	white-space: nowrap;
+	scrollbar-width: none;
+}
+
+.bw-jump-nav::-webkit-scrollbar {
+	display: none;
 }
 
 .bw-jump-nav a {
+	display: inline-block;
+	padding-block: var(--wp--preset--spacing--1);
 	color: var(--wp--preset--color--navy);
 	text-decoration: none;
+	box-shadow: inset 0 -2px 0 transparent;
 }
 
 .bw-jump-nav a:hover {
 	color: var(--wp--preset--color--red);
 }
 
-/* Jump navigation band directly below a photo header */
+/* Section in view (set by assets/js/navigation.js) */
+.bw-jump-nav a[aria-current="true"] {
+	color: var(--wp--preset--color--blue);
+	box-shadow: inset 0 -2px 0 currentcolor;
+}
+
+/* Jump navigation band directly below a photo header; stays below the sticky header */
 .bw-jump-band {
+	position: sticky;
+	top: calc(var(--bw-admin-bar-h, 0px) + var(--bw-header-h, 4.5rem));
+	z-index: 40;
 	border-block-end: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
 }
 

@@ -38,10 +38,20 @@ final class Assets {
 	}
 
 	/**
-	 * Base styles (focus, skip link, small resets) that theme.json cannot express.
+	 * Base styles (focus, skip link, small resets) that theme.json cannot express, and the small navigation script.
 	 */
 	public function enqueue_base(): void {
 		wp_enqueue_style( 'bw-appa-base', get_theme_file_uri( 'assets/css/base.css' ), array(), Theme::version() );
+		wp_enqueue_script(
+			'bw-appa-navigation',
+			get_theme_file_uri( 'assets/js/navigation.js' ),
+			array(),
+			Theme::version(),
+			array(
+				'strategy'  => 'defer',
+				'in_footer' => true,
+			)
+		);
 		if ( is_page_template( array( 'page-member', 'page-member-dashboard' ) ) ) {
 			wp_enqueue_style( 'bw-appa-member', get_theme_file_uri( 'assets/css/member.css' ), array( 'bw-appa-base' ), Theme::version() );
 		}
