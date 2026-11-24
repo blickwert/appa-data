@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Create or update the APPA pages, the front page setting and the main menu via the WordPress REST API.
 
-    WP_URL=https://… WP_USER=… WP_APP_PASSWORD=… python3 scripts/import_pages.py [--dry-run]
+    WP_URL=https://… WP_USER=… WP_APP_PASSWORD=… [WP_BRIDGE_KEY=…] python3 scripts/import_pages.py [--dry-run]
 
 The page content is taken from the theme's page patterns ("appa/page-<slug>"), rendered by WordPress itself,
 so internal links and image URLs match the target installation. Existing pages are updated in place
 (a revision is kept by WordPress); nothing else is deleted.
+
+If the BW WP Bridge on the target requires its connection key for all REST requests, set WP_BRIDGE_KEY;
+it is sent in the header X-BW-Bridge-Key (hyphens, not underscores).
 """
 import base64
 import json
@@ -28,11 +31,13 @@ DRY = "--dry-run" in sys.argv
 
 BASE = os.environ["WP_URL"].rstrip("/") + "/wp-json/"
 AUTH = "Basic " + base64.b64encode(f"{os.environ['WP_USER']}:{os.environ['WP_APP_PASSWORD']}".encode()).decode()
+HEADERS = {"Authorization": AUTH, "Content-Type": "application/json"}
+if os.environ.get("WP_BRIDGE_KEY"):
+    HEADERS["X-BW-Bridge-Key"] = os.environ["WP_BRIDGE_KEY"]
 
 
 def api(method, path, data=None):
-    req = urllib.request.Request(BASE + path, method=method, headers={"Authorization": AUTH,
-                                                                      "Content-Type": "application/json"})
+    req = urllib.request.Request(BASE + path, method=method, headers=HEADERS)
     body = json.dumps(data).encode() if data is not None else None
     try:
         with urllib.request.urlopen(req, body, timeout=60) as res:
