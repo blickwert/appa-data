@@ -32,7 +32,9 @@
 
 @media (max-width: 600px) {
 	.bw-hero__note.is-style-card {
-		position: static;
+		position: relative; /* stays above the image it overlaps */
+		z-index: 1;
+		inset: auto;
 		margin-block-start: calc(-1 * var(--wp--preset--spacing--10));
 		margin-inline: var(--wp--preset--spacing--4);
 	}
