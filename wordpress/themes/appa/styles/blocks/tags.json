@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Schlagworte",
+	"slug": "tags",
+	"blockTypes": [
+		"core/paragraph"
+	],
+	"styles": {
+		"color": {
+			"text": "var(--wp--preset--color--navy)"
+		},
+		"typography": {
+			"fontWeight": "600"
+		}
+	}
+}

@@ -1,0 +1,23 @@
+/* bw/icon – decorative icon in a tinted square */
+.bw-icon {
+	--bw-icon-size: 2.75rem;
+	display: inline-grid;
+	place-items: center;
+	inline-size: var(--bw-icon-size);
+	block-size: var(--bw-icon-size);
+	border-radius: var(--wp--custom--radius--lg);
+	color: var(--bw-icon-color, var(--wp--preset--color--red));
+	background: color-mix(in srgb, var(--bw-icon-color, var(--wp--preset--color--red)) 12%, transparent);
+}
+
+.bw-icon svg {
+	inline-size: 50%;
+	block-size: 50%;
+}
+
+.bw-icon--s { --bw-icon-size: 2rem; }
+.bw-icon--l { --bw-icon-size: 3.5rem; }
+.bw-icon--navy { --bw-icon-color: var(--wp--preset--color--navy); }
+.bw-icon--green { --bw-icon-color: var(--wp--preset--color--green); }
+.bw-icon--gold { --bw-icon-color: var(--wp--preset--color--gold-text); }
+.bw-icon--blue { --bw-icon-color: var(--wp--preset--color--blue); }

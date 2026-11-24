@@ -1,0 +1,26 @@
+/* core/quote – large centred quote with gold quotation mark */
+
+.wp-block-quote.is-style-large-centered {
+	max-inline-size: var(--wp--style--global--content-size);
+	margin-inline: auto;
+	padding: 0;
+	text-align: center;
+}
+
+.wp-block-quote.is-style-large-centered::before {
+	content: "";
+	display: block;
+	inline-size: 2.5rem;
+	block-size: 2.5rem;
+	margin: 0 auto var(--wp--preset--spacing--5);
+	background: var(--wp--preset--color--gold);
+	mask: url("../../icons/quote.svg") center / contain no-repeat;
+}
+
+.wp-block-quote.is-style-large-centered cite {
+	display: block;
+	margin-block-start: var(--wp--preset--spacing--4);
+	color: var(--wp--preset--color--slate);
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: 400;
+}

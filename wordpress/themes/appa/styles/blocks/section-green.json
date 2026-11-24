@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Abschnitt Grün",
+	"slug": "section-green",
+	"blockTypes": [
+		"core/group"
+	],
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--green)",
+			"text": "var(--wp--preset--color--on-green)"
+		},
+		"elements": {
+			"heading": {
+				"color": {
+					"text": "var(--wp--preset--color--on-green)"
+				}
+			}
+		}
+	}
+}

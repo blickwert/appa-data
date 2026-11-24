@@ -1,0 +1,39 @@
+/* core/group – card variants and layout helpers */
+
+.wp-block-group.is-style-card,
+.wp-block-group.is-style-card-flat {
+	display: flex;
+	flex-direction: column;
+}
+
+/* Push the last block (usually the button row) to the bottom of equal-height cards */
+.wp-block-group.is-style-card > :last-child:is(.wp-block-buttons),
+.wp-block-group.is-style-card-flat > :last-child:is(.wp-block-buttons) {
+	margin-block-start: auto;
+	padding-block-start: var(--wp--preset--spacing--4);
+}
+
+/* Overlay card on the hero image */
+.bw-hero__media {
+	position: relative;
+}
+
+.bw-hero__media .wp-block-image img {
+	inline-size: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
+}
+
+.bw-hero__note.is-style-card {
+	position: absolute;
+	block-size: auto;
+	inset: auto var(--wp--preset--spacing--5) var(--wp--preset--spacing--5);
+}
+
+@media (max-width: 600px) {
+	.bw-hero__note.is-style-card {
+		position: static;
+		margin-block-start: calc(-1 * var(--wp--preset--spacing--10));
+		margin-inline: var(--wp--preset--spacing--4);
+	}
+}

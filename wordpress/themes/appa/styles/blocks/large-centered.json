@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Zitat groß",
+	"slug": "large-centered",
+	"blockTypes": [
+		"core/quote"
+	],
+	"styles": {
+		"typography": {
+			"textAlign": "center"
+		}
+	}
+}

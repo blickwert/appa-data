@@ -1,0 +1,30 @@
+<!-- wp:template-part {"slug":"header","area":"header","tagName":"div"} /-->
+
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<main class="wp-block-group" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+	<!-- wp:query-title {"type":"archive","level":1} /-->
+
+	<!-- wp:query {"queryId":1,"query":{"inherit":true},"layout":{"type":"default"}} -->
+	<div class="wp-block-query">
+		<!-- wp:post-template {"layout":{"type":"grid","columnCount":2}} -->
+			<!-- wp:group {"className":"is-style-card","layout":{"type":"default"}} -->
+			<div class="wp-block-group is-style-card">
+				<!-- wp:post-title {"level":2,"isLink":true,"fontSize":"xl"} /-->
+				<!-- wp:post-excerpt /-->
+			</div>
+			<!-- /wp:group -->
+		<!-- /wp:post-template -->
+
+		<!-- wp:query-pagination /-->
+
+		<!-- wp:query-no-results -->
+			<!-- wp:paragraph -->
+			<p>Hier gibt es noch keine Beiträge.</p>
+			<!-- /wp:paragraph -->
+		<!-- /wp:query-no-results -->
+	</div>
+	<!-- /wp:query -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"div"} /-->
