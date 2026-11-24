@@ -35,6 +35,28 @@ final class Journal {
 	}
 
 	/**
+	 * Any period from day to day ("Y-m-d", both inclusive); invalid or reversed values mean the previous month.
+	 *
+	 * @return array{0: DateTimeImmutable, 1: DateTimeImmutable}
+	 */
+	public static function range( string $from, string $to, DateTimeZone $zone, ?DateTimeImmutable $now = null ): array {
+		$start = self::day( $from, $zone );
+		$end   = self::day( $to, $zone );
+		if ( ! $start || ! $end || $start > $end ) {
+			return self::period( '', $zone, $now );
+		}
+		return array( $start, $end->setTime( 23, 59, 59 ) );
+	}
+
+	/**
+	 * A valid day "Y-m-d" at midnight, or null.
+	 */
+	private static function day( string $value, DateTimeZone $zone ): ?DateTimeImmutable {
+		$day = 1 === preg_match( '/^\d{4}-\d{2}-\d{2}$/', $value ) ? DateTimeImmutable::createFromFormat( '!Y-m-d', $value, $zone ) : false;
+		return $day && $day->format( 'Y-m-d' ) === $value ? $day : null;
+	}
+
+	/**
 	 * Amount for spreadsheets in Austria: comma, two decimals, no thousands separator.
 	 */
 	public static function money( float $amount ): string {

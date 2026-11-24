@@ -68,18 +68,26 @@ const STATUS_FILTERS = [
 ];
 
 /**
- * Fee journal of a month for the bookkeeping (CSV download).
+ * Fee journal of a period for the bookkeeping (CSV download); default: previous month.
  */
 function JournalExport() {
-	const last = new Date();
-	last.setDate( 1 );
-	last.setMonth( last.getMonth() - 1 );
-	const [ month, setMonth ] = useState( `${ last.getFullYear() }-${ String( last.getMonth() + 1 ).padStart( 2, '0' ) }` );
+	const day = ( d ) => `${ d.getFullYear() }-${ String( d.getMonth() + 1 ).padStart( 2, '0' ) }-${ String( d.getDate() ).padStart( 2, '0' ) }`;
+	const now = new Date();
+	const [ from, setFrom ] = useState( day( new Date( now.getFullYear(), now.getMonth() - 1, 1 ) ) );
+	const [ to, setTo ] = useState( day( new Date( now.getFullYear(), now.getMonth(), 0 ) ) );
+	const lastYear = () => {
+		setFrom( `${ now.getFullYear() - 1 }-01-01` );
+		setTo( `${ now.getFullYear() - 1 }-12-31` );
+	};
 	return (
 		<span className="bwo-journal">
-			<label htmlFor="bwo-journal-month">Beitragsjournal</label>
-			<input id="bwo-journal-month" type="month" value={ month } onChange={ ( e ) => setMonth( e.target.value ) } />
-			<Button variant="secondary" href={ addQueryArgs( config.journalUrl, { month } ) }>Herunterladen (CSV)</Button>
+			<span className="bwo-journal__label">Beitragsjournal</span>
+			<label htmlFor="bwo-journal-from">von</label>
+			<input id="bwo-journal-from" type="date" value={ from } max={ to } onChange={ ( e ) => setFrom( e.target.value ) } />
+			<label htmlFor="bwo-journal-to">bis</label>
+			<input id="bwo-journal-to" type="date" value={ to } min={ from } onChange={ ( e ) => setTo( e.target.value ) } />
+			<Button variant="link" onClick={ lastYear }>Vorjahr</Button>
+			<Button variant="secondary" href={ addQueryArgs( config.journalUrl, { from, to } ) }>Herunterladen (CSV)</Button>
 		</span>
 	);
 }

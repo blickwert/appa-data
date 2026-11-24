@@ -31,7 +31,7 @@ Menü **Mitglieder** (Berechtigung `bw_wm_manage_members`, vergeben an Administr
 
 Konten mit Redaktionsrechten (`edit_posts`) können dort nicht bearbeitet werden.
 
-**Beitragsjournal** (Kopf der Mitgliederliste, Monat wählen): CSV mit allen Zahlungen eines Monats (Zahlungsdatum, Bestellung, Art, Mitgliedsnummer, Name, E-Mail, Betrag, Erstattet, Zahlungsart, Stripe-Gebühr, Netto, Transaktions-ID) und einer Summenzeile. Grundlage für Sammelbuchungen in der Buchhaltung; Stripe-Gebühr und Netto stammen aus den Bestelldaten des Stripe-Plugins (`_stripe_fee`, `_stripe_net`). Download über `admin-post.php?action=bw_wm_journal&month=JJJJ-MM`.
+**Beitragsjournal** (Kopf der Mitgliederliste): CSV mit allen Zahlungen eines Zeitraums (Zahlungsdatum, Bestellung, Art, Mitgliedsnummer, Name, E-Mail, Betrag, Erstattet, Zahlungsart, Stripe-Gebühr, Netto, Transaktions-ID) und einer Summenzeile. Grundlage für Sammelbuchungen in der Buchhaltung; Stripe-Gebühr und Netto stammen aus den Bestelldaten des Stripe-Plugins (`_stripe_fee`, `_stripe_net`). Zeitraum frei wählbar (von/bis, Knopf „Vorjahr“ als Sammelexport); Download über `admin-post.php?action=bw_wm_journal&from=JJJJ-MM-TT&to=JJJJ-MM-TT`.
 
 ## Studiennachweis
 

@@ -46,4 +46,17 @@ final class JournalTest extends TestCase {
 		);
 		self::assertSame( array( 'total' => 131.1, 'refunded' => 35.0, 'fee' => 1.69, 'net' => 94.51 ), $sum );
 	}
+
+	public function test_range(): void {
+		$zone          = new DateTimeZone( 'Europe/Vienna' );
+		$now           = new DateTimeImmutable( '2027-03-10 10:00', $zone );
+		[ $from, $to ] = Journal::range( '2026-01-01', '2026-12-31', $zone, $now );
+		self::assertSame( '2026-01-01 00:00:00', $from->format( 'Y-m-d H:i:s' ) );
+		self::assertSame( '2026-12-31 23:59:59', $to->format( 'Y-m-d H:i:s' ) );
+		foreach ( array( array( '2026-12-31', '2026-01-01' ), array( '2026-02-30', '2026-03-01' ), array( '', '' ) ) as [ $a, $b ] ) {
+			[ $from, $to ] = Journal::range( $a, $b, $zone, $now );
+			self::assertSame( '2027-02-01', $from->format( 'Y-m-d' ), "{$a} bis {$b}" );
+			self::assertSame( '2027-02-28', $to->format( 'Y-m-d' ), "{$a} bis {$b}" );
+		}
+	}
 }

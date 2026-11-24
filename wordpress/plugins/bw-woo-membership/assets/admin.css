@@ -28,6 +28,10 @@
 	border-inline-start: 1px solid #dcdcde;
 }
 
+.bwo-app .bwo-journal__label {
+	font-weight: 600;
+}
+
 .bwo-app .bwo-journal input {
 	min-height: 36px;
 }

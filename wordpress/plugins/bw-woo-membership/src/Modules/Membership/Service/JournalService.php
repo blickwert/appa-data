@@ -29,12 +29,12 @@ final class JournalService {
 	}
 
 	/**
-	 * CSV rows (header, entries, sum) and the period label for the file name.
+	 * CSV rows (header, entries, sum) of a period ("Y-m-d" to "Y-m-d") and its label for the file name.
 	 *
 	 * @return array{label: string, rows: list<list<string>>}
 	 */
-	public function export( string $month ): array {
-		[ $from, $to ] = Journal::period( $month, wp_timezone() );
+	public function export( string $from_day, string $to_day ): array {
+		[ $from, $to ] = Journal::range( $from_day, $to_day, wp_timezone() );
 		$entries       = array();
 		foreach ( $this->paid_orders( $from->getTimestamp(), $to->getTimestamp() ) as $order ) {
 			$entries[] = $this->entry( $order );
@@ -46,8 +46,8 @@ final class JournalService {
 			$rows[] = array( $e['date_label'], $e['number'], $e['kind'], $e['member'], $e['first'], $e['last'], $e['email'], Journal::money( $e['total'] ), $e['refunded'] > 0 ? Journal::money( $e['refunded'] ) : '', $e['method'], $e['has_fee'] ? Journal::money( $e['fee'] ) : '', Journal::money( $e['net'] ), $e['transaction'] );
 		}
 		$sum    = Journal::totals( $entries );
-		$rows[] = array( 'Summe ' . $from->format( 'm/Y' ), (string) count( $entries ) . ' Zahlungen', '', '', '', '', '', Journal::money( $sum['total'] ), Journal::money( $sum['refunded'] ), '', Journal::money( $sum['fee'] ), Journal::money( $sum['net'] ), '' );
-		return array( 'label' => $from->format( 'Y-m' ), 'rows' => $rows );
+		$rows[] = array( 'Summe ' . $from->format( 'd.m.Y' ) . '–' . $to->format( 'd.m.Y' ), (string) count( $entries ) . ' Zahlungen', '', '', '', '', '', Journal::money( $sum['total'] ), Journal::money( $sum['refunded'] ), '', Journal::money( $sum['fee'] ), Journal::money( $sum['net'] ), '' );
+		return array( 'label' => $from->format( 'Y-m-d' ) . '_' . $to->format( 'Y-m-d' ), 'rows' => $rows );
 	}
 
 	/**

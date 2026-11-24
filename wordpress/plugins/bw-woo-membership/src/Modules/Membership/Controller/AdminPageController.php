@@ -113,14 +113,15 @@ final class AdminPageController {
 	}
 
 	/**
-	 * Fee journal of a month for the bookkeeping (CSV, UTF-8 with BOM, semicolon separated).
+	 * Fee journal of any period for the bookkeeping (CSV, UTF-8 with BOM, semicolon separated).
 	 */
 	public function journal(): void {
 		if ( ! current_user_can( Setup::CAPABILITY ) || ! check_admin_referer( 'bw_wm_journal' ) ) {
 			wp_die( esc_html__( 'Nicht erlaubt.', 'bw-woo-membership' ), '', array( 'response' => 403 ) );
 		}
-		$month  = isset( $_GET['month'] ) ? sanitize_text_field( wp_unslash( $_GET['month'] ) ) : '';
-		$export = $this->journal->export( $month );
+		$from   = isset( $_GET['from'] ) ? sanitize_text_field( wp_unslash( $_GET['from'] ) ) : '';
+		$to     = isset( $_GET['to'] ) ? sanitize_text_field( wp_unslash( $_GET['to'] ) ) : '';
+		$export = $this->journal->export( $from, $to );
 		nocache_headers();
 		header( 'Content-Type: text/csv; charset=utf-8' );
 		header( 'Content-Disposition: attachment; filename="appa-beitragsjournal-' . $export['label'] . '.csv"' );
