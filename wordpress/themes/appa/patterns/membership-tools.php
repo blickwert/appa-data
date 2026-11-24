@@ -11,8 +11,8 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","anchor":"tools","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section id="tools" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+<!-- wp:group {"tagName":"section","anchor":"tools","align":"full","className":"is-style-section-sky","style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section id="tools" class="wp-block-group alignfull is-style-section-sky" style="padding-top:var(--wp--preset--spacing--12);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
 		<!-- wp:column {"width":"50%"} -->
@@ -59,62 +59,50 @@ declare(strict_types=1);
 				<h3 class="wp-block-heading">Mit diesen sechs Tools starten wir</h3>
 				<!-- /wp:heading -->
 
-				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"14rem"}} -->
+				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"12rem"}} -->
 				<div class="wp-block-group">
-					<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group is-style-card-flat">
-						<!-- wp:bw/icon {"icon":"bar-chart","size":"s"} /-->
-
+					<!-- wp:group {"className":"is-style-card-white","style":{"spacing":{"blockGap":"var:preset|spacing|0"}},"layout":{"type":"default"}} -->
+					<div class="wp-block-group is-style-card-white">
 						<!-- wp:heading {"level":4} -->
 						<h4 class="wp-block-heading">PERMA Profiler</h4>
 						<!-- /wp:heading -->
 					</div>
 					<!-- /wp:group -->
 
-					<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group is-style-card-flat">
-						<!-- wp:bw/icon {"icon":"bar-chart","size":"s"} /-->
-
+					<!-- wp:group {"className":"is-style-card-white","style":{"spacing":{"blockGap":"var:preset|spacing|0"}},"layout":{"type":"default"}} -->
+					<div class="wp-block-group is-style-card-white">
 						<!-- wp:heading {"level":4} -->
 						<h4 class="wp-block-heading">PERMA Profiler.kids</h4>
 						<!-- /wp:heading -->
 					</div>
 					<!-- /wp:group -->
 
-					<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group is-style-card-flat">
-						<!-- wp:bw/icon {"icon":"bar-chart","size":"s"} /-->
-
+					<!-- wp:group {"className":"is-style-card-white","style":{"spacing":{"blockGap":"var:preset|spacing|0"}},"layout":{"type":"default"}} -->
+					<div class="wp-block-group is-style-card-white">
 						<!-- wp:heading {"level":4} -->
 						<h4 class="wp-block-heading">Mental Health Continuum</h4>
 						<!-- /wp:heading -->
 					</div>
 					<!-- /wp:group -->
 
-					<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group is-style-card-flat">
-						<!-- wp:bw/icon {"icon":"bar-chart","size":"s"} /-->
-
+					<!-- wp:group {"className":"is-style-card-white","style":{"spacing":{"blockGap":"var:preset|spacing|0"}},"layout":{"type":"default"}} -->
+					<div class="wp-block-group is-style-card-white">
 						<!-- wp:heading {"level":4} -->
 						<h4 class="wp-block-heading">Pragmatic Prospection Scale</h4>
 						<!-- /wp:heading -->
 					</div>
 					<!-- /wp:group -->
 
-					<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group is-style-card-flat">
-						<!-- wp:bw/icon {"icon":"bar-chart","size":"s"} /-->
-
+					<!-- wp:group {"className":"is-style-card-white","style":{"spacing":{"blockGap":"var:preset|spacing|0"}},"layout":{"type":"default"}} -->
+					<div class="wp-block-group is-style-card-white">
 						<!-- wp:heading {"level":4} -->
 						<h4 class="wp-block-heading">Selbstwirksamkeitsskala</h4>
 						<!-- /wp:heading -->
 					</div>
 					<!-- /wp:group -->
 
-					<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group is-style-card-flat">
-						<!-- wp:bw/icon {"icon":"bar-chart","size":"s"} /-->
-
+					<!-- wp:group {"className":"is-style-card-white","style":{"spacing":{"blockGap":"var:preset|spacing|0"}},"layout":{"type":"default"}} -->
+					<div class="wp-block-group is-style-card-white">
 						<!-- wp:heading {"level":4} -->
 						<h4 class="wp-block-heading">Resilienzskala</h4>
 						<!-- /wp:heading -->

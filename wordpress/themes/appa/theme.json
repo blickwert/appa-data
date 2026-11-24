@@ -6,7 +6,7 @@
 		"useRootPaddingAwareAlignments": true,
 		"layout": {
 			"contentSize": "47.5rem",
-			"wideSize": "72rem"
+			"wideSize": "69rem"
 		},
 		"color": {
 			"palette": [
@@ -100,7 +100,7 @@
 		"typography": {
 			"fluid": {
 				"minViewportWidth": "360px",
-				"maxViewportWidth": "72rem"
+				"maxViewportWidth": "69rem"
 			},
 			"customFontSize": false,
 			"defaultFontSizes": false,
@@ -284,12 +284,12 @@
 				{
 					"slug": "section",
 					"name": "Abschnitt",
-					"size": "clamp(3rem, 2.0909rem + 4.0404vw, 5rem)"
+					"size": "clamp(3rem, 2.0323rem + 4.3011vw, 5rem)"
 				},
 				{
 					"slug": "gutter",
 					"name": "Seitenrand",
-					"size": "clamp(1rem, 0.7727rem + 1.0101vw, 1.5rem)"
+					"size": "clamp(1rem, 0.7581rem + 1.0753vw, 1.5rem)"
 				}
 			],
 			"customSpacingSize": false
@@ -598,12 +598,46 @@
 			"name": "footer",
 			"title": "Footer",
 			"area": "footer"
+		},
+		{
+			"name": "header-member",
+			"title": "Header Mitgliederbereich (Login)",
+			"area": "header"
+		},
+		{
+			"name": "footer-member",
+			"title": "Footer Mitgliederbereich",
+			"area": "footer"
+		},
+		{
+			"name": "header-dashboard",
+			"title": "Header Mitgliederbereich (Übersicht)",
+			"area": "header"
+		},
+		{
+			"name": "member-sidebar",
+			"title": "Mitgliederbereich: Navigation",
+			"area": "uncategorized"
 		}
 	],
 	"customTemplates": [
 		{
 			"name": "page-full",
 			"title": "Seite ohne Titel (Abschnitte)",
+			"postTypes": [
+				"page"
+			]
+		},
+		{
+			"name": "page-member",
+			"title": "Mitgliederbereich: Login",
+			"postTypes": [
+				"page"
+			]
+		},
+		{
+			"name": "page-member-dashboard",
+			"title": "Mitgliederbereich: Übersicht",
 			"postTypes": [
 				"page"
 			]

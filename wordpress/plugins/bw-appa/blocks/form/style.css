@@ -61,7 +61,12 @@
 	font-weight: 400;
 }
 
+.bwa-form__actions {
+	flex-basis: 100%;
+}
+
 .bwa-form__submit {
+	inline-size: 100%;
 	padding: var(--wp--preset--spacing--3) var(--wp--preset--spacing--6);
 	border: 0;
 	border-radius: var(--wp--custom--radius--lg);

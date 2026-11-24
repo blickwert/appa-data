@@ -14,10 +14,10 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky","style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|16"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-sky" style="padding-top:var(--wp--preset--spacing--16);padding-bottom:var(--wp--preset--spacing--16)">
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-	<div class="wp-block-group">
+<!-- wp:cover {"url":"<?php echo esc_url( get_theme_file_uri( 'assets/images/about.webp' ) ); ?>","dimRatio":0,"isUserOverlayColor":true,"contentPosition":"bottom left","isDark":false,"align":"full","className":"bw-page-photo","layout":{"type":"constrained","contentSize":"69rem"}} -->
+<div class="wp-block-cover alignfull is-light has-custom-content-position is-position-bottom-left bw-page-photo"><img class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/about.webp' ) ); ?>" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container">
+	<!-- wp:group {"className":"bw-page-photo__box","style":{"spacing":{"blockGap":"var:preset|spacing|1"}},"layout":{"type":"default"}} -->
+	<div class="wp-block-group bw-page-photo__box">
 		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
 		<p class="is-style-eyebrow">Wissenschaft</p>
 		<!-- /wp:paragraph -->
@@ -27,18 +27,18 @@ declare(strict_types=1);
 		<!-- /wp:heading -->
 	</div>
 	<!-- /wp:group -->
-</section>
-<!-- /wp:group -->
+</div></div>
+<!-- /wp:cover -->
 
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|4","bottom":"var:preset|spacing|4"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--4);padding-bottom:var(--wp--preset--spacing--4)">
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky bw-jump-band","style":{"spacing":{"padding":{"top":"var:preset|spacing|4","bottom":"var:preset|spacing|4"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-sky bw-jump-band" style="padding-top:var(--wp--preset--spacing--4);padding-bottom:var(--wp--preset--spacing--4)">
 	<!-- wp:html -->
 	<nav aria-label="Auf dieser Seite"><ul class="bw-jump-nav"><li><a href="#ist">Was sie ist</a></li><li><a href="#ist-nicht">Was sie nicht ist</a></li><li><a href="#beispiele">Beispiele</a></li><li><a href="#quellen">Quellen</a></li></ul></nav>
 	<!-- /wp:html -->
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
@@ -70,29 +70,41 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","anchor":"ist","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section id="ist" class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-	<div class="wp-block-group">
-		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
-		<p class="is-style-eyebrow">Was sie ist</p>
-		<!-- /wp:paragraph -->
+<!-- wp:group {"tagName":"section","anchor":"ist","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section id="ist" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
+	<div class="wp-block-columns">
+		<!-- wp:column {"width":"33.33%"} -->
+		<div class="wp-block-column" style="flex-basis:33.33%">
+			<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+			<p class="is-style-eyebrow">Was sie ist</p>
+			<!-- /wp:paragraph -->
 
-		<!-- wp:heading -->
-		<h2 class="wp-block-heading">Vier Dinge, die Positive Psychologie ausmachen</h2>
-		<!-- /wp:heading -->
+			<!-- wp:heading -->
+			<h2 class="wp-block-heading">Vier Dinge, die Positive Psychologie ausmachen</h2>
+			<!-- /wp:heading -->
+		</div>
+		<!-- /wp:column -->
 
-		<!-- wp:paragraph -->
-		<p>Beispiele aus Forschung und Praxis.</p>
-		<!-- /wp:paragraph -->
+		<!-- wp:column {"width":"66.66%"} -->
+		<div class="wp-block-column" style="flex-basis:66.66%">
+			<!-- wp:paragraph -->
+			<p>Beispiele aus Forschung und Praxis.</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:column -->
 	</div>
-	<!-- /wp:group -->
+	<!-- /wp:columns -->
+</section>
+<!-- /wp:group -->
 
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|6"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->
 	<div class="wp-block-group">
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"check-circle","tone":"green"} /-->
+			<!-- wp:bw/icon {"icon":"check-circle","tone":"red"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Die Wissenschaft vom gelingenden Leben</h3>
@@ -120,7 +132,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"check-circle","tone":"green"} /-->
+			<!-- wp:bw/icon {"icon":"check-circle","tone":"red"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Ein Modell mit Struktur: PERMA</h3>
@@ -134,7 +146,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"check-circle","tone":"green"} /-->
+			<!-- wp:bw/icon {"icon":"check-circle","tone":"gold"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Stärken statt nur Defizite</h3>
@@ -150,24 +162,36 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","anchor":"ist-nicht","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","anchor":"ist-nicht","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section id="ist-nicht" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-	<div class="wp-block-group">
-		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
-		<p class="is-style-eyebrow">Was sie nicht ist</p>
-		<!-- /wp:paragraph -->
+	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
+	<div class="wp-block-columns">
+		<!-- wp:column {"width":"33.33%"} -->
+		<div class="wp-block-column" style="flex-basis:33.33%">
+			<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+			<p class="is-style-eyebrow">Was sie nicht ist</p>
+			<!-- /wp:paragraph -->
 
-		<!-- wp:heading -->
-		<h2 class="wp-block-heading">Vier verbreitete Missverständnisse</h2>
-		<!-- /wp:heading -->
+			<!-- wp:heading -->
+			<h2 class="wp-block-heading">Vier verbreitete Missverständnisse</h2>
+			<!-- /wp:heading -->
+		</div>
+		<!-- /wp:column -->
 
-		<!-- wp:paragraph -->
-		<p>Wo Erwartungen und Forschungsstand auseinandergehen.</p>
-		<!-- /wp:paragraph -->
+		<!-- wp:column {"width":"66.66%"} -->
+		<div class="wp-block-column" style="flex-basis:66.66%">
+			<!-- wp:paragraph -->
+			<p>Wo Erwartungen und Forschungsstand auseinandergehen.</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:column -->
 	</div>
-	<!-- /wp:group -->
+	<!-- /wp:columns -->
+</section>
+<!-- /wp:group -->
 
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|6"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->
 	<div class="wp-block-group">
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
@@ -186,7 +210,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"x-circle","tone":"red"} /-->
+			<!-- wp:bw/icon {"icon":"x-circle","tone":"green"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Kein Ersatz für Psychotherapie</h3>
@@ -214,7 +238,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"x-circle","tone":"red"} /-->
+			<!-- wp:bw/icon {"icon":"x-circle","tone":"gold"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Keine Pflicht zur Selbstoptimierung</h3>
@@ -230,8 +254,8 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","anchor":"beispiele","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section id="beispiele" class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+<!-- wp:group {"tagName":"section","anchor":"beispiele","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section id="beispiele" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
 		<!-- wp:column {"width":"33.33%"} -->
@@ -274,7 +298,7 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","anchor":"quellen","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","anchor":"quellen","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section id="quellen" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
@@ -292,8 +316,8 @@ declare(strict_types=1);
 
 		<!-- wp:column {"width":"66.66%"} -->
 		<div class="wp-block-column" style="flex-basis:66.66%">
-			<!-- wp:list -->
-			<ul class="wp-block-list">
+			<!-- wp:list {"className":"bw-link-list"} -->
+			<ul class="wp-block-list bw-link-list">
 				<!-- wp:list-item -->
 				<li><a href="https://link.springer.com/article/10.1007/s10902-012-9380-0" rel="noopener">Gander et al. (2012): Strengths-based positive psychology interventions, Journal of Happiness Studies</a></li>
 				<!-- /wp:list-item -->
@@ -318,10 +342,10 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-green","style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|12"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-green","style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|12"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull is-style-section-green" style="padding-top:var(--wp--preset--spacing--12);padding-bottom:var(--wp--preset--spacing--12)">
-	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
-	<div class="wp-block-group">
+	<!-- wp:group {"className":"bw-cta__row","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+	<div class="wp-block-group bw-cta__row">
 		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group">
 			<!-- wp:heading {"fontSize":"xx-large"} -->

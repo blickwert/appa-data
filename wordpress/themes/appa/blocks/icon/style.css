@@ -1,23 +1,61 @@
-/* bw/icon – decorative icon in a tinted square */
+/* bw/icon – decorative icon: plain glyph in the tone colour, or a navy glyph on a round tone-coloured disc */
 .bw-icon {
-	--bw-icon-size: 2.75rem;
+	--bw-icon-size: 1.5rem;
+	flex: none;
 	display: inline-grid;
 	place-items: center;
 	inline-size: var(--bw-icon-size);
 	block-size: var(--bw-icon-size);
-	border-radius: var(--wp--custom--radius--lg);
 	color: var(--bw-icon-color, var(--wp--preset--color--red));
-	background: color-mix(in srgb, var(--bw-icon-color, var(--wp--preset--color--red)) 12%, transparent);
 }
 
 .bw-icon svg {
+	inline-size: 100%;
+	block-size: 100%;
+}
+
+.bw-icon--s { --bw-icon-size: 1.25rem; }
+.bw-icon--l { --bw-icon-size: 2rem; }
+.bw-icon--navy { --bw-icon-color: var(--wp--preset--color--navy); }
+.bw-icon--green { --bw-icon-color: var(--wp--preset--color--green); }
+.bw-icon--gold { --bw-icon-color: var(--wp--preset--color--gold); }
+.bw-icon--blue { --bw-icon-color: var(--wp--preset--color--blue); }
+
+.bw-icon--circle,
+.bw-icon--square {
+	--bw-icon-size: 3rem;
+	border-radius: 50%;
+	background: var(--bw-icon-color, var(--wp--preset--color--red));
+	color: var(--wp--preset--color--navy);
+}
+
+.bw-icon--square {
+	border-radius: var(--wp--custom--radius--lg);
+}
+
+.bw-icon--circle svg,
+.bw-icon--square svg {
 	inline-size: 50%;
 	block-size: 50%;
 }
 
-.bw-icon--s { --bw-icon-size: 2rem; }
-.bw-icon--l { --bw-icon-size: 3.5rem; }
-.bw-icon--navy { --bw-icon-color: var(--wp--preset--color--navy); }
-.bw-icon--green { --bw-icon-color: var(--wp--preset--color--green); }
-.bw-icon--gold { --bw-icon-color: var(--wp--preset--color--gold-text); }
-.bw-icon--blue { --bw-icon-color: var(--wp--preset--color--blue); }
+.bw-icon--circle.bw-icon--l { --bw-icon-size: 5rem; }
+
+.bw-icon--circle.bw-icon--l svg {
+	inline-size: 40%;
+	block-size: 40%;
+}
+
+.bw-icon--tile {
+	--bw-icon-size: 3rem;
+	border-radius: var(--wp--custom--radius--lg);
+	background: var(--wp--preset--color--sky);
+}
+
+.bw-icon--tile svg {
+	inline-size: 50%;
+	block-size: 50%;
+}
+
+.bw-icon--tile.bw-icon--s { --bw-icon-size: 2.5rem; }
+.bw-icon--tile.bw-icon--l { --bw-icon-size: 3.5rem; }

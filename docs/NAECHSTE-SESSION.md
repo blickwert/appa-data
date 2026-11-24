@@ -14,6 +14,8 @@ Zugang: Bridge-Client `tools/wp_bridge.py` aus `blickwert/bw-wp-bridge`, `--site
 
 - WordPress 7.1.5, Deutsch, Permalinks `/%postname%/`. Aktiv: Theme `appa`, Plugins `bw-appa`, Contact Form 7 (mit deutscher Übersetzung), BW WP Bridge. Elementor & Co. sind installiert, aber inaktiv.
 - Seiten, Startseite und Hauptmenü per `import_pages.py`; CF7-Formulare „APPA – Kontakt“ und „APPA – Mitgliedsantrag“ angelegt. Kontaktformular getestet: wird versendet.
+- Layout an die Elementor-Seite angeglichen (Typografie des Block-Themes bleibt), Mitgliederbereich (Anmeldung + Übersicht) als eigene Vorlagen; Theme 0.2.0, Plugin 0.1.2.
+- Die CF7-Formulare legt `bw-appa` bei `admin_init` an. Ohne Anmeldung auslösen: `…/wp-admin/admin-ajax.php?action=bw_noop` aufrufen (ohne `action` endet admin-ajax vor `admin_init`).
 - Empfänger: Standard = Admin-E-Mail `bw-cms@blickwert.at` (Einstellungen › APPA Formulare ist noch leer). Umstellen auf `info@appa.net` im Backend.
 - Drei Beispiel-Veranstaltungen (Fachtagung 8. 10. 2027, zwei Online-Termine mit Platzhalter-Zoom-Link `zoom.us/j/0000000000`).
 - Sprachpakete: Die Bridge installiert keine Übersetzungen. Fehlen welche, im Backend „Dashboard › Aktualisierungen › Übersetzungen aktualisieren“.
@@ -44,7 +46,7 @@ ln -s <repo>/wordpress/themes/appa site/wp-content/themes/appa && ln -s <repo>/w
 $W theme activate appa && $W plugin activate bw-appa && $W rewrite structure '/%postname%/'
 (cd site && php -S 127.0.0.1:8899 &)   # Screenshots: Playwright mit executablePath /opt/pw-browsers/chromium
 ```
-App-Passwort für `import_pages.py`: `$W user application-password create admin local --porcelain`; bei Python-Anfragen `NO_PROXY=127.0.0.1` setzen.
+App-Passwort für `import_pages.py`: `$W user application-password create admin local --porcelain`; bei Python-Anfragen `NO_PROXY=127.0.0.1` setzen. Lokal zusätzlich `$W config set WP_ENVIRONMENT_TYPE local` (Anwendungspasswörter ohne HTTPS) und `$W config set WP_DEVELOPMENT_MODE theme` (sonst cached WordPress die Pattern-Liste). Lädt `wp plugin install` nichts (Proxy), CF7 und Sprachpakete mit `curl` holen und entpacken.
 
 ## Arbeitsregeln (Kurzfassung)
 
@@ -61,5 +63,6 @@ App-Passwort für `import_pages.py`: `$W user application-password create admin 
 - Turnstile-Schlüssel, endgültiger Formular-Empfänger.
 - Datenschutzerklärung, Statuten-PDF, ZVR-Zahl und Vereinsbehörde (Impressum).
 - „Mehr Gelb“ im Design (Meeting 9. 10.): wo genau.
+- Mitgliederbereich: Texte dort in „Sie“-Form (wie Elementor/Mockup), die übrige Website duzt – vereinheitlichen? E-Mail dort `info@appa.net` statt `info@appa.at` (Elementor).
 - Danach: Mitgliederbereich und Mitgliedschaft mit Zahlung im eigenen Plugin `bw-woo-membership` (Konzept „APPA – Mitgliedschaft online“, Meeting 9. 10.: WooCommerce + Subscriptions, Stripe, Staffel Juni ½ / Oktober ⅓ / Dezember gratis, Studierendennachweis jährlich, vier Mitgliedsarten).
 - Die alte Elementor-Seite `2603-appa` nutzt noch `wp-plugins/appa-loop-query`; nach Umstieg kann der Ordner entfallen.

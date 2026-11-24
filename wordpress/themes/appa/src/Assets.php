@@ -19,8 +19,10 @@ final class Assets {
 	 */
 	private const BLOCK_STYLES = array(
 		'core/button',
+		'core/cover',
 		'core/details',
 		'core/group',
+		'core/list',
 		'core/navigation',
 		'core/post-template',
 		'core/quote',
@@ -40,6 +42,9 @@ final class Assets {
 	 */
 	public function enqueue_base(): void {
 		wp_enqueue_style( 'bw-appa-base', get_theme_file_uri( 'assets/css/base.css' ), array(), Theme::version() );
+		if ( is_page_template( array( 'page-member', 'page-member-dashboard' ) ) ) {
+			wp_enqueue_style( 'bw-appa-member', get_theme_file_uri( 'assets/css/member.css' ), array( 'bw-appa-base' ), Theme::version() );
+		}
 	}
 
 	/**

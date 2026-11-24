@@ -11,13 +11,13 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|6"}},"layout":{"type":"grid","columnCount":3,"minimumColumnWidth":"18rem"}} -->
-	<div class="wp-block-group">
+	<!-- wp:group {"className":"bw-grid--lead","style":{"spacing":{"blockGap":"var:preset|spacing|6"}},"layout":{"type":"grid","columnCount":3,"minimumColumnWidth":"18rem"}} -->
+	<div class="wp-block-group bw-grid--lead">
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"lightbulb"} /-->
+			<!-- wp:bw/icon {"icon":"lightbulb","tone":"red"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Was ist Positive Psychologie?</h3>
@@ -39,7 +39,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"target"} /-->
+			<!-- wp:bw/icon {"icon":"target","tone":"green"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Unser Auftrag</h3>
@@ -61,7 +61,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"users"} /-->
+			<!-- wp:bw/icon {"icon":"users","tone":"red"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Die Menschen hinter der APPA</h3>
@@ -83,7 +83,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"handshake"} /-->
+			<!-- wp:bw/icon {"icon":"handshake","tone":"gold"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Gemeinsam weiterkommen</h3>
@@ -105,7 +105,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"sparkles"} /-->
+			<!-- wp:bw/icon {"icon":"sparkles","tone":"green"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Hier kannst du mitgestalten</h3>
@@ -127,7 +127,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"file-text"} /-->
+			<!-- wp:bw/icon {"icon":"file-text","tone":"red"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Unsere Statuten</h3>

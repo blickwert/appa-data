@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:query {"queryId":7,"query":{"perPage":12,"pages":0,"offset":0,"postType":"appa_event","order":"asc","orderBy":"date","inherit":true},"layout":{"type":"default"}} -->
 	<div class="wp-block-query">
@@ -22,7 +22,7 @@ declare(strict_types=1);
 		<p class="is-style-eyebrow"></p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:post-title {"level":3,"isLink":true,"fontSize":"xl"} /-->
+		<!-- wp:post-title {"level":2,"isLink":true,"fontSize":"xl"} /-->
 
 		<!-- wp:post-excerpt {"excerptLength":40} /-->
 

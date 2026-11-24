@@ -30,3 +30,38 @@
 .wp-block-details > :not(summary) {
 	margin-block-start: var(--wp--preset--spacing--3);
 }
+
+/* Boxed accordion: bordered list, marker on the left, open item in red */
+.bw-accordion {
+	border: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
+	border-radius: var(--wp--custom--radius--sm);
+	background: var(--wp--preset--color--white);
+}
+
+.bw-accordion > .wp-block-details {
+	margin: 0;
+	padding: var(--wp--preset--spacing--3) var(--wp--preset--spacing--4);
+}
+
+.bw-accordion > .wp-block-details + .wp-block-details {
+	border-block-start: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
+}
+
+.bw-accordion .wp-block-details > summary {
+	justify-content: flex-start;
+	gap: var(--wp--preset--spacing--2);
+}
+
+.bw-accordion .wp-block-details > summary::after {
+	order: -1;
+	inline-size: 1ch;
+}
+
+.bw-accordion .wp-block-details[open] > summary {
+	color: var(--wp--preset--color--red);
+}
+
+.bw-accordion .wp-block-details[open] > :not(summary) {
+	padding-block-start: var(--wp--preset--spacing--3);
+	border-block-start: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
+}

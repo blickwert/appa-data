@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|12"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-sky" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--12)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
-		<!-- wp:column {"width":"45%"} -->
-		<div class="wp-block-column" style="flex-basis:45%">
+		<!-- wp:column {"width":"50%"} -->
+		<div class="wp-block-column" style="flex-basis:50%">
 			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 			<div class="wp-block-group">
 				<!-- wp:heading -->
@@ -35,18 +35,18 @@ declare(strict_types=1);
 		</div>
 		<!-- /wp:column -->
 
-		<!-- wp:column {"width":"55%"} -->
-		<div class="wp-block-column" style="flex-basis:55%">
+		<!-- wp:column {"width":"50%"} -->
+		<div class="wp-block-column" style="flex-basis:50%">
 			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|5"}},"layout":{"type":"default"}} -->
 			<div class="wp-block-group">
 				<!-- wp:heading {"level":3} -->
 				<h3 class="wp-block-heading">Was deine Mitgliedschaft möglich macht</h3>
 				<!-- /wp:heading -->
 
-				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"14rem"}} -->
+				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"12rem"}} -->
 				<div class="wp-block-group">
-					<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group is-style-card-flat">
+					<!-- wp:group {"className":"is-style-card-white","style":{"spacing":{"blockGap":"var:preset|spacing|1"}},"layout":{"type":"default"}} -->
+					<div class="wp-block-group is-style-card-white">
 						<!-- wp:heading {"level":4} -->
 						<h4 class="wp-block-heading">Fachgruppen mitgestalten</h4>
 						<!-- /wp:heading -->
@@ -57,8 +57,8 @@ declare(strict_types=1);
 					</div>
 					<!-- /wp:group -->
 
-					<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group is-style-card-flat">
+					<!-- wp:group {"className":"is-style-card-white","style":{"spacing":{"blockGap":"var:preset|spacing|1"}},"layout":{"type":"default"}} -->
+					<div class="wp-block-group is-style-card-white">
 						<!-- wp:heading {"level":4} -->
 						<h4 class="wp-block-heading">Digitale Tools nutzen</h4>
 						<!-- /wp:heading -->
@@ -69,8 +69,8 @@ declare(strict_types=1);
 					</div>
 					<!-- /wp:group -->
 
-					<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group is-style-card-flat">
+					<!-- wp:group {"className":"is-style-card-white","style":{"spacing":{"blockGap":"var:preset|spacing|1"}},"layout":{"type":"default"}} -->
+					<div class="wp-block-group is-style-card-white">
 						<!-- wp:heading {"level":4} -->
 						<h4 class="wp-block-heading">Wissen und Erfahrungen teilen</h4>
 						<!-- /wp:heading -->
@@ -81,8 +81,8 @@ declare(strict_types=1);
 					</div>
 					<!-- /wp:group -->
 
-					<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group is-style-card-flat">
+					<!-- wp:group {"className":"is-style-card-white","style":{"spacing":{"blockGap":"var:preset|spacing|1"}},"layout":{"type":"default"}} -->
+					<div class="wp-block-group is-style-card-white">
 						<!-- wp:heading {"level":4} -->
 						<h4 class="wp-block-heading">Im Verein mitentscheiden</h4>
 						<!-- /wp:heading -->

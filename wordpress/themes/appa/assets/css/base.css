@@ -47,11 +47,6 @@ body {
 }
 
 /* Footer ---------------------------------------------------------------- */
-.bw-site-footer {
-	border-block-start: 4px solid transparent;
-	border-image: var(--wp--preset--gradient--logo-stripe) 1;
-}
-
 .bw-site-footer a {
 	text-decoration: none;
 }
@@ -60,10 +55,20 @@ body {
 	text-decoration: underline;
 }
 
+.bw-site-footer .bw-site-footer__brand {
+	color: var(--wp--preset--color--white);
+	font-weight: 700;
+}
+
+.bw-site-footer .bw-site-footer__mail {
+	color: var(--wp--preset--color--red);
+}
+
 .bw-footer-links {
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--wp--preset--spacing--2) var(--wp--preset--spacing--5);
+	margin: 0;
 	padding: 0;
 	list-style: none;
 }
@@ -87,6 +92,16 @@ body {
 
 .bw-jump-nav a:hover {
 	color: var(--wp--preset--color--red);
+}
+
+/* Jump navigation band directly below a photo header */
+.bw-jump-band {
+	border-block-end: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
+}
+
+/* Full-width sections of the page content sit flush, like the template parts */
+.wp-block-post-content > .alignfull {
+	margin-block: 0;
 }
 
 /* Template parts and main content sit flush (no global block gap between header, main and footer) */

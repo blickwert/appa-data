@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky bw-hero","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-sky bw-hero" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
-	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}},"verticalAlignment":"center"} -->
-	<div class="wp-block-columns are-vertically-aligned-center">
-		<!-- wp:column {"width":"55%","verticalAlignment":"center"} -->
-		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:55%">
-			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|5"}},"layout":{"type":"default"}} -->
-			<div class="wp-block-group">
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky bw-hero","style":{"spacing":{"padding":{}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-sky bw-hero">
+	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
+	<div class="wp-block-columns">
+		<!-- wp:column {"width":"50%"} -->
+		<div class="wp-block-column" style="flex-basis:50%">
+			<!-- wp:group {"className":"bw-hero__text","style":{"spacing":{"blockGap":"var:preset|spacing|5"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group bw-hero__text">
 				<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
 				<p class="is-style-eyebrow">APPA · Positive Psychologie in Österreich</p>
 				<!-- /wp:paragraph -->
@@ -47,8 +47,8 @@ declare(strict_types=1);
 		</div>
 		<!-- /wp:column -->
 
-		<!-- wp:column {"width":"45%","verticalAlignment":"center"} -->
-		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:45%">
+		<!-- wp:column {"width":"50%"} -->
+		<div class="wp-block-column" style="flex-basis:50%">
 			<!-- wp:group {"className":"bw-hero__media","layout":{"type":"default"}} -->
 			<div class="wp-block-group bw-hero__media">
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
@@ -57,9 +57,9 @@ declare(strict_types=1);
 
 				<!-- wp:group {"className":"is-style-card bw-hero__note","style":{"spacing":{"blockGap":"var:preset|spacing|1"}},"layout":{"type":"default"}} -->
 				<div class="wp-block-group is-style-card bw-hero__note">
-					<!-- wp:heading {"level":3,"fontSize":"base"} -->
-					<h3 class="wp-block-heading has-base-font-size">Deine Ideen können etwas bewegen.</h3>
-					<!-- /wp:heading -->
+					<!-- wp:paragraph {"textColor":"navy"} -->
+					<p class="has-navy-color has-text-color"><strong>Deine Ideen können etwas bewegen.</strong></p>
+					<!-- /wp:paragraph -->
 
 					<!-- wp:paragraph {"fontSize":"sm"} -->
 					<p class="has-sm-font-size">Gestalte mit uns die Positive Psychologie in Österreich.</p>

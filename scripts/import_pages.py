@@ -17,16 +17,20 @@ import sys
 import urllib.error
 import urllib.request
 
-PAGES = [  # slug, title, pattern
-    ("startseite", "Startseite", "appa/page-home"),
-    ("ueber-uns", "Über uns", "appa/page-ueber-uns"),
-    ("positive-psychologie", "Positive Psychologie", "appa/page-positive-psychologie"),
-    ("mitgliedschaft", "Mitgliedschaft", "appa/page-mitgliedschaft"),
-    ("kontakt", "Kontakt", "appa/page-kontakt"),
-    ("impressum", "Impressum", "appa/page-impressum"),
-    ("datenschutz", "Datenschutz", "appa/page-datenschutz"),
+PAGES = [  # slug, title, pattern, page template
+    ("startseite", "Startseite", "appa/page-home", "page-full"),
+    ("ueber-uns", "Über uns", "appa/page-ueber-uns", "page-full"),
+    ("positive-psychologie", "Positive Psychologie", "appa/page-positive-psychologie", "page-full"),
+    ("mitgliedschaft", "Mitgliedschaft", "appa/page-mitgliedschaft", "page-full"),
+    ("kontakt", "Kontakt", "appa/page-kontakt", "page-full"),
+    ("impressum", "Impressum", "appa/page-impressum", "page-full"),
+    ("datenschutz", "Datenschutz", "appa/page-datenschutz", "page-full"),
+    ("mitgliederbereich", "Mitgliederbereich", "appa/page-mitgliederbereich", "page-member"),
+    ("mitgliederbereich-uebersicht", "Mitgliederbereich – Übersicht", "appa/page-mitgliederbereich-uebersicht",
+     "page-member-dashboard"),
 ]
-MENU = ["ueber-uns", "positive-psychologie", "veranstaltungen", "mitgliedschaft"]  # Kontakt/Impressum: footer
+# Main menu as in the Elementor/Mockup layout; Kontakt, Impressum and Datenschutz are in the footer
+MENU = ["home", "ueber-uns", "positive-psychologie", "veranstaltungen", "mitgliedschaft", "mitgliederbereich"]
 DRY = "--dry-run" in sys.argv
 
 BASE = os.environ["WP_URL"].rstrip("/") + "/wp-json/"
@@ -50,11 +54,11 @@ def main():
     patterns = {p["name"]: p["content"] for p in api("GET", "wp/v2/block-patterns/patterns")}
     ids = {}
     links_by_slug = {}
-    for slug, title, pattern in PAGES:
+    for slug, title, pattern, template in PAGES:
         if pattern not in patterns:
             sys.exit(f"Pattern {pattern} fehlt – ist das Theme 'appa' aktiv?")
         found = api("GET", f"wp/v2/pages?slug={slug}&status=publish,draft,private&_fields=id")
-        data = {"title": title, "slug": slug, "status": "publish", "template": "page-full",
+        data = {"title": title, "slug": slug, "status": "publish", "template": template,
                 "content": patterns[pattern]}
         if DRY:
             print(("update" if found else "create"), slug)
@@ -71,11 +75,15 @@ def main():
     home = api("GET", "")["home"].rstrip("/")
     links = []
     for slug in MENU:
-        if slug == "veranstaltungen":  # archive of the event post type (plugin bw-appa)
+        if slug == "home":  # front page as a page link, so it is marked as current page
+            links.append(json.dumps({"label": "Home", "type": "page", "id": ids["startseite"],
+                                     "url": links_by_slug["startseite"], "kind": "post-type"},
+                                    ensure_ascii=False).join(("<!-- wp:navigation-link ", " /-->")))
+        elif slug == "veranstaltungen":  # archive of the event post type (plugin bw-appa)
             links.append(json.dumps({"label": "Veranstaltungen", "type": "custom", "url": f"{home}/veranstaltungen/",
                                      "kind": "custom"}, ensure_ascii=False).join(("<!-- wp:navigation-link ", " /-->")))
         else:
-            title = next(t for s, t, _ in PAGES if s == slug)
+            title = next(t for s, t, _, _ in PAGES if s == slug)
             # "url" is required: core/navigation-link renders no href without it, even when "id" is set.
             links.append(json.dumps({"label": title, "type": "page", "id": ids[slug], "url": links_by_slug[slug],
                                      "kind": "post-type"},

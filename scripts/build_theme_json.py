@@ -147,9 +147,15 @@ theme = {
     "templateParts": [
         {"name": "header", "title": "Header", "area": "header"},
         {"name": "footer", "title": "Footer", "area": "footer"},
+        {"name": "header-member", "title": "Header Mitgliederbereich (Login)", "area": "header"},
+        {"name": "footer-member", "title": "Footer Mitgliederbereich", "area": "footer"},
+        {"name": "header-dashboard", "title": "Header Mitgliederbereich (Übersicht)", "area": "header"},
+        {"name": "member-sidebar", "title": "Mitgliederbereich: Navigation", "area": "uncategorized"},
     ],
     "customTemplates": [
         {"name": "page-full", "title": "Seite ohne Titel (Abschnitte)", "postTypes": ["page"]},
+        {"name": "page-member", "title": "Mitgliederbereich: Login", "postTypes": ["page"]},
+        {"name": "page-member-dashboard", "title": "Mitgliederbereich: Übersicht", "postTypes": ["page"]},
     ],
 }
 

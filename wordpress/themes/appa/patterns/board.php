@@ -11,8 +11,8 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","anchor":"vorstand","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section id="vorstand" class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+<!-- wp:group {"tagName":"section","anchor":"vorstand","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section id="vorstand" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group">
 		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
@@ -31,9 +31,9 @@ declare(strict_types=1);
 
 	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|6"}},"layout":{"type":"grid","columnCount":3,"minimumColumnWidth":"16rem"}} -->
 	<div class="wp-block-group">
-		<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group is-style-card-flat">
-			<!-- wp:bw/icon {"icon":"user","size":"l","tone":"navy"} /-->
+		<!-- wp:group {"className":"is-style-card-tint","style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group is-style-card-tint">
+			<!-- wp:bw/icon {"icon":"user","size":"l","tone":"gold","shape":"circle"} /-->
 
 			<!-- wp:heading {"level":3,"fontSize":"base"} -->
 			<h3 class="wp-block-heading has-base-font-size">Dr. Martin Wammerl</h3>
@@ -45,9 +45,9 @@ declare(strict_types=1);
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group is-style-card-flat">
-			<!-- wp:bw/icon {"icon":"user","size":"l","tone":"navy"} /-->
+		<!-- wp:group {"className":"is-style-card-tint","style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group is-style-card-tint">
+			<!-- wp:bw/icon {"icon":"user","size":"l","tone":"green","shape":"circle"} /-->
 
 			<!-- wp:heading {"level":3,"fontSize":"base"} -->
 			<h3 class="wp-block-heading has-base-font-size">Brigitte Wiesner Kulovits, BA, MA, MA</h3>
@@ -59,9 +59,9 @@ declare(strict_types=1);
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group is-style-card-flat">
-			<!-- wp:bw/icon {"icon":"user","size":"l","tone":"navy"} /-->
+		<!-- wp:group {"className":"is-style-card-tint","style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group is-style-card-tint">
+			<!-- wp:bw/icon {"icon":"user","size":"l","tone":"gold","shape":"circle"} /-->
 
 			<!-- wp:heading {"level":3,"fontSize":"base"} -->
 			<h3 class="wp-block-heading has-base-font-size">Mag. Michael Wohlkönig</h3>

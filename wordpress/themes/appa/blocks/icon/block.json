@@ -10,7 +10,8 @@
 	"attributes": {
 		"icon": { "type": "string", "default": "sparkles" },
 		"size": { "type": "string", "enum": [ "s", "m", "l" ], "default": "m" },
-		"tone": { "type": "string", "enum": [ "red", "navy", "green", "gold", "blue" ], "default": "red" }
+		"tone": { "type": "string", "enum": [ "red", "navy", "green", "gold", "blue" ], "default": "red" },
+		"shape": { "type": "string", "enum": [ "plain", "circle", "square", "tile" ], "default": "plain" }
 	},
 	"supports": { "html": false, "spacing": { "margin": true } },
 	"editorScript": "file:./index.js",
