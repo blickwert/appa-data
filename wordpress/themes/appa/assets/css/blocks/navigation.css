@@ -1,7 +1,8 @@
 /* core/navigation – current page and mobile overlay */
 
-.wp-block-navigation .current-menu-item > a,
-.wp-block-navigation a[aria-current="page"] {
+/* Doubled class: core resets the colour with ".wp-block-navigation-item__content.wp-block-navigation-item__content" */
+.wp-block-navigation .current-menu-item > .wp-block-navigation-item__content.wp-block-navigation-item__content,
+.wp-block-navigation .wp-block-navigation-item__content.wp-block-navigation-item__content[aria-current="page"] {
 	color: var(--wp--preset--color--red);
 }
 
