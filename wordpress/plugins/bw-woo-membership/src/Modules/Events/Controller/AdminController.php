@@ -11,6 +11,7 @@ namespace BW\WooMembership\Modules\Events\Controller;
 
 use BW\WooMembership\Core\Setup;
 use BW\WooMembership\Modules\Events\Repository\EventRepository;
+use BW\WooMembership\Modules\Events\Repository\WaitlistRepository;
 use BW\WooMembership\Support\Csv;
 
 /**
@@ -21,7 +22,10 @@ final class AdminController {
 	/**
 	 * Builds the controller.
 	 */
-	public function __construct( private readonly EventRepository $events ) {
+	public function __construct(
+		private readonly EventRepository $events,
+		private readonly WaitlistRepository $waitlist,
+	) {
 	}
 
 	/**
@@ -58,6 +62,11 @@ final class AdminController {
 		}
 		$count = $this->events->count_registrations( $event_id );
 		echo esc_html( $count . ( '' !== $fields['capacity'] ? ' / ' . $fields['capacity'] : '' ) );
+		$waiting = $this->waitlist->count( $event_id );
+		if ( $waiting > 0 ) {
+			/* translators: %d: people on the waiting list */
+			echo '<br>' . esc_html( sprintf( __( 'Warteliste: %d', 'bw-woo-membership' ), $waiting ) );
+		}
 		if ( $count > 0 && current_user_can( Setup::CAPABILITY ) ) {
 			$url = add_query_arg( array( 'action' => 'bw_wm_participants', 'event' => $event_id, '_wpnonce' => wp_create_nonce( 'bw_wm_participants' ) ), admin_url( 'admin-post.php' ) );
 			echo '<br><a href="' . esc_url( $url ) . '">' . esc_html__( 'Teilnehmerliste (CSV)', 'bw-woo-membership' ) . '</a>';

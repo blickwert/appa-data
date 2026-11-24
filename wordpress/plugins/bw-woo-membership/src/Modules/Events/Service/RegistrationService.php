@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace BW\WooMembership\Modules\Events\Service;
 
 use BW\WooMembership\Modules\Events\Repository\EventRepository;
+use BW\WooMembership\Modules\Events\Repository\WaitlistRepository;
 
 /**
  * Decides price and bookability of an event for a user and prepares the registration box.
@@ -19,7 +20,10 @@ final class RegistrationService {
 	/**
 	 * Builds the service.
 	 */
-	public function __construct( private readonly EventRepository $events ) {
+	public function __construct(
+		private readonly EventRepository $events,
+		private readonly WaitlistRepository $waitlist,
+	) {
 	}
 
 	/**
@@ -52,6 +56,14 @@ final class RegistrationService {
 	}
 
 	/**
+	 * Whether registration is closed (event over or deadline passed).
+	 */
+	public function is_closed( int $event_id ): bool {
+		$f = $this->events->fields( $event_id );
+		return ! EventPricing::open( $f['date'], $f['deadline'], current_time( 'Y-m-d' ) );
+	}
+
+	/**
 	 * Whether the event lies in the past.
 	 */
 	public function is_past( int $event_id ): bool {
@@ -69,6 +81,9 @@ final class RegistrationService {
 		}
 		if ( $this->is_past( $event_id ) ) {
 			return 'Die Anmeldung ist geschlossen.';
+		}
+		if ( $this->is_closed( $event_id ) ) {
+			return 'Die Anmeldefrist ist abgelaufen.';
 		}
 		$existing = $user_id > 0 ? $this->events->registration_of( $event_id, $user_id ) : null;
 		// A pending order (payment failed or aborted) does not block a new attempt.
@@ -97,13 +112,27 @@ final class RegistrationService {
 		$member_price = EventPricing::price( $f['audience'], true, $f['price_member'], $f['price_public'] );
 		$public_price = EventPricing::price( $f['audience'], false, $f['price_member'], $f['price_public'] );
 		$refusal      = $this->refusal( $event_id, $user_id );
+		$left         = EventPricing::places_left( $f['capacity'], $this->events->count_registrations( $event_id ) );
+		$deadline     = '' !== $f['deadline'] ? \DateTimeImmutable::createFromFormat( '!Y-m-d', $f['deadline'] ) : false;
+		// Waiting list: sold out, still open, and the person could book (logged in, not registered, eligible).
+		$sold_out     = 0 === $left && ! $this->is_closed( $event_id ) && null === $registration;
+		$eligible     = $user_id > 0 && null !== $this->price( $event_id, $user_id );
 		return array(
+			'deadline'     => $deadline ? $deadline->format( 'd.m.Y' ) : '',
+			'waitlist'     => array(
+				'open'     => $sold_out && ( $eligible || $user_id <= 0 ),
+				'can_join' => $sold_out && $eligible,
+				'position' => $user_id > 0 ? $this->waitlist->position( $event_id, $user_id ) : 0,
+				'action'   => admin_url( 'admin-post.php' ),
+				'nonce'    => wp_create_nonce( 'bw_wm_waitlist_' . $event_id ),
+				'event'    => $event_id,
+			),
 			'enabled'      => $f['registration'],
 			'audience'     => $f['audience'],
 			'member_price' => EventPricing::label( $member_price ),
 			'public_price' => EventPricing::label( $public_price ),
 			'is_member'    => $this->is_member( $user_id ),
-			'places_left'  => EventPricing::places_left( $f['capacity'], $this->events->count_registrations( $event_id ) ),
+			'places_left'  => $left,
 			'registered'   => null !== $registration,
 			'paid'         => null !== $registration && $registration->is_paid(),
 			'refusal'      => null !== $registration ? '' : $refusal,

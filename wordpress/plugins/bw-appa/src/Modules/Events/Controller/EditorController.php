@@ -52,6 +52,7 @@ final class EditorController {
 					'pricePublic'  => EventRepository::META_PRICE_PUBLIC,
 					'capacity'     => EventRepository::META_CAPACITY,
 					'registration' => EventRepository::META_REGISTRATION,
+					'deadline'     => EventRepository::META_DEADLINE,
 				),
 				'audiences' => EventRepository::AUDIENCES,
 			)

@@ -29,6 +29,7 @@ final class EventRepository {
 	public const META_PRICE_PUBLIC = 'bw_appa_event_price_public';
 	public const META_CAPACITY     = 'bw_appa_event_capacity';
 	public const META_REGISTRATION = 'bw_appa_event_registration';
+	public const META_DEADLINE     = 'bw_appa_event_deadline';
 
 	/**
 	 * Kinds of events (meeting 9 October 2026).

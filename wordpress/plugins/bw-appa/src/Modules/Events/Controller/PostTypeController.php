@@ -79,6 +79,7 @@ final class PostTypeController {
 			EventRepository::META_PRICE_PUBLIC => array( EventFields::class, 'price' ),
 			EventRepository::META_CAPACITY     => array( EventFields::class, 'capacity' ),
 			EventRepository::META_REGISTRATION => array( EventFields::class, 'flag' ),
+			EventRepository::META_DEADLINE     => array( EventFields::class, 'date' ),
 		);
 		foreach ( $fields as $key => $sanitize ) {
 			register_post_meta(

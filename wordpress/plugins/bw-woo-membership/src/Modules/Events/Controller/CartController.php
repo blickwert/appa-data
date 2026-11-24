@@ -112,7 +112,7 @@ final class CartController {
 	 */
 	public function purchasable( bool $purchasable, $product ): bool {
 		$event_id = is_object( $product ) ? $this->events->event_id( (int) $product->get_id() ) : 0;
-		return $event_id ? $purchasable && ! $this->registrations->is_past( $event_id ) : $purchasable;
+		return $event_id ? $purchasable && ! $this->registrations->is_closed( $event_id ) : $purchasable;
 	}
 
 	/**

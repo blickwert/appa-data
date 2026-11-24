@@ -41,7 +41,10 @@
 					el( SelectControl, {
 						label: 'Art der Veranstaltung',
 						value: audience,
-						options: Object.keys( config.audiences ).map( ( k ) => ( { value: k, label: config.audiences[ k ] } ) ),
+						// "Für Mitglieder gratis" is not offered at the moment (answer V4); kept for events that use it.
+						options: Object.keys( config.audiences )
+							.filter( ( k ) => 'free_members' !== k || 'free_members' === audience )
+							.map( ( k ) => ( { value: k, label: config.audiences[ k ] } ) ),
 						onChange: set( 'audience' ),
 						...common,
 					} ),
@@ -54,7 +57,8 @@
 					} ),
 					registration && field( 'priceMember', 'Preis für Mitglieder (€)', 'text', 'free_members' === audience ? 'Für Mitglieder gratis: 0 eintragen.' : '' ),
 					registration && 'members' !== audience && field( 'pricePublic', 'Preis für Nichtmitglieder (€)', 'text' ),
-					registration && field( 'capacity', 'Plätze', 'number', 'Leer = unbegrenzt.' )
+					registration && field( 'capacity', 'Plätze', 'number', 'Leer = unbegrenzt. Ist alles ausgebucht, können sich Interessierte auf die Warteliste setzen.' ),
+					registration && field( 'deadline', 'Anmeldeschluss', 'date', 'Letzter Tag der Anmeldung. Leer = bis zum Termin.' )
 				)
 			)
 		);

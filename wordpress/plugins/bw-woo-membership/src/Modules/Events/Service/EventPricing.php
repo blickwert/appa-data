@@ -49,4 +49,31 @@ final class EventPricing {
 		}
 		return $price <= 0.0 ? 'kostenlos' : number_format( $price, 2, ',', '.' ) . ' €';
 	}
+
+	/**
+	 * Whether registration is still open: not after the event date, not after the registration deadline.
+	 */
+	public static function open( string $date, string $deadline, string $today ): bool {
+		return ! ( ( '' !== $date && $date < $today ) || ( '' !== $deadline && $deadline < $today ) );
+	}
+
+	/**
+	 * People on the waiting list to inform about free places: the first ones not informed yet, as many as places.
+	 *
+	 * @param list<array{user: int, since: string, notified: string}> $list Waiting list.
+	 * @return int[]
+	 */
+	public static function to_notify( array $list, ?int $places_left ): array {
+		$free = null === $places_left ? PHP_INT_MAX : $places_left;
+		$out  = array();
+		foreach ( $list as $entry ) {
+			if ( count( $out ) >= $free ) {
+				break;
+			}
+			if ( '' === $entry['notified'] ) {
+				$out[] = $entry['user'];
+			}
+		}
+		return $out;
+	}
 }

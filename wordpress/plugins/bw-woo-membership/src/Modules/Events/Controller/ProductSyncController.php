@@ -110,6 +110,13 @@ final class ProductSyncController {
 		if ( $new_id !== $product_id ) {
 			$this->events->link( $event_id, $new_id );
 		}
+		/**
+		 * Free places of an event were recalculated (event saved or a registration changed).
+		 *
+		 * @param int      $event_id Event.
+		 * @param int|null $left     Free places, null = unlimited.
+		 */
+		do_action( 'bw_wm_event_places_changed', $event_id, $left );
 	}
 
 	/**

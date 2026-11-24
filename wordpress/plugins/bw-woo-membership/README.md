@@ -44,6 +44,8 @@ Studierende laden den Nachweis im Mitgliederbereich hoch (PDF/JPG/PNG, max. 5 MB
 - Felder am Termin (Plugin `bw-appa`): Art (`open` offen, `members` nur Mitglieder, `free_members` für Mitglieder gratis), Preis Mitglieder, Preis Nichtmitglieder, Plätze, Anmeldung über die Website ein/aus.
 - Beim Speichern entsteht bzw. aktualisiert sich ein verstecktes Produkt (`_bw_wm_product_id` am Termin, `_bw_wm_event_id` am Produkt). Bestand = Plätze − Anmeldungen.
 - Der Preis wird im Warenkorb gesetzt: Mitgliederpreis nur mit bereits aktiver Mitgliedschaft. „Nur Mitglieder“ lehnt alle anderen ab (auch über die Store-API).
+- **Anmeldeschluss** (Feld in `bw-appa`, `bw_appa_event_deadline`): danach keine Anmeldung und kein Kauf mehr.
+- **Warteliste**, wenn ausgebucht: Angemeldete setzen sich in der Box auf die Liste (oder nehmen sich herunter). Wird ein Platz frei (Storno, Erstattung, mehr Plätze), bekommen die nächsten noch nicht Benachrichtigten eine E-Mail – so viele wie Plätze frei sind; wer zuerst bucht, bekommt den Platz. Nach der Anmeldung fällt man automatisch von der Liste. Spalte „Anmeldungen“ zeigt die Länge der Warteliste. Aktion `bw_wm_event_places_changed`.
 - Eine Anmeldung pro Konto (Kauf nur mit Konto; ein Gast erhält an der Kasse eines). Vergangene und ausgebuchte Termine sind nicht buchbar; unbezahlte Anmeldungen vergangener Termine werden beim täglichen Lauf storniert.
 - Plätze zählen Bestellungen in Wartestellung, in Bearbeitung und abgeschlossen (wie der WooCommerce-Bestand). Bei jeder Statusänderung, auch Erstattung, wird der Bestand neu gesetzt.
 - Redaktion und Office zahlen den regulären Preis (Filter `bw_wm_user_is_member`).
@@ -77,6 +79,8 @@ Die Anmeldeseite ist die Seite mit der Theme-Vorlage `page-member`, die Übersic
 | `bw_wm_daily_after_sync` | Aktion | nach dem täglichen Abgleich (`bw_wm_daily`, 03:15) |
 | `bw_wm_admin_menu_parent` | Filter | übergeordnetes Menü der Verwaltung |
 | `bw_wm_events_before_list` | Aktion | vor der Veranstaltungsliste im Mitgliederbereich („Meine Anmeldungen“) |
+| `bw_wm_event_places_changed` | Aktion | freie Plätze einer Veranstaltung neu berechnet (`$event_id`, `$left`) |
+| `bw_wm_join_proof_page` | Filter | Seite mit dem Upload des Studiennachweises beim Beitritt |
 | `bw_wm_unpaid_registration_days` | Filter | Tage bis zur Stornierung unbezahlter Anmeldungen (Standard 7) |
 | `bw_wm_template` | Filter | Vorlagendatei; Theme-Überschreibung unter `bw-woo-membership/dashboard/<name>.php` |
 

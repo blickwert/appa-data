@@ -33,4 +33,24 @@ final class EventPricingTest extends TestCase {
 		self::assertSame( 'kostenlos', EventPricing::label( 0.0 ) );
 		self::assertSame( '1.200,50 €', EventPricing::label( 1200.5 ) );
 	}
+
+	public function test_registration_open(): void {
+		self::assertTrue( EventPricing::open( '2027-10-08', '', '2027-10-08' ), 'on the day' );
+		self::assertFalse( EventPricing::open( '2027-10-08', '', '2027-10-09' ), 'after the event' );
+		self::assertTrue( EventPricing::open( '2027-10-08', '2027-09-15', '2027-09-15' ), 'on the deadline' );
+		self::assertFalse( EventPricing::open( '2027-10-08', '2027-09-15', '2027-09-16' ), 'after the deadline' );
+		self::assertTrue( EventPricing::open( '', '', '2030-01-01' ), 'no dates' );
+	}
+
+	public function test_waitlist_to_notify(): void {
+		$list = array(
+			array( 'user' => 1, 'since' => '2027-01-01', 'notified' => '2027-01-05' ),
+			array( 'user' => 2, 'since' => '2027-01-02', 'notified' => '' ),
+			array( 'user' => 3, 'since' => '2027-01-03', 'notified' => '' ),
+		);
+		self::assertSame( array( 2 ), EventPricing::to_notify( $list, 1 ), 'first one not yet informed' );
+		self::assertSame( array( 2, 3 ), EventPricing::to_notify( $list, 5 ) );
+		self::assertSame( array( 2, 3 ), EventPricing::to_notify( $list, null ), 'unlimited' );
+		self::assertSame( array(), EventPricing::to_notify( $list, 0 ) );
+	}
 }
