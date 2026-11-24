@@ -8,14 +8,34 @@ Mitgliederbereich der APPA auf Basis von WooCommerce. PHP 8.3, WordPress 7.x, Wo
 |---|---|
 | `membership` | Mitgliedsstatus (manuell › WooCommerce Subscriptions › Bestellung), Mitgliedsnummer und „Mitglied seit“ bei der ersten Zahlung, Produktfeld „Mitgliedsart“, Schutz der Übersicht und Login-Weiterleitung, Blöcke `user`, `overview`, `events`, `profile`, Profil-Formular, druckbare Mitgliedsbestätigung (`?bw_wm_confirmation=1`) |
 | `documents` | Beitragstyp „Mitglieder-Dokumente“ (`bw_member_doc`) mit Kategorien, Datei und Sichtbarkeit; Uploads in `uploads/bw-member-docs/` mit Zufallsnamen; Download nur über `?bw_wm_doc=<ID>` nach Prüfung; Block `documents` |
+| `events` | Anmeldung zu Veranstaltungen (`appa_event` aus `bw-appa`) über ein verstecktes, virtuelles WooCommerce-Produkt je Veranstaltung; Mitgliederpreis, Plätze als Bestand, Block `event-registration`, „Meine Anmeldungen“, Spalte „Anmeldungen“ und Teilnehmerliste (CSV) |
 
 ## Mitgliedschaft
 
 - Ein Produkt wird zum Mitgliedschaftsprodukt über das Feld **Mitgliedsart** (Produktdaten › Allgemein): ordentlich, studentisch, Ehrenmitglied, institutionell.
 - **Ohne WooCommerce Subscriptions:** Die letzte bezahlte Bestellung (Status „In Bearbeitung“ oder „Abgeschlossen“) gilt für das Kalenderjahr der Zahlung; Zahlung im Dezember gilt bis Ende des Folgejahres. Offene Bestellung (Überweisung) = „Zahlung offen“, kein Zugang.
 - **Mit WooCommerce Subscriptions:** Status, Start und nächste Zahlung kommen aus dem Abo (aktiv / pausiert / ausstehend / beendet).
-- **Ehren- und institutionelle Mitglieder:** Benutzerfelder `bw_wm_manual_type` (und optional `bw_wm_manual_until`, Y-m-d). Verwaltung im Backend folgt mit Stufe 2.
+- **Ehren- und institutionelle Mitglieder:** Benutzerfelder `bw_wm_manual_type` (und optional `bw_wm_manual_until`, Y-m-d). Verwaltung im Backend unter **Mitglieder** (Liste, Filter, Bearbeiten, Neu, CSV-Export).
 - Mitgliedsnummer `A-0001` …, vergeben bei der ersten bezahlten Mitgliedschaft, bleibt für immer (auch bei Austritt und Wiedereintritt). Deinstallieren löscht keine Mitgliedsdaten.
+
+## Verwaltung (Backend)
+
+Menü **Mitglieder** (Berechtigung `bw_wm_manage_members`, vergeben an Administrator und Shop-Manager): Mitgliederliste mit Filter und Suche, Mitglied bearbeiten (Art, gültig bis, manuelle Mitgliedschaft), Ehren- und institutionelle Mitglieder anlegen, CSV-Export, Unterseite **Nachweise prüfen**. Die Oberfläche ist eine React-App (`src-js/admin.js`, gebaut mit `@wordpress/scripts`) auf der REST-Schnittstelle `bw-wm/v1`.
+
+Konten mit Redaktionsrechten (`edit_posts`) können dort nicht bearbeitet werden.
+
+## Studiennachweis
+
+Studierende laden den Nachweis im Mitgliederbereich hoch (PDF/JPG/PNG, max. 5 MB, Ordner `uploads/bw-member-proofs/`). Das Office gibt frei oder lehnt ab; die Datei wird danach gelöscht, gespeichert bleiben Status, gültig bis, Prüfdatum und Prüfer:in. 28 Tage vor Ablauf kommt eine Erinnerung. Ohne gültigen Nachweis kann die studentische Mitgliedschaft nicht verlängert werden.
+
+## Veranstaltungen
+
+- Felder am Termin (Plugin `bw-appa`): Art (`open` offen, `members` nur Mitglieder, `free_members` für Mitglieder gratis), Preis Mitglieder, Preis Nichtmitglieder, Plätze, Anmeldung über die Website ein/aus.
+- Beim Speichern entsteht bzw. aktualisiert sich ein verstecktes Produkt (`_bw_wm_product_id` am Termin, `_bw_wm_event_id` am Produkt). Bestand = Plätze − Anmeldungen.
+- Der Preis wird im Warenkorb gesetzt: Mitgliederpreis nur mit bereits aktiver Mitgliedschaft. „Nur Mitglieder“ lehnt alle anderen ab (auch über die Store-API).
+- Eine Anmeldung pro Konto. Vergangene und ausgebuchte Termine sind nicht buchbar.
+- Bestellungen nur mit Anmeldungen werden nach der Zahlung abgeschlossen (0 € sofort). Unbezahlte Überweisungen werden nach 7 Tagen storniert (Filter `bw_wm_unpaid_registration_days`).
+- Zugangsdaten (Zoom) sehen nur Angemeldete und Redaktion: Das Modul beantwortet den Filter `bw_appa_event_private_visible` von `bw-appa`; die REST-Ausgabe enthält die Felder für alle anderen nicht.
 
 ## Seiten
 
@@ -32,6 +52,12 @@ Die Anmeldeseite ist die Seite mit der Theme-Vorlage `page-member`, die Übersic
 | `bw_wm_membership_paid` | Aktion | Mitgliedschaftsbestellung bezahlt (`$user_id`, `$type`, `$order`) |
 | `bw_wm_member_number_prefix` | Filter | Präfix der Mitgliedsnummer (Standard `A-`) |
 | `bw_wm_overview_before_cards` | Aktion | Ausgabe vor den Statuskarten |
+| `bw_wm_office_email` | Filter | Empfänger der Office-Benachrichtigungen (Standard: Admin-E-Mail) |
+| `bw_wm_setup` | Aktion | nach Aktivierung bzw. Versionswechsel (Berechtigung, Cron) |
+| `bw_wm_daily_after_sync` | Aktion | nach dem täglichen Abgleich (`bw_wm_daily`, 03:15) |
+| `bw_wm_admin_menu_parent` | Filter | übergeordnetes Menü der Verwaltung |
+| `bw_wm_events_before_list` | Aktion | vor der Veranstaltungsliste im Mitgliederbereich („Meine Anmeldungen“) |
+| `bw_wm_unpaid_registration_days` | Filter | Tage bis zur Stornierung unbezahlter Anmeldungen (Standard 7) |
 | `bw_wm_template` | Filter | Vorlagendatei; Theme-Überschreibung unter `bw-woo-membership/dashboard/<name>.php` |
 
 ## Geschützte Dateien unter nginx
@@ -40,6 +66,7 @@ nginx liest keine `.htaccess`. Die Dateinamen sind zufällig, die Adresse ist al
 
 ```nginx
 location ^~ /wp-content/uploads/bw-member-docs/ { deny all; return 403; }
+location ^~ /wp-content/uploads/bw-member-proofs/ { deny all; return 403; }
 ```
 
 Bei Unterverzeichnis-Installationen den Pfad anpassen (z. B. `/wp/2603b-appa/wp-content/uploads/bw-member-docs/`).
@@ -47,3 +74,5 @@ Bei Unterverzeichnis-Installationen den Pfad anpassen (z. B. `/wp/2603b-appa/wp-
 ## Entwicklung
 
 `composer install`, `composer test` (PHPUnit + Brain Monkey), `composer lint`.
+
+Backend-App: `npm install`, `npm run build` (erzeugt `build/`, nicht im Git). Vor jedem ZIP bauen; ins ZIP gehören `build/`, nicht aber `node_modules/`, `src-js/`, `tests/`, `vendor/`.

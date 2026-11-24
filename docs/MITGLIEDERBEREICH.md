@@ -7,8 +7,8 @@ Stand: 24. November 2026. Grundlage: die Vorschau im Theme (`page-member`, `page
 | Stufe | Inhalt | Stand |
 |---|---|---|
 | 1 | Plugin `bw-woo-membership`: Status aus Bestellung bzw. Abo, Mitgliedsnummer, geschützte Übersicht, Login-Weiterleitung, Blöcke (Kopf, Übersicht, Veranstaltungen, Dokumente, Profil), Profil und Verzeichnis-Einwilligung, Mitgliedsbestätigung zum Drucken, Mitglieder-Dokumente mit geschütztem Download | umgesetzt (24. 11. 2026) |
-| 2 | Verwaltung im Backend wie Mockup: Mitgliederliste, Mitglied bearbeiten (Ehren-/institutionelle Mitglieder), Studiennachweis hochladen, prüfen, erinnern, umstellen | offen |
-| 3 | Veranstaltungen: Feld „Art“ (nur Mitglieder / offen / für Mitglieder gratis), Anmeldung über verstecktes WooCommerce-Produkt mit Mitgliederpreis, „Meine Anmeldungen“, Aufzeichnungen | offen |
+| 2 | Verwaltung im Backend wie Mockup: Mitgliederliste, Mitglied bearbeiten (Ehren-/institutionelle Mitglieder), Studiennachweis hochladen, prüfen, erinnern, umstellen | umgesetzt (24. 11. 2026, Plugin 0.2.0) |
+| 3 | Veranstaltungen: Feld „Art“ (nur Mitglieder / offen / für Mitglieder gratis), Anmeldung über verstecktes WooCommerce-Produkt mit Mitgliederpreis, „Meine Anmeldungen“, Teilnehmerliste | umgesetzt (24. 11. 2026, Plugin 0.3.0, `bw-appa` 0.2.0); Aufzeichnungen offen (Frage V5) |
 | – | WooCommerce Subscriptions (Lizenz) für automatische Verlängerung; Staffel Juni ½ / Oktober ⅓ / Dezember gratis beim ersten Beitrag | offen |
 
 Ohne WooCommerce Subscriptions gilt eine bezahlte Mitgliedschaftsbestellung für das Kalenderjahr (Dezember: bis Ende des Folgejahres).
@@ -58,7 +58,7 @@ Ohne WooCommerce Subscriptions gilt eine bezahlte Mitgliedschaftsbestellung für
 |---|---|---|
 | Texte und Aufbau der Seiten Mitgliederbereich und Übersicht | blickwert | Block-Editor (Seite) bzw. Repo (`scripts/build_patterns.py`) |
 | Dynamische Bereiche | Plugin | Eigene Blöcke (z. B. „Mitgliedschaft“, „Veranstaltungen für Mitglieder“, „Dokumente“, „Profil“), die serverseitig die Daten des angemeldeten Mitglieds ausgeben. Sie ersetzen die statische Vorschau, Position und Überschriften bleiben im Editor änderbar |
-| Mitglieder | automatisch | Beitritt über die Website: Antrag → Freigabe durch den Vorstand → Bezahlung → Konto und Abo entstehen. Ehren- und institutionelle Mitglieder legt das Office von Hand an (Abo ohne bzw. mit manuellem Betrag) |
+| Mitglieder | automatisch | Beitritt über die Website: Mitgliedschaft kaufen → bezahlt = Mitglied (keine Freigabe durch den Vorstand, siehe Frage M1); Studierende laden danach den Nachweis hoch. Ehren- und institutionelle Mitglieder legt das Office von Hand an (Abo ohne bzw. mit manuellem Betrag) |
 | Veranstaltungen | Office / Vorstand | Veranstaltungen › Neu (bestehend) plus Felder Zugang, Format, Preise, Aufzeichnung |
 | Dokumente | Office / Vorstand | Mitglieder-Dokumente › Neu: Datei hochladen, Kategorie und Sichtbarkeit wählen |
 | Profil und Verzeichnis-Eintrag | Mitglied selbst | „Profil bearbeiten“ im Mitgliederbereich |
@@ -67,8 +67,4 @@ Ohne WooCommerce Subscriptions gilt eine bezahlte Mitgliedschaftsbestellung für
 
 ## Offene Fragen an APPA
 
-1. Was soll die Glocke anzeigen – oder entfällt sie?
-2. Wo liegen Aufzeichnungen (Video-Plattform), und wer lädt sie hoch?
-3. Welche Dokumentkategorien und welche Sichtbarkeiten werden gebraucht?
-4. Fragebogen-Tools (30 Anwendungen pro Monat): eigener Bereich im Mitgliederbereich oder Link zu einem externen Tool (Martin bevorzugt ein Tool)?
-5. Inhalte und Zugang der institutionellen Mitgliedschaft.
+Gesammelt mit Arbeitsannahmen in [`OFFENE-FRAGEN.md`](OFFENE-FRAGEN.md).
