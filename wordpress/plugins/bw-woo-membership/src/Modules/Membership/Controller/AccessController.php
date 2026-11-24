@@ -11,6 +11,7 @@ namespace BW\WooMembership\Modules\Membership\Controller;
 
 use BW\WooMembership\Modules\Membership\Service\MemberPages;
 use BW\WooMembership\Modules\Membership\Service\MembershipService;
+use BW\WooMembership\Support\NoCache;
 use WP_User;
 
 /**
@@ -46,17 +47,16 @@ final class AccessController {
 			return;
 		}
 		$page_id = (int) get_queried_object_id();
+		if ( $this->pages->is_protected( $page_id ) || $page_id === $this->pages->login_page_id() ) {
+			NoCache::send(); // Personal content or a redirect that depends on the login.
+		}
 		if ( $this->pages->is_protected( $page_id ) && ! is_user_logged_in() ) {
-			nocache_headers();
 			wp_safe_redirect( $this->pages->login_url( (string) get_permalink( $page_id ) ) );
 			exit;
 		}
 		if ( $page_id === $this->pages->login_page_id() && is_user_logged_in() && '' !== $this->pages->dashboard_url() ) {
 			wp_safe_redirect( $this->pages->dashboard_url() );
 			exit;
-		}
-		if ( $this->pages->is_protected( $page_id ) ) {
-			nocache_headers();
 		}
 	}
 

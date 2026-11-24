@@ -50,6 +50,12 @@ Studierende laden den Nachweis im Mitgliederbereich hoch (PDF/JPG/PNG, max. 5 MB
 - Bestellungen nur mit Anmeldungen werden nach der Zahlung abgeschlossen (0 € sofort). Unbezahlte Überweisungen werden nach 7 Tagen storniert (Filter `bw_wm_unpaid_registration_days`).
 - Zugangsdaten (Zoom) sehen nur Angemeldete und Redaktion: Das Modul beantwortet den Filter `bw_appa_event_private_visible` von `bw-appa`; die REST-Ausgabe enthält die Felder für alle anderen nicht.
 
+## Seiten-Cache
+
+Der Seiten-Cache des Hostings nimmt angemeldete Nutzer:innen nicht aus (Antwort T2). Deshalb:
+- Persönliche Antworten (Mitgliederbereich, Anmeldeseite, Seite Studiennachweis, Beitrittslinks, AJAX) senden `Cache-Control: no-store, private`, `X-Accel-Expires: 0` und setzen `DONOTCACHEPAGE` (`Support\NoCache`).
+- Die Anmelde-Box auf der Veranstaltungsseite wird per `admin-ajax.php?action=bw_wm_event_box&event=ID` nachgeladen (`assets/event-box.js`); die Veranstaltungsseite selbst bleibt cachebar. Seiten mit Zoom-Zugangsdaten schließt `bw-appa` vom Cache aus.
+
 ## Seiten
 
 Die Anmeldeseite ist die Seite mit der Theme-Vorlage `page-member`, die Übersicht die mit `page-member-dashboard` (Filter `bw_wm_login_page_id`, `bw_wm_dashboard_page_id`). Jede Seite mit einem der Blöcke `overview`, `events`, `documents`, `profile` ist geschützt.

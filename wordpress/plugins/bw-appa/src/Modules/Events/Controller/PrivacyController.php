@@ -29,6 +29,7 @@ final class PrivacyController {
 	 */
 	public function register(): void {
 		add_filter( 'rest_prepare_' . EventRepository::POST_TYPE, array( $this, 'strip_from_rest' ), 10, 2 );
+		add_action( 'template_redirect', array( $this, 'no_cache' ) );
 	}
 
 	/**
@@ -62,5 +63,24 @@ final class PrivacyController {
 			$response->set_data( $data );
 		}
 		return $response;
+	}
+
+	/**
+	 * An event page with access data looks different for registered people, so it must not come from a page cache
+	 * (the hosting cache does not skip logged-in users).
+	 */
+	public function no_cache(): void {
+		if ( ! is_singular( EventRepository::POST_TYPE ) ) {
+			return;
+		}
+		$event_id = (int) get_queried_object_id();
+		if ( '' === (string) get_post_meta( $event_id, EventRepository::META_LINK, true ) && '' === (string) get_post_meta( $event_id, EventRepository::META_ACCESS, true ) ) {
+			return;
+		}
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', true );
+		}
+		nocache_headers();
+		header( 'X-Accel-Expires: 0' );
 	}
 }

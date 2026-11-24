@@ -16,6 +16,7 @@ use BW\WooMembership\Modules\Membership\Service\JoinProof;
 use BW\WooMembership\Modules\Membership\Service\MemberPages;
 use BW\WooMembership\Modules\Membership\Service\MembershipService;
 use BW\WooMembership\Modules\Membership\Service\ProfileFields;
+use BW\WooMembership\Support\NoCache;
 use WC_Order;
 
 /**
@@ -93,6 +94,7 @@ final class JoinController {
 		if ( ! $product_id ) {
 			return;
 		}
+		NoCache::send(); // The redirect depends on the person (membership, proof).
 		$user_id = get_current_user_id();
 		if ( $user_id > 0 && $this->memberships->for_user( $user_id )->grants_access() && '' !== $this->pages->dashboard_url() ) {
 			// Already a member: renewal and status live in the member area.

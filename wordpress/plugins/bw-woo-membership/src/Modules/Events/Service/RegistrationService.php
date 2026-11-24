@@ -45,6 +45,13 @@ final class RegistrationService {
 	}
 
 	/**
+	 * Whether the event takes registrations on the website at all (the same for everyone).
+	 */
+	public function enabled( int $event_id ): bool {
+		return $this->events->fields( $event_id )['registration'];
+	}
+
+	/**
 	 * Whether the event lies in the past.
 	 */
 	public function is_past( int $event_id ): bool {

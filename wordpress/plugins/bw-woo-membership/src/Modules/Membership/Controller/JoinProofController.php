@@ -12,6 +12,7 @@ namespace BW\WooMembership\Modules\Membership\Controller;
 use BW\WooMembership\Core\View;
 use BW\WooMembership\Modules\Membership\Repository\MembershipOrderRepository;
 use BW\WooMembership\Modules\Membership\Service\JoinProof;
+use BW\WooMembership\Support\NoCache;
 use WC_Order;
 
 /**
@@ -37,6 +38,7 @@ final class JoinProofController {
 	public function register(): void {
 		add_action( 'init', array( $this, 'register_block' ), 20 );
 		add_action( 'template_redirect', array( $this, 'handle_post' ), 5 );
+		add_action( 'template_redirect', array( $this, 'no_cache' ) );
 		add_action( 'woocommerce_check_cart_items', array( $this, 'check_cart' ) );
 		add_action( 'woocommerce_store_api_checkout_order_processed', array( $this, 'attach' ), 5 );
 	}
@@ -53,7 +55,6 @@ final class JoinProofController {
 	 */
 	public function render(): string {
 		$user_id = get_current_user_id();
-		nocache_headers();
 		return View::render(
 			'join/proof',
 			array(
@@ -65,6 +66,15 @@ final class JoinProofController {
 				'regular'  => add_query_arg( 'bw_wm_join', 'regular', home_url( '/' ) ),
 			)
 		);
+	}
+
+	/**
+	 * The proof page shows the person's own upload state.
+	 */
+	public function no_cache(): void {
+		if ( is_singular() && has_block( 'bw-woo-membership/join-proof', (int) get_queried_object_id() ) ) {
+			NoCache::send();
+		}
 	}
 
 	/**
