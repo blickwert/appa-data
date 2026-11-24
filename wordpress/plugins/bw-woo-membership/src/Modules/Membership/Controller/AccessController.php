@@ -35,6 +35,7 @@ final class AccessController {
 		add_filter( 'login_redirect', array( $this, 'login_redirect' ), 20, 3 );
 		add_filter( 'woocommerce_login_redirect', array( $this, 'woocommerce_login_redirect' ), 20, 2 );
 		add_filter( 'bw_wm_user_has_access', array( $this, 'user_has_access' ), 10, 2 );
+		add_filter( 'bw_wm_user_is_member', array( $this, 'user_is_member' ), 10, 2 );
 	}
 
 	/**
@@ -92,5 +93,12 @@ final class AccessController {
 			return false;
 		}
 		return $has_access || user_can( $user_id, 'edit_pages' ) || $this->memberships->for_user( $user_id )->grants_access();
+	}
+
+	/**
+	 * Answers `bw_wm_user_is_member` for other modules: active membership only (no staff exception).
+	 */
+	public function user_is_member( bool $is_member, int $user_id ): bool {
+		return $is_member || ( $user_id > 0 && $this->memberships->for_user( $user_id )->grants_access() );
 	}
 }

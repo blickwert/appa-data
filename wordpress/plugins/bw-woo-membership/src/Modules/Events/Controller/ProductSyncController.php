@@ -33,6 +33,26 @@ final class ProductSyncController {
 		add_action( 'wp_after_insert_post', array( $this, 'on_save' ), 20, 2 );
 		add_action( 'wp_trash_post', array( $this, 'on_remove' ) );
 		add_action( 'before_delete_post', array( $this, 'on_remove' ) );
+		// After WooCommerce reduced or restored the stock: set it again from the registrations (one source).
+		add_action( 'woocommerce_order_status_changed', array( $this, 'on_order_status' ), 99, 4 );
+	}
+
+	/**
+	 * An order changed its status: re-sync the stock of its events (covers refunds and cancellations).
+	 *
+	 * @param int       $order_id Order ID.
+	 * @param string    $from     Old status.
+	 * @param string    $to       New status.
+	 * @param \WC_Order $order    Order.
+	 */
+	public function on_order_status( int $order_id, string $from, string $to, $order ): void {
+		if ( ! $order instanceof \WC_Order ) {
+			return;
+		}
+		$this->events->forget();
+		foreach ( $this->events->events_in_order( $order ) as $event_id ) {
+			$this->sync( $event_id );
+		}
 	}
 
 	/**

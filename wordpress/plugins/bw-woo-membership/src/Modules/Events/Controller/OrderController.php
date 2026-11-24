@@ -59,19 +59,25 @@ final class OrderController {
 		 */
 		$days      = max( 1, (int) apply_filters( 'bw_wm_unpaid_registration_days', 7 ) );
 		$cancelled = 0;
+		$limit     = time() - $days * DAY_IN_SECONDS;
 		$orders    = wc_get_orders(
 			array(
-				'status'       => array( 'wc-on-hold', 'wc-pending' ),
-				'date_created' => '<' . ( time() - $days * DAY_IN_SECONDS ),
-				'limit'        => -1,
-				'type'         => 'shop_order',
+				'status' => array( 'wc-on-hold', 'wc-pending' ),
+				'limit'  => -1,
+				'type'   => 'shop_order',
 			)
 		);
 		foreach ( $orders as $order ) {
 			if ( ! $order instanceof WC_Order || ! $this->only_events( $order ) ) {
 				continue;
 			}
-			$order->update_status( 'cancelled', sprintf( 'Anmeldung nach %d Tagen ohne Zahlung storniert.', $days ) );
+			$created = $order->get_date_created();
+			$expired = $created && $created->getTimestamp() < $limit;
+			// Unpaid registrations for events that are over are cancelled right away.
+			if ( ! $expired && ! $this->all_past( $order ) ) {
+				continue;
+			}
+			$order->update_status( 'cancelled', $expired ? sprintf( 'Anmeldung nach %d Tagen ohne Zahlung storniert.', $days ) : 'Anmeldung ohne Zahlung storniert: Die Veranstaltung ist vorbei.' );
 			$this->mailer->send(
 				$order->get_billing_email(),
 				'Deine Anmeldung wurde storniert',
@@ -80,6 +86,20 @@ final class OrderController {
 			++$cancelled;
 		}
 		return $cancelled;
+	}
+
+	/**
+	 * Whether all events of an order lie in the past.
+	 */
+	private function all_past( WC_Order $order ): bool {
+		$today = current_time( 'Y-m-d' );
+		foreach ( $this->events->events_in_order( $order ) as $event_id ) {
+			$date = $this->events->fields( $event_id )['date'];
+			if ( '' === $date || $date >= $today ) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**

@@ -38,6 +38,7 @@ final class CartController {
 		add_action( 'woocommerce_check_cart_items', array( $this, 'check_cart' ) );
 		add_action( 'woocommerce_checkout_create_order_line_item', array( $this, 'record_basis' ), 10, 3 );
 		add_filter( 'woocommerce_is_purchasable', array( $this, 'purchasable' ), 10, 2 );
+		add_filter( 'woocommerce_checkout_registration_required', array( $this, 'require_account' ) );
 	}
 
 	/**
@@ -112,5 +113,20 @@ final class CartController {
 	public function purchasable( bool $purchasable, $product ): bool {
 		$event_id = is_object( $product ) ? $this->events->event_id( (int) $product->get_id() ) : 0;
 		return $event_id ? $purchasable && ! $this->registrations->is_past( $event_id ) : $purchasable;
+	}
+
+	/**
+	 * Registrations belong to an account (one per account, access data in the member area): no guest checkout.
+	 */
+	public function require_account( bool $required ): bool {
+		if ( $required || ! function_exists( 'WC' ) || ! WC()->cart ) {
+			return $required;
+		}
+		foreach ( WC()->cart->get_cart() as $item ) {
+			if ( $this->events->event_id( (int) ( $item['product_id'] ?? 0 ) ) ) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

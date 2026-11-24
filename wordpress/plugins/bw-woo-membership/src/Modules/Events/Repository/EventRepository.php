@@ -28,6 +28,15 @@ final class EventRepository {
 	public const META_PRODUCT       = '_bw_wm_product_id';
 	public const META_EVENT         = '_bw_wm_event_id';
 	public const REGISTERED_STATUSES = array( 'wc-processing', 'wc-completed', 'wc-on-hold', 'wc-pending' );
+	/** Statuses that hold a place: WooCommerce reduces the stock for these (not for pending). */
+	public const HOLDING_STATUSES = array( 'processing', 'completed', 'on-hold' );
+
+	/**
+	 * Orders per event for this request.
+	 *
+	 * @var array<int, WC_Order[]>
+	 */
+	private array $cache = array();
 
 	/**
 	 * Event fields as plain strings.
@@ -76,37 +85,66 @@ final class EventRepository {
 	 * @return WC_Order[]
 	 */
 	public function registration_orders( int $event_id, ?int $customer_id = null ): array {
-		$product_id = $this->product_id( $event_id );
-		if ( ! $product_id || ! function_exists( 'wc_get_orders' ) ) {
-			return array();
+		if ( ! isset( $this->cache[ $event_id ] ) ) {
+			$product_id                 = $this->product_id( $event_id );
+			$this->cache[ $event_id ] = $product_id && function_exists( 'wc_get_orders' ) ? array_values(
+				array_filter(
+					wc_get_orders( array( 'status' => self::REGISTERED_STATUSES, 'limit' => -1, 'type' => 'shop_order' ) ),
+					fn( $order ): bool => $order instanceof WC_Order && $this->contains( $order, $product_id )
+				)
+			) : array();
 		}
-		$args = array( 'status' => self::REGISTERED_STATUSES, 'limit' => -1, 'type' => 'shop_order' );
-		if ( null !== $customer_id ) {
-			$args['customer_id'] = $customer_id;
+		if ( null === $customer_id ) {
+			return $this->cache[ $event_id ];
 		}
-		return array_values(
-			array_filter(
-				wc_get_orders( $args ),
-				fn( $order ): bool => $order instanceof WC_Order && $this->contains( $order, $product_id )
-			)
-		);
+		return array_values( array_filter( $this->cache[ $event_id ], static fn( WC_Order $order ): bool => $order->get_customer_id() === $customer_id ) );
 	}
 
 	/**
-	 * Number of registrations (paid and awaiting payment).
+	 * Forgets the cached orders (after an order changed).
+	 */
+	public function forget(): void {
+		$this->cache = array();
+	}
+
+	/**
+	 * Number of registrations that hold a place (pending orders do not, like the WooCommerce stock).
 	 */
 	public function count_registrations( int $event_id ): int {
-		return count( $this->registration_orders( $event_id ) );
+		return count( array_filter( $this->registration_orders( $event_id ), array( self::class, 'holds_place' ) ) );
 	}
 
 	/**
-	 * The customer's registration order for an event, or null.
+	 * Whether an order holds a place.
+	 */
+	public static function holds_place( WC_Order $order ): bool {
+		return in_array( $order->get_status(), self::HOLDING_STATUSES, true );
+	}
+
+	/**
+	 * The customer's registration order for an event (also awaiting payment), or null.
 	 */
 	public function registration_of( int $event_id, int $customer_id ): ?WC_Order {
 		if ( $customer_id <= 0 ) {
 			return null;
 		}
 		return $this->registration_orders( $event_id, $customer_id )[0] ?? null;
+	}
+
+	/**
+	 * Event IDs contained in an order.
+	 *
+	 * @return int[]
+	 */
+	public function events_in_order( WC_Order $order ): array {
+		$ids = array();
+		foreach ( $order->get_items() as $item ) {
+			$event_id = method_exists( $item, 'get_product_id' ) ? $this->event_id( (int) $item->get_product_id() ) : 0;
+			if ( $event_id ) {
+				$ids[] = $event_id;
+			}
+		}
+		return array_values( array_unique( $ids ) );
 	}
 
 	/**

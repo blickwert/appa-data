@@ -26,8 +26,14 @@ final class RegistrationService {
 	 * Whether the user has an active membership (answered by the membership module).
 	 */
 	public function is_member( int $user_id ): bool {
-		/** This filter is documented in src/Modules/Documents/Controller/DownloadController.php */
-		return $user_id > 0 && (bool) apply_filters( 'bw_wm_user_has_access', false, $user_id );
+		/**
+		 * Whether a user has an active membership (answered by the membership module). Unlike
+		 * `bw_wm_user_has_access`, site staff are not members here, so they pay the regular price.
+		 *
+		 * @param bool $is_member Default false.
+		 * @param int  $user_id   User ID.
+		 */
+		return $user_id > 0 && (bool) apply_filters( 'bw_wm_user_is_member', false, $user_id );
 	}
 
 	/**
@@ -57,7 +63,9 @@ final class RegistrationService {
 		if ( $this->is_past( $event_id ) ) {
 			return 'Die Anmeldung ist geschlossen.';
 		}
-		if ( $user_id > 0 && $this->events->registration_of( $event_id, $user_id ) ) {
+		$existing = $user_id > 0 ? $this->events->registration_of( $event_id, $user_id ) : null;
+		// A pending order (payment failed or aborted) does not block a new attempt.
+		if ( null !== $existing && EventRepository::holds_place( $existing ) ) {
 			return 'Du bist für diese Veranstaltung bereits angemeldet.';
 		}
 		if ( null === $this->price( $event_id, $user_id ) ) {
@@ -121,7 +129,7 @@ final class RegistrationService {
 				'past'    => '' !== $f['date'] && $f['date'] < current_time( 'Y-m-d' ),
 				'paid'    => $paid,
 				'status'  => $paid ? 'Angemeldet' : 'Angemeldet – Zahlung offen',
-				'pay_url' => ! $paid && $order->needs_payment() ? $order->get_checkout_payment_url() : '',
+				'pay_url' => ! $paid && ! $this->is_past( $event_id ) && $order->needs_payment() ? $order->get_checkout_payment_url() : '',
 				'zoom'    => $paid ? (string) get_post_meta( $event_id, 'bw_appa_event_zoom_link', true ) : '',
 				'access'  => $paid ? (string) get_post_meta( $event_id, 'bw_appa_event_zoom_access', true ) : '',
 				'invoice' => $order->get_view_order_url(),

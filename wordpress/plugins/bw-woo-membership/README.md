@@ -33,7 +33,9 @@ Studierende laden den Nachweis im Mitgliederbereich hoch (PDF/JPG/PNG, max. 5 MB
 - Felder am Termin (Plugin `bw-appa`): Art (`open` offen, `members` nur Mitglieder, `free_members` für Mitglieder gratis), Preis Mitglieder, Preis Nichtmitglieder, Plätze, Anmeldung über die Website ein/aus.
 - Beim Speichern entsteht bzw. aktualisiert sich ein verstecktes Produkt (`_bw_wm_product_id` am Termin, `_bw_wm_event_id` am Produkt). Bestand = Plätze − Anmeldungen.
 - Der Preis wird im Warenkorb gesetzt: Mitgliederpreis nur mit bereits aktiver Mitgliedschaft. „Nur Mitglieder“ lehnt alle anderen ab (auch über die Store-API).
-- Eine Anmeldung pro Konto. Vergangene und ausgebuchte Termine sind nicht buchbar.
+- Eine Anmeldung pro Konto (Kauf nur mit Konto; ein Gast erhält an der Kasse eines). Vergangene und ausgebuchte Termine sind nicht buchbar; unbezahlte Anmeldungen vergangener Termine werden beim täglichen Lauf storniert.
+- Plätze zählen Bestellungen in Wartestellung, in Bearbeitung und abgeschlossen (wie der WooCommerce-Bestand). Bei jeder Statusänderung, auch Erstattung, wird der Bestand neu gesetzt.
+- Redaktion und Office zahlen den regulären Preis (Filter `bw_wm_user_is_member`).
 - Bestellungen nur mit Anmeldungen werden nach der Zahlung abgeschlossen (0 € sofort). Unbezahlte Überweisungen werden nach 7 Tagen storniert (Filter `bw_wm_unpaid_registration_days`).
 - Zugangsdaten (Zoom) sehen nur Angemeldete und Redaktion: Das Modul beantwortet den Filter `bw_appa_event_private_visible` von `bw-appa`; die REST-Ausgabe enthält die Felder für alle anderen nicht.
 
@@ -49,6 +51,7 @@ Die Anmeldeseite ist die Seite mit der Theme-Vorlage `page-member`, die Übersic
 | `bw_wm_membership_types` | Filter | Mitgliedsarten |
 | `bw_wm_membership` | Filter | ermittelte Mitgliedschaft ändern |
 | `bw_wm_user_has_access` | Filter | darf ein Benutzer Mitgliederinhalte sehen (vom Modul `membership` beantwortet) |
+| `bw_wm_user_is_member` | Filter | hat ein Benutzer eine aktive Mitgliedschaft (ohne Ausnahme für Redaktion; für Preise) |
 | `bw_wm_membership_paid` | Aktion | Mitgliedschaftsbestellung bezahlt (`$user_id`, `$type`, `$order`) |
 | `bw_wm_member_number_prefix` | Filter | Präfix der Mitgliedsnummer (Standard `A-`) |
 | `bw_wm_overview_before_cards` | Aktion | Ausgabe vor den Statuskarten |
