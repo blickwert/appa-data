@@ -8,24 +8,23 @@ Stand: 24. November 2026. Zuerst `CLAUDE.md` und `docs/WP-UMSETZUNG.md` lesen, d
 - Inhalte = Stand der Elementor-Seite `2603-appa` (Texte nach Briefing vom 23. 9. und Seite „Positive Psychologie“).
 - Getroffene Entscheidungen (nicht neu verhandeln): neue Dev-Installation `2603b-appa`; Formulare mit Contact Form 7 + Turnstile; Veranstaltungen als Beitragstyp im Plugin per Code (kein ACF); Kontakt/Impressum/Datenschutz nur im Footer-Menü.
 
-## Nächste Aufgabe: Übertragung auf `2603b-appa`
+## Stand `2603b-appa` (übertragen am 24. 11. 2026)
 
-Voraussetzung (von David): Installation `https://dev.blickwert.at/wp/2603b-appa` mit BW WP Bridge und Zugangsdaten als Umgebungsvariablen. Erwartete Namen: `WP_APPA2_URL`, `WP_APPA2_USER`, `WP_APPA2_APP_PASSWORD` (ggf. `WP_APPA2_BRIDGE_KEY`). Prüfen mit `env | grep '^WP_' | sed 's/=.*//'` (Werte nie ausgeben). Fehlen sie, David fragen.
+Zugang: Bridge-Client `tools/wp_bridge.py` aus `blickwert/bw-wp-bridge`, `--site dev2603bappa` (Umgebungsvariablen `WP_DEV2603BAPPA_URL`, `_USER`, `_APP_PASSWORD`, `_BRIDGE_KEY`; Werte nie ausgeben). Die Bridge verlangt den Verbindungsschlüssel bei **allen** REST-Anfragen; `import_pages.py` sendet ihn, wenn `WP_BRIDGE_KEY` gesetzt ist.
 
-1. Bridge-Client holen: Repo `blickwert/bw-wp-bridge` (über `add_repo` einbinden, klonen) → `python3 tools/wp_bridge.py --site appa2 status`.
-2. Bestand ansehen (nichts ändern): WordPress-Version, Sprache, Permalinks, installierte Plugins.
-3. Contact Form 7 installieren und aktivieren, **deutsche Übersetzung vor `bw-appa`** (sonst entstehen die CF7-Meldungen englisch).
-4. ZIPs bauen und installieren:
-   ```bash
-   cd wordpress/themes && zip -qr /tmp/appa.zip appa
-   cd ../plugins && zip -qr /tmp/bw-appa.zip bw-appa -x 'bw-appa/vendor/*' 'bw-appa/tests/*' 'bw-appa/composer.*' 'bw-appa/phpunit.xml.dist'
-   python3 tools/wp_bridge.py --site appa2 plugin-install --zip /tmp/bw-appa.zip --activate   # Theme: über WP-Admin oder Bridge, dann aktivieren
-   ```
-   Theme-Upload kann der Bridge-Client evtl. nicht – dann David bitten, `appa.zip` unter Design → Themes hochzuladen, oder REST/Bridge prüfen.
-5. Permalinks „Beitragsname“ setzen, einmal `wp-admin` aufrufen (legt die CF7-Formulare an).
-6. Seiten, Startseite, Hauptmenü: `WP_URL=$WP_APPA2_URL WP_USER=$WP_APPA2_USER WP_APP_PASSWORD=$WP_APPA2_APP_PASSWORD python3 scripts/import_pages.py` (erst mit `--dry-run`).
-7. Einstellungen → „APPA Formulare“: Empfänger (vorerst `bw-cms@blickwert.at`, später `info@appa.net` – David fragen). CF7 → Integration: Turnstile-Schlüssel (David).
-8. 2–3 Veranstaltungen als Beispiel anlegen (Fachtagung 8./9. Oktober 2027 aus dem Briefing), Formulare testen, Screenshots 1440/390 gegen `2603-appa` vergleichen, Ergebnis melden.
+- WordPress 7.1.5, Deutsch, Permalinks `/%postname%/`. Aktiv: Theme `appa`, Plugins `bw-appa`, Contact Form 7 (mit deutscher Übersetzung), BW WP Bridge. Elementor & Co. sind installiert, aber inaktiv.
+- Seiten, Startseite und Hauptmenü per `import_pages.py`; CF7-Formulare „APPA – Kontakt“ und „APPA – Mitgliedsantrag“ angelegt. Kontaktformular getestet: wird versendet.
+- Empfänger: Standard = Admin-E-Mail `bw-cms@blickwert.at` (Einstellungen › APPA Formulare ist noch leer). Umstellen auf `info@appa.net` im Backend.
+- Drei Beispiel-Veranstaltungen (Fachtagung 8. 10. 2027, zwei Online-Termine mit Platzhalter-Zoom-Link `zoom.us/j/0000000000`).
+- Sprachpakete: Die Bridge installiert keine Übersetzungen. Fehlen welche, im Backend „Dashboard › Aktualisierungen › Übersetzungen aktualisieren“.
+- Eine Mail mit einem Absendernamen wie dem Dev-Titel „@dev 2603b-appa“ lehnt `mail()` dort ab; deshalb bereinigt `bw-appa` ab 0.1.1 den Absendernamen.
+
+Nach Änderungen neu übertragen: ZIP bauen (siehe unten), `theme-install --zip … --overwrite` bzw. `plugin-install --zip … --overwrite`; Theme- bzw. Plugin-Version erhöhen (Cache der CSS-Dateien).
+
+```bash
+cd wordpress/themes && zip -qr <scratchpad>/appa.zip appa
+cd ../plugins && zip -qr <scratchpad>/bw-appa.zip bw-appa -x 'bw-appa/vendor/*' 'bw-appa/tests/*' 'bw-appa/composer.*' 'bw-appa/phpunit.xml.dist'
+```
 
 ## Lokale Prüfumgebung neu aufsetzen (Container ist frisch)
 
@@ -56,7 +55,9 @@ App-Passwort für `import_pages.py`: `$W user application-password create admin 
 
 ## Offene Punkte (von David / APPA)
 
-- Dev-Installation `2603b-appa` + Zugangsdaten.
+- Beispielinhalte auf `2603b-appa` (Beitrag „Hallo Welt“, „Beispielseite“, Entwurf „Datenschutzerklärung“, CF7 „Contact form 1“): löschen?
+- Debug-Log auf `2603b-appa` ist aus (`WP_DEBUG_LOG`); für die Prüfung auf PHP-Warnungen einschalten.
+- Bridge-Freigabe „Plugins und Themes installieren“ nach der Übertragung wieder ausschalten.
 - Turnstile-Schlüssel, endgültiger Formular-Empfänger.
 - Datenschutzerklärung, Statuten-PDF, ZVR-Zahl und Vereinsbehörde (Impressum).
 - „Mehr Gelb“ im Design (Meeting 9. 10.): wo genau.

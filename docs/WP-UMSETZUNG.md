@@ -46,6 +46,8 @@ Stand: 24. November 2026. Die APPA-Website wird ohne Elementor als eigenes **Blo
 
 ## Übertragung auf `2603b-appa`
 
+Erledigt am 24. 11. 2026, Stand siehe `docs/NAECHSTE-SESSION.md`.
+
 1. WordPress 7.x mit Sprache Deutsch, Permalinks „Beitragsname“.
 2. Plugins: Contact Form 7 (mit deutscher Übersetzung, **vor** `bw-appa`, damit die CF7-Meldungen deutsch angelegt werden), BW WP Bridge.
 3. Theme `appa` und Plugin `bw-appa` als ZIP installieren und aktivieren.
@@ -63,7 +65,6 @@ WordPress 7.1 + SQLite lokal, Theme und Plugin verlinkt:
 
 ## Offen
 
-- Dev-Installation `2603b-appa` und Zugangsdaten für die Bridge (Umgebungsvariablen `WP_APPA2_*`).
 - Turnstile-Schlüssel, endgültiger Empfänger (`info@appa.net`?), Datenschutzerklärung, Statuten-PDF, ZVR-Zahl und Vereinsbehörde im Impressum.
 - Mitgliederbereich und Mitgliedschaft mit Zahlung: eigenes Plugin `bw-woo-membership` (WooCommerce Subscriptions), siehe Konzept.
 - Mehr Gelb im Design (Meeting 9. Oktober) – mit David abstimmen, wo.
