@@ -28,7 +28,7 @@ declare(strict_types=1);
 			<!-- wp:details -->
 			<details class="wp-block-details"><summary>Wer kann Mitglied werden?</summary>
 				<!-- wp:paragraph -->
-				<p>Die Mitgliedschaft steht grundsätzlich allen natürlichen und juristischen Personen offen, die den Vereinszweck unterstützen. Du brauchst kein Psychologiestudium. Menschen aus anderen Fachrichtungen und interessierte Personen sind ebenso willkommen. Über Aufnahmeanträge entscheidet der Vorstand.</p>
+				<p>Die Mitgliedschaft steht grundsätzlich allen natürlichen und juristischen Personen offen, die den Vereinszweck unterstützen. Du brauchst kein Psychologiestudium. Menschen aus anderen Fachrichtungen und interessierte Personen sind ebenso willkommen. Du trittst direkt online bei; Organisationen melden sich über das Kontaktformular.</p>
 				<!-- /wp:paragraph -->
 			</details>
 			<!-- /wp:details -->

@@ -494,7 +494,7 @@ PRICES = [
      button("Als Student:in beitreten", url("?bw_wm_join=student"), full=True)),
     ("Organisationen", "Auch juristische Personen können Mitglied werden. Wir freuen uns über Einrichtungen und "
      "Organisationen, die den Vereinszweck unterstützen möchten.", "Mitgliedschaft anfragen",
-     button("Kontakt aufnehmen", mailto("Mitgliedschaft für Organisationen"), "secondary", full=True)),
+     button("Kontakt aufnehmen", url("kontakt/?betreff=Mitgliedschaft%20f%C3%BCr%20Organisationen"), "secondary", full=True)),
 ]
 
 MEMBER_PRICES = section(join(
@@ -508,7 +508,8 @@ MEMBER_PRICES = section(join(
         p("So funktioniert der Beitritt: Du legst an der Kasse dein Konto an und bezahlst den Jahresbeitrag online mit "
           "Karte oder SEPA-Lastschrift. Danach hast du sofort Zugang zum Mitgliederbereich. Als Student:in lädst du dort "
           "deinen Studiennachweis hoch.", size="sm"),
-        p(f"Über die Aufnahme entscheidet der Vorstand; lehnt er sie ab, erstatten wir den Beitrag. Die Rechte und "
+        p(f"Organisationen nehmen über das Kontaktformular Kontakt mit uns auf; über ihre Aufnahme entscheidet der "
+          f"Vorstand. Die Rechte und "
           f"Pflichten der Mitglieder regeln die <a href=\"{url('ueber-uns/#statuten')}\">Statuten</a>. Bis zur "
           f"Entstehung des Vereins erfolgt die Aufnahme vorläufig. Die Mitgliedschaft wird mit der Entstehung des "
           f"Vereins wirksam.", size="sm"),
@@ -518,7 +519,8 @@ MEMBER_PRICES = section(join(
 FAQ = [
     ("Wer kann Mitglied werden?", "Die Mitgliedschaft steht grundsätzlich allen natürlichen und juristischen Personen "
      "offen, die den Vereinszweck unterstützen. Du brauchst kein Psychologiestudium. Menschen aus anderen Fachrichtungen "
-     "und interessierte Personen sind ebenso willkommen. Über Aufnahmeanträge entscheidet der Vorstand."),
+     "und interessierte Personen sind ebenso willkommen. Du trittst direkt online bei; Organisationen melden sich über "
+     "das Kontaktformular."),
     ("Was bedeutet Gründungsmitglied?", "Du kommst in der Aufbauphase dazu und kannst von Beginn an Themen, Fachgruppen "
      "und Projekte mitentwickeln. Für alle Mitglieder gelten die Rechte und Pflichten unserer Statuten. Jede "
      "Mitgliedschaft hat eine Stimme in der Generalversammlung."),

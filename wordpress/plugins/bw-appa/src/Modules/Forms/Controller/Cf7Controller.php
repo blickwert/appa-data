@@ -48,6 +48,28 @@ final class Cf7Controller {
 		add_filter( 'wpcf7_form_elements', array( $this, 'add_honeypot' ) );
 		add_filter( 'wpcf7_spam', array( $this, 'check_spam' ), 10, 2 );
 		add_filter( 'wpcf7_mail_components', array( $this, 'route_mail' ), 10, 3 );
+		add_filter( 'wpcf7_form_tag', array( $this, 'prefill_subject' ) );
+	}
+
+	/**
+	 * The subject can be prefilled from the address (e.g. /kontakt/?betreff=…), also in forms created earlier.
+	 *
+	 * @param array<string, mixed>|object $tag Form tag.
+	 * @return array<string, mixed>|object
+	 */
+	public function prefill_subject( $tag ) {
+		$name    = is_object( $tag ) ? ( $tag->name ?? '' ) : ( $tag['name'] ?? '' );
+		$options = is_object( $tag ) ? (array) ( $tag->options ?? array() ) : (array) ( $tag['options'] ?? array() );
+		if ( 'betreff' !== $name || in_array( 'default:get', $options, true ) ) {
+			return $tag;
+		}
+		$options[] = 'default:get';
+		if ( is_object( $tag ) ) {
+			$tag->options = $options;
+		} else {
+			$tag['options'] = $options;
+		}
+		return $tag;
 	}
 
 	/**

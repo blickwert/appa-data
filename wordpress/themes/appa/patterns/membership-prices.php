@@ -96,7 +96,7 @@ declare(strict_types=1);
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"width":100,"className":"is-style-secondary"} -->
-				<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-secondary"><a class="wp-block-button__link wp-element-button" href="mailto:info@appa.net?subject=Mitgliedschaft%20für%20Organisationen">Kontakt aufnehmen</a></div>
+				<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-secondary"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/kontakt/?betreff=Mitgliedschaft%20f%C3%BCr%20Organisationen' ) ); ?>">Kontakt aufnehmen</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -114,7 +114,7 @@ declare(strict_types=1);
 			<!-- /wp:paragraph -->
 
 			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size">Über die Aufnahme entscheidet der Vorstand; lehnt er sie ab, erstatten wir den Beitrag. Die Rechte und Pflichten der Mitglieder regeln die <a href="<?php echo esc_url( home_url( '/ueber-uns/#statuten' ) ); ?>">Statuten</a>. Bis zur Entstehung des Vereins erfolgt die Aufnahme vorläufig. Die Mitgliedschaft wird mit der Entstehung des Vereins wirksam.</p>
+			<p class="has-sm-font-size">Organisationen nehmen über das Kontaktformular Kontakt mit uns auf; über ihre Aufnahme entscheidet der Vorstand. Die Rechte und Pflichten der Mitglieder regeln die <a href="<?php echo esc_url( home_url( '/ueber-uns/#statuten' ) ); ?>">Statuten</a>. Bis zur Entstehung des Vereins erfolgt die Aufnahme vorläufig. Die Mitgliedschaft wird mit der Entstehung des Vereins wirksam.</p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->

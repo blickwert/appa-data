@@ -124,7 +124,7 @@ final class JoinController {
 		woocommerce_register_additional_checkout_field(
 			array(
 				'id'       => self::FIELD_STATUTES,
-				'label'    => 'Ich habe die Statuten gelesen und beantrage die Aufnahme in die APPA.',
+				'label'    => 'Ich habe die Statuten gelesen und trete der APPA bei.',
 				'location' => 'order',
 				'type'     => 'checkbox',
 				'required' => $with_membership,
