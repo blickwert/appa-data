@@ -28,6 +28,7 @@ PAGES = [  # slug, title, pattern, page template
     ("mitgliederbereich", "Mitgliederbereich", "appa/page-mitgliederbereich", "page-member"),
     ("mitgliederbereich-uebersicht", "Mitgliederbereich – Übersicht", "appa/page-mitgliederbereich-uebersicht",
      "page-member-dashboard"),
+    ("studiennachweis", "Studiennachweis", "appa/page-studiennachweis", "page-full"),
 ]
 # Main menu as in the Elementor/Mockup layout; Kontakt, Impressum and Datenschutz are in the footer
 MENU = ["home", "ueber-uns", "positive-psychologie", "veranstaltungen", "mitgliedschaft", "mitgliederbereich"]

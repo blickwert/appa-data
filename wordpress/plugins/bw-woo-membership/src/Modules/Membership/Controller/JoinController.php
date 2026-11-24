@@ -12,6 +12,7 @@ namespace BW\WooMembership\Modules\Membership\Controller;
 use BW\WooMembership\Modules\Membership\Repository\MemberRepository;
 use BW\WooMembership\Modules\Membership\Repository\MembershipOrderRepository;
 use BW\WooMembership\Modules\Membership\Service\JoinDiscount;
+use BW\WooMembership\Modules\Membership\Service\JoinProof;
 use BW\WooMembership\Modules\Membership\Service\MemberPages;
 use BW\WooMembership\Modules\Membership\Service\MembershipService;
 use BW\WooMembership\Modules\Membership\Service\ProfileFields;
@@ -39,6 +40,7 @@ final class JoinController {
 		private readonly MembershipOrderRepository $orders,
 		private readonly MemberRepository $members,
 		private readonly MemberPages $pages,
+		private readonly JoinProof $proof,
 	) {
 	}
 
@@ -95,6 +97,11 @@ final class JoinController {
 		if ( $user_id > 0 && $this->memberships->for_user( $user_id )->grants_access() && '' !== $this->pages->dashboard_url() ) {
 			// Already a member: renewal and status live in the member area.
 			wp_safe_redirect( $this->pages->dashboard_url() );
+			exit;
+		}
+		if ( 'student' === $type && ! $this->proof->has_proof( $user_id ) ) {
+			// Student membership only with proof (answer M2): upload first, then on to the checkout.
+			wp_safe_redirect( $this->proof->page_url() );
 			exit;
 		}
 		$in_cart = false;

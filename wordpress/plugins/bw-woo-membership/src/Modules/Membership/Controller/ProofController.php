@@ -115,10 +115,11 @@ final class ProofController {
 	}
 
 	/**
-	 * New student members without a valid proof are asked to upload one (within 30 days, see docs/OFFENE-FRAGEN.md M2).
+	 * Student members without a proof (normally uploaded when booking, answer M2) are asked to upload one.
 	 */
 	public function ask_new_student( int $user_id, string $type ): void {
-		if ( 'student' !== $type || ProofRules::valid_on( $this->proofs->get( $user_id ), current_time( 'Y-m-d' ) ) ) {
+		$proof = $this->proofs->get( $user_id );
+		if ( 'student' !== $type || 'pending' === $proof['status'] || ProofRules::valid_on( $proof, current_time( 'Y-m-d' ) ) ) {
 			return;
 		}
 		$user = get_userdata( $user_id );
@@ -126,7 +127,7 @@ final class ProofController {
 			$this->mailer->send(
 				$user->user_email,
 				'Willkommen bei der APPA – bitte Studiennachweis hochladen',
-				sprintf( "Hallo %s,\n\nschön, dass du dabei bist! Für die studentische Mitgliedschaft brauchen wir eine aktuelle Inskriptionsbestätigung. Bitte lade sie innerhalb von 30 Tagen im Mitgliederbereich hoch: %s", $user->first_name ?: $user->display_name, home_url( '/mitgliederbereich-uebersicht/#nachweis' ) )
+				sprintf( "Hallo %s,\n\nschön, dass du dabei bist! Für die studentische Mitgliedschaft brauchen wir eine aktuelle Inskriptionsbestätigung. Bitte lade sie im Mitgliederbereich hoch: %s", $user->first_name ?: $user->display_name, home_url( '/mitgliederbereich-uebersicht/#nachweis' ) )
 			);
 		}
 	}

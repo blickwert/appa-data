@@ -20,7 +20,8 @@ use WP_Error;
  */
 final class ProofService {
 
-	public const SUBDIR = '/bw-member-proofs';
+	public const SUBDIR       = '/bw-member-proofs';
+	public const STASH_PREFIX = 'beitritt';
 
 	/**
 	 * Builds the service.
@@ -33,12 +34,85 @@ final class ProofService {
 	}
 
 	/**
-	 * Stores an uploaded proof and notifies the office.
+	 * Stores an uploaded proof for a member and notifies the office.
 	 *
 	 * @param array{name: string, tmp_name: string, size: int, error: int} $file Entry of $_FILES.
 	 * @return true|WP_Error
 	 */
 	public function upload( int $user_id, array $file ): bool|WP_Error {
+		$stored = $this->store( $file, 'nachweis-' . $user_id );
+		if ( is_wp_error( $stored ) ) {
+			return $stored;
+		}
+		$this->attach( $user_id, $stored['file'], $stored['name'] );
+		return true;
+	}
+
+	/**
+	 * Stores the proof of someone joining without an account yet; it is attached after the order (see attach()).
+	 * Files that are never attached are removed by cleanup_stash().
+	 *
+	 * @param array{name: string, tmp_name: string, size: int, error: int} $file Entry of $_FILES.
+	 * @return array{file: string, name: string}|WP_Error
+	 */
+	public function stash( array $file ): array|WP_Error {
+		return $this->store( $file, self::STASH_PREFIX );
+	}
+
+	/**
+	 * Attaches a stored file to a member as "pending" (renamed out of the stash) and notifies the office.
+	 */
+	public function attach( int $user_id, string $path, string $name ): void {
+		if ( ! is_readable( $path ) ) {
+			return;
+		}
+		if ( str_starts_with( basename( $path ), self::STASH_PREFIX ) ) {
+			$target = dirname( $path ) . '/nachweis-' . $user_id . '-' . wp_generate_password( 16, false ) . '.' . pathinfo( $path, PATHINFO_EXTENSION );
+			if ( rename( $path, $target ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.rename_rename -- same protected folder.
+				$path = $target;
+			}
+		}
+		$this->delete_file( $user_id );
+		$this->proofs->update(
+			$user_id,
+			array(
+				'status'   => 'pending',
+				'file'     => $path,
+				'name'     => sanitize_file_name( $name ),
+				'uploaded' => current_time( 'Y-m-d' ),
+				'reason'   => '',
+			)
+		);
+		$user = get_userdata( $user_id );
+		$this->mailer->send(
+			$this->mailer->office(),
+			'Neuer Studiennachweis zur Prüfung',
+			sprintf( "%s hat einen Studiennachweis hochgeladen.\n\nPrüfen: %s", $user ? $user->display_name : '#' . $user_id, admin_url( 'admin.php?page=bw-wm-members&path=/proofs' ) )
+		);
+	}
+
+	/**
+	 * Deletes stashed proofs that were not attached to an order within two days.
+	 */
+	public function cleanup_stash(): int {
+		$dir     = (string) wp_upload_dir( null, false )['basedir'] . self::SUBDIR;
+		$removed = 0;
+		foreach ( (array) glob( $dir . '/' . self::STASH_PREFIX . '*' ) as $file ) {
+			if ( is_string( $file ) && filemtime( $file ) < time() - 2 * DAY_IN_SECONDS ) {
+				wp_delete_file( $file );
+				++$removed;
+			}
+		}
+		return $removed;
+	}
+
+	/**
+	 * Validates and moves an uploaded file into the protected folder.
+	 *
+	 * @param array{name: string, tmp_name: string, size: int, error: int} $file Entry of $_FILES.
+	 * @return array{file: string, name: string}|WP_Error
+	 */
+	private function store( array $file, string $prefix ): array|WP_Error {
 		if ( UPLOAD_ERR_OK !== (int) $file['error'] || ! is_uploaded_file( $file['tmp_name'] ) ) {
 			return new WP_Error( 'bw_wm_proof', 'Die Datei konnte nicht hochgeladen werden.' );
 		}
@@ -50,28 +124,11 @@ final class ProofService {
 			return new WP_Error( 'bw_wm_proof', 'Bitte lade eine PDF-, JPG- oder PNG-Datei hoch.' );
 		}
 		$dir    = ProtectedFolder::ensure( (string) wp_upload_dir( null, false )['basedir'], self::SUBDIR );
-		$target = $dir . '/nachweis-' . $user_id . '-' . wp_generate_password( 16, false ) . '.' . $check['ext'];
+		$target = $dir . '/' . $prefix . '-' . wp_generate_password( 16, false ) . '.' . $check['ext'];
 		if ( ! move_uploaded_file( $file['tmp_name'], $target ) ) {
 			return new WP_Error( 'bw_wm_proof', 'Die Datei konnte nicht gespeichert werden.' );
 		}
-		$this->delete_file( $user_id );
-		$this->proofs->update(
-			$user_id,
-			array(
-				'status'   => 'pending',
-				'file'     => $target,
-				'name'     => sanitize_file_name( $file['name'] ),
-				'uploaded' => current_time( 'Y-m-d' ),
-				'reason'   => '',
-			)
-		);
-		$user = get_userdata( $user_id );
-		$this->mailer->send(
-			$this->mailer->office(),
-			'Neuer Studiennachweis zur Prüfung',
-			sprintf( "%s hat einen Studiennachweis hochgeladen.\n\nPrüfen: %s", $user ? $user->display_name : '#' . $user_id, admin_url( 'admin.php?page=bw-wm-members&path=/proofs' ) )
-		);
-		return true;
+		return array( 'file' => $target, 'name' => sanitize_file_name( $file['name'] ) );
 	}
 
 	/**

@@ -24,6 +24,7 @@ Mitgliederbereich der APPA auf Basis von WooCommerce. PHP 8.3, WordPress 7.x, Wo
 - An der Kasse wird das Konto angelegt. Zusätzliche Felder der Block-Kasse, nur wenn eine Mitgliedschaft im Warenkorb liegt: Beruf/Studienrichtung (Pflicht), Fachgruppe (freiwillig), „Statuten gelesen, Aufnahme beantragt“ (Pflicht). Bemerkungen gehen in die Bestellnotiz.
 - Die Angaben landen am Konto: `bw_wm_occupation`, `bw_wm_statutes_accepted` (Datum), Fachgruppe im Profil; sichtbar in der Verwaltung unter „Angaben beim Beitritt“.
 - Das frühere Antragsformular (Contact Form 7) entfällt.
+- **Studiennachweis bei der Buchung:** `?bw_wm_join=student` führt ohne Nachweis zuerst auf die Seite `/studiennachweis/` (Block `join-proof`, Filter `bw_wm_join_proof_page`). Angemeldete laden direkt auf ihr Konto hoch; Personen ohne Konto behalten die Datei in der WooCommerce-Sitzung, nach der Bestellung hängt sie „in Prüfung“ am neuen Konto. Die Kasse lehnt die studentische Mitgliedschaft ohne Nachweis ab. Nicht übernommene Dateien löscht der tägliche Lauf nach zwei Tagen.
 - **Staffel beim ersten Beitrag** (nur wer noch nie Mitglied war): Jänner–Mai voller Beitrag, Juni–September die Hälfte, Oktober–November ein Drittel; Beitritt im Dezember zum vollen Beitrag, gültig bis Ende des Folgejahres. Umgesetzt als Abzugszeile im Warenkorb (`JoinDiscount`), nicht als geänderter Preis – Verlängerungen und ein späteres Abo bleiben beim vollen Beitrag.
 
 ## Verwaltung (Backend)

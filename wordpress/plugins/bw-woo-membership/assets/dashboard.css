@@ -565,3 +565,9 @@
 	background: #fce9e7;
 	color: #8a2418;
 }
+
+/* Join as a student: the upload sits in the page flow, not in a card. */
+.bwm-join-proof .bwm-form {
+	padding: 0;
+	background: none;
+}

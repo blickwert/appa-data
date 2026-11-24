@@ -631,6 +631,17 @@ MEMBER_LOGIN = join(
 
 # Overview: the dynamic parts come from the plugin "APPA Mitgliedschaft" (bw-woo-membership); without the plugin
 # the blocks render nothing and only the navigation remains.
+JOIN_PROOF = join(
+    page_header("Beitritt als Student:in", "Studiennachweis hochladen",
+                "Für die studentische Mitgliedschaft brauchen wir eine aktuelle Inskriptionsbestätigung. Lade sie hier "
+                "hoch, danach geht es weiter zur Kasse."),
+    section(narrow(join(
+        '<!-- wp:bw-woo-membership/join-proof /-->',
+        p("Ohne gültigen Nachweis gilt die ordentliche Mitgliedschaft. Den Nachweis erneuerst du jedes Jahr im "
+          "Mitgliederbereich; wir erinnern dich rechtzeitig.", size="sm"),
+    ), gap="4")),
+)
+
 MEMBER_DASHBOARD = group(join(
     '<!-- wp:html -->\n<nav class="bw-member-tabs" aria-label="Bereiche"><a href="#top" aria-current="page">Übersicht'
     '</a><a href="#veranstaltungen">Veranstaltungen</a><a href="#dokumente">Dokumente</a><a href="#profil">Profil</a>'
@@ -687,6 +698,7 @@ SECTIONS = {
     "privacy": ("Datenschutz: Text", join(PRIVACY_HEADER, PRIVACY_BODY)),
     "member-login": ("Mitgliederbereich: Anmeldung", MEMBER_LOGIN),
     "member-dashboard": ("Mitgliederbereich: Übersicht", MEMBER_DASHBOARD),
+    "join-proof": ("Beitritt: Studiennachweis", JOIN_PROOF),
 }
 
 PAGES = {
@@ -705,6 +717,7 @@ PAGES = {
     "datenschutz": ("Seiteninhalt: Datenschutz", ["privacy"]),
     "mitgliederbereich": ("Seiteninhalt: Mitgliederbereich (Anmeldung)", ["member-login"]),
     "mitgliederbereich-uebersicht": ("Seiteninhalt: Mitgliederbereich (Übersicht)", ["member-dashboard"]),
+    "studiennachweis": ("Seiteninhalt: Studiennachweis (Beitritt)", ["join-proof"]),
 }
 
 
