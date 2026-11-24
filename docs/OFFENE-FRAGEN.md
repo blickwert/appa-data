@@ -14,7 +14,7 @@ Die Annahmen wurden mit einem zweiten Claude-Agenten gegengeprüft (Abgleich mit
 | M4 | Bei Umstellung Studierende → ordentlich: Differenz sofort nachzahlen? | Nein, erst ab der nächsten Verlängerung. | |
 | M5 | Institutionelle Mitglieder: Inhalte, Preis, Zahlung? | Manuelle Mitgliedschaft im Backend; Rechnung bei Bedarf über eine WooCommerce-Bestellung, die das Office anlegt. | |
 | M6 | Staffel beim ersten Beitrag (ab Juni ½, ab Oktober ⅓, Dezember gratis) | Erst mit WooCommerce Subscriptions umgesetzt; bis dahin voller Beitrag, Dezember-Beitritte gelten bis Ende des Folgejahres. | |
-| M7 | WooCommerce Subscriptions (Lizenz ca. 280 €/Jahr) – wer kauft, wann? | Plugin funktioniert ohne; sobald das ZIP da ist, wird es installiert und genutzt. | |
+| M7 | WooCommerce Subscriptions (Lizenz ca. 280 €/Jahr) – oder selbst bauen? | Zwei Wege: (A) ohne Abo-Plugin, eigene Verlängerung im Plugin: im Dezember Erinnerung mit Bezahl-Link (Karte oder Überweisung), Staffel beim ersten Beitrag selbst programmiert – keine Lizenzkosten, aber keine automatische Abbuchung. (B) WooCommerce Subscriptions: automatische Abbuchung per Stripe (Karte, SEPA), Verlängerung auf den 1. 1. synchronisiert. Die automatische Abbuchung selbst zu programmieren wird nicht empfohlen (Zahlungsabwicklung, starke Kundenauthentifizierung, Fehlversuche). Das Plugin funktioniert mit beiden Wegen. | |
 
 ## Veranstaltungen
 
