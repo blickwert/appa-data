@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace BW\Appa\Modules\Events\Service;
 
+use BW\Appa\Modules\Events\Repository\EventRepository;
+
 /**
  * Normalises raw meta values; used when saving and when reading.
  */
@@ -56,7 +58,7 @@ final class EventFields {
 	 */
 	public static function audience( string $value ): string {
 		$value = trim( $value );
-		return in_array( $value, array( 'open', 'members', 'free_members' ), true ) ? $value : 'open';
+		return array_key_exists( $value, EventRepository::AUDIENCES ) ? $value : 'open';
 	}
 
 	/**
@@ -84,7 +86,7 @@ final class EventFields {
 	 */
 	public static function format( string $value ): string {
 		$value = trim( $value );
-		return in_array( $value, array( 'onsite', 'online', 'hybrid' ), true ) ? $value : '';
+		return array_key_exists( $value, EventRepository::FORMATS ) ? $value : '';
 	}
 
 	/**

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: APPA Funktionen
  * Description: Funktionen der APPA-Website: Veranstaltungen (Beitragstyp, Felder, Abfrage kommender Termine) und Formulare auf Basis von Contact Form 7 mit Spamschutz.
- * Version: 0.4.1
+ * Version: 0.4.2
  * Requires at least: 6.8
  * Requires PHP: 8.3
  * Author: blickwert
@@ -17,7 +17,7 @@ declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
-const BW_APPA_VERSION = '0.4.1';
+const BW_APPA_VERSION = '0.4.2';
 const BW_APPA_FILE    = __FILE__;
 define( 'BW_APPA_DIR', __DIR__ );
 

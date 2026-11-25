@@ -10,7 +10,8 @@ declare(strict_types=1);
 namespace BW\WooMembership\Modules\Events\Service;
 
 /**
- * Date and place of an event as text (the same wording as the event pages of bw-appa).
+ * Date and place of an event as text: the labels of bw-appa when available (EventRepository::fields()), otherwise a
+ * fallback with the same rules.
  */
 final class EventLabels {
 
@@ -22,6 +23,9 @@ final class EventLabels {
 	 * @param array{date: string, time: string, end_date: string, end_time: string} $f Event fields.
 	 */
 	public static function when( array $f ): string {
+		if ( '' !== ( $f['when_label'] ?? '' ) ) {
+			return (string) $f['when_label']; // Wording of bw-appa (single source).
+		}
 		$day = self::day( $f['date'] );
 		if ( '' === $day ) {
 			return '';
@@ -42,6 +46,9 @@ final class EventLabels {
 	 * @param array{format: string, location: string, zoom_link: string} $f Event fields.
 	 */
 	public static function place( array $f ): string {
+		if ( '' !== ( $f['place_label'] ?? '' ) ) {
+			return (string) $f['place_label'];
+		}
 		$location = '' !== $f['location'] ? ': ' . $f['location'] : '';
 		return match ( $f['format'] ) {
 			'online' => 'Online via Zoom',

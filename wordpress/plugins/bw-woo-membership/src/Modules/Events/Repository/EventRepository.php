@@ -52,31 +52,73 @@ final class EventRepository {
 	private array $cache = array();
 
 	/**
+	 * Event fields for this request.
+	 *
+	 * @var array<int, array<string, mixed>>
+	 */
+	private array $fields_cache = array();
+
+	/**
 	 * Event fields as plain strings.
 	 *
-	 * @return array{date: string, time: string, audience: string, price_member: string, price_public: string, capacity: string, registration: bool, deadline: string, end_date: string, end_time: string, format: string, location: string, reminder_days: string, cancel_days: string, zoom_link: string, zoom_access: string}
+	 * @return array{date: string, time: string, audience: string, price_member: string, price_public: string, capacity: string, registration: bool, deadline: string, end_date: string, end_time: string, format: string, location: string, reminder_days: string, cancel_days: string, zoom_link: string, zoom_access: string, when_label: string, place_label: string}
 	 */
 	public function fields( int $event_id ): array {
-		$meta     = static fn( string $key ): string => (string) get_post_meta( $event_id, $key, true );
-		$audience = $meta( self::META_AUDIENCE );
-		return array(
-			'date'         => $meta( self::META_DATE ),
-			'time'         => $meta( self::META_TIME ),
-			'audience'     => '' !== $audience ? $audience : 'open',
-			'price_member' => $meta( self::META_PRICE_MEMBER ),
-			'price_public' => $meta( self::META_PRICE_PUBLIC ),
-			'capacity'     => $meta( self::META_CAPACITY ),
-			'registration' => '1' === $meta( self::META_REGISTRATION ),
-			'deadline'     => $meta( self::META_DEADLINE ),
-			'end_date'      => $meta( self::META_END_DATE ),
-			'end_time'      => $meta( self::META_END_TIME ),
-			'format'        => $meta( self::META_FORMAT ),
-			'location'      => $meta( self::META_LOCATION ),
-			'reminder_days' => $meta( self::META_REMINDER ),
-			'cancel_days'   => $meta( self::META_CANCEL ),
-			'zoom_link'     => $meta( self::META_ZOOM_LINK ),
-			'zoom_access'   => $meta( self::META_ZOOM_ACCESS ),
+		if ( isset( $this->fields_cache[ $event_id ] ) ) {
+			return $this->fields_cache[ $event_id ];
+		}
+		$defaults = array(
+			'date'          => '',
+			'time'          => '',
+			'audience'      => 'open',
+			'price_member'  => '',
+			'price_public'  => '',
+			'capacity'      => '',
+			'registration'  => false,
+			'deadline'      => '',
+			'end_date'      => '',
+			'end_time'      => '',
+			'format'        => '',
+			'location'      => '',
+			'reminder_days' => '',
+			'cancel_days'   => '',
+			'zoom_link'     => '',
+			'zoom_access'   => '',
+			'when_label'    => '',
+			'place_label'   => '',
 		);
+		/**
+		 * Normalised event data and labels from the plugin bw-appa (single source, see its DataController).
+		 *
+		 * @param array|null $fields   Null when bw-appa does not answer.
+		 * @param int        $event_id Event.
+		 */
+		$data = apply_filters( 'bw_appa_event_fields', null, $event_id );
+		if ( ! is_array( $data ) ) {
+			// Fallback without bw-appa: the raw meta.
+			$meta = static fn( string $key ): string => (string) get_post_meta( $event_id, $key, true );
+			$data = array(
+				'date'          => $meta( self::META_DATE ),
+				'time'          => $meta( self::META_TIME ),
+				'audience'      => '' !== $meta( self::META_AUDIENCE ) ? $meta( self::META_AUDIENCE ) : 'open',
+				'price_member'  => $meta( self::META_PRICE_MEMBER ),
+				'price_public'  => $meta( self::META_PRICE_PUBLIC ),
+				'capacity'      => $meta( self::META_CAPACITY ),
+				'registration'  => '1' === $meta( self::META_REGISTRATION ),
+				'deadline'      => $meta( self::META_DEADLINE ),
+				'end_date'      => $meta( self::META_END_DATE ),
+				'end_time'      => $meta( self::META_END_TIME ),
+				'format'        => $meta( self::META_FORMAT ),
+				'location'      => $meta( self::META_LOCATION ),
+				'reminder_days' => $meta( self::META_REMINDER ),
+				'cancel_days'   => $meta( self::META_CANCEL ),
+				'zoom_link'     => $meta( self::META_ZOOM_LINK ),
+				'zoom_access'   => $meta( self::META_ZOOM_ACCESS ),
+			);
+		}
+		$fields                = array_intersect_key( $data, $defaults ) + $defaults;
+		$fields['registration'] = (bool) $fields['registration'];
+		return $this->fields_cache[ $event_id ] = $fields;
 	}
 
 	/**
@@ -167,7 +209,8 @@ final class EventRepository {
 	 * Forgets the cached orders (after an order changed).
 	 */
 	public function forget(): void {
-		$this->cache = array();
+		$this->cache        = array();
+		$this->fields_cache = array();
 	}
 
 	/**

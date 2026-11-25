@@ -11,6 +11,7 @@ namespace BW\Appa\Modules\Events;
 
 use BW\Appa\Core\AbstractModule;
 use BW\Appa\Modules\Events\Controller\BindingsController;
+use BW\Appa\Modules\Events\Controller\DataController;
 use BW\Appa\Modules\Events\Controller\EditorController;
 use BW\Appa\Modules\Events\Controller\PostTypeController;
 use BW\Appa\Modules\Events\Controller\PrivacyController;
@@ -46,6 +47,7 @@ final class EventsModule extends AbstractModule {
 		( new PostTypeController() )->register();
 		( new QueryController( new UpcomingQuery() ) )->register();
 		( new BindingsController( $repository, new EventFormatter() ) )->register();
+		( new DataController( $repository, new EventFormatter() ) )->register();
 		( new EditorController() )->register();
 		( new PrivacyController() )->register();
 	}
