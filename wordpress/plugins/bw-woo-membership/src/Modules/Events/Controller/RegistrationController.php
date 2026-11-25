@@ -31,6 +31,7 @@ final class RegistrationController {
 	public const CANCEL          = 'bw_wm_cancel_registration';
 	public const ITEM_CONFIRMED  = '_bw_wm_confirmed';
 	public const ITEM_REMINDED   = '_bw_wm_reminded';
+	public const ADDED_BY_OFFICE = '_bw_wm_added_by_office';
 	private const NOTICE         = 'bw_wm_event_notice_';
 
 	/**
@@ -55,6 +56,10 @@ final class RegistrationController {
 		add_action( 'bw_wm_daily_after_sync', array( $this, 'send_reminders' ) );
 		add_filter( 'woocommerce_email_enabled_customer_completed_order', array( $this, 'skip_completed_mail' ), 10, 2 );
 		add_filter( 'woocommerce_email_enabled_new_order', array( $this, 'skip_free_order_mail' ), 10, 2 );
+		add_filter( 'woocommerce_valid_order_statuses_for_payment', array( $this, 'payable_on_hold' ), 10, 2 );
+		add_filter( 'woocommerce_email_enabled_customer_on_hold_order', array( $this, 'skip_office_on_hold_mail' ), 10, 2 );
+		add_filter( 'woocommerce_should_send_low_stock_notification', array( $this, 'no_stock_mail' ), 10, 2 );
+		add_filter( 'woocommerce_should_send_no_stock_notification', array( $this, 'no_stock_mail' ), 10, 2 );
 	}
 
 	/**
@@ -75,7 +80,7 @@ final class RegistrationController {
 			wp_safe_redirect( $back );
 			exit;
 		}
-		$order = $this->create_free_order( $event_id, $user_id );
+		$order = $this->create_order( $event_id, $user_id );
 		$this->notice( $user_id, $order ? 'Du bist angemeldet. Die Bestätigung haben wir dir per E-Mail geschickt.' : 'Die Anmeldung hat nicht geklappt. Bitte versuche es noch einmal.' );
 		wp_safe_redirect( $back );
 		exit;
@@ -228,9 +233,12 @@ final class RegistrationController {
 	}
 
 	/**
-	 * Creates a completed 0 € order for the person.
+	 * Creates a registration order for a person: 0 € is completed right away (confirmation mail follows), an amount
+	 * leaves the order "on hold" with a payment link (for registrations added by the office).
+	 *
+	 * @param bool $confirm Send the confirmation mail (free) or the payment link (amount).
 	 */
-	private function create_free_order( int $event_id, int $user_id ): ?WC_Order {
+	public function create_order( int $event_id, int $user_id, float $amount = 0.0, string $note = 'Kostenlose Anmeldung über die Veranstaltungsseite.', bool $confirm = true ): ?WC_Order {
 		$product = wc_get_product( $this->events->product_id( $event_id ) );
 		if ( ! $product ) {
 			return null;
@@ -240,11 +248,14 @@ final class RegistrationController {
 			if ( is_wp_error( $order ) ) {
 				return null;
 			}
-			$item_id = $order->add_product( $product, 1, array( 'subtotal' => 0, 'total' => 0 ) );
+			$item_id = $order->add_product( $product, 1, array( 'subtotal' => $amount, 'total' => $amount ) );
 			$item    = $order->get_item( $item_id );
 			if ( $item ) {
 				$item->add_meta_data( '_bw_wm_price_basis', $this->registrations->is_member( $user_id ) ? 'member' : 'public', true );
 				$item->add_meta_data( '_bw_wm_event_id', $event_id, true );
+				if ( ! $confirm ) {
+					$item->add_meta_data( self::ITEM_CONFIRMED, 'ohne E-Mail', true );
+				}
 				$item->save();
 			}
 			$customer = new \WC_Customer( $user_id );
@@ -255,13 +266,76 @@ final class RegistrationController {
 			$order->set_billing_email( $customer->get_billing_email() ?: ( $user ? $user->user_email : '' ) );
 			$order->set_billing_country( $customer->get_billing_country() );
 			$order->calculate_totals();
-			$order->add_order_note( 'Kostenlose Anmeldung über die Veranstaltungsseite.' );
+			$order->add_order_note( $note );
 			$order->save();
-			$order->payment_complete(); // Completes the order (OrderController) and reduces the stock.
+			if ( $amount <= 0 ) {
+				$order->payment_complete(); // Completes the order (OrderController) and reduces the stock.
+				return $order;
+			}
+			$order->update_meta_data( self::ADDED_BY_OFFICE, '1' );
+			$order->set_status( 'on-hold', 'Zahlung offen.' ); // Holds the place; payable through the link.
+			$order->save();
+			wc_maybe_reduce_stock_levels( $order->get_id() );
+			if ( $confirm ) {
+				$this->send_payment_link( $order, $event_id );
+			}
 			return $order;
 		} catch ( \Throwable $e ) {
 			return null;
 		}
+	}
+
+	/**
+	 * Registrations added by the office with an amount can be paid through the payment link while "on hold".
+	 *
+	 * @param string[]      $statuses Statuses that can be paid.
+	 * @param WC_Order|null $order    Order.
+	 * @return string[]
+	 */
+	public function payable_on_hold( $statuses, $order = null ) {
+		if ( $order instanceof WC_Order && $order->get_meta( self::ADDED_BY_OFFICE ) ) {
+			$statuses[] = 'on-hold';
+		}
+		return $statuses;
+	}
+
+	/**
+	 * Registrations added by the office with an amount get our mail with the payment link instead of "order on hold".
+	 *
+	 * @param bool          $enabled Whether the mail is sent.
+	 * @param WC_Order|null $order   Order.
+	 */
+	public function skip_office_on_hold_mail( $enabled, $order = null ) {
+		return $order instanceof WC_Order && $order->get_meta( self::ADDED_BY_OFFICE ) ? false : $enabled;
+	}
+
+	/**
+	 * No "low stock" / "out of stock" mails for event products (places are shown on the participants page).
+	 *
+	 * @param bool $send       Whether to send.
+	 * @param int  $product_id Product.
+	 */
+	public function no_stock_mail( $send, $product_id = 0 ) {
+		return $this->events->event_id( (int) $product_id ) ? false : $send;
+	}
+
+	/**
+	 * Mail with the payment link of a registration added by the office.
+	 */
+	private function send_payment_link( WC_Order $order, int $event_id ): void {
+		$f = $this->events->fields( $event_id );
+		$this->mailer->send(
+			$order->get_billing_email(),
+			'Deine Anmeldung: ' . get_the_title( $event_id ),
+			sprintf(
+				"Hallo %s,\n\nwir haben dich für „%s“ angemeldet.\nTermin: %s\n\nBitte bezahle %s über diesen Link: %s\n\nSobald die Zahlung da ist, bekommst du die Bestätigung mit dem Termin für deinen Kalender.",
+				$order->get_billing_first_name(),
+				get_the_title( $event_id ),
+				EventLabels::when( $f ),
+				wp_strip_all_tags( wc_price( (float) $order->get_total() ) ),
+				$order->get_checkout_payment_url()
+			)
+		);
 	}
 
 	/**

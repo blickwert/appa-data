@@ -34,7 +34,7 @@ final class EditorController {
 		wp_enqueue_script(
 			'bw-appa-event-panel',
 			plugins_url( 'assets/js/event-panel.js', BW_APPA_FILE ),
-			array( 'wp-components', 'wp-core-data', 'wp-data', 'wp-editor', 'wp-element', 'wp-hooks', 'wp-plugins' ),
+			array( 'wp-components', 'wp-core-data', 'wp-data', 'wp-editor', 'wp-edit-post', 'wp-element', 'wp-hooks', 'wp-plugins' ),
 			BW_APPA_VERSION,
 			array( 'in_footer' => true )
 		);
@@ -61,6 +61,14 @@ final class EditorController {
 					'cancel'       => EventRepository::META_CANCEL,
 				),
 				'audiences' => EventRepository::AUDIENCES,
+				/**
+				 * Registration figures for the editor sidebar (answered by the plugin "APPA Mitgliedschaft"):
+				 * enabled, registered, capacity, left, waitlist, url (participants page).
+				 *
+				 * @param array<string, mixed> $info    Default: none.
+				 * @param int                  $post_id Event.
+				 */
+				'info'      => apply_filters( 'bw_appa_event_editor_info', array(), (int) get_the_ID() ),
 				'formats'   => EventRepository::FORMATS,
 			)
 		);

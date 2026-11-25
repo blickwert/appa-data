@@ -15,7 +15,8 @@ use BW\WooMembership\Modules\Events\Repository\WaitlistRepository;
 use BW\WooMembership\Support\Csv;
 
 /**
- * Column "Anmeldungen" with a link to the participant list (CSV).
+ * Column "Anmeldungen" (registered of maximum, free places, waiting list) with a link to the participants page, and
+ * the participant list as CSV.
  */
 final class AdminController {
 
@@ -61,15 +62,17 @@ final class AdminController {
 			return;
 		}
 		$count = $this->events->count_registrations( $event_id );
-		echo esc_html( $count . ( '' !== $fields['capacity'] ? ' / ' . $fields['capacity'] : '' ) );
+		echo '<strong>' . esc_html( '' !== $fields['capacity'] ? sprintf( '%d von %s', $count, $fields['capacity'] ) : sprintf( '%d angemeldet', $count ) ) . '</strong>';
+		if ( '' !== $fields['capacity'] ) {
+			echo '<br>' . esc_html( sprintf( 'frei: %d', max( 0, (int) $fields['capacity'] - $count ) ) );
+		}
 		$waiting = $this->waitlist->count( $event_id );
 		if ( $waiting > 0 ) {
 			/* translators: %d: people on the waiting list */
 			echo '<br>' . esc_html( sprintf( __( 'Warteliste: %d', 'bw-woo-membership' ), $waiting ) );
 		}
-		if ( $count > 0 && current_user_can( Setup::CAPABILITY ) ) {
-			$url = add_query_arg( array( 'action' => 'bw_wm_participants', 'event' => $event_id, '_wpnonce' => wp_create_nonce( 'bw_wm_participants' ) ), admin_url( 'admin-post.php' ) );
-			echo '<br><a href="' . esc_url( $url ) . '">' . esc_html__( 'Teilnehmerliste (CSV)', 'bw-woo-membership' ) . '</a>';
+		if ( current_user_can( Setup::CAPABILITY ) ) {
+			echo '<br><a href="' . esc_url( ParticipantsController::url( $event_id ) ) . '">' . esc_html__( 'Teilnehmende', 'bw-woo-membership' ) . '</a>';
 		}
 	}
 
