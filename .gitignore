@@ -4,3 +4,4 @@ wordpress/plugins/*/vendor/
 wordpress/plugins/*/.phpunit.result.cache
 wordpress/plugins/*/node_modules/
 wordpress/plugins/*/build/
+.claude/worktrees/
