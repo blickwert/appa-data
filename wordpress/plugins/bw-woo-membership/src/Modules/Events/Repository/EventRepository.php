@@ -26,8 +26,18 @@ final class EventRepository {
 	public const META_CAPACITY      = 'bw_appa_event_capacity';
 	public const META_REGISTRATION  = 'bw_appa_event_registration';
 	public const META_DEADLINE      = 'bw_appa_event_deadline';
+	public const META_END_DATE      = 'bw_appa_event_end_date';
+	public const META_END_TIME      = 'bw_appa_event_end_time';
+	public const META_FORMAT        = 'bw_appa_event_format';
+	public const META_LOCATION      = 'bw_appa_event_location';
+	public const META_REMINDER      = 'bw_appa_event_reminder_days';
+	public const META_CANCEL        = 'bw_appa_event_cancel_days';
+	public const META_ZOOM_LINK     = 'bw_appa_event_zoom_link';
+	public const META_ZOOM_ACCESS   = 'bw_appa_event_zoom_access';
 	public const META_PRODUCT       = '_bw_wm_product_id';
 	public const META_EVENT         = '_bw_wm_event_id';
+	/** Order item meta: the person cancelled this registration (the order itself may hold more items). */
+	public const ITEM_CANCELLED     = '_bw_wm_cancelled';
 	public const REGISTERED_STATUSES = array( 'wc-processing', 'wc-completed', 'wc-on-hold', 'wc-pending' );
 	/** Statuses that hold a place: WooCommerce reduces the stock for these (not for pending). */
 	public const HOLDING_STATUSES = array( 'processing', 'completed', 'on-hold' );
@@ -42,7 +52,7 @@ final class EventRepository {
 	/**
 	 * Event fields as plain strings.
 	 *
-	 * @return array{date: string, time: string, audience: string, price_member: string, price_public: string, capacity: string, registration: bool, deadline: string}
+	 * @return array{date: string, time: string, audience: string, price_member: string, price_public: string, capacity: string, registration: bool, deadline: string, end_date: string, end_time: string, format: string, location: string, reminder_days: string, cancel_days: string, zoom_link: string, zoom_access: string}
 	 */
 	public function fields( int $event_id ): array {
 		$meta     = static fn( string $key ): string => (string) get_post_meta( $event_id, $key, true );
@@ -56,6 +66,14 @@ final class EventRepository {
 			'capacity'     => $meta( self::META_CAPACITY ),
 			'registration' => '1' === $meta( self::META_REGISTRATION ),
 			'deadline'     => $meta( self::META_DEADLINE ),
+			'end_date'      => $meta( self::META_END_DATE ),
+			'end_time'      => $meta( self::META_END_TIME ),
+			'format'        => $meta( self::META_FORMAT ),
+			'location'      => $meta( self::META_LOCATION ),
+			'reminder_days' => $meta( self::META_REMINDER ),
+			'cancel_days'   => $meta( self::META_CANCEL ),
+			'zoom_link'     => $meta( self::META_ZOOM_LINK ),
+			'zoom_access'   => $meta( self::META_ZOOM_ACCESS ),
 		);
 	}
 
@@ -143,7 +161,7 @@ final class EventRepository {
 		foreach ( $order->get_items() as $item ) {
 			$event_id = method_exists( $item, 'get_product_id' ) ? $this->event_id( (int) $item->get_product_id() ) : 0;
 			if ( $event_id ) {
-				$ids[] = $event_id;
+				$ids[] = $event_id; // Cancelled items too: their stock is re-synced as well.
 			}
 		}
 		return array_values( array_unique( $ids ) );
@@ -164,7 +182,7 @@ final class EventRepository {
 				continue;
 			}
 			foreach ( $order->get_items() as $item ) {
-				$event_id = method_exists( $item, 'get_product_id' ) ? $this->event_id( (int) $item->get_product_id() ) : 0;
+				$event_id = method_exists( $item, 'get_product_id' ) && ! $item->get_meta( self::ITEM_CANCELLED ) ? $this->event_id( (int) $item->get_product_id() ) : 0;
 				if ( $event_id && ! isset( $out[ $event_id ] ) ) {
 					$out[ $event_id ] = $order;
 				}
@@ -174,11 +192,47 @@ final class EventRepository {
 	}
 
 	/**
+	 * The order item of an event in an order (not cancelled), or null.
+	 */
+	public function item_for( WC_Order $order, int $event_id ): ?\WC_Order_Item_Product {
+		$product_id = $this->product_id( $event_id );
+		foreach ( $order->get_items() as $item ) {
+			if ( $item instanceof \WC_Order_Item_Product && $product_id && (int) $item->get_product_id() === $product_id && ! $item->get_meta( self::ITEM_CANCELLED ) ) {
+				return $item;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Upcoming events (date today or later) that take registrations.
+	 *
+	 * @return int[]
+	 */
+	public function upcoming_with_registration( string $today ): array {
+		return array_map(
+			'intval',
+			get_posts(
+				array(
+					'post_type'   => self::POST_TYPE,
+					'post_status' => 'publish',
+					'numberposts' => 100,
+					'fields'      => 'ids',
+					'meta_query'  => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- small post type, daily.
+						array( 'key' => self::META_REGISTRATION, 'value' => '1' ),
+						array( 'key' => self::META_DATE, 'value' => $today, 'compare' => '>=' ),
+					),
+				)
+			)
+		);
+	}
+
+	/**
 	 * Whether an order contains a product.
 	 */
 	private function contains( WC_Order $order, int $product_id ): bool {
 		foreach ( $order->get_items() as $item ) {
-			if ( method_exists( $item, 'get_product_id' ) && (int) $item->get_product_id() === $product_id ) {
+			if ( method_exists( $item, 'get_product_id' ) && (int) $item->get_product_id() === $product_id && ! $item->get_meta( self::ITEM_CANCELLED ) ) {
 				return true;
 			}
 		}

@@ -30,6 +30,21 @@ final class EventRepository {
 	public const META_CAPACITY     = 'bw_appa_event_capacity';
 	public const META_REGISTRATION = 'bw_appa_event_registration';
 	public const META_DEADLINE     = 'bw_appa_event_deadline';
+	public const META_END_DATE     = 'bw_appa_event_end_date';
+	public const META_END_TIME     = 'bw_appa_event_end_time';
+	public const META_FORMAT       = 'bw_appa_event_format';
+	public const META_LOCATION     = 'bw_appa_event_location';
+	public const META_REMINDER     = 'bw_appa_event_reminder_days';
+	public const META_CANCEL       = 'bw_appa_event_cancel_days';
+
+	/**
+	 * Formats of an event.
+	 */
+	public const FORMATS = array(
+		'onsite' => 'Vor Ort',
+		'online' => 'Online',
+		'hybrid' => 'Vor Ort und online',
+	);
 
 	/**
 	 * Kinds of events (meeting 9 October 2026).
@@ -51,6 +66,12 @@ final class EventRepository {
 			EventFields::time( $meta( self::META_TIME ) ),
 			EventFields::url( $meta( self::META_LINK ) ),
 			EventFields::text( $meta( self::META_ACCESS ) ),
+			EventFields::date( $meta( self::META_END_DATE ) ),
+			EventFields::time( $meta( self::META_END_TIME ) ),
+			EventFields::format( $meta( self::META_FORMAT ) ),
+			EventFields::text( $meta( self::META_LOCATION ) ),
+			EventFields::audience( $meta( self::META_AUDIENCE ) ),
+			'1' === $meta( self::META_REGISTRATION ),
 		);
 	}
 }

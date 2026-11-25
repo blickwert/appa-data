@@ -551,6 +551,40 @@
 	gap: 0.75rem;
 }
 
+.bwm-register__badge {
+	display: inline-block;
+	margin: 0 0 0.75rem;
+	padding: 0.25rem 0.75rem;
+	border-radius: 999px;
+	background: var(--bwm-navy);
+	color: #fff;
+	font-size: var(--wp--preset--font-size--xs, 0.75rem);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.bwm-register__state {
+	color: var(--bwm-navy);
+}
+
+/* Secondary action that looks like a link (cancel a registration) */
+.bwm-link-button {
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--bwm-accent);
+	font: inherit;
+	font-weight: 600;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.bwm-link-button:hover,
+.bwm-link-button:focus-visible {
+	color: var(--bwm-accent-dark);
+}
+
 .bwm-pill--pending {
 	background: var(--bwm-tint);
 }

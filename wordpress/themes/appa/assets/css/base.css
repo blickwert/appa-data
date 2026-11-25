@@ -56,12 +56,36 @@ html {
 }
 
 /* Navigation and the icons WooCommerce adds after it (account, mini cart) form one right-aligned group. */
-.bw-site-header__end {
-	gap: var(--wp--preset--spacing--4);
+.bw-site-header__end.bw-site-header__end {
+	gap: 0;
 }
 
 .bw-site-header__end > .wp-block-navigation {
-	margin-inline-end: var(--wp--preset--spacing--3);
+	margin-inline-end: var(--wp--preset--spacing--4);
+}
+
+/* Same size and colour for both icons; the links keep a comfortable tap area. */
+.bw-site-header__end .wc-block-customer-account__link,
+.bw-site-header__end .wc-block-mini-cart__button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-inline-size: 2.5rem;
+	min-block-size: 2.5rem;
+	padding: 0;
+	color: var(--wp--preset--color--navy);
+}
+
+.bw-site-header__end .wc-block-customer-account__account-icon,
+.bw-site-header__end .wc-block-mini-cart__icon {
+	inline-size: 1.5rem;
+	block-size: 1.5rem;
+}
+
+@media (max-width: 600px) {
+	.bw-site-header__end > .wp-block-navigation {
+		margin-inline-end: 0;
+	}
 }
 
 .bw-site-logo img {
@@ -150,4 +174,18 @@ html {
 /* Template parts and main content sit flush (no global block gap between header, main and footer) */
 .wp-site-blocks > * + * {
 	margin-block-start: 0;
+}
+
+/* Event cards: label for events only for members (bound paragraph, empty for open events) */
+.bw-event-badge {
+	display: inline-block;
+	margin: 0;
+	padding: var(--wp--preset--spacing--1) var(--wp--preset--spacing--3);
+	border-radius: var(--wp--custom--radius--pill);
+	background: var(--wp--preset--color--navy);
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
 }

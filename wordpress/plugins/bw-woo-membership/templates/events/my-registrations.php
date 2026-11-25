@@ -21,6 +21,15 @@ defined( 'ABSPATH' ) || exit;
 						<span class="bwm-sub">Zugangsdaten: <?php echo esc_html( $item['access'] ); ?></span>
 					<?php endif; ?>
 				</span>
+				<?php if ( '' !== $item['cancel'] ) : ?>
+					<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" onsubmit="return window.confirm( 'Möchtest du dich wirklich abmelden?' );">
+						<input type="hidden" name="action" value="bw_wm_cancel_registration">
+						<input type="hidden" name="event" value="<?php echo esc_attr( (string) $item['event'] ); ?>">
+						<input type="hidden" name="back" value="<?php echo esc_url( home_url( '/mitgliederbereich-uebersicht/#veranstaltungen' ) ); ?>">
+						<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $item['cancel'] ); ?>">
+						<button class="bwm-link-button" type="submit">Abmelden</button>
+					</form>
+				<?php endif; ?>
 				<?php if ( '' !== $item['zoom'] && ! $item['past'] ) : ?>
 					<a class="bwm-button" href="<?php echo esc_url( $item['zoom'] ); ?>" target="_blank" rel="noopener">Per Zoom teilnehmen</a>
 				<?php elseif ( '' !== $item['pay_url'] ) : ?>

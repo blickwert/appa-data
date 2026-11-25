@@ -16,6 +16,7 @@ use BW\WooMembership\Modules\Events\Controller\CartController;
 use BW\WooMembership\Modules\Events\Controller\OrderController;
 use BW\WooMembership\Modules\Events\Controller\PrivacyController;
 use BW\WooMembership\Modules\Events\Controller\ProductSyncController;
+use BW\WooMembership\Modules\Events\Controller\RegistrationController;
 use BW\WooMembership\Modules\Events\Repository\EventRepository;
 use BW\WooMembership\Modules\Events\Repository\WaitlistRepository;
 use BW\WooMembership\Modules\Events\Controller\WaitlistController;
@@ -55,12 +56,14 @@ final class EventsModule extends AbstractModule {
 		$events        = new EventRepository();
 		$waitlist      = new WaitlistRepository();
 		$registrations = new RegistrationService( $events, $waitlist );
-		( new ProductSyncController( $events ) )->register();
+		$sync          = new ProductSyncController( $events );
+		$sync->register();
 		( new CartController( $events, $registrations ) )->register();
 		( new OrderController( $events, new Mailer() ) )->register();
 		( new PrivacyController( $events, $registrations ) )->register();
 		( new BlockController( $registrations ) )->register();
 		( new AdminController( $events, $waitlist ) )->register();
 		( new WaitlistController( $events, $waitlist, $registrations, new Mailer() ) )->register();
+		( new RegistrationController( $events, $registrations, $sync, new Mailer() ) )->register();
 	}
 }

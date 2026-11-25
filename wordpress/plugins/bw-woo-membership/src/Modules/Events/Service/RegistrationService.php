@@ -117,7 +117,24 @@ final class RegistrationService {
 		// Waiting list: sold out, still open, and the person could book (logged in, not registered, eligible).
 		$sold_out     = 0 === $left && ! $this->is_closed( $event_id ) && null === $registration;
 		$eligible     = $user_id > 0 && null !== $this->price( $event_id, $user_id );
+		$price        = $user_id > 0 ? $this->price( $event_id, $user_id ) : null;
+		$item         = null !== $registration ? $this->events->item_for( $registration, $event_id ) : null;
+		$paid_amount  = null !== $registration && null !== $item && $registration->is_paid() && (float) $item->get_total() > 0;
+		$cancel_until = null !== $registration ? RegistrationRules::cancel_until( $f['date'], $f['cancel_days'], $paid_amount ) : '';
+		$user         = $user_id > 0 ? get_userdata( $user_id ) : false;
 		return array(
+			'notice'       => \BW\WooMembership\Modules\Events\Controller\RegistrationController::take_notice( $user_id ),
+			'event'        => $event_id,
+			'action'       => admin_url( 'admin-post.php' ),
+			// Free for this person and logged in: register with one click under the own name.
+			'one_click'    => '' === $refusal && 0.0 === $price ? wp_create_nonce( 'bw_wm_register_' . $event_id ) : '',
+			'name'         => $user ? trim( $user->first_name . ' ' . $user->last_name ) ?: $user->display_name : '',
+			'email'        => $user ? $user->user_email : '',
+			'cancel'       => null !== $registration && RegistrationRules::can_cancel( $f['date'], $f['cancel_days'], $paid_amount, current_time( 'Y-m-d' ) ) ? wp_create_nonce( 'bw_wm_cancel_registration_' . $event_id ) : '',
+			'cancel_until' => '' !== $cancel_until ? EventLabels::day( $cancel_until ) : '',
+			'refund'       => $paid_amount,
+			'office'       => (string) apply_filters( 'bw_wm_office_email', (string) get_option( 'admin_email' ) ),
+			'paid_until'   => EventLabels::day( RegistrationRules::cancel_until( $f['date'], $f['cancel_days'], true ) ),
 			'deadline'     => $deadline ? $deadline->format( 'd.m.Y' ) : '',
 			'waitlist'     => array(
 				'open'     => $sold_out && ( $eligible || $user_id <= 0 ),
@@ -144,6 +161,15 @@ final class RegistrationService {
 	}
 
 	/**
+	 * Whether the person can cancel the registration in an order on the website.
+	 */
+	public function can_cancel( int $event_id, \WC_Order $order ): bool {
+		$item = $this->events->item_for( $order, $event_id );
+		$f    = $this->events->fields( $event_id );
+		return null !== $item && RegistrationRules::can_cancel( $f['date'], $f['cancel_days'], $order->is_paid() && (float) $item->get_total() > 0, current_time( 'Y-m-d' ) );
+	}
+
+	/**
 	 * The user's registrations for the member area, upcoming first.
 	 *
 	 * @return list<array<string, mixed>>
@@ -155,20 +181,21 @@ final class RegistrationService {
 				continue;
 			}
 			$f       = $this->events->fields( $event_id );
-			$day     = \DateTimeImmutable::createFromFormat( '!Y-m-d', $f['date'] );
 			$paid    = $order->is_paid();
 			$items[] = array(
 				'title'   => get_the_title( $event_id ),
 				'url'     => (string) get_permalink( $event_id ),
 				'date'    => $f['date'],
-				'when'    => $day ? $day->format( 'd.m.Y' ) . ( '' !== $f['time'] ? ', ' . $f['time'] . ' Uhr' : '' ) : '',
+				'when'    => EventLabels::when( $f ),
 				'past'    => '' !== $f['date'] && $f['date'] < current_time( 'Y-m-d' ),
 				'paid'    => $paid,
 				'status'  => $paid ? 'Angemeldet' : 'Angemeldet – Zahlung offen',
 				'pay_url' => ! $paid && ! $this->is_past( $event_id ) && $order->needs_payment() ? $order->get_checkout_payment_url() : '',
-				'zoom'    => $paid ? (string) get_post_meta( $event_id, 'bw_appa_event_zoom_link', true ) : '',
-				'access'  => $paid ? (string) get_post_meta( $event_id, 'bw_appa_event_zoom_access', true ) : '',
+				'zoom'    => $paid ? $f['zoom_link'] : '',
+				'access'  => $paid ? $f['zoom_access'] : '',
 				'invoice' => $order->get_view_order_url(),
+				'event'   => $event_id,
+				'cancel'  => $this->can_cancel( $event_id, $order ) ? wp_create_nonce( 'bw_wm_cancel_registration_' . $event_id ) : '',
 			);
 		}
 		usort( $items, static fn( array $a, array $b ): int => array( $a['past'], $a['date'] ) <=> array( $b['past'], $b['date'] ) );

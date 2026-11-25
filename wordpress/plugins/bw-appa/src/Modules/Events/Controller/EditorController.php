@@ -53,8 +53,15 @@ final class EditorController {
 					'capacity'     => EventRepository::META_CAPACITY,
 					'registration' => EventRepository::META_REGISTRATION,
 					'deadline'     => EventRepository::META_DEADLINE,
+					'endDate'      => EventRepository::META_END_DATE,
+					'endTime'      => EventRepository::META_END_TIME,
+					'format'       => EventRepository::META_FORMAT,
+					'location'     => EventRepository::META_LOCATION,
+					'reminder'     => EventRepository::META_REMINDER,
+					'cancel'       => EventRepository::META_CANCEL,
 				),
 				'audiences' => EventRepository::AUDIENCES,
+				'formats'   => EventRepository::FORMATS,
 			)
 		);
 	}

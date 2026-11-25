@@ -28,12 +28,14 @@ final class Mailer {
 
 	/**
 	 * Sends a mail; the signature is appended.
+	 *
+	 * @param string[] $attachments File paths.
 	 */
-	public function send( string $to, string $subject, string $body ): bool {
+	public function send( string $to, string $subject, string $body, array $attachments = array() ): bool {
 		if ( ! is_email( $to ) ) {
 			return false;
 		}
 		$body .= "\n\n-- \nAPPA – Austrian Positive Psychology Association\n" . home_url( '/' );
-		return wp_mail( $to, $subject, $body );
+		return wp_mail( $to, $subject, $body, '', $attachments );
 	}
 }

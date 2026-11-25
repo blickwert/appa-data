@@ -75,13 +75,17 @@ def events_query(per_page, *, archive=False, title_level=3):
                    separators=(",", ":"))
     when = ('<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"when"}}}},'
             '"className":"is-style-eyebrow"} -->\n<p class="is-style-eyebrow"></p>\n<!-- /wp:paragraph -->')
-    access = ('<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"access"}}}},'
-              '"fontSize":"sm"} -->\n<p class="has-sm-font-size"></p>\n<!-- /wp:paragraph -->')
+    # No Zoom data in lists (David, 25. 11. 2026): it is shown only to registered people on the event page.
+    badge = ('<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"badge"}}}},'
+             '"className":"bw-event-badge"} -->\n<p class="bw-event-badge"></p>\n<!-- /wp:paragraph -->')
+    place = ('<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"place"}}}},'
+             '"fontSize":"sm"} -->\n<p class="has-sm-font-size"></p>\n<!-- /wp:paragraph -->')
     title = f'<!-- wp:post-title {{"level":{title_level},"isLink":true,"fontSize":"xl"}} /-->'
     excerpt = '<!-- wp:post-excerpt {"excerptLength":40} /-->'
-    zoom = buttons(button("Per Zoom teilnehmen", None,
-                          bindings={"url": {"source": "bw-appa/event", "args": {"key": "zoom_link"}}}))
-    item = card(join(when, title, excerpt, access, zoom))
+    cta = buttons(button("Mehr erfahren", None, bindings={
+        "url": {"source": "bw-appa/event", "args": {"key": "url"}},
+        "text": {"source": "bw-appa/event", "args": {"key": "cta"}}}))
+    item = card(join(badge, when, title, place, excerpt, cta))
     empty = p("Aktuell sind keine Termine geplant. Sobald es Neuigkeiten gibt, findest du sie hier.")
     tpl = ('<!-- wp:post-template {"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->\n'
            f"{item}\n<!-- /wp:post-template -->")

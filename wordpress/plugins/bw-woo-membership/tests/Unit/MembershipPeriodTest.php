@@ -27,4 +27,9 @@ final class MembershipPeriodTest extends TestCase {
 		self::assertSame( '01. Jänner 2027', MembershipPeriod::format( '2027-01-01' ) );
 		self::assertSame( '', MembershipPeriod::format( null ) );
 	}
+
+	public function test_day_month(): void {
+		self::assertSame( '1. Jänner', \BW\WooMembership\Modules\Membership\Service\MembershipPeriod::day_month( 1, 1 ) );
+		self::assertSame( '', \BW\WooMembership\Modules\Membership\Service\MembershipPeriod::day_month( 0, 13 ) );
+	}
 }

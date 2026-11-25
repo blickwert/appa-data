@@ -15,6 +15,8 @@ namespace BW\WooMembership\Modules\Membership\Service;
  */
 final class MembershipPeriod {
 
+	public const MONTHS = array( 'Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember' );
+
 	/**
 	 * Last day (Y-m-d) covered by a payment on the given day.
 	 */
@@ -45,8 +47,14 @@ final class MembershipPeriod {
 		if ( null === $date || '' === $date ) {
 			return '';
 		}
-		$months = array( 'Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember' );
-		$day    = new \DateTimeImmutable( $date );
-		return sprintf( '%s. %s %s', $day->format( 'd' ), $months[ (int) $day->format( 'n' ) - 1 ], $day->format( 'Y' ) );
+		$day = new \DateTimeImmutable( $date );
+		return sprintf( '%s. %s %s', $day->format( 'd' ), self::MONTHS[ (int) $day->format( 'n' ) - 1 ], $day->format( 'Y' ) );
+	}
+
+	/**
+	 * Day and month without year, e.g. "1. Jänner" (empty for an invalid date).
+	 */
+	public static function day_month( int $day, int $month ): string {
+		return $day >= 1 && $day <= 31 && $month >= 1 && $month <= 12 ? sprintf( '%d. %s', $day, self::MONTHS[ $month - 1 ] ) : '';
 	}
 }

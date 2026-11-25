@@ -46,4 +46,13 @@ final class EventFieldsTest extends TestCase {
 		self::assertSame( '1', EventFields::flag( 'true' ) );
 		self::assertSame( '', EventFields::flag( '' ) );
 	}
+
+	public function test_format_and_days(): void {
+		self::assertSame( 'hybrid', EventFields::format( ' hybrid ' ) );
+		self::assertSame( '', EventFields::format( 'Präsenz' ) );
+		self::assertSame( '14', EventFields::days( '014' ) );
+		self::assertSame( '0', EventFields::days( '0' ) );
+		self::assertSame( '', EventFields::days( '-1' ) );
+		self::assertSame( '', EventFields::days( '400' ) );
+	}
 }

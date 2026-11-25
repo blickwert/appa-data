@@ -70,6 +70,10 @@ final class BindingsController {
 
 		return match ( $key ) {
 			'when'      => esc_html( $this->formatter->when( $event ) ),
+			'place'     => esc_html( $this->formatter->place( $event ) ),
+			'badge'     => esc_html( $this->formatter->badge( $event ) ),
+			'cta'       => esc_html( $this->formatter->call_to_action( $event ) ),
+			'url'       => esc_url_raw( (string) get_permalink( $post_id ) . ( $event->registration ? '#anmeldung' : '' ) ),
 			'access'    => esc_html( $this->formatter->access( $event ) ),
 			'zoom_link' => esc_url_raw( $event->zoom_link ),
 			default     => null,

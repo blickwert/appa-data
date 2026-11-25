@@ -80,6 +80,22 @@ final class EventFields {
 	}
 
 	/**
+	 * Format of the event: "onsite", "online", "hybrid" or '' (not set).
+	 */
+	public static function format( string $value ): string {
+		$value = trim( $value );
+		return in_array( $value, array( 'onsite', 'online', 'hybrid' ), true ) ? $value : '';
+	}
+
+	/**
+	 * Number of days (0–365) as string, '' when empty or invalid.
+	 */
+	public static function days( string $value ): string {
+		$value = trim( $value );
+		return 1 === preg_match( '/^\d{1,3}$/', $value ) && (int) $value <= 365 ? (string) (int) $value : '';
+	}
+
+	/**
 	 * On/off flag as '1' or ''.
 	 */
 	public static function flag( string $value ): string {
