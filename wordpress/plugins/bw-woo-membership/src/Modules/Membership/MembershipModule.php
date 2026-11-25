@@ -22,6 +22,7 @@ use BW\WooMembership\Modules\Membership\Controller\ConfirmationController;
 use BW\WooMembership\Modules\Membership\Controller\OrderController;
 use BW\WooMembership\Modules\Membership\Controller\ProductFieldController;
 use BW\WooMembership\Modules\Membership\Controller\ProfileController;
+use BW\WooMembership\Modules\Membership\Controller\SubscriptionController;
 use BW\WooMembership\Modules\Membership\Controller\SyncController;
 use BW\WooMembership\Modules\Membership\Repository\MemberRepository;
 use BW\WooMembership\Modules\Membership\Repository\MembershipOrderRepository;
@@ -76,6 +77,7 @@ final class MembershipModule extends AbstractModule {
 		( new ProfileController( $members ) )->register();
 		( new ConfirmationController( $memberships, $model ) )->register();
 		( new SyncController( $sync, $orders ) )->register();
+		( new SubscriptionController( $orders, $proofs ) )->register();
 		( new ProofController( $proof, $proofs, $memberships, $mailer ) )->register();
 		( new PurchaseController( $memberships, $orders, $proofs ) )->register();
 		$join_proof = new JoinProof( $proofs, $proof );

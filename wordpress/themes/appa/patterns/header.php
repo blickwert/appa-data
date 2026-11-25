@@ -19,7 +19,11 @@ declare(strict_types=1);
 		<a class="bw-site-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="<?php esc_attr_e( 'APPA – zur Startseite', 'appa' ); ?>"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/appa-logo.webp' ) ); ?>" width="312" height="144" alt="APPA"></a>
 		<!-- /wp:html -->
 
-		<!-- wp:navigation {"overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"right"},"style":{"spacing":{"blockGap":"var:preset|spacing|7"}}} /-->
+		<!-- wp:group {"className":"bw-site-header__end","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right"}} -->
+		<div class="wp-block-group bw-site-header__end">
+			<!-- wp:navigation {"overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"right"},"style":{"spacing":{"blockGap":"var:preset|spacing|7"}}} /-->
+		</div>
+		<!-- /wp:group -->
 	</div>
 	<!-- /wp:group -->
 </header>

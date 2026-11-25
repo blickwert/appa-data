@@ -24,6 +24,17 @@ final class ProofRulesTest extends TestCase {
 		self::assertTrue( ProofRules::may_buy_student( true, $this->proof( 'approved', '2027-12-31' ), '2027-01-01' ) );
 	}
 
+	public function test_renewal_type(): void {
+		$day = '2027-01-01';
+		self::assertSame( 'regular', ProofRules::renewal_type( 'student', $this->proof( 'approved', '2026-12-31' ), $day ), 'no proof for the new period' );
+		self::assertSame( 'regular', ProofRules::renewal_type( 'student', $this->proof( 'rejected' ), $day ) );
+		self::assertSame( 'student', ProofRules::renewal_type( 'student', $this->proof( 'approved', '2027-12-31' ), $day ) );
+		self::assertSame( 'student', ProofRules::renewal_type( 'student', $this->proof( 'pending' ), $day ), 'under review: unchanged' );
+		self::assertSame( 'student', ProofRules::renewal_type( 'regular', $this->proof( 'approved', '2027-12-31' ), $day ) );
+		self::assertSame( 'regular', ProofRules::renewal_type( 'regular', $this->proof( 'none' ), $day ) );
+		self::assertSame( 'honorary', ProofRules::renewal_type( 'honorary', $this->proof( 'none' ), $day ) );
+	}
+
 	public function test_reminder(): void {
 		$end = '2026-12-31';
 		self::assertTrue( ProofRules::reminder_due( 'student', $end, $this->proof( 'approved', $end ), '2026-12-10' ) );

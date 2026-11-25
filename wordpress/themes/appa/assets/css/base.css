@@ -55,6 +55,15 @@ html {
 	scroll-padding-top: calc(var(--bw-admin-bar-h, 0px) + var(--bw-header-h, 4.5rem) + var(--bw-jump-h, 0px));
 }
 
+/* Navigation and the icons WooCommerce adds after it (account, mini cart) form one right-aligned group. */
+.bw-site-header__end {
+	gap: var(--wp--preset--spacing--4);
+}
+
+.bw-site-header__end > .wp-block-navigation {
+	margin-inline-end: var(--wp--preset--spacing--3);
+}
+
 .bw-site-logo img {
 	display: block;
 	inline-size: auto;

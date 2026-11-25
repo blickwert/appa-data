@@ -110,9 +110,13 @@ final class DashboardModel {
 
 	/**
 	 * Checkout link for renewing (order-based memberships without automatic renewal): within 45 days before the end
-	 * of the period or after it. Students renew as students only with a proof for the next period.
+	 * of the period or after it. Subscriptions: the payment link of an open renewal order. Students renew as students only with a proof for the next period.
 	 */
 	private function renew_url( Membership $m ): string {
+		if ( 'subscription' === $m->source ) {
+			// The subscription creates its own renewal order; a second purchase would start a second subscription.
+			return $this->orders->renewal_payment_url( $m->user_id );
+		}
 		if ( $m->auto_renew || 'manual' === $m->source || '' === $m->type || ! function_exists( 'wc_get_checkout_url' ) ) {
 			return '';
 		}

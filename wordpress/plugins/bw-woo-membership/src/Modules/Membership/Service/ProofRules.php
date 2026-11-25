@@ -65,6 +65,20 @@ final class ProofRules {
 	}
 
 	/**
+	 * Membership type a subscription renews as on `$day` (answer M4): students without a proof for that day renew
+	 * as regular members; a proof still under review keeps the current type; regular members with an approved proof
+	 * renew as students. Other types stay as they are.
+	 *
+	 * @param array{status: string, valid_until: string} $proof Proof state.
+	 */
+	public static function renewal_type( string $type, array $proof, string $day ): string {
+		if ( ! in_array( $type, array( 'student', 'regular' ), true ) || 'pending' === $proof['status'] ) {
+			return $type;
+		}
+		return self::valid_on( $proof, $day ) ? 'student' : 'regular';
+	}
+
+	/**
 	 * Default "valid until" for an approval: end of the member's current period, else end of this calendar year.
 	 */
 	public static function default_valid_until( ?string $period_end, string $today ): string {

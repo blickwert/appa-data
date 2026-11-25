@@ -54,6 +54,10 @@ final class MembershipServiceTest extends TestCase {
 		self::assertSame( Membership::STATUS_ACTIVE, $m->status );
 		self::assertTrue( $m->auto_renew );
 		self::assertSame( '2026-10-01', $m->since );
+		self::assertSame( '2026-12-31', $m->valid_until, 'paid up to the day before the next payment' );
+
+		$m = MembershipService::from_subscription( 7, array( 'status' => 'pending-cancel', 'end' => '2027-03-31' ) + $sub, '', null );
+		self::assertSame( '2027-03-31', $m->valid_until );
 
 		$m = MembershipService::from_subscription( 7, array( 'status' => 'on-hold' ) + $sub, '', null );
 		self::assertSame( Membership::STATUS_ON_HOLD, $m->status );

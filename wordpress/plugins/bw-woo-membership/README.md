@@ -14,7 +14,8 @@ Mitgliederbereich der APPA auf Basis von WooCommerce. PHP 8.3, WordPress 7.x, Wo
 
 - Ein Produkt wird zum Mitgliedschaftsprodukt über das Feld **Mitgliedsart** (Produktdaten › Allgemein): ordentlich, studentisch, Ehrenmitglied, institutionell.
 - **Ohne WooCommerce Subscriptions:** Die letzte bezahlte Bestellung (Status „In Bearbeitung“ oder „Abgeschlossen“) gilt für das Kalenderjahr der Zahlung; Zahlung im Dezember gilt bis Ende des Folgejahres. Offene Bestellung (Überweisung) = „Zahlung offen“, kein Zugang.
-- **Mit WooCommerce Subscriptions:** Status, Start und nächste Zahlung kommen aus dem Abo (aktiv / pausiert / ausstehend / beendet).
+- **Mit WooCommerce Subscriptions:** Status, Start und nächste Zahlung kommen aus dem Abo (aktiv / pausiert / ausstehend / beendet); bezahlt bis zum Vortag der nächsten Zahlung. Einrichtung: Produkte als „Einfaches Abonnement“, jährlich, synchron zum 1. 1.; „Sign-up cutoff“ 31 Tage (Beitritt im Dezember: erste Zahlung am 1. 1., gilt für das Folgejahr).
+- **Verlängerung im Abo:** Kurz bevor das Abo die Verlängerungsbestellung anlegt, stellt `SubscriptionController` die Mitgliedsart um: studentisch ohne gültigen Nachweis für den Verlängerungstag → ordentlich; ordentlich mit gültigem Nachweis → studentisch; Nachweis in Prüfung → unverändert (Notiz am Abo). Der Knopf „Mitgliedschaft verlängern“ führt bei Abos zur offenen Verlängerungsbestellung, nie zu einem zweiten Abo.
 - **Ehren- und institutionelle Mitglieder:** Benutzerfelder `bw_wm_manual_type` (und optional `bw_wm_manual_until`, Y-m-d). Verwaltung im Backend unter **Mitglieder** (Liste, Filter, Bearbeiten, Neu, CSV-Export).
 - Mitgliedsnummer `A-0001` …, vergeben bei der ersten bezahlten Mitgliedschaft, bleibt für immer (auch bei Austritt und Wiedereintritt). Deinstallieren löscht keine Mitgliedsdaten.
 

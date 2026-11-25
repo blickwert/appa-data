@@ -126,15 +126,12 @@ final class MembershipOrderRepository {
 	 * @return array{type: string, status: string, start: ?string, end: ?string, next: ?string, manual: bool}|null
 	 */
 	public function latest_subscription( int $user_id ): ?array {
-		if ( ! function_exists( 'wcs_get_users_subscriptions' ) || $user_id <= 0 ) {
+		$subscription = $this->membership_subscription( $user_id );
+		if ( null === $subscription ) {
 			return null;
 		}
-		foreach ( wcs_get_users_subscriptions( $user_id ) as $subscription ) {
-			$type = $this->order_type( $subscription );
-			if ( '' === $type ) {
-				continue;
-			}
-			$date = static function ( string $key ) use ( $subscription ): ?string {
+		$type = $this->order_type( $subscription );
+		$date = static function ( string $key ) use ( $subscription ): ?string {
 				$value = (string) $subscription->get_date( $key );
 				return '' !== $value && '0' !== $value ? substr( $value, 0, 10 ) : null;
 			};
@@ -146,7 +143,34 @@ final class MembershipOrderRepository {
 				'next'   => $date( 'next_payment' ),
 				'manual' => (bool) $subscription->is_manual(),
 			);
+	}
+
+	/**
+	 * The user's newest subscription that contains a membership product (WooCommerce Subscriptions), or null.
+	 *
+	 * @return \WC_Subscription|null
+	 */
+	public function membership_subscription( int $user_id ): ?WC_Order {
+		if ( ! function_exists( 'wcs_get_users_subscriptions' ) || $user_id <= 0 ) {
+			return null;
+		}
+		foreach ( wcs_get_users_subscriptions( $user_id ) as $subscription ) {
+			if ( $subscription instanceof WC_Order && '' !== $this->order_type( $subscription ) ) {
+				return $subscription;
+			}
 		}
 		return null;
+	}
+
+	/**
+	 * Payment link of the open renewal order of the user's membership subscription ('' when nothing is due).
+	 */
+	public function renewal_payment_url( int $user_id ): string {
+		$subscription = $this->membership_subscription( $user_id );
+		if ( null === $subscription || ! method_exists( $subscription, 'get_last_order' ) ) {
+			return '';
+		}
+		$renewal = $subscription->get_last_order( 'all', 'renewal' );
+		return $renewal instanceof WC_Order && $renewal->needs_payment() ? $renewal->get_checkout_payment_url() : '';
 	}
 }
