@@ -99,7 +99,7 @@ final class SubscriptionController {
 		wp_add_inline_script(
 			'wp-hooks',
 			sprintf(
-				"wp.hooks.addFilter( 'i18n.gettext_woocommerce-subscriptions', 'bw-wm/texts', function ( translation, text ) { return 'every' === text ? %1$s : ( 'every %%s' === text ? %2$s : translation ); } );",
+				'wp.hooks.addFilter( \'i18n.gettext_woocommerce-subscriptions\', \'bw-wm/texts\', function ( translation, text ) { return \'every\' === text ? %1$s : ( \'every %%s\' === text ? %2$s : translation ); } );',
 				wp_json_encode( _x( 'pro', 'billing period: every', 'bw-woo-membership' ) ),
 				/* translators: %s: billing period, e.g. "Jahr" */
 				wp_json_encode( _x( 'pro %s', 'billing period: every …', 'bw-woo-membership' ) )
