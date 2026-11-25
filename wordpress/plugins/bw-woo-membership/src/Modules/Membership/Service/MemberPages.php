@@ -57,7 +57,31 @@ final class MemberPages {
 	 */
 	public function login_url( string $return_to ): string {
 		$id = $this->login_page_id();
-		return $id ? (string) get_permalink( $id ) : wp_login_url( $return_to );
+		if ( ! $id ) {
+			return wp_login_url( $return_to );
+		}
+		$url = (string) get_permalink( $id );
+		return '' === $return_to ? $url : add_query_arg( 'redirect_to', rawurlencode( $return_to ), $url );
+	}
+
+	/**
+	 * Validated return address from the login page's `redirect_to` parameter: only addresses on this site,
+	 * never the login page itself; otherwise an empty string.
+	 */
+	public function safe_return_url( string $requested ): string {
+		$url = '' === $requested ? '' : wp_validate_redirect( $requested, '' );
+		if ( '' === $url ) {
+			return '';
+		}
+		// `allowed_redirect_hosts` may widen wp_validate_redirect(); the login page only returns to its own host.
+		$host = wp_parse_url( $url, PHP_URL_HOST );
+		if ( is_string( $host ) && strtolower( $host ) !== strtolower( (string) wp_parse_url( home_url(), PHP_URL_HOST ) ) ) {
+			return '';
+		}
+		$login_id = $this->login_page_id();
+		$login    = $login_id ? (string) get_permalink( $login_id ) : '';
+		$path     = static fn( string $address ): string => untrailingslashit( (string) wp_parse_url( $address, PHP_URL_PATH ) );
+		return '' !== $login && $path( $url ) === $path( $login ) ? '' : $url;
 	}
 
 	/**

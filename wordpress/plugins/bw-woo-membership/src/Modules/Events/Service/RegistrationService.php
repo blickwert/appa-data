@@ -12,6 +12,7 @@ namespace BW\WooMembership\Modules\Events\Service;
 use BW\WooMembership\Modules\Events\Repository\EventRepository;
 use BW\WooMembership\Modules\Events\Repository\NoticeRepository;
 use BW\WooMembership\Modules\Events\Repository\WaitlistRepository;
+use BW\WooMembership\Modules\Membership\Service\MemberPages;
 
 /**
  * Decides price and bookability of an event for a user and prepares the registration box.
@@ -25,6 +26,7 @@ final class RegistrationService {
 		private readonly EventRepository $events,
 		private readonly WaitlistRepository $waitlist,
 		private readonly NoticeRepository $notices,
+		private readonly MemberPages $pages,
 	) {
 	}
 
@@ -156,8 +158,8 @@ final class RegistrationService {
 			'paid'         => null !== $registration && $registration->is_paid(),
 			'refusal'      => null !== $registration ? '' : $refusal,
 			'book_url'     => '' === $refusal && $product_id && function_exists( 'wc_get_checkout_url' ) ? add_query_arg( 'add-to-cart', $product_id, wc_get_checkout_url() ) : '',
-			// Back to the event after the login (the member-area login page always leads to the dashboard).
-			'login_url'    => $user_id > 0 ? '' : wp_login_url( (string) get_permalink( $event_id ) . '#anmeldung' ),
+			// Member-area login page (falls back to wp-login.php), back to the event afterwards.
+			'login_url'    => $user_id > 0 ? '' : $this->pages->login_url( (string) get_permalink( $event_id ) . '#anmeldung' ),
 			'join_url'     => home_url( '/mitgliedschaft/' ),
 			'area_url'     => home_url( '/mitgliederbereich-uebersicht/#veranstaltungen' ),
 		);

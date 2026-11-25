@@ -33,6 +33,7 @@ final class AccessController {
 	 */
 	public function register(): void {
 		add_action( 'template_redirect', array( $this, 'guard' ) );
+		add_filter( 'login_form_defaults', array( $this, 'login_form_defaults' ) );
 		add_filter( 'login_redirect', array( $this, 'login_redirect' ), 20, 3 );
 		add_filter( 'woocommerce_login_redirect', array( $this, 'woocommerce_login_redirect' ), 20, 2 );
 		add_filter( 'bw_wm_user_has_access', array( $this, 'user_has_access' ), 10, 2 );
@@ -40,7 +41,8 @@ final class AccessController {
 	}
 
 	/**
-	 * Guests on the overview are sent to the login page; logged-in users on the login page to the overview.
+	 * Guests on the overview are sent to the login page; logged-in users on the login page to the requested
+	 * `redirect_to` or the overview.
 	 */
 	public function guard(): void {
 		if ( ! is_singular( 'page' ) ) {
@@ -54,10 +56,39 @@ final class AccessController {
 			wp_safe_redirect( $this->pages->login_url( (string) get_permalink( $page_id ) ) );
 			exit;
 		}
-		if ( $page_id === $this->pages->login_page_id() && is_user_logged_in() && '' !== $this->pages->dashboard_url() ) {
-			wp_safe_redirect( $this->pages->dashboard_url() );
-			exit;
+		if ( $page_id === $this->pages->login_page_id() && is_user_logged_in() ) {
+			$target = $this->requested_return() ?: $this->pages->dashboard_url();
+			if ( '' !== $target ) {
+				wp_safe_redirect( $target );
+				exit;
+			}
 		}
+	}
+
+	/**
+	 * On the login page the form returns to the address in `redirect_to` (e.g. an event) instead of the page itself.
+	 *
+	 * @param array<string, mixed> $defaults Defaults of wp_login_form().
+	 * @return array<string, mixed>
+	 */
+	public function login_form_defaults( array $defaults ): array {
+		if ( ! is_singular( 'page' ) || (int) get_queried_object_id() !== $this->pages->login_page_id() ) {
+			return $defaults;
+		}
+		$target = $this->requested_return();
+		if ( '' !== $target ) {
+			$defaults['redirect'] = $target;
+		}
+		return $defaults;
+	}
+
+	/**
+	 * Validated `redirect_to` of the current request or empty string.
+	 */
+	private function requested_return(): string {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only navigation target, validated below.
+		$requested = isset( $_GET['redirect_to'] ) && is_string( $_GET['redirect_to'] ) ? sanitize_url( wp_unslash( $_GET['redirect_to'] ) ) : '';
+		return $this->pages->safe_return_url( $requested );
 	}
 
 	/**
