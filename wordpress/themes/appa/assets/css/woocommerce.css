@@ -567,7 +567,7 @@
 }
 
 /* Small screens ----------------------------------------------------------- */
-@media (max-width: 781px) {
+@media (max-width: 781.98px) {
 	.woocommerce-account .woocommerce:has(> .woocommerce-MyAccount-navigation) {
 		grid-template-columns: minmax(0, 1fr);
 		gap: var(--wp--preset--spacing--6);

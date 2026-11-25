@@ -54,7 +54,7 @@
 	inset: auto var(--wp--preset--spacing--3) var(--wp--preset--spacing--5);
 }
 
-@media (max-width: 781px) {
+@media (max-width: 781.98px) {
 	.bw-hero__text {
 		padding-block-end: var(--wp--preset--spacing--6);
 	}
@@ -83,8 +83,11 @@
 /* Half-width block on large screens (accordions) */
 @media (min-width: 782px) {
 	.is-layout-constrained > .bw-half {
-		max-inline-size: min(50%, calc(var(--wp--style--global--wide-size) / 2)) !important;
-		/* left edge of the section width instead of the centring of the constrained layout */
+		/* (0,2,0) beats the layout's `.is-layout-constrained > :where(…)` (0,1,0) without !important */
+		max-inline-size: min(50%, calc(var(--wp--style--global--wide-size) / 2));
+		/* Left edge of the section width instead of the centring of the constrained layout.
+		   !important stays: core sets `margin-left: auto !important` on constrained children,
+		   and only another !important declaration can override it. */
 		margin-inline-start: max(0px, calc((100% - var(--wp--style--global--wide-size)) / 2)) !important;
 	}
 }

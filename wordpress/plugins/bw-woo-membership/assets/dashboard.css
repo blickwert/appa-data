@@ -482,7 +482,7 @@
 	font-weight: 700;
 }
 
-@media (max-width: 781px) {
+@media (max-width: 781.98px) {
 	.bwm-event {
 		flex-direction: column;
 	}

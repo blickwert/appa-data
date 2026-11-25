@@ -232,7 +232,7 @@
 }
 
 /* Small screens: tabs on top, the navigation becomes a bar at the bottom ----- */
-@media (max-width: 781px) {
+@media (max-width: 781.98px) {
 	.bw-dashboard-brand__area {
 		display: none;
 	}

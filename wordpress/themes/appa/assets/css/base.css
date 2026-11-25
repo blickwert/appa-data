@@ -1,4 +1,9 @@
-/* APPA – base styles that theme.json cannot express. Tokens only (presets / --wp--custom--*). */
+/* APPA – base styles that theme.json cannot express. Tokens only (presets / --wp--custom--*).
+ *
+ * Breakpoints (tokens.json "breakpoints", the same as WordPress core; media queries cannot use custom properties):
+ * sm 600px, md 782px, lg 1024px. Pattern: min-width: <bp>px / max-width: <bp - 0.02>px (599.98px, 781.98px, 1023.98px),
+ * so no width matches both sides. Exception: the admin bar follows core's own query (max-width: 600px).
+ */
 
 /* Base ------------------------------------------------------------------ */
 html {
@@ -39,6 +44,7 @@ html:has(> body.admin-bar) {
 	--bw-admin-bar-h: var(--wp-admin--admin-bar--height, 0px);
 }
 
+/* Same query as core's admin bar CSS (inclusive 600px), not the breakpoint pattern */
 @media (max-width: 600px) {
 	/* The admin bar scrolls away on small screens. */
 	html:has(> body.admin-bar) {
@@ -102,7 +108,7 @@ html {
 	text-align: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 599.98px) {
 	.bw-site-header__end > .wp-block-navigation {
 		margin-inline-end: 0;
 	}
