@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace BW\WooMembership\Modules\Membership\Service;
 
 use BW\WooMembership\Modules\Membership\Repository\ProofRepository;
+use BW\WooMembership\Modules\Membership\Repository\UploadLimitRepository;
 use WP_Error;
 
 /**
@@ -23,11 +24,17 @@ final class JoinProof {
 	public const SESSION_ERROR = 'bw_wm_join_proof_error';
 
 	/**
+	 * Guest uploads per address and hour.
+	 */
+	public const MAX_GUEST_UPLOADS = 5;
+
+	/**
 	 * Builds the service.
 	 */
 	public function __construct(
 		private readonly ProofRepository $proofs,
 		private readonly ProofService $service,
+		private readonly UploadLimitRepository $uploads,
 	) {
 	}
 
@@ -82,12 +89,21 @@ final class JoinProof {
 	/**
 	 * Accepts an uploaded proof: on the account when logged in, otherwise in the session.
 	 *
-	 * @param array{name: string, tmp_name: string, size: int, error: int} $file Entry of $_FILES.
+	 * @param array{name: string, tmp_name: string, size: int, error: int} $file   Entry of $_FILES.
+	 * @param int                                                          $user_id Logged-in user or 0.
+	 * @param string                                                       $client  Address of a guest for the upload limit ('' = no limit).
 	 * @return true|WP_Error
 	 */
-	public function accept( array $file, int $user_id ): bool|WP_Error {
+	public function accept( array $file, int $user_id, string $client = '' ): bool|WP_Error {
 		if ( $user_id > 0 ) {
 			return $this->service->upload( $user_id, $file );
+		}
+		// Guests can upload without an account, so the number of files per address is limited.
+		if ( '' !== $client ) {
+			if ( $this->uploads->count( $client ) >= self::MAX_GUEST_UPLOADS ) {
+				return new WP_Error( 'bw_wm_proof', 'Zu viele Uploads in kurzer Zeit. Bitte versuche es in einer Stunde noch einmal.' );
+			}
+			$this->uploads->increment( $client );
 		}
 		$stored = $this->service->stash( $file );
 		if ( is_wp_error( $stored ) ) {
