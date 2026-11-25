@@ -98,14 +98,16 @@ final class MembershipService {
 			default                    => Membership::STATUS_EXPIRED,
 		};
 		$renews = 'active' === $sub['status'];
-		// Paid up to the day before the next payment (yearly subscription synced to 1 January → 31 December).
-		$until = $sub['end'] ?? ( null !== $sub['next'] ? ( new \DateTimeImmutable( $sub['next'] ) )->modify( '-1 day' )->format( 'Y-m-d' ) : null );
+		$paid   = in_array( $sub['status'], array( 'active', 'pending-cancel', 'on-hold' ), true );
+		// Paid up to the day before the next payment (yearly subscription synced to 1 January → 31 December);
+		// a subscription that was never paid has no period and no "member since".
+		$until = ! $paid ? null : ( $sub['end'] ?? ( null !== $sub['next'] ? ( new \DateTimeImmutable( $sub['next'] ) )->modify( '-1 day' )->format( 'Y-m-d' ) : null ) );
 		return new Membership(
 			$user_id,
 			$status,
 			$sub['type'],
 			$number,
-			$since ?? $sub['start'],
+			$since ?? ( $paid ? $sub['start'] : null ),
 			$until,
 			$renews ? $sub['next'] : null,
 			$renews && ! $sub['manual'],

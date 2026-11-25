@@ -58,7 +58,8 @@ final class PostTypeController {
 				'show_ui'         => true,
 				/** This filter lets the membership module place the documents under its menu "Mitglieder". */
 				'show_in_menu'    => (string) apply_filters( 'bw_wm_admin_menu_parent', '' ) ?: true,
-				'show_in_rest'    => true,
+				// Not in the REST API: it would list titles and (through /wp/v2/media?parent=) file addresses to guests.
+				'show_in_rest'    => false,
 				'menu_position'   => 21,
 				'menu_icon'       => 'dashicons-media-document',
 				'supports'        => array( 'title', 'excerpt', 'revisions' ),
@@ -76,7 +77,7 @@ final class PostTypeController {
 				),
 				'public'            => false,
 				'show_ui'           => true,
-				'show_in_rest'      => true,
+				'show_in_rest'      => false,
 				'show_admin_column' => true,
 				'hierarchical'      => true,
 			)

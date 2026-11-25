@@ -91,10 +91,11 @@ final class AdminController {
 		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- streaming the export.
 		fputcsv( $out, array( 'Vorname', 'Nachname', 'E-Mail', 'Mitglied', 'Betrag (EUR)', 'Status', 'Bestellung', 'Datum' ), ';' );
 		foreach ( $this->events->registration_orders( $event_id ) as $order ) {
-			$basis = '';
-			foreach ( $order->get_items() as $item ) {
-				$basis = $basis ? $basis : (string) $item->get_meta( '_bw_wm_price_basis' );
+			$item = $this->events->item_for( $order, $event_id ); // The event's own line, also in orders with more items.
+			if ( ! $item ) {
+				continue;
 			}
+			$basis = (string) $item->get_meta( '_bw_wm_price_basis' );
 			fputcsv(
 				$out,
 				array_map(
@@ -104,7 +105,7 @@ final class AdminController {
 						$order->get_billing_last_name(),
 						$order->get_billing_email(),
 						'member' === $basis ? 'ja' : 'nein',
-						number_format( (float) $order->get_total(), 2, ',', '' ),
+						number_format( (float) $item->get_total(), 2, ',', '' ),
 						wc_get_order_status_name( $order->get_status() ),
 						(string) $order->get_order_number(),
 						$order->get_date_created() ? $order->get_date_created()->date( 'd.m.Y' ) : '',

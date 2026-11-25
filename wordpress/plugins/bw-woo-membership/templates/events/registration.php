@@ -20,10 +20,12 @@ $bwm_exclusive = 'members' === $data['audience'];
 		<p class="bwm-saved" role="status"><?php echo esc_html( $data['notice'] ); ?></p>
 	<?php endif; ?>
 	<dl class="bwm-register__prices">
-		<?php if ( '' !== $data['member_price'] ) : ?>
+		<?php if ( ! $bwm_exclusive && '' !== $data['public_price'] && $data['public_price'] === $data['member_price'] ) : ?>
+			<dt>Teilnahme</dt><dd><?php echo esc_html( $data['member_price'] ); ?></dd>
+		<?php elseif ( '' !== $data['member_price'] ) : ?>
 			<dt>Für Mitglieder</dt><dd><?php echo esc_html( $data['member_price'] ); ?></dd>
 		<?php endif; ?>
-		<?php if ( ! $bwm_exclusive && '' !== $data['public_price'] ) : ?>
+		<?php if ( ! $bwm_exclusive && '' !== $data['public_price'] && $data['public_price'] !== $data['member_price'] ) : ?>
 			<dt>Für Nichtmitglieder</dt><dd><?php echo esc_html( $data['public_price'] ); ?></dd>
 		<?php endif; ?>
 		<?php if ( null !== $data['places_left'] ) : ?>
@@ -34,7 +36,7 @@ $bwm_exclusive = 'members' === $data['audience'];
 		<?php endif; ?>
 	</dl>
 	<?php if ( $data['registered'] ) : ?>
-		<p class="bwm-register__state"><strong><?php echo $data['paid'] ? 'Du bist angemeldet' : 'Du bist angemeldet – die Zahlung ist noch offen'; ?></strong><?php echo '' !== $data['name'] ? ' als ' . esc_html( $data['name'] ) : ''; ?>.</p>
+		<p class="bwm-register__state"><strong>Du bist angemeldet</strong><?php echo '' !== $data['name'] ? ' als ' . esc_html( $data['name'] ) : ''; ?><?php echo $data['paid'] ? '.' : ' – die Zahlung ist noch offen.'; ?></p>
 		<p class="bwm-register__links">
 			<a class="bwm-button bwm-button--outline" href="<?php echo esc_url( $data['area_url'] ); ?>">Meine Anmeldungen</a>
 		</p>
@@ -83,7 +85,7 @@ $bwm_exclusive = 'members' === $data['audience'];
 			</form>
 		<?php endif; ?>
 	<?php elseif ( $bwm_exclusive && ! $data['is_member'] && $data['enabled'] ) : ?>
-		<p>Diese Veranstaltung ist exklusiv für Mitglieder der APPA. Melde dich an, um dich zu registrieren – oder werde Mitglied.</p>
+		<p><?php echo '' !== $data['login_url'] ? 'Diese Veranstaltung ist exklusiv für Mitglieder der APPA. Melde dich an, um dich zu registrieren – oder werde Mitglied.' : 'Diese Veranstaltung ist exklusiv für Mitglieder der APPA. Mit einer aktiven Mitgliedschaft kannst du dich hier anmelden.'; ?></p>
 		<p class="bwm-register__links">
 			<?php if ( '' !== $data['login_url'] ) : ?><a class="bwm-button" href="<?php echo esc_url( $data['login_url'] ); ?>">Jetzt anmelden</a><?php endif; ?>
 			<a class="bwm-button<?php echo '' !== $data['login_url'] ? ' bwm-button--outline' : ''; ?>" href="<?php echo esc_url( $data['join_url'] ); ?>">Mitglied werden</a>

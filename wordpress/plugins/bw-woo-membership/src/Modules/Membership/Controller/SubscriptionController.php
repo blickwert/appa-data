@@ -40,6 +40,36 @@ final class SubscriptionController {
 		add_filter( 'woocommerce_get_item_data', array( $this, 'renewal_line' ), 20, 2 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'script_texts' ) );
 		add_filter( 'woocommerce_account_menu_items', array( $this, 'account_menu' ), 20 );
+		add_filter( 'woocommerce_subscriptions_translation_file_rel_path', array( $this, 'translation_path' ) );
+		add_filter( 'lang_dir_for_domain', array( $this, 'translation_dir' ), 10, 3 );
+	}
+
+	/**
+	 * WooCommerce Subscriptions passes an absolute path to load_plugin_textdomain(), which expects one relative to
+	 * the plugins folder, so a language file in its own "languages" folder is never found (and the just-in-time
+	 * loading of WordPress only looks in wp-content/languages/plugins). Language packs installed there keep working
+	 * and take precedence.
+	 *
+	 * @param string|false $path   Folder WordPress found for the domain.
+	 * @param string       $domain Text domain.
+	 * @param string       $locale Locale.
+	 */
+	public function translation_dir( $path, $domain, $locale ) {
+		if ( 'woocommerce-subscriptions' !== $domain || ! class_exists( 'WC_Subscriptions' ) || empty( \WC_Subscriptions::$plugin_file ) ) {
+			return $path;
+		}
+		$own = trailingslashit( dirname( \WC_Subscriptions::$plugin_file ) ) . 'languages/';
+		// Only when no language pack is installed in wp-content/languages/plugins.
+		return ( false === $path || ! is_readable( trailingslashit( (string) $path ) . "woocommerce-subscriptions-{$locale}.mo" ) ) && is_readable( $own . "woocommerce-subscriptions-{$locale}.mo" ) ? $own : $path;
+	}
+
+	/**
+	 * Same for load_plugin_textdomain(), which the plugin calls with an absolute path.
+	 *
+	 * @param string $path Path the plugin would use.
+	 */
+	public function translation_path( $path ) {
+		return class_exists( 'WC_Subscriptions' ) && ! empty( \WC_Subscriptions::$plugin_file ) ? dirname( plugin_basename( \WC_Subscriptions::$plugin_file ) ) . '/languages' : $path;
 	}
 
 	/**

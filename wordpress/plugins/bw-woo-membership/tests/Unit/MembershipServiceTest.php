@@ -63,6 +63,11 @@ final class MembershipServiceTest extends TestCase {
 		self::assertSame( Membership::STATUS_ON_HOLD, $m->status );
 		self::assertNull( $m->next_renewal );
 
+		$m = MembershipService::from_subscription( 7, array( 'status' => 'pending' ) + $sub, '', null );
+		self::assertSame( Membership::STATUS_PENDING, $m->status );
+		self::assertNull( $m->valid_until, 'not paid yet: no period' );
+		self::assertNull( $m->since );
+
 		self::assertNull( MembershipService::from_subscription( 7, null, '', null ) );
 	}
 

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: APPA Mitgliedschaft
  * Description: Mitgliederbereich der APPA auf Basis von WooCommerce: Mitgliedsstatus, Mitgliedsnummer, geschützte Übersicht, Mitglieder-Dokumente und Profil fürs Mitgliederverzeichnis. Nutzt WooCommerce Subscriptions, sobald es aktiv ist.
- * Version:           0.10.2
+ * Version:           0.10.5
  * Requires at least: 6.8
  * Requires PHP: 8.3
  * Requires Plugins: woocommerce
@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
-const BW_WM_VERSION = '0.10.2';
+const BW_WM_VERSION = '0.10.5';
 const BW_WM_FILE    = __FILE__;
 define( 'BW_WM_DIR', __DIR__ );
 
