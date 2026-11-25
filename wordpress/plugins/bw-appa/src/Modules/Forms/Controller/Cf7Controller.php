@@ -12,6 +12,7 @@ namespace BW\Appa\Modules\Forms\Controller;
 use BW\Appa\Modules\Forms\Repository\FormRepository;
 use BW\Appa\Modules\Forms\Repository\RateLimitRepository;
 use BW\Appa\Modules\Forms\Repository\SettingsRepository;
+use BW\Appa\Modules\Forms\Service\ConsentLink;
 use BW\Appa\Modules\Forms\Service\FormToken;
 use BW\Appa\Modules\Forms\Service\MailSender;
 use BW\Appa\Modules\Forms\Service\SpamGuard;
@@ -45,6 +46,7 @@ final class Cf7Controller {
 		add_action( 'admin_init', array( $this->forms, 'ensure_all' ) );
 		add_action( 'admin_notices', array( $this, 'missing_cf7_notice' ) );
 		add_filter( 'wpcf7_form_hidden_fields', array( $this, 'hidden_fields' ) );
+		add_filter( 'wpcf7_form_elements', array( $this, 'link_privacy_notice' ) );
 		add_filter( 'wpcf7_form_elements', array( $this, 'add_honeypot' ) );
 		add_filter( 'wpcf7_spam', array( $this, 'check_spam' ), 10, 2 );
 		add_filter( 'wpcf7_mail_components', array( $this, 'route_mail' ), 10, 3 );
@@ -94,6 +96,18 @@ final class Cf7Controller {
 	public function hidden_fields( array $fields ): array {
 		$fields[ self::FIELD_TOKEN ] = $this->token->create( time() );
 		return $fields;
+	}
+
+	/**
+	 * Links "Datenschutzhinweise" in the consent text of the APPA forms to the current privacy page.
+	 */
+	public function link_privacy_notice( string $html ): string {
+		$form = WPCF7_ContactForm::get_current();
+		if ( ! $form instanceof WPCF7_ContactForm || ! $this->forms->is_ours( (int) $form->id() ) ) {
+			return $html;
+		}
+		$url = get_privacy_policy_url() ?: home_url( '/datenschutz/' );
+		return ConsentLink::add( $html, esc_url_raw( $url ) );
 	}
 
 	/**
@@ -152,8 +166,7 @@ final class Cf7Controller {
 		if ( 'mail' !== ( method_exists( $mail, 'name' ) ? $mail->name() : '' ) ) {
 			return $components;
 		}
-		$ours = array_map( 'intval', (array) get_option( FormRepository::OPTION, array() ) );
-		if ( in_array( $form->id(), $ours, true ) ) {
+		if ( $this->forms->is_ours( (int) $form->id() ) ) {
 			$components['recipient'] = $this->settings->get()['recipient'];
 		}
 		return $components;
