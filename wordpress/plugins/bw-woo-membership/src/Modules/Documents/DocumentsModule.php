@@ -10,12 +10,13 @@ declare(strict_types=1);
 namespace BW\WooMembership\Modules\Documents;
 
 use BW\WooMembership\Core\AbstractModule;
+use BW\WooMembership\Core\PrivateStorage;
 use BW\WooMembership\Modules\Documents\Controller\BlockController;
 use BW\WooMembership\Modules\Documents\Controller\DownloadController;
 use BW\WooMembership\Modules\Documents\Controller\PostTypeController;
 use BW\WooMembership\Modules\Documents\Controller\UploadController;
 use BW\WooMembership\Modules\Documents\Repository\DocumentRepository;
-use BW\WooMembership\Support\ProtectedFolder;
+use BW\WooMembership\Support\PrivatePath;
 
 /**
  * Member documents: post type, protected files, checked downloads, list block.
@@ -66,6 +67,6 @@ final class DocumentsModule extends AbstractModule {
 	 */
 	public function activate(): void {
 		( new PostTypeController( new DocumentRepository() ) )->register_post_type();
-		ProtectedFolder::ensure( (string) wp_upload_dir( null, false )['basedir'] );
+		PrivateStorage::dir( PrivatePath::DOCS );
 	}
 }

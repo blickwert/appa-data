@@ -9,9 +9,10 @@ declare(strict_types=1);
 
 namespace BW\WooMembership\Modules\Membership\Service;
 
+use BW\WooMembership\Core\PrivateStorage;
 use BW\WooMembership\Modules\Membership\Repository\ProofRepository;
 use BW\WooMembership\Support\Mailer;
-use BW\WooMembership\Support\ProtectedFolder;
+use BW\WooMembership\Support\PrivatePath;
 use WP_Error;
 
 /**
@@ -20,7 +21,6 @@ use WP_Error;
  */
 final class ProofService {
 
-	public const SUBDIR       = '/bw-member-proofs';
 	public const STASH_PREFIX = 'beitritt';
 
 	/**
@@ -101,12 +101,13 @@ final class ProofService {
 	 * Deletes stashed proofs that were not attached to an order within two days.
 	 */
 	public function cleanup_stash(): int {
-		$dir     = (string) wp_upload_dir( null, false )['basedir'] . self::SUBDIR;
 		$removed = 0;
-		foreach ( (array) glob( $dir . '/' . self::STASH_PREFIX . '*' ) as $file ) {
-			if ( is_string( $file ) && filemtime( $file ) < time() - 2 * DAY_IN_SECONDS ) {
-				wp_delete_file( $file );
-				++$removed;
+		foreach ( PrivateStorage::folders( PrivatePath::PROOFS ) as $dir ) {
+			foreach ( (array) glob( $dir . '/' . self::STASH_PREFIX . '*' ) as $file ) {
+				if ( is_string( $file ) && filemtime( $file ) < time() - 2 * DAY_IN_SECONDS ) {
+					wp_delete_file( $file );
+					++$removed;
+				}
 			}
 		}
 		return $removed;
@@ -129,7 +130,7 @@ final class ProofService {
 		if ( empty( $check['ext'] ) || empty( $check['type'] ) ) {
 			return new WP_Error( 'bw_wm_proof', __( 'Bitte lade eine PDF-, JPG- oder PNG-Datei hoch.', 'bw-woo-membership' ) );
 		}
-		$dir    = ProtectedFolder::ensure( (string) wp_upload_dir( null, false )['basedir'], self::SUBDIR );
+		$dir    = PrivateStorage::dir( PrivatePath::PROOFS );
 		$target = $dir . '/' . $prefix . '-' . wp_generate_password( 16, false ) . '.' . $check['ext'];
 		if ( ! move_uploaded_file( $file['tmp_name'], $target ) ) {
 			return new WP_Error( 'bw_wm_proof', __( 'Die Datei konnte nicht gespeichert werden.', 'bw-woo-membership' ) );
@@ -217,7 +218,7 @@ final class ProofService {
 	 * Absolute path of the pending proof file, or ''.
 	 */
 	public function file( int $user_id ): string {
-		$file = $this->proofs->get( $user_id )['file'];
+		$file = $this->stored_path( $user_id );
 		return '' !== $file && is_readable( $file ) ? $file : '';
 	}
 
@@ -225,9 +226,17 @@ final class ProofService {
 	 * Removes a stored proof file.
 	 */
 	private function delete_file( int $user_id ): void {
-		$file = $this->proofs->get( $user_id )['file'];
+		$file = $this->stored_path( $user_id );
 		if ( '' !== $file && file_exists( $file ) ) {
 			wp_delete_file( $file );
 		}
+	}
+
+	/**
+	 * Absolute path of the stored proof ('' when none). Paths are stored absolute; a relative one belongs below uploads.
+	 */
+	private function stored_path( int $user_id ): string {
+		$file = $this->proofs->get( $user_id )['file'];
+		return '' === $file ? '' : PrivatePath::resolve( $file, PrivateStorage::uploads_basedir() );
 	}
 }
