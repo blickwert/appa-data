@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace BW\WooMembership\Modules\Events\Service;
 
 use BW\WooMembership\Modules\Events\Repository\EventRepository;
+use BW\WooMembership\Modules\Events\Repository\NoticeRepository;
 use BW\WooMembership\Modules\Events\Repository\WaitlistRepository;
 
 /**
@@ -23,6 +24,7 @@ final class RegistrationService {
 	public function __construct(
 		private readonly EventRepository $events,
 		private readonly WaitlistRepository $waitlist,
+		private readonly NoticeRepository $notices,
 	) {
 	}
 
@@ -123,7 +125,7 @@ final class RegistrationService {
 		$cancel_until = null !== $registration ? RegistrationRules::cancel_until( $f['date'], $f['cancel_days'], $paid_amount ) : '';
 		$user         = $user_id > 0 ? get_userdata( $user_id ) : false;
 		return array(
-			'notice'       => \BW\WooMembership\Modules\Events\Controller\RegistrationController::take_notice( $user_id ),
+			'notice'       => $this->notices->take( $user_id ),
 			'event'        => $event_id,
 			'action'       => admin_url( 'admin-post.php' ),
 			// Free for this person and logged in: register with one click under the own name.

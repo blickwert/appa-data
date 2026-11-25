@@ -248,6 +248,29 @@ final class EventRepository {
 	}
 
 	/**
+	 * All events that take registrations, newest date first (backend lists).
+	 *
+	 * @return int[]
+	 */
+	public function with_registration(): array {
+		return array_map(
+			'intval',
+			get_posts(
+				array(
+					'post_type'   => self::POST_TYPE,
+					'post_status' => array( 'publish', 'draft', 'future', 'private' ),
+					'numberposts' => 200,
+					'fields'      => 'ids',
+					'meta_key'    => self::META_DATE, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- small post type.
+					'orderby'     => 'meta_value',
+					'order'       => 'DESC',
+					'meta_query'  => array( array( 'key' => self::META_REGISTRATION, 'value' => '1' ) ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				)
+			)
+		);
+	}
+
+	/**
 	 * Upcoming events (date today or later) that take registrations.
 	 *
 	 * @return int[]

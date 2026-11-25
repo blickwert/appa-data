@@ -184,3 +184,42 @@
 		grid-template-columns: minmax(0, 1fr);
 	}
 }
+
+/* Veranstaltungen › Teilnehmende (templates/admin/participants.php) */
+.bwm-participants__picker {
+	margin: 12px 0 20px;
+}
+
+.bwm-participants__stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 16px 0;
+	padding: 0;
+	list-style: none;
+}
+
+.bwm-participants__stats li {
+	min-inline-size: 120px;
+	margin: 0;
+	padding: 12px 16px;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	background: #fff;
+}
+
+.bwm-participants__stats span {
+	display: block;
+	color: #50575e;
+}
+
+.bwm-participants__stats strong {
+	display: block;
+	margin-block-start: 4px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.bwm-participants__add {
+	margin-block-start: 28px;
+}

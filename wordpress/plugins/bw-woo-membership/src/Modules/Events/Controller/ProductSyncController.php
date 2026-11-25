@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace BW\WooMembership\Modules\Events\Controller;
 
 use BW\WooMembership\Modules\Events\Repository\EventRepository;
-use BW\WooMembership\Modules\Events\Service\EventPricing;
+use BW\WooMembership\Modules\Events\Service\ProductSync;
 use WP_Post;
 
 /**
@@ -22,7 +22,10 @@ final class ProductSyncController {
 	/**
 	 * Builds the controller.
 	 */
-	public function __construct( private readonly EventRepository $events ) {
+	public function __construct(
+		private readonly EventRepository $events,
+		private readonly ProductSync $sync,
+	) {
 	}
 
 	/**
@@ -51,7 +54,7 @@ final class ProductSyncController {
 		}
 		$this->events->forget();
 		foreach ( $this->events->events_in_order( $order ) as $event_id ) {
-			$this->sync( $event_id );
+			$this->sync->sync( $event_id );
 		}
 	}
 
@@ -62,7 +65,7 @@ final class ProductSyncController {
 		if ( EventRepository::POST_TYPE !== $post->post_type || wp_is_post_revision( $post_id ) || 'auto-draft' === $post->post_status ) {
 			return;
 		}
-		$this->sync( $post_id );
+		$this->sync->sync( $post_id );
 	}
 
 	/**
@@ -70,63 +73,8 @@ final class ProductSyncController {
 	 */
 	public function on_remove( int $post_id ): void {
 		if ( EventRepository::POST_TYPE === get_post_type( $post_id ) ) {
-			$this->hide( $this->events->product_id( $post_id ) );
+			$this->sync->hide( $this->events->product_id( $post_id ) );
 		}
 	}
 
-	/**
-	 * Creates or updates the product of an event.
-	 */
-	public function sync( int $event_id ): void {
-		if ( ! class_exists( 'WC_Product_Simple' ) ) {
-			return;
-		}
-		$fields     = $this->events->fields( $event_id );
-		$product_id = $this->events->product_id( $event_id );
-		$product    = $product_id ? wc_get_product( $product_id ) : null;
-		if ( ! $fields['registration'] ) {
-			$this->hide( $product_id );
-			return;
-		}
-		if ( ! $product ) {
-			$product = new \WC_Product_Simple();
-		}
-		// Base price = public price (or member price for members-only); the cart sets the price per person.
-		$base = 'members' === $fields['audience'] ? $fields['price_member'] : ( '' !== $fields['price_public'] ? $fields['price_public'] : $fields['price_member'] );
-		$product->set_name( 'Anmeldung: ' . get_the_title( $event_id ) );
-		$product->set_status( 'publish' === get_post_status( $event_id ) ? 'publish' : 'private' );
-		$product->set_catalog_visibility( 'hidden' );
-		$product->set_virtual( true );
-		$product->set_sold_individually( true );
-		$product->set_tax_status( 'none' );
-		$product->set_regular_price( '' !== $base ? $base : '0' );
-		$left = EventPricing::places_left( $fields['capacity'], $this->events->count_registrations( $event_id ) );
-		$product->set_manage_stock( null !== $left );
-		if ( null !== $left ) {
-			$product->set_stock_quantity( $left );
-		}
-		$product->update_meta_data( EventRepository::META_EVENT, $event_id );
-		$new_id = $product->save();
-		if ( $new_id !== $product_id ) {
-			$this->events->link( $event_id, $new_id );
-		}
-		/**
-		 * Free places of an event were recalculated (event saved or a registration changed).
-		 *
-		 * @param int      $event_id Event.
-		 * @param int|null $left     Free places, null = unlimited.
-		 */
-		do_action( 'bw_wm_event_places_changed', $event_id, $left );
-	}
-
-	/**
-	 * Makes a product private (not purchasable, orders stay intact).
-	 */
-	private function hide( int $product_id ): void {
-		$product = $product_id && function_exists( 'wc_get_product' ) ? wc_get_product( $product_id ) : null;
-		if ( $product && 'private' !== $product->get_status() ) {
-			$product->set_status( 'private' );
-			$product->save();
-		}
-	}
 }
