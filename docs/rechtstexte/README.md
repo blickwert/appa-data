@@ -31,7 +31,7 @@ Alle Stellen sind im Text als `[Platzhalter: …]` markiert.
 - Wertersatz bei Rücktritt von der Mitgliedschaft (Empfehlung: verzichten)
 
 **Veranstaltungen**
-- Stornostaffel (Tage, Gebühren), Ersatzperson, Erstattung bei Nachbesetzung
+- Storno: entschieden (bis 14 Tage vorher volle Erstattung, keine Staffel); offen nur Ersatzperson und Erstattung bei Nachbesetzung
 - Mindestteilnehmerzahl, Frist für unbezahlte Anmeldungen
 - Aufzeichnung von Online-Veranstaltungen, Anzeigename bei Zoom
 - Weitere Felder bei der Anmeldung und in der Teilnehmerliste
