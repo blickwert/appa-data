@@ -42,7 +42,7 @@ Die Annahmen wurden mit einem zweiten Claude-Agenten gegengeprüft (Abgleich mit
 
 | # | Frage | Arbeitsannahme (umgesetzt) | Antwort |
 |---|---|---|---|
-| T1 | Build-Schritt für die Backend-Verwaltung (`@wordpress/scripts`) einführen? | Ja, wie im Skill vorgesehen (JSX, kein TypeScript). Vor dem ZIP `npm run build`; `build/` ist nicht im Git. | **David, 24. 11.:** Ja. |
+| T1 | Build-Schritt für die Backend-Verwaltung (`@wordpress/scripts`) einführen? | Ja, wie im Skill vorgesehen; seit 25. 11. in TypeScript (Review #31). Vor dem ZIP `npm run typecheck && npm run build`; `build/` ist nicht im Git. | **David, 24. 11.:** Ja. |
 | T2 | Seiten-Cache beim Hosting: werden angemeldete Nutzer:innen ausgenommen? | Wird angenommen (übliche Einstellung). Bitte beim Hosting prüfen, sonst sehen Mitglieder falsche Preise. | **David, 24. 11.:** Nein (angemeldete Nutzer:innen werden nicht ausgenommen) – mit AJAX lösen. → umgesetzt: persönliche Seiten nicht cachebar, Anmelde-Box per AJAX. |
 | T3 | nginx-Regel für geschützte Ordner | Auf 2603b nicht nötig (direkter Aufruf liefert 403). Bei Umzug auf die Live-Domain erneut prüfen. | **David, 24. 11.:** Ja. |
 | T4 | Stripe verbinden, Bankdaten für Überweisung, AGB/Beitragsordnung, Datenschutzseite | Offen, Platzhalter auf 2603b. | **Entschieden (David, 24. 11.): Im Live-Betrieb nur Stripe (Karte, SEPA-Lastschrift); Überweisung wird deaktiviert.** Bankdaten für Überweisung entfallen. Offen: Stripe verbinden, AGB/Beitragsordnung, Datenschutzseite. **Nachtrag David, 24. 11.:** Später; Claude schreibt Entwürfe der Rechtsseiten. → Entwürfe: docs/rechtstexte/. |
