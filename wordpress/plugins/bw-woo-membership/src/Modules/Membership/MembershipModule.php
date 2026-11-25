@@ -28,6 +28,7 @@ use BW\WooMembership\Modules\Membership\Controller\SyncController;
 use BW\WooMembership\Modules\Membership\Repository\MemberRepository;
 use BW\WooMembership\Modules\Membership\Repository\MembershipOrderRepository;
 use BW\WooMembership\Modules\Membership\Repository\ProofRepository;
+use BW\WooMembership\Modules\Membership\Repository\UploadLimitRepository;
 use BW\WooMembership\Support\Mailer;
 use BW\WooMembership\Modules\Membership\Service\MemberAdminService;
 use BW\WooMembership\Modules\Membership\Service\ProofService;
@@ -89,7 +90,7 @@ final class MembershipModule extends AbstractModule {
 		( new ShopController( $orders ) )->register();
 		( new ProofController( $proof, $proofs, $memberships, $mailer ) )->register();
 		( new PurchaseController( $memberships, $orders, $proofs ) )->register();
-		$join_proof = new JoinProof( $proofs, $proof );
+		$join_proof = new JoinProof( $proofs, $proof, new UploadLimitRepository() );
 		( new JoinController( $memberships, $orders, $members, new MemberPages(), $join_proof ) )->register();
 		( new JoinProofController( $join_proof, $orders ) )->register();
 		add_action( 'bw_wm_daily_after_sync', array( $proof, 'cleanup_stash' ) );

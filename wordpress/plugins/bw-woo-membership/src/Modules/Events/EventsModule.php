@@ -27,6 +27,7 @@ use BW\WooMembership\Modules\Events\Service\RegistrationFlow;
 use BW\WooMembership\Modules\Events\Service\RegistrationMails;
 use BW\WooMembership\Modules\Events\Controller\WaitlistController;
 use BW\WooMembership\Modules\Events\Service\RegistrationService;
+use BW\WooMembership\Modules\Membership\Service\MemberPages;
 use BW\WooMembership\Support\Mailer;
 
 /**
@@ -70,7 +71,8 @@ final class EventsModule extends AbstractModule {
 		$waitlist      = new WaitlistRepository();
 		$notices       = new NoticeRepository();
 		$mailer        = new Mailer();
-		$registrations = new RegistrationService( $events, $waitlist, $notices );
+		// The events module requires the membership module, whose page lookup is a plain service without hooks.
+		$registrations = new RegistrationService( $events, $waitlist, $notices, new MemberPages() );
 		$sync          = new ProductSync( $events );
 		$flow          = new RegistrationFlow( $events, $registrations, $sync, new RegistrationMails( $mailer ) );
 		( new ProductSyncController( $events, $sync ) )->register();
