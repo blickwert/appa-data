@@ -14,6 +14,7 @@ use BW\Appa\Modules\Forms\Repository\RateLimitRepository;
 use BW\Appa\Modules\Forms\Repository\SettingsRepository;
 use BW\Appa\Modules\Forms\Service\ConsentLink;
 use BW\Appa\Modules\Forms\Service\FormToken;
+use BW\Appa\Modules\Forms\Service\LegacyClasses;
 use BW\Appa\Modules\Forms\Service\MailSender;
 use BW\Appa\Modules\Forms\Service\SpamGuard;
 use WPCF7_ContactForm;
@@ -49,6 +50,7 @@ final class Cf7Controller {
 		add_action( 'admin_init', array( $this->forms, 'ensure_all' ) );
 		add_action( 'admin_notices', array( $this, 'missing_cf7_notice' ) );
 		add_filter( 'wpcf7_form_hidden_fields', array( $this, 'hidden_fields' ) );
+		add_filter( 'wpcf7_form_elements', array( LegacyClasses::class, 'rename' ), 5 );
 		add_filter( 'wpcf7_form_elements', array( $this, 'link_privacy_notice' ) );
 		add_filter( 'wpcf7_form_elements', array( $this, 'add_honeypot' ) );
 		add_filter( 'wpcf7_spam', array( $this, 'check_spam' ), 10, 2 );
@@ -118,7 +120,7 @@ final class Cf7Controller {
 	 */
 	public function add_honeypot( string $html ): string {
 		return $html . sprintf(
-			'<p class="bwa-form__hp" aria-hidden="true"><label>%1$s <input type="text" name="%2$s" value="" tabindex="-1" autocomplete="off"></label></p>',
+			'<p class="bw-form__hp" aria-hidden="true"><label>%1$s <input type="text" name="%2$s" value="" tabindex="-1" autocomplete="off"></label></p>',
 			esc_html__( 'Bitte leer lassen', 'bw-appa' ),
 			esc_attr( self::FIELD_HONEYPOT )
 		);

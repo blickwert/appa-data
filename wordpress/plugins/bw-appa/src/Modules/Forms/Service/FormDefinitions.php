@@ -47,13 +47,13 @@ final class FormDefinitions {
 		return implode(
 			"\n",
 			array(
-				'<div class="bwa-form">',
-				'<p class="bwa-form__field bwa-form__field--half"><label>' . esc_html__( 'Vor- und Nachname *', 'bw-appa' ) . '<br>[text* name autocomplete:name]</label></p>',
-				'<p class="bwa-form__field bwa-form__field--half"><label>' . esc_html__( 'E-Mail-Adresse *', 'bw-appa' ) . '<br>[email* email autocomplete:email]</label></p>',
-				'<p class="bwa-form__field"><label>' . esc_html__( 'Betreff *', 'bw-appa' ) . '<br>[text* betreff]</label></p>',
-				'<p class="bwa-form__field"><label>' . esc_html__( 'Nachricht *', 'bw-appa' ) . '<br>[textarea* nachricht x5]</label></p>',
-				'<p class="bwa-form__field bwa-form__consent">[acceptance datenschutz] ' . esc_html__( 'Ich habe die Datenschutzhinweise gelesen und bin einverstanden, dass meine Angaben zur Beantwortung meiner Anfrage verarbeitet werden.', 'bw-appa' ) . ' [/acceptance]</p>',
-				'<p class="bwa-form__actions">[submit class:bwa-form__submit "' . esc_attr__( 'Nachricht senden', 'bw-appa' ) . '"]</p>',
+				'<div class="bw-form">',
+				'<p class="bw-form__field bw-form__field--half"><label>' . esc_html__( 'Vor- und Nachname *', 'bw-appa' ) . '<br>[text* name autocomplete:name]</label></p>',
+				'<p class="bw-form__field bw-form__field--half"><label>' . esc_html__( 'E-Mail-Adresse *', 'bw-appa' ) . '<br>[email* email autocomplete:email]</label></p>',
+				'<p class="bw-form__field"><label>' . esc_html__( 'Betreff *', 'bw-appa' ) . '<br>[text* betreff]</label></p>',
+				'<p class="bw-form__field"><label>' . esc_html__( 'Nachricht *', 'bw-appa' ) . '<br>[textarea* nachricht x5]</label></p>',
+				'<p class="bw-form__field bw-form__consent">[acceptance datenschutz] ' . esc_html__( 'Ich habe die Datenschutzhinweise gelesen und bin einverstanden, dass meine Angaben zur Beantwortung meiner Anfrage verarbeitet werden.', 'bw-appa' ) . ' [/acceptance]</p>',
+				'<p class="bw-form__actions">[submit class:bw-form__submit "' . esc_attr__( 'Nachricht senden', 'bw-appa' ) . '"]</p>',
 				'</div>',
 			)
 		);

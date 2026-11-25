@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
 
 final class ConsentLinkTest extends TestCase {
 
-	private const FORM = '<p class="bwa-form__field">Datenschutzhinweise</p><p class="bwa-form__field bwa-form__consent"><label><input type="checkbox"> Ich habe die Datenschutzhinweise gelesen.</label></p>';
+	private const FORM = '<p class="bw-form__field">Datenschutzhinweise</p><p class="bw-form__field bw-form__consent"><label><input type="checkbox"> Ich habe die Datenschutzhinweise gelesen.</label></p>';
 
 	public function test_links_word_in_consent_paragraph_only(): void {
 		$html = ConsentLink::add( self::FORM, 'https://appa.test/datenschutz/?a=1&b=2' );
 		self::assertStringContainsString( 'Ich habe die <a href="https://appa.test/datenschutz/?a=1&amp;b=2" target="_blank" rel="noopener">Datenschutzhinweise</a> gelesen.', $html );
-		self::assertStringStartsWith( '<p class="bwa-form__field">Datenschutzhinweise</p>', $html );
+		self::assertStringStartsWith( '<p class="bw-form__field">Datenschutzhinweise</p>', $html );
 		self::assertSame( 1, substr_count( $html, '<a ' ) );
 	}
 

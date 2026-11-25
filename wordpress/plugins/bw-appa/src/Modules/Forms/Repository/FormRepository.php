@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace BW\Appa\Modules\Forms\Repository;
 
 use BW\Appa\Modules\Forms\Service\FormDefinitions;
+use BW\Appa\Modules\Forms\Service\LegacyClasses;
 use WPCF7_ContactForm;
 
 /**
@@ -18,6 +19,12 @@ use WPCF7_ContactForm;
 final class FormRepository {
 
 	public const OPTION = 'bw_appa_forms_ids';
+
+	/**
+	 * Version of the class names in the stored form markup (2 = prefix `bw-`, see LegacyClasses).
+	 */
+	public const MARKUP_OPTION  = 'bw_appa_forms_markup';
+	private const MARKUP_VERSION = 2;
 
 	/**
 	 * Builds the repository.
@@ -51,6 +58,7 @@ final class FormRepository {
 		if ( ! class_exists( WPCF7_ContactForm::class ) ) {
 			return;
 		}
+		$this->migrate_markup();
 		$ids = (array) get_option( self::OPTION, array() );
 		foreach ( $this->definitions->all() as $key => $definition ) {
 			if ( $this->find( $key ) ) {
@@ -80,5 +88,24 @@ final class FormRepository {
 			$ids[ $key ] = $form->save();
 		}
 		update_option( self::OPTION, $ids, false );
+	}
+
+	/**
+	 * Renames the old class names (`bwa-form…`) in the stored markup of all forms this plugin created,
+	 * once per markup version. Only the class names change, other edits in CF7 stay.
+	 */
+	private function migrate_markup(): void {
+		if ( (int) get_option( self::MARKUP_OPTION, 0 ) >= self::MARKUP_VERSION ) {
+			return;
+		}
+		foreach ( array_map( 'intval', (array) get_option( self::OPTION, array() ) ) as $id ) {
+			$form   = $id > 0 ? WPCF7_ContactForm::get_instance( $id ) : null;
+			$markup = $form ? (string) $form->prop( 'form' ) : '';
+			if ( $form && LegacyClasses::found( $markup ) ) {
+				$form->set_properties( array( 'form' => LegacyClasses::rename( $markup ) ) );
+				$form->save();
+			}
+		}
+		update_option( self::MARKUP_OPTION, self::MARKUP_VERSION, false );
 	}
 }

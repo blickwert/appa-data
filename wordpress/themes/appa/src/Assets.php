@@ -42,9 +42,9 @@ final class Assets {
 	 * Base styles (focus, skip link, small resets) that theme.json cannot express, and the small navigation script.
 	 */
 	public function enqueue_base(): void {
-		wp_enqueue_style( 'bw-appa-base', get_theme_file_uri( 'assets/css/base.css' ), array(), Theme::version() );
+		wp_enqueue_style( 'bw-appa-theme-base', get_theme_file_uri( 'assets/css/base.css' ), array(), Theme::version() );
 		wp_enqueue_script(
-			'bw-appa-navigation',
+			'bw-appa-theme-navigation',
 			get_theme_file_uri( 'assets/js/navigation.js' ),
 			array(),
 			Theme::version(),
@@ -54,7 +54,7 @@ final class Assets {
 			)
 		);
 		if ( is_page_template( array( 'page-member', 'page-member-dashboard' ) ) ) {
-			wp_enqueue_style( 'bw-appa-member', get_theme_file_uri( 'assets/css/member.css' ), array( 'bw-appa-base' ), Theme::version() );
+			wp_enqueue_style( 'bw-appa-theme-member', get_theme_file_uri( 'assets/css/member.css' ), array( 'bw-appa-theme-base' ), Theme::version() );
 		}
 	}
 
@@ -73,7 +73,7 @@ final class Assets {
 			}
 			return;
 		}
-		wp_enqueue_style( 'bw-appa-woocommerce', get_theme_file_uri( 'assets/css/woocommerce.css' ), array( 'bw-appa-base' ), Theme::version() );
+		wp_enqueue_style( 'bw-appa-theme-woocommerce', get_theme_file_uri( 'assets/css/woocommerce.css' ), array( 'bw-appa-theme-base' ), Theme::version() );
 	}
 
 	/**
@@ -93,7 +93,7 @@ final class Assets {
 			wp_enqueue_block_style(
 				$block,
 				array(
-					'handle' => 'bw-appa-' . $name,
+					'handle' => 'bw-appa-theme-' . $name,
 					'src'    => get_theme_file_uri( "assets/css/blocks/{$name}.css" ),
 					'path'   => get_theme_file_path( "assets/css/blocks/{$name}.css" ),
 					'ver'    => Theme::version(),

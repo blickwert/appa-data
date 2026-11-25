@@ -16,6 +16,14 @@
 
 .bw-icon--s { --bw-icon-size: 1.25rem; }
 .bw-icon--l { --bw-icon-size: 2rem; }
+
+/* Tone (attribute `tone`: red, navy, green, gold, blue → class by role; primary = default colour) */
+.bw-icon--text { --bw-icon-color: var(--wp--preset--color--navy); }
+.bw-icon--success { --bw-icon-color: var(--wp--preset--color--green); }
+.bw-icon--accent { --bw-icon-color: var(--wp--preset--color--gold); }
+.bw-icon--info { --bw-icon-color: var(--wp--preset--color--blue); }
+
+/* Old class names (theme ≤ 0.5.2), only for HTML cached before the update */
 .bw-icon--navy { --bw-icon-color: var(--wp--preset--color--navy); }
 .bw-icon--green { --bw-icon-color: var(--wp--preset--color--green); }
 .bw-icon--gold { --bw-icon-color: var(--wp--preset--color--gold); }

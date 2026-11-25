@@ -28,7 +28,7 @@ final class ConsentLink {
 			return $html;
 		}
 		return (string) preg_replace_callback(
-			'#<p\b[^>]*\bbwa-form__consent\b[^>]*>.*?</p>#s',
+			'#<p\b[^>]*\bbw-form__consent\b[^>]*>.*?</p>#s',
 			static function ( array $m ) use ( $url ): string {
 				if ( str_contains( $m[0], '<a ' ) ) {
 					return $m[0];
