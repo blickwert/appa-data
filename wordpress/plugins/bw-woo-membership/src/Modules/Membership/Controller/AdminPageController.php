@@ -103,7 +103,7 @@ final class AdminPageController {
 			);
 			return;
 		}
-		echo '<div class="wrap"><div id="bw-wm-admin" class="bwo-app"><p>' . esc_html__( 'Lädt …', 'bw-woo-membership' ) . '</p></div></div>';
+		echo '<div class="wrap"><div id="bw-wm-admin" class="bwm-app"><p>' . esc_html__( 'Lädt …', 'bw-woo-membership' ) . '</p></div></div>';
 	}
 
 	/**
