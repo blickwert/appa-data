@@ -1,0 +1,217 @@
+<?php
+/**
+ * Member data.
+ *
+ * @package BW\WooMembership
+ */
+
+declare(strict_types=1);
+
+namespace BW\WooMembership\Modules\Membership\Repository;
+
+/**
+ * Reads and writes the member's own data (user meta) and the member number sequence.
+ */
+final class MemberRepository {
+
+	public const META_NUMBER       = 'bw_wm_number';
+	public const META_SINCE        = 'bw_wm_since';
+	public const META_MANUAL_TYPE  = 'bw_wm_manual_type';
+	public const META_MANUAL_UNTIL = 'bw_wm_manual_until';
+	public const META_DIRECTORY    = 'bw_wm_directory';
+	public const META_CONSENT      = 'bw_wm_directory_consent';
+	public const META_PROFILE      = 'bw_wm_profile';
+	public const OPTION_SEQUENCE   = 'bw_wm_number_sequence';
+	public const OPTION_LOCK       = 'bw_wm_number_lock';
+
+	// Snapshot of the resolved membership, kept up to date by MembershipSync (list, filters, export).
+	public const META_STATUS      = 'bw_wm_status';
+	public const META_TYPE        = 'bw_wm_type';
+	public const META_VALID_UNTIL = 'bw_wm_valid_until';
+	public const META_NEXT        = 'bw_wm_next_renewal';
+
+	/**
+	 * IDs of users who are or were members (member number or manual membership).
+	 *
+	 * @return int[]
+	 */
+	public function member_ids(): array {
+		return array_map(
+			'intval',
+			get_users(
+				array(
+					'fields'     => 'ID',
+					'number'     => -1,
+					'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- association with a few hundred members.
+						'relation' => 'OR',
+						array( 'key' => self::META_NUMBER, 'compare' => 'EXISTS' ),
+						array( 'key' => self::META_MANUAL_TYPE, 'compare' => 'EXISTS' ),
+					),
+				)
+			)
+		);
+	}
+
+	/**
+	 * IDs of users that have a membership snapshot.
+	 *
+	 * @return int[]
+	 */
+	public function snapshot_ids(): array {
+		return array_map( 'intval', get_users( array( 'fields' => 'ID', 'number' => -1, 'meta_key' => self::META_STATUS ) ) ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- few hundred users.
+	}
+
+	/**
+	 * Stores the snapshot of a resolved membership.
+	 *
+	 * @param array{status: string, type: string, valid_until: ?string, next: ?string} $snapshot Values.
+	 */
+	public function store_snapshot( int $user_id, array $snapshot ): void {
+		update_user_meta( $user_id, self::META_STATUS, $snapshot['status'] );
+		update_user_meta( $user_id, self::META_TYPE, $snapshot['type'] );
+		update_user_meta( $user_id, self::META_VALID_UNTIL, (string) $snapshot['valid_until'] );
+		update_user_meta( $user_id, self::META_NEXT, (string) $snapshot['next'] );
+	}
+
+	/**
+	 * Sets or clears a manual membership (honorary, institutional).
+	 */
+	public function set_manual( int $user_id, string $type, string $until ): void {
+		if ( '' === $type ) {
+			delete_user_meta( $user_id, self::META_MANUAL_TYPE );
+			delete_user_meta( $user_id, self::META_MANUAL_UNTIL );
+			return;
+		}
+		update_user_meta( $user_id, self::META_MANUAL_TYPE, $type );
+		update_user_meta( $user_id, self::META_MANUAL_UNTIL, $until );
+	}
+
+	/**
+	 * Member number or empty string.
+	 */
+	public function number( int $user_id ): string {
+		return (string) get_user_meta( $user_id, self::META_NUMBER, true );
+	}
+
+	/**
+	 * Day (Y-m-d) the user first became a member, or null.
+	 */
+	public function since( int $user_id ): ?string {
+		$since = (string) get_user_meta( $user_id, self::META_SINCE, true );
+		return '' !== $since ? $since : null;
+	}
+
+	/**
+	 * Assigns number and start date once; both stay when a member leaves and rejoins.
+	 *
+	 * @param callable(int): string $format Formats a sequence value (MemberNumber::format).
+	 */
+	public function ensure_number( int $user_id, callable $format, string $today ): void {
+		if ( '' === $this->number( $user_id ) && $this->lock() ) {
+			try {
+				// Read again inside the lock: two payments at the same time must not get the same number.
+				wp_cache_delete( self::OPTION_SEQUENCE, 'options' );
+				wp_cache_delete( 'alloptions', 'options' );
+				clean_user_cache( $user_id );
+				if ( '' === $this->number( $user_id ) ) {
+					$next = $this->sequence() + 1;
+					update_option( self::OPTION_SEQUENCE, $next, false );
+					update_user_meta( $user_id, self::META_NUMBER, (string) $format( $next ) );
+				}
+			} finally {
+				delete_option( self::OPTION_LOCK );
+			}
+		}
+		if ( null === $this->since( $user_id ) ) {
+			update_user_meta( $user_id, self::META_SINCE, $today );
+		}
+	}
+
+	/**
+	 * Short lock for the number sequence: add_option() only succeeds for one request (unique option name).
+	 * A lock older than 30 seconds is stale (request died) and is taken over.
+	 */
+	private function lock(): bool {
+		for ( $try = 0; $try < 50; $try++ ) {
+			if ( add_option( self::OPTION_LOCK, (string) time(), '', false ) ) {
+				return true;
+			}
+			wp_cache_delete( self::OPTION_LOCK, 'options' );
+			$since = (int) get_option( self::OPTION_LOCK, 0 );
+			if ( $since > 0 && time() - $since > 30 ) {
+				delete_option( self::OPTION_LOCK );
+				continue;
+			}
+			usleep( 100000 );
+		}
+		return false;
+	}
+
+	/**
+	 * Last assigned sequence value.
+	 */
+	public function sequence(): int {
+		return (int) get_option( self::OPTION_SEQUENCE, 0 );
+	}
+
+	/**
+	 * Manually managed membership (honorary, institutional): type and last day, or null.
+	 *
+	 * @return array{type: string, until: string}|null
+	 */
+	public function manual( int $user_id ): ?array {
+		$type = (string) get_user_meta( $user_id, self::META_MANUAL_TYPE, true );
+		if ( '' === $type ) {
+			return null;
+		}
+		return array(
+			'type'  => $type,
+			'until' => (string) get_user_meta( $user_id, self::META_MANUAL_UNTIL, true ),
+		);
+	}
+
+	/**
+	 * Whether the member agreed to be listed in the public directory.
+	 */
+	public function in_directory( int $user_id ): bool {
+		return 'yes' === get_user_meta( $user_id, self::META_DIRECTORY, true );
+	}
+
+	/**
+	 * Stores the directory choice; the consent date documents the opt-in (GDPR).
+	 */
+	public function set_directory( int $user_id, bool $visible, string $today ): void {
+		update_user_meta( $user_id, self::META_DIRECTORY, $visible ? 'yes' : 'no' );
+		if ( $visible ) {
+			update_user_meta( $user_id, self::META_CONSENT, $today );
+		} else {
+			delete_user_meta( $user_id, self::META_CONSENT );
+		}
+	}
+
+	/**
+	 * Directory profile fields.
+	 *
+	 * @return array{title: string, website: string, focus: string, bio: string, groups: string[]}
+	 */
+	public function profile( int $user_id ): array {
+		$stored = get_user_meta( $user_id, self::META_PROFILE, true );
+		$stored = is_array( $stored ) ? $stored : array();
+		return array(
+			'title'   => (string) ( $stored['title'] ?? '' ),
+			'website' => (string) ( $stored['website'] ?? '' ),
+			'focus'   => (string) ( $stored['focus'] ?? '' ),
+			'bio'     => (string) ( $stored['bio'] ?? '' ),
+			'groups'  => array_values( array_map( 'strval', (array) ( $stored['groups'] ?? array() ) ) ),
+		);
+	}
+
+	/**
+	 * Saves sanitised profile fields.
+	 *
+	 * @param array{title: string, website: string, focus: string, bio: string, groups: string[]} $profile Clean values.
+	 */
+	public function save_profile( int $user_id, array $profile ): void {
+		update_user_meta( $user_id, self::META_PROFILE, $profile );
+	}
+}

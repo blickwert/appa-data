@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bw-woo-membership/profile",
+	"title": "Mitglied: Profil",
+	"category": "widgets",
+	"icon": "groups",
+	"description": "Profil und Sichtbarkeit im öffentlichen Mitgliederverzeichnis.",
+	"textdomain": "bw-woo-membership",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"multiple": false
+	},
+	"editorScript": "bw-wm-blocks",
+	"style": "bw-wm-dashboard"
+}

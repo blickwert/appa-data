@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bw-woo-membership/documents",
+	"title": "Mitglied: Dokumente",
+	"category": "widgets",
+	"icon": "groups",
+	"description": "Neueste Mitglieder-Dokumente zum Herunterladen.",
+	"textdomain": "bw-woo-membership",
+	"attributes": {
+		"limit": {
+			"type": "integer",
+			"default": 3
+		}
+	},
+	"supports": {
+		"html": false,
+		"multiple": false
+	},
+	"editorScript": "bw-wm-blocks",
+	"style": "bw-wm-dashboard"
+}

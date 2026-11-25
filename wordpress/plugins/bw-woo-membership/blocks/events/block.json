@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bw-woo-membership/events",
+	"title": "Mitglied: Veranstaltungen",
+	"category": "widgets",
+	"icon": "groups",
+	"description": "Kommende Veranstaltungen für Mitglieder.",
+	"textdomain": "bw-woo-membership",
+	"attributes": {
+		"limit": {
+			"type": "integer",
+			"default": 3
+		}
+	},
+	"supports": {
+		"html": false,
+		"multiple": false
+	},
+	"editorScript": "bw-wm-blocks",
+	"style": "bw-wm-dashboard"
+}

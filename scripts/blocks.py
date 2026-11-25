@@ -5,8 +5,12 @@ Only presets and block style variations are used – no raw design values.
 """
 import json
 from html import escape
+from pathlib import Path
 
 ARROW = "arrow"
+_TOKENS = json.loads((Path(__file__).resolve().parent.parent / "tokens/tokens.json").read_text("utf-8"))
+# Content width of page sections: layout.wide (1104 px, as in the Elementor/Mockup layout) in rem, like theme.json.
+WIDE = f"{_TOKENS['layout']['wide'] / 16:g}rem"
 
 
 def _attrs(d):
@@ -83,7 +87,12 @@ def group(inner, *, tag="div", variation=None, cls=None, anchor=None, align=None
 def section(inner, *, variation=None, anchor=None, cls=None, pad=("section", "section"), gap=None):
     """Full-width page section with the wide content width."""
     return group(inner, tag="section", variation=variation, anchor=anchor, cls=cls, align="full", pad=pad, gap=gap,
-                 layout={"type": "constrained", "contentSize": "72rem"})
+                 layout={"type": "constrained", "contentSize": WIDE})
+
+
+def narrow(inner, gap=None, cls=None):
+    """Left-aligned block with the (narrower) global content width, e.g. for long text or accordions."""
+    return group(inner, cls=cls, gap=gap, layout={"type": "constrained", "justifyContent": "left"})
 
 
 def stack(inner, gap=None, cls=None, variation=None):
@@ -102,8 +111,8 @@ def grid(inner, columns=3, min_width="18rem", gap="6", cls=None):
                  cls=cls)
 
 
-def card(inner, variation="card", gap="4"):
-    return group(inner, variation=variation, gap=gap, layout={"type": "default"})
+def card(inner, variation="card", gap="4", cls=None):
+    return group(inner, variation=variation, gap=gap, cls=cls, layout={"type": "default"})
 
 
 def heading(text, level=2, size=None, cls=None, anchor=None):
@@ -140,21 +149,26 @@ def eyebrow(text):
     return p(text, variation="eyebrow")
 
 
-def button(text, url, variation=None, bindings=None):
+def button(text, url, variation=None, bindings=None, full=False):
     attrs = {}
+    if full:
+        attrs["width"] = 100
     if bindings:
         attrs["metadata"] = {"bindings": bindings}
     if variation:
         attrs["className"] = f"is-style-{variation}"
     href = f' href="{url}"' if url else ""
     ext = ' target="_blank" rel="noreferrer noopener"' if url and url.startswith("http") and "appa" not in url else ""
-    return (f"<!-- wp:button{_attrs(attrs)} -->\n<div class=\"{_cls('wp-block-button', attrs.get('className'))}\">"
+    width_cls = "has-custom-width wp-block-button__width-100" if full else ""
+    return (f"<!-- wp:button{_attrs(attrs)} -->\n<div class=\"{_cls('wp-block-button', width_cls, attrs.get('className'))}\">"
             f"<a class=\"wp-block-button__link wp-element-button\"{href}{ext}>{text}</a></div>\n<!-- /wp:button -->")
 
 
-def buttons(*items, justify=None):
+def buttons(*items, justify=None, cls=None):
     attrs = {"layout": {"type": "flex", "justifyContent": justify}} if justify else {}
-    cls = _cls("wp-block-buttons", f"is-content-justification-{justify}" if justify else "")
+    if cls:
+        attrs["className"] = cls
+    cls = _cls("wp-block-buttons", cls, f"is-content-justification-{justify}" if justify else "")
     return f"<!-- wp:buttons{_attrs(attrs)} -->\n<div class=\"{cls}\">\n{_indent(join(*items))}\n</div>\n<!-- /wp:buttons -->"
 
 
@@ -162,13 +176,29 @@ def arrow(text, url):
     return buttons(button(text, url, ARROW))
 
 
-def icon(name, size=None, tone=None):
+def icon(name, size=None, tone=None, shape=None):
+    """Theme icon. shape: None = plain glyph in the tone colour, "circle" = navy glyph on a round tone-coloured disc,
+    "tile" = glyph in the tone colour on a light rounded square."""
     attrs = {"icon": name}
     if size:
         attrs["size"] = size
     if tone:
         attrs["tone"] = tone
+    if shape:
+        attrs["shape"] = shape
     return f"<!-- wp:bw/icon{_attrs(attrs)} /-->"
+
+
+def cover(php_src, inner, cls=None):
+    """Full-width image band (core/cover, no overlay) with content at the bottom left of the section width."""
+    attrs = {"url": php_src, "dimRatio": 0, "isUserOverlayColor": True, "contentPosition": "bottom left",
+             "isDark": False, "align": "full", "className": cls,
+             "layout": {"type": "constrained", "contentSize": WIDE}}
+    html_cls = _cls("wp-block-cover alignfull is-light has-custom-content-position is-position-bottom-left", cls)
+    return (f"<!-- wp:cover{_attrs(attrs)} -->\n<div class=\"{html_cls}\"><img class=\"wp-block-cover__image-background\" "
+            f"alt=\"\" src=\"{php_src}\" data-object-fit=\"cover\"/><span aria-hidden=\"true\" "
+            f"class=\"wp-block-cover__background has-background-dim-0 has-background-dim\"></span>"
+            f"<div class=\"wp-block-cover__inner-container\">\n{_indent(inner)}\n</div></div>\n<!-- /wp:cover -->")
 
 
 def image(php_src, alt, cls=None):
@@ -211,7 +241,10 @@ def quote(text, cite):
             f"\n{_indent(p(text))}\n<cite>{cite}</cite></blockquote>\n<!-- /wp:quote -->")
 
 
-def separator():
+def separator(wide=False):
+    if wide:
+        return ("<!-- wp:separator {\"className\":\"is-style-wide\"} -->\n<hr class=\"wp-block-separator "
+                "has-alpha-channel-opacity is-style-wide\"/>\n<!-- /wp:separator -->")
     return "<!-- wp:separator -->\n<hr class=\"wp-block-separator has-alpha-channel-opacity\"/>\n<!-- /wp:separator -->"
 
 

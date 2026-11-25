@@ -8,24 +8,52 @@ Stand: 24. November 2026. Zuerst `CLAUDE.md` und `docs/WP-UMSETZUNG.md` lesen, d
 - Inhalte = Stand der Elementor-Seite `2603-appa` (Texte nach Briefing vom 23. 9. und Seite „Positive Psychologie“).
 - Getroffene Entscheidungen (nicht neu verhandeln): neue Dev-Installation `2603b-appa`; Formulare mit Contact Form 7 + Turnstile; Veranstaltungen als Beitragstyp im Plugin per Code (kein ACF); Kontakt/Impressum/Datenschutz nur im Footer-Menü.
 
-## Nächste Aufgabe: Übertragung auf `2603b-appa`
+## Stand `2603b-appa` (übertragen am 24. 11. 2026)
 
-Voraussetzung (von David): Installation `https://dev.blickwert.at/wp/2603b-appa` mit BW WP Bridge und Zugangsdaten als Umgebungsvariablen. Erwartete Namen: `WP_APPA2_URL`, `WP_APPA2_USER`, `WP_APPA2_APP_PASSWORD` (ggf. `WP_APPA2_BRIDGE_KEY`). Prüfen mit `env | grep '^WP_' | sed 's/=.*//'` (Werte nie ausgeben). Fehlen sie, David fragen.
+Zugang: Bridge-Client `tools/wp_bridge.py` aus `blickwert/bw-wp-bridge`, `--site dev2603bappa` (Umgebungsvariablen `WP_DEV2603BAPPA_URL`, `_USER`, `_APP_PASSWORD`, `_BRIDGE_KEY`; Werte nie ausgeben). Die Bridge verlangt den Verbindungsschlüssel bei **allen** REST-Anfragen; `import_pages.py` sendet ihn, wenn `WP_BRIDGE_KEY` gesetzt ist.
 
-1. Bridge-Client holen: Repo `blickwert/bw-wp-bridge` (über `add_repo` einbinden, klonen) → `python3 tools/wp_bridge.py --site appa2 status`.
-2. Bestand ansehen (nichts ändern): WordPress-Version, Sprache, Permalinks, installierte Plugins.
-3. Contact Form 7 installieren und aktivieren, **deutsche Übersetzung vor `bw-appa`** (sonst entstehen die CF7-Meldungen englisch).
-4. ZIPs bauen und installieren:
-   ```bash
-   cd wordpress/themes && zip -qr /tmp/appa.zip appa
-   cd ../plugins && zip -qr /tmp/bw-appa.zip bw-appa -x 'bw-appa/vendor/*' 'bw-appa/tests/*' 'bw-appa/composer.*' 'bw-appa/phpunit.xml.dist'
-   python3 tools/wp_bridge.py --site appa2 plugin-install --zip /tmp/bw-appa.zip --activate   # Theme: über WP-Admin oder Bridge, dann aktivieren
-   ```
-   Theme-Upload kann der Bridge-Client evtl. nicht – dann David bitten, `appa.zip` unter Design → Themes hochzuladen, oder REST/Bridge prüfen.
-5. Permalinks „Beitragsname“ setzen, einmal `wp-admin` aufrufen (legt die CF7-Formulare an).
-6. Seiten, Startseite, Hauptmenü: `WP_URL=$WP_APPA2_URL WP_USER=$WP_APPA2_USER WP_APP_PASSWORD=$WP_APPA2_APP_PASSWORD python3 scripts/import_pages.py` (erst mit `--dry-run`).
-7. Einstellungen → „APPA Formulare“: Empfänger (vorerst `bw-cms@blickwert.at`, später `info@appa.net` – David fragen). CF7 → Integration: Turnstile-Schlüssel (David).
-8. 2–3 Veranstaltungen als Beispiel anlegen (Fachtagung 8./9. Oktober 2027 aus dem Briefing), Formulare testen, Screenshots 1440/390 gegen `2603-appa` vergleichen, Ergebnis melden.
+- WordPress 7.1.5, Deutsch, Permalinks `/%postname%/`. Aktiv: Theme `appa`, Plugins `bw-appa`, Contact Form 7 (mit deutscher Übersetzung), BW WP Bridge. Elementor & Co. sind installiert, aber inaktiv.
+- Seiten, Startseite und Hauptmenü per `import_pages.py`; CF7-Formulare „APPA – Kontakt“ und „APPA – Mitgliedsantrag“ angelegt. Kontaktformular getestet: wird versendet.
+- Layout an die Elementor-Seite angeglichen (Typografie des Block-Themes bleibt), Mitgliederbereich (Anmeldung + Übersicht) als eigene Vorlagen; Theme 0.3.0, Plugin 0.1.2.
+- Mitgliederbereich Stufe 1 live (Plugin `bw-woo-membership`): Übersicht geschützt, Daten aus WooCommerce, Mitglieder-Dokumente geschützt (direkter Dateiaufruf auf 2603b liefert 403). Produkte 52/53 haben die Mitgliedsart `regular`/`student`. Nächste Stufen siehe `docs/MITGLIEDERBEREICH.md`.
+- **Stufe 2 und 3 live (24. 11.):** `bw-woo-membership` 0.3.0, `bw-appa` 0.2.0, Theme 0.4.0. Backend-Menü „Mitglieder“ (Liste, Bearbeiten, Ehren-/institutionelle Mitglieder, CSV, „Nachweise prüfen“), Studiennachweis im Mitgliederbereich, Veranstaltungsanmeldung über WooCommerce (Felder im Editor unter „Anmeldung und Preise“). Bei der Fachtagung (ID 18, Produkt 60) ist die Anmeldung eingeschaltet, mit **Testpreisen** 80/120 € und 150 Plätzen (echte Preise von APPA fehlen); live mit zwei Testkonten durchgespielt, Testdaten wieder gelöscht. WooCommerce-Modus „Shop demnächst verfügbar“ ist auf 2603b aus (sonst keine Kasse für Kund:innen). Lokal Ende-zu-Ende geprüft (Mitgliederpreis, Gratis-Anmeldung, nur Mitglieder, Erstattung, Gastkasse) und von einem zweiten Agenten gegengelesen.
+- Theme 0.4.2: Kopf und Ankerleiste bleiben beim Scrollen oben, aktiver Abschnitt blau (`assets/js/navigation.js`); Titelbox im Fotokopf bündig mit der Inhaltsspalte.
+- **Abo-Plugin entschieden: WooCommerce Subscriptions** (Milo Subscriptions geprüft und auf 2603b deaktiviert, siehe `docs/OFFENE-FRAGEN.md` M7).
+- **WooCommerce Subscriptions 9.4.1 auf 2603b (25. 11.)** – zum Testen aus der GitHub-Kopie `pronamic/woocommerce-subscriptions` (GPL, ohne Lizenz: keine automatischen Updates, kein Support). Für den Live-Betrieb die Lizenz kaufen und die Version von woocommerce.com einspielen. Deutsche Übersetzung (Sprachpaket von translate.wordpress.com) liegt im `languages/`-Ordner des Plugins; mit Lizenz kommt sie über „Aktualisierungen“.
+  - Einstellungen (WooCommerce › Einstellungen › Abonnements): Produkttyp „Einfaches Abonnement“ eingeschaltet; ein Abo pro Kauf; Rolle bleibt „Kunde“; erste Zahlung voll beim Abschluss (Staffel M6 zieht unser Plugin ab); **Sign-up cutoff 31 Tage** → Beitritt im Dezember kostet heute 0 €, der volle Beitrag wird am 1. 1. fällig und gilt für das ganze Folgejahr; manuelle Verlängerung (Überweisung) erlaubt – im Live-Betrieb mit nur Stripe wieder aus.
+  - Produkte 52/53: „Einfaches Abonnement“, 96 €/35 € jährlich, Zahlung synchron zum 1. 1.
+  - Live getestet: Beitritt im November → heute 32 € (⅓), danach 96 €/Jahr ab 1. 1. 2027; Testdaten gelöscht. Lokal zusätzlich: Mitgliedsnummer nach Zahlung, Verlängerung (96 € ohne Staffel), Dezember-Regel, Mitgliederbereich, Beitragsjournal („– Verlängerung“), Wechsel studentisch ↔ ordentlich bei der Verlängerung.
+  - Noch englisch: „Renews: on Januar 1st each year“, holprig „jede(n) Jahr“ (Texte der Block-Kasse aus dem Abo-Plugin).
+- **Antworten von David (24. 11.) umgesetzt** (siehe `docs/OFFENE-FRAGEN.md`): Beitritt ohne Vorstandsfreigabe, Studiennachweis bei der Buchung (`/studiennachweis/`), Staffel beim ersten Beitrag, Anmeldeschluss und Warteliste, Cache-Festigkeit (AJAX), Beitragsjournal über beliebigen Zeitraum, Entwürfe der Rechtstexte in `docs/rechtstexte/`. Offen: B3 Fragebogen-Tool (eigenes Projekt), V5 Aufzeichnungen, B2 bitte bestätigen.
+- **Offene Fragen mit Arbeitsannahmen:** `docs/OFFENE-FRAGEN.md` – Antworten dort eintragen.
+- Plugins aufgeräumt (24. 11.): aktiv sind nur `bw-appa`, `bw-woo-membership` 0.1.0, BW WP Bridge, Contact Form 7, WooCommerce 11.3 und WooCommerce Stripe Gateway 11.2; alle übrigen (Elementor & Co., ACF Pro, UpdraftPlus …) gelöscht.
+- WooCommerce: Graz/EUR (1.234,56 €), keine Steuern, kein Versand, keine Gutscheine, Kauf nur mit Konto (Konto wird an der Kasse angelegt). Seiten `warenkorb`, `kasse`, `mein-konto`, `shop`. Banküberweisung aktiv (Bankdaten noch Platzhalter), Stripe im Testmodus, aber noch nicht verbunden. Produkte (virtuell, im Shop ausgeblendet): „Mitgliedschaft (ordentlich)“ 96 € (ID 52), „Mitgliedschaft (Studierende)“ 35 € (ID 53) – werden zu Abo-Produkten, sobald WooCommerce Subscriptions installiert ist.
+- Die CF7-Formulare legt `bw-appa` bei `admin_init` an. Ohne Anmeldung auslösen: `…/wp-admin/admin-ajax.php?action=bw_noop` aufrufen (ohne `action` endet admin-ajax vor `admin_init`).
+- Empfänger: Standard = Admin-E-Mail `bw-cms@blickwert.at` (Einstellungen › APPA Formulare ist noch leer). Umstellen auf `info@appa.net` im Backend.
+- Drei Beispiel-Veranstaltungen (Fachtagung 8. 10. 2027, zwei Online-Termine mit Platzhalter-Zoom-Link `zoom.us/j/0000000000`).
+- Keine Shop-Seite (David, 25. 11.): `/shop/`, Produktarchive und Produktseiten leiten weiter (Veranstaltung bzw. `/mitgliedschaft/`), „Zurück zum Shop“ heißt „Zu den Veranstaltungen“ (`ShopController`). Auf der Seite `warenkorb` (ID 45) ist „Neu im Shop“ entfernt.
+- Sprachpakete: Die Bridge installiert keine Übersetzungen. Fehlen welche, im Backend „Dashboard › Aktualisierungen › Übersetzungen aktualisieren“.
+- Eine Mail mit einem Absendernamen wie dem Dev-Titel „@dev 2603b-appa“ lehnt `mail()` dort ab; deshalb bereinigt `bw-appa` ab 0.1.1 den Absendernamen.
+
+Nach Änderungen neu übertragen: ZIP bauen (siehe unten), `theme-install --zip … --overwrite` bzw. `plugin-install --zip … --overwrite`; Theme- bzw. Plugin-Version erhöhen (Cache der CSS-Dateien).
+
+```bash
+cd wordpress/themes && zip -qr <scratchpad>/appa.zip appa
+cd ../plugins && zip -qr <scratchpad>/bw-appa.zip bw-appa -x 'bw-appa/vendor/*' 'bw-appa/tests/*' 'bw-appa/composer.*' 'bw-appa/phpunit.xml.dist'
+(cd bw-woo-membership && npm install && npm run build)   # Backend-App, build/ ist nicht im Git
+zip -qr <scratchpad>/bw-woo-membership.zip bw-woo-membership -x 'bw-woo-membership/vendor/*' 'bw-woo-membership/tests/*' 'bw-woo-membership/composer.*' 'bw-woo-membership/phpunit.xml.dist' 'bw-woo-membership/node_modules/*' 'bw-woo-membership/src-js/*' 'bw-woo-membership/package*.json'
+```
+
+## Checkliste Live-Betrieb (vor dem Start)
+
+- Stripe verbinden (Live-Schlüssel), Karte und SEPA-Lastschrift aktivieren; **Banküberweisung deaktivieren** (Entscheidung David, 24. 11.).
+- WooCommerce Subscriptions: Lizenz kaufen und offizielle Version einspielen (auf 2603b läuft die GitHub-Kopie); „Manuelle Verlängerung“ aus, sobald nur Stripe; Zahlungsbestätigung als PDF.
+- Rechtstexte prüfen lassen und als Seiten anlegen (`docs/rechtstexte/README.md`); Statuten an den Beitritt ohne Vorstandsfreigabe anpassen.
+- Geschützte Dateien (T3, Review #3). Entscheidung David, 25. 11.: kein `BW_WM_PRIVATE_DIR`; live läuft Apache, der Schutz kommt aus den `.htaccess`-Dateien, die das Plugin in `uploads/bw-member-docs` und `uploads/bw-member-proofs` anlegt (dafür muss `AllowOverride` mindestens `AuthConfig`/`Limit` erlauben). Auf 2603b (nginx vor Apache) geprüft: auch PDF/JPG dort liefern 403.
+  - Falls der Test unten nicht „gut“ zeigt: `define( 'BW_WM_PRIVATE_DIR', '/pfad/ausserhalb/des/webroots/appa-private' );` in die `wp-config.php` (zwei Angaben, Name und Pfad!) und vorhandene Dateien verschieben (README von `bw-woo-membership`, „Geschützte Dateien“), oder bei nginx die Regel `location ~* /wp-content/uploads/(bw-member-docs|bw-member-proofs)/ { deny all; return 404; }`.
+  - Danach Werkzeuge → Website-Zustand: Test „Studiennachweise und Mitglieder-Dokumente sind geschützt“ muss „gut“ zeigen.
+- „Shop demnächst verfügbar“ aus, Testpreise der Fachtagung durch echte ersetzen, Testdaten löschen.
+- AGB/Beitragsordnung und Datenschutzseite in WooCommerce hinterlegen.
 
 ## Lokale Prüfumgebung neu aufsetzen (Container ist frisch)
 
@@ -45,7 +73,7 @@ ln -s <repo>/wordpress/themes/appa site/wp-content/themes/appa && ln -s <repo>/w
 $W theme activate appa && $W plugin activate bw-appa && $W rewrite structure '/%postname%/'
 (cd site && php -S 127.0.0.1:8899 &)   # Screenshots: Playwright mit executablePath /opt/pw-browsers/chromium
 ```
-App-Passwort für `import_pages.py`: `$W user application-password create admin local --porcelain`; bei Python-Anfragen `NO_PROXY=127.0.0.1` setzen.
+App-Passwort für `import_pages.py`: `$W user application-password create admin local --porcelain`; bei Python-Anfragen `NO_PROXY=127.0.0.1` setzen. Lokal zusätzlich `$W config set WP_ENVIRONMENT_TYPE local` (Anwendungspasswörter ohne HTTPS) und `$W config set WP_DEVELOPMENT_MODE theme` (sonst cached WordPress die Pattern-Liste). Lädt `wp plugin install` nichts (Proxy), CF7 und Sprachpakete mit `curl` holen und entpacken.
 
 ## Arbeitsregeln (Kurzfassung)
 
@@ -56,9 +84,14 @@ App-Passwort für `import_pages.py`: `$W user application-password create admin 
 
 ## Offene Punkte (von David / APPA)
 
-- Dev-Installation `2603b-appa` + Zugangsdaten.
+- Beispielinhalte auf `2603b-appa` (Beitrag „Hallo Welt“, „Beispielseite“, Entwurf „Datenschutzerklärung“, CF7 „Contact form 1“): löschen?
+- Debug-Log auf `2603b-appa` ist aus (`WP_DEBUG_LOG`); für die Prüfung auf PHP-Warnungen einschalten.
+- Bridge-Freigabe „Plugins und Themes installieren“ nach der Übertragung wieder ausschalten.
 - Turnstile-Schlüssel, endgültiger Formular-Empfänger.
 - Datenschutzerklärung, Statuten-PDF, ZVR-Zahl und Vereinsbehörde (Impressum).
 - „Mehr Gelb“ im Design (Meeting 9. 10.): wo genau.
-- Danach: Mitgliederbereich und Mitgliedschaft mit Zahlung im eigenen Plugin `bw-woo-membership` (Konzept „APPA – Mitgliedschaft online“, Meeting 9. 10.: WooCommerce + Subscriptions, Stripe, Staffel Juni ½ / Oktober ⅓ / Dezember gratis, Studierendennachweis jährlich, vier Mitgliedsarten).
+- WooCommerce Subscriptions (kostenpflichtig, Lizenz/ZIP von APPA bzw. blickwert), Stripe verbinden (Backend: WooCommerce › Einstellungen › Zahlungen › Stripe), Bankdaten für die Überweisung, AGB/Beitragsordnung als Seite, Datenschutzseite in WordPress als Datenschutzseite festlegen, Produkt-URL-Basis `/product/` eindeutschen, Shop-Seiten im Theme gestalten.
+- Mockup der Verwaltung (Mitglieder, Dokumente, Veranstaltungen mit Kopplung zum Mitgliederbereich): Claude-Artifact „APPA Mitgliederverwaltung WP“.
+- Mitgliederbereich: Analyse in `docs/MITGLIEDERBEREICH.md`, offene Fragen in `docs/OFFENE-FRAGEN.md`. Noch offen: WooCommerce Subscriptions und Staffel beim ersten Beitrag, Aufzeichnungen (V5), Anmeldefrist/Warteliste (V6).
+- Lokal: Shop-Basis auf AT stellen und Testkonten eine Adresse geben, sonst scheitert die Block-Kasse an Pflichtfeldern.
 - Die alte Elementor-Seite `2603-appa` nutzt noch `wp-plugins/appa-loop-query`; nach Umstieg kann der Ordner entfallen.

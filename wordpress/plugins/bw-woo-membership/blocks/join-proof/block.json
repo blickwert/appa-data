@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bw-woo-membership/join-proof",
+	"title": "Beitritt: Studiennachweis",
+	"category": "widgets",
+	"icon": "welcome-learn-more",
+	"description": "Upload des Studiennachweises vor dem Kauf der studentischen Mitgliedschaft.",
+	"textdomain": "bw-woo-membership",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"multiple": false
+	},
+	"editorScript": "bw-wm-blocks",
+	"style": "bw-wm-dashboard"
+}

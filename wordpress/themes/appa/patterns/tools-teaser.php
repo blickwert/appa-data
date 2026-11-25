@@ -11,8 +11,8 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
 		<!-- wp:column {"width":"33.33%"} -->
@@ -38,7 +38,7 @@ declare(strict_types=1);
 			<!-- /wp:paragraph -->
 
 			<!-- wp:paragraph -->
-			<p>Du kannst die Ergebnisse deiner Klient:innen, Coachees, Schüler:innen oder Patient:innen jederzeit abrufen und über mehrere Erhebungen hinweg vergleichen. Nach jeder abgeschlossenen Befragung stehen die aktualisierten Auswertungen direkt zur Verfügung.</p>
+			<p>Du kannst die Ergebnisse deiner Klient:innen, Coachees, Schüler:innen oder Patient:innen jederzeit abrufen und über mehrere Erhebungen hinweg vergleichen. Nach jeder abgeschlossenen Befragung stehen die aktualisierten Auswertungen direkt zur Verfügung. So kannst du Veränderungen anhand wissenschaftlich fundierter Verfahren nachvollziehen und gemeinsam die nächsten Schritte gestalten.</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:paragraph -->

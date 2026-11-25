@@ -1,0 +1,8 @@
+/* core/list – plain link list (sources) */
+
+.wp-block-list.bw-link-list {
+	display: grid;
+	gap: var(--wp--preset--spacing--3);
+	padding: 0;
+	list-style: none;
+}

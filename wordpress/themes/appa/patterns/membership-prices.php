@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","anchor":"beitrag","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","anchor":"beitrag","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section id="beitrag" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
+	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"constrained","justifyContent":"left"}} -->
 	<div class="wp-block-group">
 		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
 		<p class="is-style-eyebrow">Gemeinsam etwas aufbauen</p>
@@ -31,8 +31,8 @@ declare(strict_types=1);
 
 	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|6"}},"layout":{"type":"grid","columnCount":3,"minimumColumnWidth":"18rem"}} -->
 	<div class="wp-block-group">
-		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group is-style-card">
+		<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group is-style-card-flat">
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Mitgliedschaft</h3>
 			<!-- /wp:heading -->
@@ -47,16 +47,16 @@ declare(strict_types=1);
 
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
-				<!-- wp:button -->
-				<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#antrag">Gründungsmitglied werden</a></div>
+				<!-- wp:button {"width":100,"className":"is-style-secondary"} -->
+				<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-secondary"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/?bw_wm_join=regular' ) ); ?>">Gründungsmitglied werden</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group is-style-card">
+		<!-- wp:group {"className":"is-style-card-highlight","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group is-style-card-highlight">
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Studierende</h3>
 			<!-- /wp:heading -->
@@ -71,16 +71,16 @@ declare(strict_types=1);
 
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
-				<!-- wp:button -->
-				<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#antrag">Als Student:in beitreten</a></div>
+				<!-- wp:button {"width":100} -->
+				<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/?bw_wm_join=student' ) ); ?>">Als Student:in beitreten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group is-style-card">
+		<!-- wp:group {"className":"is-style-card-flat","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group is-style-card-flat">
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Organisationen</h3>
 			<!-- /wp:heading -->
@@ -90,16 +90,32 @@ declare(strict_types=1);
 			<!-- /wp:paragraph -->
 
 			<!-- wp:paragraph {"className":"bw-price","textColor":"red","fontSize":"xx-large"} -->
-			<p class="bw-price has-red-color has-text-color has-xx-large-font-size">Auf Anfrage</p>
+			<p class="bw-price has-red-color has-text-color has-xx-large-font-size">Mitgliedschaft anfragen</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
-				<!-- wp:button {"className":"is-style-secondary"} -->
-				<div class="wp-block-button is-style-secondary"><a class="wp-block-button__link wp-element-button" href="mailto:info@appa.net?subject=Mitgliedschaft%20für%20Organisationen">Kontakt aufnehmen</a></div>
+				<!-- wp:button {"width":100,"className":"is-style-secondary"} -->
+				<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-secondary"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/kontakt/?betreff=Mitgliedschaft%20f%C3%BCr%20Organisationen' ) ); ?>">Kontakt aufnehmen</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
+		</div>
+		<!-- /wp:group -->
+	</div>
+	<!-- /wp:group -->
+
+	<!-- wp:group {"layout":{"type":"constrained","justifyContent":"left"}} -->
+	<div class="wp-block-group">
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group">
+			<!-- wp:paragraph {"fontSize":"sm"} -->
+			<p class="has-sm-font-size">So funktioniert der Beitritt: Du legst an der Kasse dein Konto an und bezahlst den Jahresbeitrag online mit Karte oder SEPA-Lastschrift. Danach hast du sofort Zugang zum Mitgliederbereich. Als Student:in lädst du dort deinen Studiennachweis hoch.</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:paragraph {"fontSize":"sm"} -->
+			<p class="has-sm-font-size">Organisationen nehmen über das Kontaktformular Kontakt mit uns auf; über ihre Aufnahme entscheidet der Vorstand. Die Rechte und Pflichten der Mitglieder regeln die <a href="<?php echo esc_url( home_url( '/ueber-uns/#statuten' ) ); ?>">Statuten</a>. Bis zur Entstehung des Vereins erfolgt die Aufnahme vorläufig. Die Mitgliedschaft wird mit der Entstehung des Vereins wirksam.</p>
+			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 	</div>

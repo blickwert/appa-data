@@ -11,8 +11,10 @@ namespace BW\Appa\Modules\Events;
 
 use BW\Appa\Core\AbstractModule;
 use BW\Appa\Modules\Events\Controller\BindingsController;
+use BW\Appa\Modules\Events\Controller\DataController;
 use BW\Appa\Modules\Events\Controller\EditorController;
 use BW\Appa\Modules\Events\Controller\PostTypeController;
+use BW\Appa\Modules\Events\Controller\PrivacyController;
 use BW\Appa\Modules\Events\Controller\QueryController;
 use BW\Appa\Modules\Events\Repository\EventRepository;
 use BW\Appa\Modules\Events\Service\EventFormatter;
@@ -40,12 +42,21 @@ final class EventsModule extends AbstractModule {
 	/**
 	 * {@inheritDoc}
 	 */
+	public function description(): string {
+		return __( 'Beitragstyp Veranstaltung mit Terminfeldern, Abfrage kommender Termine und Block-Bindungen.', 'bw-appa' );
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function register(): void {
 		$repository = new EventRepository();
 		( new PostTypeController() )->register();
 		( new QueryController( new UpcomingQuery() ) )->register();
 		( new BindingsController( $repository, new EventFormatter() ) )->register();
+		( new DataController( $repository, new EventFormatter() ) )->register();
 		( new EditorController() )->register();
+		( new PrivacyController() )->register();
 	}
 
 	/**

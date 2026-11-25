@@ -1,9 +1,13 @@
-/* APPA – base styles that theme.json cannot express. Tokens only (presets / --wp--custom--*). */
+/* APPA – base styles that theme.json cannot express. Tokens only (presets / --wp--custom--*).
+ *
+ * Breakpoints (tokens.json "breakpoints", the same as WordPress core; media queries cannot use custom properties):
+ * sm 600px, md 782px, lg 1024px. Pattern: min-width: <bp>px / max-width: <bp - 0.02>px (599.98px, 781.98px, 1023.98px),
+ * so no width matches both sides. Exception: the admin bar follows core's own query (max-width: 600px).
+ */
 
 /* Base ------------------------------------------------------------------ */
 html {
 	scroll-behavior: smooth;
-	scroll-padding-top: var(--wp--preset--spacing--20);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -29,15 +33,85 @@ body {
 }
 
 /* Header ---------------------------------------------------------------- */
-.bw-site-header {
+/* Sticky on the template-part wrapper: the header itself is as tall as its wrapper and could not stick. */
+.wp-site-blocks > :has(> .bw-site-header) {
 	position: sticky;
-	top: 0;
+	top: var(--bw-admin-bar-h, 0px);
 	z-index: 50;
+}
+
+html:has(> body.admin-bar) {
+	--bw-admin-bar-h: var(--wp-admin--admin-bar--height, 0px);
+}
+
+/* Same query as core's admin bar CSS (inclusive 600px), not the breakpoint pattern */
+@media (max-width: 600px) {
+	/* The admin bar scrolls away on small screens. */
+	html:has(> body.admin-bar) {
+		--bw-admin-bar-h: 0px;
+	}
+}
+
+.bw-site-header {
 	border-block-end: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
 }
 
-.admin-bar .bw-site-header {
-	top: var(--wp-admin--admin-bar--height, 0);
+/* Anchor targets stop right below the sticky header and jump navigation (sections bring their own padding). */
+html {
+	scroll-padding-top: calc(var(--bw-admin-bar-h, 0px) + var(--bw-header-h, 4.5rem) + var(--bw-jump-h, 0px));
+}
+
+/* Navigation and the icons WooCommerce adds after it (account, mini cart) form one right-aligned group. */
+.bw-site-header__end.bw-site-header__end {
+	gap: 0;
+}
+
+.bw-site-header__end > .wp-block-navigation {
+	margin-inline-end: var(--wp--preset--spacing--4);
+}
+
+/* Same size and colour for both icons; the links keep a comfortable tap area. */
+.bw-site-header__end .wc-block-customer-account__link,
+.bw-site-header__end .bw-cart-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-inline-size: 2.5rem;
+	min-block-size: 2.5rem;
+	padding: 0;
+	color: var(--wp--preset--color--navy);
+}
+
+.bw-site-header__end .wc-block-customer-account__account-icon,
+.bw-site-header__end .bw-cart-link__icon {
+	inline-size: 1.5rem;
+	block-size: 1.5rem;
+}
+
+/* Cart link (blocks/cart-link): number of items as a small badge */
+.bw-cart-link {
+	position: relative;
+}
+
+.bw-cart-link__count {
+	position: absolute;
+	inset-block-start: 0;
+	inset-inline-end: 0;
+	min-inline-size: 1.125rem;
+	padding-inline: 0.25rem;
+	border-radius: var(--wp--custom--radius--pill);
+	background: var(--wp--preset--color--navy);
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: 700;
+	line-height: 1.125rem;
+	text-align: center;
+}
+
+@media (max-width: 599.98px) {
+	.bw-site-header__end > .wp-block-navigation {
+		margin-inline-end: 0;
+	}
 }
 
 .bw-site-logo img {
@@ -47,11 +121,6 @@ body {
 }
 
 /* Footer ---------------------------------------------------------------- */
-.bw-site-footer {
-	border-block-start: 4px solid transparent;
-	border-image: var(--wp--preset--gradient--logo-stripe) 1;
-}
-
 .bw-site-footer a {
 	text-decoration: none;
 }
@@ -60,36 +129,92 @@ body {
 	text-decoration: underline;
 }
 
+.bw-site-footer .bw-site-footer__brand {
+	color: var(--wp--preset--color--white);
+	font-weight: 700;
+}
+
+/* White on navy (red on navy is too weak, WCAG 1.4.3) */
+.bw-site-footer .bw-site-footer__mail {
+	color: var(--wp--preset--color--white);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+}
+
 .bw-footer-links {
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--wp--preset--spacing--2) var(--wp--preset--spacing--5);
-	padding: 0;
-	list-style: none;
-}
-
-/* Jump navigation below page headers */
-.bw-jump-nav {
-	display: flex;
-	flex-wrap: wrap;
-	gap: var(--wp--preset--spacing--2) var(--wp--preset--spacing--6);
 	margin: 0;
 	padding: 0;
 	list-style: none;
+}
+
+/* Jump navigation below page headers: one line, scrolls sideways on small screens */
+.bw-jump-nav {
+	position: relative;
+	display: flex;
+	gap: var(--wp--preset--spacing--6);
+	margin: 0;
+	padding: 0;
+	overflow-x: auto;
+	list-style: none;
 	font-size: var(--wp--preset--font-size--sm);
 	font-weight: 600;
+	white-space: nowrap;
+	scrollbar-width: none;
+}
+
+.bw-jump-nav::-webkit-scrollbar {
+	display: none;
 }
 
 .bw-jump-nav a {
+	display: inline-block;
+	padding-block: var(--wp--preset--spacing--1);
 	color: var(--wp--preset--color--navy);
 	text-decoration: none;
+	box-shadow: inset 0 -2px 0 transparent;
 }
 
 .bw-jump-nav a:hover {
 	color: var(--wp--preset--color--red);
 }
 
+/* Section in view (set by assets/js/navigation.js) */
+.bw-jump-nav a[aria-current="true"] {
+	color: var(--wp--preset--color--blue);
+	box-shadow: inset 0 -2px 0 currentcolor;
+}
+
+/* Jump navigation band directly below a photo header; stays below the sticky header */
+.bw-jump-band {
+	position: sticky;
+	top: calc(var(--bw-admin-bar-h, 0px) + var(--bw-header-h, 4.5rem));
+	z-index: 40;
+	border-block-end: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
+}
+
+/* Full-width sections of the page content sit flush, like the template parts */
+.wp-block-post-content > .alignfull {
+	margin-block: 0;
+}
+
 /* Template parts and main content sit flush (no global block gap between header, main and footer) */
 .wp-site-blocks > * + * {
 	margin-block-start: 0;
+}
+
+/* Event cards: label for events only for members (bound paragraph, empty for open events) */
+.bw-event-badge {
+	display: inline-block;
+	margin: 0;
+	padding: var(--wp--preset--spacing--1) var(--wp--preset--spacing--3);
+	border-radius: var(--wp--custom--radius--pill);
+	background: var(--wp--preset--color--navy);
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
 }

@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-sky" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|16"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--16);padding-bottom:var(--wp--preset--spacing--16)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}},"verticalAlignment":"center"} -->
 	<div class="wp-block-columns are-vertically-aligned-center">
-		<!-- wp:column {"width":"55%","verticalAlignment":"center"} -->
-		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:55%">
+		<!-- wp:column {"width":"50%","verticalAlignment":"center"} -->
+		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%">
 			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|5"}},"layout":{"type":"default"}} -->
 			<div class="wp-block-group">
 				<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
@@ -34,7 +34,7 @@ declare(strict_types=1);
 				<!-- wp:buttons -->
 				<div class="wp-block-buttons">
 					<!-- wp:button -->
-					<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#antrag">Gründungsmitglied werden</a></div>
+					<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#beitrag">Gründungsmitglied werden</a></div>
 					<!-- /wp:button -->
 				</div>
 				<!-- /wp:buttons -->
@@ -43,10 +43,10 @@ declare(strict_types=1);
 		</div>
 		<!-- /wp:column -->
 
-		<!-- wp:column {"width":"45%","verticalAlignment":"center"} -->
-		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:45%">
-			<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
-			<figure class="wp-block-image size-full"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/membership.webp' ) ); ?>" alt="Zwei Menschen im Gespräch"/></figure>
+		<!-- wp:column {"width":"50%","verticalAlignment":"center"} -->
+		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%">
+			<!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"bw-image--landscape"} -->
+			<figure class="wp-block-image size-full bw-image--landscape"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/membership.webp' ) ); ?>" alt="Zwei Menschen tauschen sich über Positive Psychologie aus"/></figure>
 			<!-- /wp:image -->
 		</div>
 		<!-- /wp:column -->

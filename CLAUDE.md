@@ -10,6 +10,7 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 
 - Theme `wordpress/themes/appa/` (Slug `appa`, Namespace `BW\AppaTheme`, Hooks `bw_appa_theme_`)
 - Plugin `wordpress/plugins/bw-appa/` (Slug `bw-appa`, Namespace `BW\Appa`, Hooks/Optionen `bw_appa_`, Konstanten `BW_APPA_*`)
+- Plugin `wordpress/plugins/bw-woo-membership/` (Slug `bw-woo-membership`, Namespace `BW\WooMembership`, Hooks/Optionen `bw_wm_`, CSS `bwm-`): Mitgliederbereich auf WooCommerce-Basis, siehe dessen `README.md` und `docs/MITGLIEDERBEREICH.md`
 - Neue Dev-Installation: `2603b-appa` (Block-Theme). Die Elementor-Seite `2603-appa` bleibt zum Vergleich.
 
 ## Regeln
@@ -20,12 +21,15 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 - Texte und Abschnitte der Seiten stehen in `scripts/build_patterns.py`; die Pattern-Dateien sind erzeugt (`cd scripts && python3 build_patterns.py`).
 - Keine Schriften oder Skripte von fremden Servern (Ausnahme: Turnstile im Formular).
 - Keine Schlüssel oder Passwörter ins Repo.
+- Sprache: Die Website ist nur deutsch. Abweichend von den Skills dürfen die Grundtexte (msgids) deutsch sein; sichtbare Texte trotzdem über `__()` & Co. übersetzbar halten (David, 25. 11. 2026).
+- SEO: Titel/Beschreibungen in `scripts/seo.json` (Einspielen mit `scripts/apply_seo.py`), Einstellungen im Modul `seo` von `bw-appa`.
 
 ## Arbeitsweise im Repo
 
 - Pro Änderung: Branch, Commit, Pull Request.
 - Sichtbare Änderungen lokal prüfen (WordPress + SQLite, Chromium/Playwright, 1440 px und 390 px) und im Block-Editor auf ungültige Blöcke prüfen.
-- Plugin: `composer install && composer test` (PHPUnit), `composer lint`.
+- Plugins: `composer install && composer test` (PHPUnit), `composer lint` – je Plugin-Ordner.
+- `bw-woo-membership`: Backend-App (TypeScript) mit `npm install && npm run typecheck && npm run build` prüfen und bauen, bevor das ZIP entsteht (`build/` ist nicht im Git).
 
 ## Wichtige Dateien
 
@@ -37,5 +41,7 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 | `scripts/import_pages.py` | Seiten, Startseite und Hauptmenü per REST anlegen/aktualisieren |
 | `wordpress/themes/appa/styles/blocks/` | Blockstil-Varianten (Abschnitte, Karten, Buttons, Eyebrow …) |
 | `wordpress/plugins/bw-appa/src/Modules/` | Module `events` (Veranstaltungen) und `forms` (CF7-Formulare, Spamschutz) |
+| `wordpress/plugins/bw-woo-membership/src/Modules/` | Module `membership` (Status, Nummer, Zugang, Blöcke, Profil, Verwaltung, Studiennachweis), `documents` (Mitglieder-Dokumente) und `events` (Anmeldung über WooCommerce) |
+| `docs/OFFENE-FRAGEN.md` | Offene Fragen an APPA mit Arbeitsannahmen |
 | `elementor/`, `APPA-Mockup/` | Alte Elementor-Umsetzung und Mockup (nur Referenz) |
 | `meeting/` | Besprechungsprotokolle |

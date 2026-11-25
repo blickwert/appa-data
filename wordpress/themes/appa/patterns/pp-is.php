@@ -11,29 +11,41 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","anchor":"ist","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section id="ist" class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-	<div class="wp-block-group">
-		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
-		<p class="is-style-eyebrow">Was sie ist</p>
-		<!-- /wp:paragraph -->
+<!-- wp:group {"tagName":"section","anchor":"ist","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section id="ist" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
+	<div class="wp-block-columns">
+		<!-- wp:column {"width":"33.33%"} -->
+		<div class="wp-block-column" style="flex-basis:33.33%">
+			<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+			<p class="is-style-eyebrow">Was sie ist</p>
+			<!-- /wp:paragraph -->
 
-		<!-- wp:heading -->
-		<h2 class="wp-block-heading">Vier Dinge, die Positive Psychologie ausmachen</h2>
-		<!-- /wp:heading -->
+			<!-- wp:heading -->
+			<h2 class="wp-block-heading">Vier Dinge, die Positive Psychologie ausmachen</h2>
+			<!-- /wp:heading -->
+		</div>
+		<!-- /wp:column -->
 
-		<!-- wp:paragraph -->
-		<p>Beispiele aus Forschung und Praxis.</p>
-		<!-- /wp:paragraph -->
+		<!-- wp:column {"width":"66.66%"} -->
+		<div class="wp-block-column" style="flex-basis:66.66%">
+			<!-- wp:paragraph -->
+			<p>Beispiele aus Forschung und Praxis.</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:column -->
 	</div>
-	<!-- /wp:group -->
+	<!-- /wp:columns -->
+</section>
+<!-- /wp:group -->
 
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|6"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->
 	<div class="wp-block-group">
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"check-circle","tone":"green"} /-->
+			<!-- wp:bw/icon {"icon":"check-circle","tone":"red"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Die Wissenschaft vom gelingenden Leben</h3>
@@ -61,7 +73,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"check-circle","tone":"green"} /-->
+			<!-- wp:bw/icon {"icon":"check-circle","tone":"red"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Ein Modell mit Struktur: PERMA</h3>
@@ -75,7 +87,7 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"check-circle","tone":"green"} /-->
+			<!-- wp:bw/icon {"icon":"check-circle","tone":"gold"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Stärken statt nur Defizite</h3>

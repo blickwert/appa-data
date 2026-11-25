@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace BW\Appa\Modules\Events\Service;
 
+use BW\Appa\Modules\Events\Repository\EventRepository;
+
 /**
  * Normalises raw meta values; used when saving and when reading.
  */
@@ -48,6 +50,57 @@ final class EventFields {
 	 * Single-line plain text.
 	 */
 	public static function text( string $value ): string {
-		return trim( (string) preg_replace( '/\s+/', ' ', strip_tags( $value ) ) );
+		return trim( (string) preg_replace( '/\s+/', ' ', strip_tags( $value ) ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags -- pure function, tested without WordPress.
+	}
+
+	/**
+	 * Kind of event: one of EventRepository::audiences(), default "open".
+	 */
+	public static function audience( string $value ): string {
+		$value = trim( $value );
+		return array_key_exists( $value, EventRepository::audiences() ) ? $value : 'open';
+	}
+
+	/**
+	 * Price as decimal string with dot ("35.00"), accepts a comma; '' when empty or invalid.
+	 */
+	public static function price( string $value ): string {
+		$value = str_replace( array( ' ', '€' ), '', trim( $value ) );
+		$value = str_replace( ',', '.', $value );
+		if ( '' === $value || 1 !== preg_match( '/^\d{1,5}(\.\d{1,2})?$/', $value ) ) {
+			return '';
+		}
+		return number_format( (float) $value, 2, '.', '' );
+	}
+
+	/**
+	 * Number of places as string ('' = unlimited).
+	 */
+	public static function capacity( string $value ): string {
+		$value = trim( $value );
+		return 1 === preg_match( '/^\d{1,5}$/', $value ) && (int) $value > 0 ? (string) (int) $value : '';
+	}
+
+	/**
+	 * Format of the event: "onsite", "online", "hybrid" or '' (not set).
+	 */
+	public static function format( string $value ): string {
+		$value = trim( $value );
+		return array_key_exists( $value, EventRepository::formats() ) ? $value : '';
+	}
+
+	/**
+	 * Number of days (0–365) as string, '' when empty or invalid.
+	 */
+	public static function days( string $value ): string {
+		$value = trim( $value );
+		return 1 === preg_match( '/^\d{1,3}$/', $value ) && (int) $value <= 365 ? (string) (int) $value : '';
+	}
+
+	/**
+	 * On/off flag as '1' or ''.
+	 */
+	public static function flag( string $value ): string {
+		return in_array( strtolower( trim( $value ) ), array( '1', 'true', 'yes', 'on' ), true ) ? '1' : '';
 	}
 }

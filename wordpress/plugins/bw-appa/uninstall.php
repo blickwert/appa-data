@@ -11,3 +11,4 @@ defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
 delete_option( 'bw_appa_forms_settings' );
 delete_option( 'bw_appa_forms_ids' );
+delete_option( 'bw_appa_forms_markup' );

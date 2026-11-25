@@ -1,0 +1,268 @@
+/* Admin app "Mitglieder" (prefix bwm-, root .bwm-app) – scoped to the app container, colours from the admin scheme. */
+.bwm-app .bwm-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+	margin: 0 0 16px;
+}
+
+.bwm-app .bwm-header h1 {
+	margin: 0;
+	padding: 0;
+}
+
+.bwm-app .bwm-header__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.bwm-app .bwm-journal {
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	padding-inline-start: 12px;
+	border-inline-start: 1px solid #dcdcde;
+}
+
+.bwm-app .bwm-journal__label {
+	font-weight: 600;
+}
+
+.bwm-app .bwm-journal input {
+	min-height: 36px;
+}
+
+.bwm-app .bwm-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin: 12px 0;
+}
+
+.bwm-app .subsubsub {
+	float: none;
+	margin: 0;
+}
+
+.bwm-app .subsubsub .components-button.is-link {
+	text-decoration: none;
+}
+
+.bwm-app .subsubsub .current {
+	color: #1d2327;
+	font-weight: 600;
+}
+
+.bwm-app .bwm-filters {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.bwm-app .bwm-filters .components-search-control {
+	min-width: 240px;
+}
+
+.bwm-app .bwm-muted {
+	color: #646970;
+}
+
+.bwm-app .bwm-badge {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 3px;
+	background: #f0f0f1;
+	color: #50575e;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.bwm-app .bwm-badge--active {
+	background: #edfaef;
+	color: #00450c;
+}
+
+.bwm-app .bwm-badge--pending,
+.bwm-app .bwm-badge--on-hold {
+	background: #fcf9e8;
+	color: #614200;
+}
+
+.bwm-app .bwm-badge--expired {
+	background: #fcf0f1;
+	color: #8a2424;
+}
+
+.bwm-app .bwm-pager {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 12px;
+}
+
+.bwm-app .bwm-columns {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 320px;
+	gap: 20px;
+	align-items: start;
+}
+
+.bwm-app .bwm-main,
+.bwm-app .bwm-side,
+.bwm-app .bwm-stack {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr); /* Cards may shrink below their content width (no sideways scrolling on phones). */
+	gap: 16px;
+	min-width: 0;
+}
+
+.bwm-app .bwm-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+	gap: 16px;
+}
+
+.bwm-app .components-card h2 {
+	margin: 0;
+	font-size: 14px;
+}
+
+.bwm-app .bwm-facts {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 6px 12px;
+	margin: 0;
+}
+
+.bwm-app .bwm-facts dt {
+	color: #646970;
+}
+
+.bwm-app .bwm-facts dd {
+	margin: 0;
+	min-width: 0;
+	overflow-wrap: anywhere; /* Long e-mail addresses. */
+}
+
+.bwm-app .bwm-checks {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 20px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.bwm-app .bwm-checks legend {
+	margin-bottom: 8px;
+	font-weight: 500;
+}
+
+.bwm-app .bwm-narrow {
+	max-width: 520px;
+}
+
+.bwm-app .bwm-proof-review {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+	gap: 20px;
+	align-items: start;
+}
+
+.bwm-app .bwm-proof-review__actions {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 8px 12px;
+	align-items: end;
+}
+
+@media (max-width: 960px) {
+	.bwm-app .bwm-columns,
+	.bwm-app .bwm-proof-review {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+@media (max-width: 599.98px) {
+	/* Label above the value on phones. */
+	.bwm-app .bwm-facts {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 2px;
+	}
+
+	.bwm-app .bwm-facts dd {
+		margin-bottom: 8px;
+	}
+
+	.bwm-app .bwm-proof-review__actions {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	/* Orders of a member: one block per order instead of a wide table row. */
+	.bwm-app .bwm-orders,
+	.bwm-app .bwm-orders tbody,
+	.bwm-app .bwm-orders tr,
+	.bwm-app .bwm-orders td {
+		display: block;
+		width: auto;
+	}
+
+	.bwm-app .bwm-orders tr {
+		padding: 8px 0;
+		border-bottom: 1px solid #dcdcde;
+	}
+
+	.bwm-app .bwm-orders td {
+		padding: 2px 10px;
+		overflow-wrap: anywhere;
+	}
+
+	.bwm-app .bwm-orders td:first-child {
+		font-weight: 600;
+	}
+}
+
+/* Veranstaltungen › Teilnehmende (templates/admin/participants.php) */
+.bwm-participants__picker {
+	margin: 12px 0 20px;
+}
+
+.bwm-participants__stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 16px 0;
+	padding: 0;
+	list-style: none;
+}
+
+.bwm-participants__stats li {
+	min-inline-size: 120px;
+	margin: 0;
+	padding: 12px 16px;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	background: #fff;
+}
+
+.bwm-participants__stats span {
+	display: block;
+	color: #50575e;
+}
+
+.bwm-participants__stats strong {
+	display: block;
+	margin-block-start: 4px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.bwm-participants__add {
+	margin-block-start: 28px;
+}

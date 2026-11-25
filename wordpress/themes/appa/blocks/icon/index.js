@@ -46,6 +46,14 @@
 							onChange: ( tone ) => setAttributes( { tone } ),
 							__next40pxDefaultSize: true,
 							__nextHasNoMarginBottom: true,
+						} ),
+						el( SelectControl, {
+							label: 'Form',
+							value: attributes.shape,
+							options: [ { label: 'Nur Symbol', value: 'plain' }, { label: 'Kreis', value: 'circle' }, { label: 'Quadrat', value: 'square' }, { label: 'Kachel', value: 'tile' } ],
+							onChange: ( shape ) => setAttributes( { shape } ),
+							__next40pxDefaultSize: true,
+							__nextHasNoMarginBottom: true,
 						} )
 					)
 				),

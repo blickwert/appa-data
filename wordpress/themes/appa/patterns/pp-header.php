@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky","style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|16"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-sky" style="padding-top:var(--wp--preset--spacing--16);padding-bottom:var(--wp--preset--spacing--16)">
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
-	<div class="wp-block-group">
+<!-- wp:cover {"url":"<?php echo esc_url( get_theme_file_uri( 'assets/images/about.webp' ) ); ?>","dimRatio":0,"isUserOverlayColor":true,"contentPosition":"bottom left","isDark":false,"align":"full","className":"bw-page-photo","layout":{"type":"constrained","contentSize":"69rem"}} -->
+<div class="wp-block-cover alignfull is-light has-custom-content-position is-position-bottom-left bw-page-photo"><img class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( get_theme_file_uri( 'assets/images/about.webp' ) ); ?>" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container">
+	<!-- wp:group {"className":"bw-page-photo__box","style":{"spacing":{"blockGap":"var:preset|spacing|1"}},"layout":{"type":"default"}} -->
+	<div class="wp-block-group bw-page-photo__box">
 		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
 		<p class="is-style-eyebrow">Wissenschaft</p>
 		<!-- /wp:paragraph -->
@@ -24,11 +24,11 @@ declare(strict_types=1);
 		<!-- /wp:heading -->
 	</div>
 	<!-- /wp:group -->
-</section>
-<!-- /wp:group -->
+</div></div>
+<!-- /wp:cover -->
 
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|4","bottom":"var:preset|spacing|4"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--4);padding-bottom:var(--wp--preset--spacing--4)">
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky bw-jump-band","style":{"spacing":{"padding":{"top":"var:preset|spacing|4","bottom":"var:preset|spacing|4"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-sky bw-jump-band" style="padding-top:var(--wp--preset--spacing--4);padding-bottom:var(--wp--preset--spacing--4)">
 	<!-- wp:html -->
 	<nav aria-label="Auf dieser Seite"><ul class="bw-jump-nav"><li><a href="#ist">Was sie ist</a></li><li><a href="#ist-nicht">Was sie nicht ist</a></li><li><a href="#beispiele">Beispiele</a></li><li><a href="#quellen">Quellen</a></li></ul></nav>
 	<!-- /wp:html -->

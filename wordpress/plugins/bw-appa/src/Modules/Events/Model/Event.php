@@ -27,6 +27,12 @@ final class Event {
 		public readonly string $time,
 		public readonly string $zoom_link,
 		public readonly string $zoom_access,
+		public readonly string $end_date = '',
+		public readonly string $end_time = '',
+		public readonly string $format = '',
+		public readonly string $location = '',
+		public readonly string $audience = 'open',
+		public readonly bool $registration = false,
 	) {
 	}
 
@@ -35,5 +41,12 @@ final class Event {
 	 */
 	public function has_date(): bool {
 		return '' !== $this->date;
+	}
+
+	/**
+	 * Whether the event takes place online (online or hybrid; without a format: when a Zoom link is set).
+	 */
+	public function is_online(): bool {
+		return in_array( $this->format, array( 'online', 'hybrid' ), true ) || ( '' === $this->format && '' !== $this->zoom_link );
 	}
 }

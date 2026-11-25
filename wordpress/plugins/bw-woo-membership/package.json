@@ -1,0 +1,21 @@
+{
+	"name": "bw-woo-membership",
+	"version": "0.14.1",
+	"private": true,
+	"description": "Verwaltung der APPA-Mitglieder im WordPress-Admin.",
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"build": "wp-scripts build admin=./src-js/admin.tsx --output-path=build",
+		"start": "wp-scripts start admin=./src-js/admin.tsx --output-path=build",
+		"typecheck": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"@wordpress/api-fetch": "^8.1.0",
+		"@wordpress/components": "^44.0.0",
+		"@wordpress/element": "^10.1.0",
+		"@wordpress/i18n": "^7.1.0",
+		"@wordpress/scripts": "^31.0.0",
+		"@wordpress/url": "^5.1.0",
+		"typescript": "~5.9"
+	}
+}

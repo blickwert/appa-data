@@ -1,31 +1,31 @@
 /* bw-appa/form – CF7 forms in the APPA look. All values come from the theme (theme.json presets and custom properties). */
 
-.bwa-form {
+.bw-form {
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--wp--preset--spacing--5) var(--wp--preset--spacing--4);
 }
 
-.bwa-form__field {
+.bw-form__field {
 	flex: 1 1 100%;
 	margin: 0;
 }
 
-.bwa-form__field--half {
+.bw-form__field--half {
 	flex-basis: calc(50% - var(--wp--preset--spacing--4));
 	min-inline-size: 14rem;
 }
 
-.bwa-form label,
-.bwa-form legend {
+.bw-form label,
+.bw-form legend {
 	color: var(--wp--preset--color--navy);
 	font-size: var(--wp--preset--font-size--sm);
 	font-weight: 600;
 }
 
-.bwa-form input:is([type="text"], [type="email"], [type="tel"]),
-.bwa-form select,
-.bwa-form textarea {
+.bw-form input:is([type="text"], [type="email"], [type="tel"]),
+.bw-form select,
+.bw-form textarea {
 	box-sizing: border-box;
 	inline-size: 100%;
 	margin-block-start: var(--wp--preset--spacing--2);
@@ -38,30 +38,35 @@
 	font-weight: 400;
 }
 
-.bwa-form :is(input, select, textarea):focus-visible {
+.bw-form :is(input, select, textarea):focus-visible {
 	border-color: var(--wp--preset--color--blue);
 	outline: 2px solid var(--wp--preset--color--blue);
 	outline-offset: 1px;
 }
 
-.bwa-form__group {
+.bw-form__group {
 	padding: 0;
 	border: 0;
 }
 
-.bwa-form__group .wpcf7-list-item {
+.bw-form__group .wpcf7-list-item {
 	display: block;
 	margin: var(--wp--preset--spacing--2) 0 0;
 	font-weight: 400;
 }
 
-.bwa-form__consent,
-.bwa-form__consent label {
+.bw-form__consent,
+.bw-form__consent label {
 	font-size: var(--wp--preset--font-size--sm);
 	font-weight: 400;
 }
 
-.bwa-form__submit {
+.bw-form__actions {
+	flex-basis: 100%;
+}
+
+.bw-form__submit {
+	inline-size: 100%;
 	padding: var(--wp--preset--spacing--3) var(--wp--preset--spacing--6);
 	border: 0;
 	border-radius: var(--wp--custom--radius--lg);
@@ -72,12 +77,12 @@
 	cursor: pointer;
 }
 
-.bwa-form__submit:hover {
+.bw-form__submit:hover {
 	background: var(--wp--preset--color--red-dark);
 }
 
 /* Honeypot: off-screen, not display:none (some bots skip hidden fields) */
-.bwa-form__hp {
+.bw-form__hp {
 	position: absolute;
 	inset-inline-start: -9999px;
 	inline-size: 1px;
@@ -85,13 +90,13 @@
 	overflow: hidden;
 }
 
-.bwa-form-block .wpcf7-response-output {
+.bw-form-block .wpcf7-response-output {
 	margin: var(--wp--preset--spacing--4) 0 0;
 	padding: var(--wp--preset--spacing--3) var(--wp--preset--spacing--4);
 	border-radius: var(--wp--custom--radius--md);
 }
 
-.bwa-form-block .wpcf7-not-valid-tip {
+.bw-form-block .wpcf7-not-valid-tip {
 	color: var(--wp--preset--color--red);
 	font-size: var(--wp--preset--font-size--sm);
 }

@@ -1,39 +1,116 @@
 /* core/group – card variants and layout helpers */
 
-.wp-block-group.is-style-card,
-.wp-block-group.is-style-card-flat {
+.wp-block-group:is(.is-style-card, .is-style-card-flat, .is-style-card-highlight, .is-style-card-plain) {
 	display: flex;
 	flex-direction: column;
 }
 
 /* Push the last block (usually the button row) to the bottom of equal-height cards */
-.wp-block-group.is-style-card > :last-child:is(.wp-block-buttons),
-.wp-block-group.is-style-card-flat > :last-child:is(.wp-block-buttons) {
+.wp-block-group:is(.is-style-card, .is-style-card-flat, .is-style-card-highlight) > :last-child:is(.wp-block-buttons) {
 	margin-block-start: auto;
 	padding-block-start: var(--wp--preset--spacing--4);
 }
 
-/* Overlay card on the hero image */
+/* Home hero: text with section padding on the left, image fills the right column edge to edge */
+.bw-hero > .wp-block-columns {
+	align-items: stretch;
+	margin-block: 0;
+}
+
+.bw-hero__text {
+	align-self: center;
+	padding-block: var(--wp--preset--spacing--section);
+}
+
+.bw-hero .wp-block-column:has(> .bw-hero__media) {
+	display: flex;
+	flex-direction: column;
+}
+
 .bw-hero__media {
 	position: relative;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.bw-hero__media .wp-block-image {
+	flex: 1;
+	margin: 0;
 }
 
 .bw-hero__media .wp-block-image img {
 	inline-size: 100%;
-	aspect-ratio: 1;
+	block-size: 100%;
+	min-block-size: 18rem;
 	object-fit: cover;
+	border-radius: 0;
 }
 
 .bw-hero__note.is-style-card {
 	position: absolute;
+	z-index: 1;
 	block-size: auto;
-	inset: auto var(--wp--preset--spacing--5) var(--wp--preset--spacing--5);
+	inset: auto var(--wp--preset--spacing--3) var(--wp--preset--spacing--5);
 }
 
-@media (max-width: 600px) {
-	.bw-hero__note.is-style-card {
-		position: static;
-		margin-block-start: calc(-1 * var(--wp--preset--spacing--10));
-		margin-inline: var(--wp--preset--spacing--4);
+@media (max-width: 781.98px) {
+	.bw-hero__text {
+		padding-block-end: var(--wp--preset--spacing--6);
 	}
+
+	.bw-hero__media .wp-block-image img {
+		block-size: 18rem;
+	}
+}
+
+/* Image in landscape format (Mitgliedschaft) */
+.bw-image--landscape img {
+	inline-size: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	border-radius: var(--wp--custom--radius--lg);
+	box-shadow: var(--wp--preset--shadow--card);
+}
+
+/* Card grid whose first card spans two columns (Über uns) */
+@media (min-width: 1024px) {
+	.bw-grid--lead > :first-child {
+		grid-column: span 2;
+	}
+}
+
+/* Half-width block on large screens (accordions) */
+@media (min-width: 782px) {
+	.is-layout-constrained > .bw-half {
+		/* (0,2,0) beats the layout's `.is-layout-constrained > :where(…)` (0,1,0) without !important */
+		max-inline-size: min(50%, calc(var(--wp--style--global--wide-size) / 2));
+		/* Left edge of the section width instead of the centring of the constrained layout.
+		   !important stays: core sets `margin-left: auto !important` on constrained children,
+		   and only another !important declaration can override it. */
+		margin-inline-start: max(0px, calc((100% - var(--wp--style--global--wide-size)) / 2)) !important;
+	}
+}
+
+/* Page header: lead limited to the reading width */
+.bw-page-header .is-style-lead {
+	max-inline-size: var(--wp--style--global--content-size);
+}
+
+/* Call to action: text takes the free space, the button stays on the right */
+.bw-cta__row > :first-child {
+	flex: 1 1 28rem;
+}
+
+/* Price in membership cards */
+.bw-price {
+	font-weight: 700;
+}
+
+/* Contact details: separator in the line colour */
+.bw-contact .wp-block-separator {
+	margin-block: var(--wp--preset--spacing--4);
+	border: 0;
+	border-block-start: var(--wp--custom--border-width--thin) solid var(--wp--preset--color--line);
+	opacity: 1;
 }

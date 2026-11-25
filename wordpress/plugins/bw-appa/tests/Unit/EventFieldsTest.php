@@ -32,4 +32,27 @@ final class EventFieldsTest extends TestCase {
 	public function test_text_is_single_line_plain_text(): void {
 		self::assertSame( 'ID 123 Kenncode 4711', EventFields::text( "<b>ID 123</b>\n Kenncode   4711" ) );
 	}
+
+	public function test_registration_fields(): void {
+		self::assertSame( 'members', EventFields::audience( 'members' ) );
+		self::assertSame( 'open', EventFields::audience( 'vip' ) );
+		self::assertSame( '35.00', EventFields::price( '35' ) );
+		self::assertSame( '12.50', EventFields::price( '12,5 €' ) );
+		self::assertSame( '0.00', EventFields::price( '0' ) );
+		self::assertSame( '', EventFields::price( '-5' ) );
+		self::assertSame( '', EventFields::price( 'gratis' ) );
+		self::assertSame( '150', EventFields::capacity( '150' ) );
+		self::assertSame( '', EventFields::capacity( '0' ) );
+		self::assertSame( '1', EventFields::flag( 'true' ) );
+		self::assertSame( '', EventFields::flag( '' ) );
+	}
+
+	public function test_format_and_days(): void {
+		self::assertSame( 'hybrid', EventFields::format( ' hybrid ' ) );
+		self::assertSame( '', EventFields::format( 'Präsenz' ) );
+		self::assertSame( '14', EventFields::days( '014' ) );
+		self::assertSame( '0', EventFields::days( '0' ) );
+		self::assertSame( '', EventFields::days( '-1' ) );
+		self::assertSame( '', EventFields::days( '400' ) );
+	}
 }

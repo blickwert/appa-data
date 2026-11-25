@@ -14,14 +14,14 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky bw-hero","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-sky bw-hero" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
-	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}},"verticalAlignment":"center"} -->
-	<div class="wp-block-columns are-vertically-aligned-center">
-		<!-- wp:column {"width":"55%","verticalAlignment":"center"} -->
-		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:55%">
-			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|5"}},"layout":{"type":"default"}} -->
-			<div class="wp-block-group">
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky bw-hero","style":{"spacing":{"padding":{}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-sky bw-hero">
+	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
+	<div class="wp-block-columns">
+		<!-- wp:column {"width":"50%"} -->
+		<div class="wp-block-column" style="flex-basis:50%">
+			<!-- wp:group {"className":"bw-hero__text","style":{"spacing":{"blockGap":"var:preset|spacing|5"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group bw-hero__text">
 				<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
 				<p class="is-style-eyebrow">APPA · Positive Psychologie in Österreich</p>
 				<!-- /wp:paragraph -->
@@ -50,8 +50,8 @@ declare(strict_types=1);
 		</div>
 		<!-- /wp:column -->
 
-		<!-- wp:column {"width":"45%","verticalAlignment":"center"} -->
-		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:45%">
+		<!-- wp:column {"width":"50%"} -->
+		<div class="wp-block-column" style="flex-basis:50%">
 			<!-- wp:group {"className":"bw-hero__media","layout":{"type":"default"}} -->
 			<div class="wp-block-group bw-hero__media">
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
@@ -60,9 +60,9 @@ declare(strict_types=1);
 
 				<!-- wp:group {"className":"is-style-card bw-hero__note","style":{"spacing":{"blockGap":"var:preset|spacing|1"}},"layout":{"type":"default"}} -->
 				<div class="wp-block-group is-style-card bw-hero__note">
-					<!-- wp:heading {"level":3,"fontSize":"base"} -->
-					<h3 class="wp-block-heading has-base-font-size">Deine Ideen können etwas bewegen.</h3>
-					<!-- /wp:heading -->
+					<!-- wp:paragraph {"textColor":"navy"} -->
+					<p class="has-navy-color has-text-color"><strong>Deine Ideen können etwas bewegen.</strong></p>
+					<!-- /wp:paragraph -->
 
 					<!-- wp:paragraph {"fontSize":"sm"} -->
 					<p class="has-sm-font-size">Gestalte mit uns die Positive Psychologie in Österreich.</p>
@@ -78,7 +78,7 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
@@ -114,8 +114,8 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
 		<!-- wp:column {"width":"33.33%"} -->
@@ -154,8 +154,8 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
 		<!-- wp:column {"width":"33.33%"} -->
@@ -181,7 +181,7 @@ declare(strict_types=1);
 			<!-- /wp:paragraph -->
 
 			<!-- wp:paragraph -->
-			<p>Du kannst die Ergebnisse deiner Klient:innen, Coachees, Schüler:innen oder Patient:innen jederzeit abrufen und über mehrere Erhebungen hinweg vergleichen. Nach jeder abgeschlossenen Befragung stehen die aktualisierten Auswertungen direkt zur Verfügung.</p>
+			<p>Du kannst die Ergebnisse deiner Klient:innen, Coachees, Schüler:innen oder Patient:innen jederzeit abrufen und über mehrere Erhebungen hinweg vergleichen. Nach jeder abgeschlossenen Befragung stehen die aktualisierten Auswertungen direkt zur Verfügung. So kannst du Veränderungen anhand wissenschaftlich fundierter Verfahren nachvollziehen und gemeinsam die nächsten Schritte gestalten.</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:paragraph -->
@@ -206,7 +206,7 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"bottom"}} -->
 	<div class="wp-block-group">
@@ -241,22 +241,26 @@ declare(strict_types=1);
 	<!-- wp:post-template {"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->
 	<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group is-style-card">
+		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"badge"}}}},"className":"bw-event-badge"} -->
+		<p class="bw-event-badge"></p>
+		<!-- /wp:paragraph -->
+
 		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"when"}}}},"className":"is-style-eyebrow"} -->
 		<p class="is-style-eyebrow"></p>
 		<!-- /wp:paragraph -->
 
 		<!-- wp:post-title {"level":3,"isLink":true,"fontSize":"xl"} /-->
 
-		<!-- wp:post-excerpt {"excerptLength":40} /-->
-
-		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"access"}}}},"fontSize":"sm"} -->
+		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"place"}}}},"fontSize":"sm"} -->
 		<p class="has-sm-font-size"></p>
 		<!-- /wp:paragraph -->
 
+		<!-- wp:post-excerpt {"excerptLength":40} /-->
+
 		<!-- wp:buttons -->
 		<div class="wp-block-buttons">
-			<!-- wp:button {"metadata":{"bindings":{"url":{"source":"bw-appa/event","args":{"key":"zoom_link"}}}}} -->
-			<div class="wp-block-button"><a class="wp-block-button__link wp-element-button">Per Zoom teilnehmen</a></div>
+			<!-- wp:button {"metadata":{"bindings":{"url":{"source":"bw-appa/event","args":{"key":"url"}},"text":{"source":"bw-appa/event","args":{"key":"cta"}}}}} -->
+			<div class="wp-block-button"><a class="wp-block-button__link wp-element-button">Mehr erfahren</a></div>
 			<!-- /wp:button -->
 		</div>
 		<!-- /wp:buttons -->
@@ -278,7 +282,7 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:quote {"className":"is-style-large-centered"} -->
 	<blockquote class="wp-block-quote is-style-large-centered">
@@ -290,10 +294,10 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-green","style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|12"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-green","style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|12"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull is-style-section-green" style="padding-top:var(--wp--preset--spacing--12);padding-bottom:var(--wp--preset--spacing--12)">
-	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
-	<div class="wp-block-group">
+	<!-- wp:group {"className":"bw-cta__row","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+	<div class="wp-block-group bw-cta__row">
 		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group">
 			<!-- wp:heading {"fontSize":"xx-large"} -->

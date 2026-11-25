@@ -1,0 +1,94 @@
+/* Printable membership confirmation. Stand-alone page without wp_head(): the presets only apply if the theme's
+   variables are present, otherwise the fallbacks; raw values only here. */
+body.bwm-print {
+	--bwm-navy: var(--wp--preset--color--navy, #12345a);
+	--bwm-text: var(--wp--preset--color--slate, #52677a);
+	--bwm-accent: var(--wp--preset--color--red, #d93629);
+	--bwm-mist: var(--wp--preset--color--mist, #f4f7f8);
+	--bwm-surface: var(--wp--preset--color--white, #fff);
+	--bwm-on-accent: var(--wp--preset--color--white, #fff);
+	margin: 0;
+	background: var(--bwm-mist);
+	color: var(--bwm-navy);
+	font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.bwm-print__page {
+	box-sizing: border-box;
+	max-inline-size: 42rem;
+	margin: 2rem auto;
+	padding: 3rem;
+	background: var(--bwm-surface);
+}
+
+.bwm-print__brand {
+	margin: 0;
+	font-size: 1.75rem;
+	font-weight: 700;
+}
+
+.bwm-print__brand span {
+	color: var(--bwm-accent);
+}
+
+.bwm-print__org {
+	margin: 0 0 2.5rem;
+	color: var(--bwm-text);
+	font-size: 0.875rem;
+}
+
+.bwm-print h1 {
+	font-size: 1.875rem;
+}
+
+.bwm-print__name {
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.bwm-print dl {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 0.5rem 2rem;
+	margin: 2rem 0;
+}
+
+.bwm-print dt {
+	color: var(--bwm-text);
+}
+
+.bwm-print dd {
+	margin: 0;
+	font-weight: 600;
+}
+
+.bwm-print__note {
+	color: var(--bwm-text);
+	font-size: 0.875rem;
+}
+
+.bwm-print__actions button {
+	padding: 0.75rem 1.5rem;
+	border: 0;
+	border-radius: 12px;
+	background: var(--bwm-accent);
+	color: var(--bwm-on-accent);
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+@media print {
+	body.bwm-print {
+		background: var(--bwm-surface);
+	}
+
+	.bwm-print__page {
+		margin: 0;
+		padding: 0;
+	}
+
+	.bwm-print__actions {
+		display: none;
+	}
+}

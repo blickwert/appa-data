@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","anchor":"fachgruppen","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","anchor":"fachgruppen","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section id="fachgruppen" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
@@ -39,30 +39,34 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull" style="padding-bottom:var(--wp--preset--spacing--section)">
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|6"}},"layout":{"type":"grid","columnCount":3,"minimumColumnWidth":"18rem"}} -->
 	<div class="wp-block-group">
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"briefcase"} /-->
+			<!-- wp:bw/icon {"icon":"briefcase","tone":"red"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Positive Coaching</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><strong>Stärken und Entwicklung im Coaching</strong></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"fontSize":"sm"} -->
+				<p class="has-sm-font-size"><strong>Stärken und Entwicklung im Coaching</strong></p>
+				<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph -->
-			<p>Wie kann Coaching Menschen dabei unterstützen, ihre Stärken zu nutzen, Orientierung zu finden und selbst gewählte Ziele zu verfolgen? Wir verbinden Erkenntnisse der Positiven Psychologie mit Erfahrungen aus Coaching und Beratung. Gemeinsam reflektieren wir Methoden, erproben Anwendungen und entwickeln Ideen für die Praxis.</p>
-			<!-- /wp:paragraph -->
+				<!-- wp:paragraph -->
+				<p>Wie kann Coaching Menschen dabei unterstützen, ihre Stärken zu nutzen, Orientierung zu finden und selbst gewählte Ziele zu verfolgen? Wir verbinden Erkenntnisse der Positiven Psychologie mit Erfahrungen aus Coaching und Beratung. Gemeinsam reflektieren wir Methoden, erproben Anwendungen und entwickeln Ideen für die Praxis.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -71,24 +75,28 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"stethoscope"} /-->
+			<!-- wp:bw/icon {"icon":"stethoscope","tone":"green"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Positive Clinical Psychology</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><strong>Ressourcen und Wohlbefinden in der klinischen Praxis</strong></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"fontSize":"sm"} -->
+				<p class="has-sm-font-size"><strong>Ressourcen und Wohlbefinden in der klinischen Praxis</strong></p>
+				<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph -->
-			<p>Wie lassen sich Wohlbefinden, Hoffnung und persönliche Ressourcen im Umgang mit psychischen Belastungen berücksichtigen? Wir beschäftigen uns mit der Verbindung von Positiver Psychologie, Klinischer Psychologie und Psychotherapie. Im Mittelpunkt stehen wissenschaftliche Erkenntnisse und ihre verantwortungsvolle Anwendung in Behandlung und Begleitung.</p>
-			<!-- /wp:paragraph -->
+				<!-- wp:paragraph -->
+				<p>Wie lassen sich Wohlbefinden, Hoffnung und persönliche Ressourcen im Umgang mit psychischen Belastungen berücksichtigen? Wir beschäftigen uns mit der Verbindung von Positiver Psychologie, Klinischer Psychologie und Psychotherapie. Im Mittelpunkt stehen wissenschaftliche Erkenntnisse und ihre verantwortungsvolle Anwendung in Behandlung und Begleitung.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -97,24 +105,28 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"heart"} /-->
+			<!-- wp:bw/icon {"icon":"heart","tone":"red"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Positive Health</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><strong>Gesundheit und Lebensqualität fördern</strong></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"fontSize":"sm"} -->
+				<p class="has-sm-font-size"><strong>Gesundheit und Lebensqualität fördern</strong></p>
+				<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph -->
-			<p>Was unterstützt Menschen dabei, gesund zu leben und auch mit gesundheitlichen Herausforderungen Lebensqualität zu erfahren? Wir beschäftigen uns mit Ressourcen, Prävention und Gesundheitsförderung. Gemeinsam entwickeln wir Ideen für unterschiedliche Lebensphasen und Lebenswelten und fragen, wie ihre Wirkung untersucht werden kann.</p>
-			<!-- /wp:paragraph -->
+				<!-- wp:paragraph -->
+				<p>Was unterstützt Menschen dabei, gesund zu leben und auch mit gesundheitlichen Herausforderungen Lebensqualität zu erfahren? Wir beschäftigen uns mit Ressourcen, Prävention und Gesundheitsförderung. Gemeinsam entwickeln wir Ideen für unterschiedliche Lebensphasen und Lebenswelten und fragen, wie ihre Wirkung untersucht werden kann.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -123,24 +135,28 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"graduation-cap"} /-->
+			<!-- wp:bw/icon {"icon":"graduation-cap","tone":"gold"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Positive Education</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><strong>Lernräume gestalten und Entwicklung ermöglichen</strong></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"fontSize":"sm"} -->
+				<p class="has-sm-font-size"><strong>Lernräume gestalten und Entwicklung ermöglichen</strong></p>
+				<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph -->
-			<p>Wie können Bildungseinrichtungen zu Orten werden, an denen Lernen, Wohlbefinden und persönliche Entwicklung zusammengehören? Wir bringen Perspektiven aus Pädagogik, Psychologie und Bildungsforschung zusammen. Themen sind etwa Stärken, Beziehungen, Motivation und die Gestaltung förderlicher Lernbedingungen.</p>
-			<!-- /wp:paragraph -->
+				<!-- wp:paragraph -->
+				<p>Wie können Bildungseinrichtungen zu Orten werden, an denen Lernen, Wohlbefinden und persönliche Entwicklung zusammengehören? Wir bringen Perspektiven aus Pädagogik, Psychologie und Bildungsforschung zusammen. Themen sind etwa Stärken, Beziehungen, Motivation und die Gestaltung förderlicher Lernbedingungen.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -149,24 +165,28 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"target"} /-->
+			<!-- wp:bw/icon {"icon":"target","tone":"green"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Positive Leadership</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><strong>Führung und Arbeitswelten gestalten</strong></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"fontSize":"sm"} -->
+				<p class="has-sm-font-size"><strong>Führung und Arbeitswelten gestalten</strong></p>
+				<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph -->
-			<p>Wie können Führung und Zusammenarbeit so gestaltet werden, dass Menschen ihre Stärken einsetzen und ihre Arbeit als sinnvoll erleben? Wir befassen uns mit Vertrauen, Entwicklung und Wohlbefinden in Organisationen. Erfahrungen aus der Führungspraxis verbinden wir mit Forschung und Ideen für konkrete Veränderungen.</p>
-			<!-- /wp:paragraph -->
+				<!-- wp:paragraph -->
+				<p>Wie können Führung und Zusammenarbeit so gestaltet werden, dass Menschen ihre Stärken einsetzen und ihre Arbeit als sinnvoll erleben? Wir befassen uns mit Vertrauen, Entwicklung und Wohlbefinden in Organisationen. Erfahrungen aus der Führungspraxis verbinden wir mit Forschung und Ideen für konkrete Veränderungen.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -175,24 +195,28 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group is-style-card">
-			<!-- wp:bw/icon {"icon":"accessibility"} /-->
+			<!-- wp:bw/icon {"icon":"accessibility","tone":"red"} /-->
 
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Positive Inclusion</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><strong>Selbstbestimmung, Teilhabe und Lebensqualität</strong></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"fontSize":"sm"} -->
+				<p class="has-sm-font-size"><strong>Selbstbestimmung, Teilhabe und Lebensqualität</strong></p>
+				<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph -->
-			<p>Wie kann Positive Psychologie Menschen mit Behinderungen in einem selbstbestimmten Leben unterstützen? Wir verbinden den Blick auf Stärken und Wohlbefinden mit Fragen der Barrierefreiheit, Mitbestimmung und gleichberechtigter Teilhabe. Menschen mit Behinderungen, Angehörige, Fachpersonen und Forschende sind eingeladen, Themen und Projekte gemeinsam zu gestalten.</p>
-			<!-- /wp:paragraph -->
+				<!-- wp:paragraph -->
+				<p>Wie kann Positive Psychologie Menschen mit Behinderungen in einem selbstbestimmten Leben unterstützen? Wir verbinden den Blick auf Stärken und Wohlbefinden mit Fragen der Barrierefreiheit, Mitbestimmung und gleichberechtigter Teilhabe. Menschen mit Behinderungen, Angehörige, Fachpersonen und Forschende sind eingeladen, Themen und Projekte gemeinsam zu gestalten.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-arrow"} -->
-				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#antrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
+				<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mitgliedschaft/#beitrag' ) ); ?>">Diese Fachgruppe mitgestalten</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->

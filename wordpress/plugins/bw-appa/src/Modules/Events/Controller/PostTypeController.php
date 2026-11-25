@@ -74,6 +74,18 @@ final class PostTypeController {
 			EventRepository::META_TIME   => array( EventFields::class, 'time' ),
 			EventRepository::META_LINK   => array( EventFields::class, 'url' ),
 			EventRepository::META_ACCESS => array( EventFields::class, 'text' ),
+			EventRepository::META_AUDIENCE     => array( EventFields::class, 'audience' ),
+			EventRepository::META_PRICE_MEMBER => array( EventFields::class, 'price' ),
+			EventRepository::META_PRICE_PUBLIC => array( EventFields::class, 'price' ),
+			EventRepository::META_CAPACITY     => array( EventFields::class, 'capacity' ),
+			EventRepository::META_REGISTRATION => array( EventFields::class, 'flag' ),
+			EventRepository::META_DEADLINE     => array( EventFields::class, 'date' ),
+			EventRepository::META_END_DATE     => array( EventFields::class, 'date' ),
+			EventRepository::META_END_TIME     => array( EventFields::class, 'time' ),
+			EventRepository::META_FORMAT       => array( EventFields::class, 'format' ),
+			EventRepository::META_LOCATION     => array( EventFields::class, 'text' ),
+			EventRepository::META_REMINDER     => array( EventFields::class, 'days' ),
+			EventRepository::META_CANCEL       => array( EventFields::class, 'days' ),
 		);
 		foreach ( $fields as $key => $sanitize ) {
 			register_post_meta(

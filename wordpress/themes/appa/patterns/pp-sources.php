@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","anchor":"quellen","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","anchor":"quellen","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section id="quellen" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
@@ -29,8 +29,8 @@ declare(strict_types=1);
 
 		<!-- wp:column {"width":"66.66%"} -->
 		<div class="wp-block-column" style="flex-basis:66.66%">
-			<!-- wp:list -->
-			<ul class="wp-block-list">
+			<!-- wp:list {"className":"bw-link-list"} -->
+			<ul class="wp-block-list bw-link-list">
 				<!-- wp:list-item -->
 				<li><a href="https://link.springer.com/article/10.1007/s10902-012-9380-0" rel="noopener">Gander et al. (2012): Strengths-based positive psychology interventions, Journal of Happiness Studies</a></li>
 				<!-- /wp:list-item -->

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"bottom"}} -->
 	<div class="wp-block-group">
@@ -46,22 +46,26 @@ declare(strict_types=1);
 	<!-- wp:post-template {"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->
 	<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group is-style-card">
+		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"badge"}}}},"className":"bw-event-badge"} -->
+		<p class="bw-event-badge"></p>
+		<!-- /wp:paragraph -->
+
 		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"when"}}}},"className":"is-style-eyebrow"} -->
 		<p class="is-style-eyebrow"></p>
 		<!-- /wp:paragraph -->
 
 		<!-- wp:post-title {"level":3,"isLink":true,"fontSize":"xl"} /-->
 
-		<!-- wp:post-excerpt {"excerptLength":40} /-->
-
-		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"access"}}}},"fontSize":"sm"} -->
+		<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"bw-appa/event","args":{"key":"place"}}}},"fontSize":"sm"} -->
 		<p class="has-sm-font-size"></p>
 		<!-- /wp:paragraph -->
 
+		<!-- wp:post-excerpt {"excerptLength":40} /-->
+
 		<!-- wp:buttons -->
 		<div class="wp-block-buttons">
-			<!-- wp:button {"metadata":{"bindings":{"url":{"source":"bw-appa/event","args":{"key":"zoom_link"}}}}} -->
-			<div class="wp-block-button"><a class="wp-block-button__link wp-element-button">Per Zoom teilnehmen</a></div>
+			<!-- wp:button {"metadata":{"bindings":{"url":{"source":"bw-appa/event","args":{"key":"url"}},"text":{"source":"bw-appa/event","args":{"key":"cta"}}}}} -->
+			<div class="wp-block-button"><a class="wp-block-button__link wp-element-button">Mehr erfahren</a></div>
 			<!-- /wp:button -->
 		</div>
 		<!-- /wp:buttons -->

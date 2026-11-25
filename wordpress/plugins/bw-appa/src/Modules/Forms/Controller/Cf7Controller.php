@@ -12,7 +12,10 @@ namespace BW\Appa\Modules\Forms\Controller;
 use BW\Appa\Modules\Forms\Repository\FormRepository;
 use BW\Appa\Modules\Forms\Repository\RateLimitRepository;
 use BW\Appa\Modules\Forms\Repository\SettingsRepository;
+use BW\Appa\Modules\Forms\Service\ConsentLink;
 use BW\Appa\Modules\Forms\Service\FormToken;
+use BW\Appa\Modules\Forms\Service\LegacyClasses;
+use BW\Appa\Modules\Forms\Service\MailSender;
 use BW\Appa\Modules\Forms\Service\SpamGuard;
 use WPCF7_ContactForm;
 use WPCF7_Submission;
@@ -28,12 +31,15 @@ final class Cf7Controller {
 
 	/**
 	 * Builds the controller.
+	 *
+	 * @param \Closure(): SpamGuard $guard Builds the spam guard with the current settings; called only for a submission.
 	 */
 	public function __construct(
 		private readonly FormRepository $forms,
 		private readonly SettingsRepository $settings,
 		private readonly RateLimitRepository $rate_limit,
 		private readonly FormToken $token,
+		private readonly \Closure $guard,
 	) {
 	}
 
@@ -44,9 +50,33 @@ final class Cf7Controller {
 		add_action( 'admin_init', array( $this->forms, 'ensure_all' ) );
 		add_action( 'admin_notices', array( $this, 'missing_cf7_notice' ) );
 		add_filter( 'wpcf7_form_hidden_fields', array( $this, 'hidden_fields' ) );
+		add_filter( 'wpcf7_form_elements', array( LegacyClasses::class, 'rename' ), 5 );
+		add_filter( 'wpcf7_form_elements', array( $this, 'link_privacy_notice' ) );
 		add_filter( 'wpcf7_form_elements', array( $this, 'add_honeypot' ) );
 		add_filter( 'wpcf7_spam', array( $this, 'check_spam' ), 10, 2 );
 		add_filter( 'wpcf7_mail_components', array( $this, 'route_mail' ), 10, 3 );
+		add_filter( 'wpcf7_form_tag', array( $this, 'prefill_subject' ) );
+	}
+
+	/**
+	 * The subject can be prefilled from the address (e.g. /kontakt/?betreff=…), also in forms created earlier.
+	 *
+	 * @param array<string, mixed>|object $tag Form tag.
+	 * @return array<string, mixed>|object
+	 */
+	public function prefill_subject( mixed $tag ): mixed {
+		$name    = is_object( $tag ) ? ( $tag->name ?? '' ) : ( $tag['name'] ?? '' );
+		$options = is_object( $tag ) ? (array) ( $tag->options ?? array() ) : (array) ( $tag['options'] ?? array() );
+		if ( 'betreff' !== $name || in_array( 'default:get', $options, true ) ) {
+			return $tag;
+		}
+		$options[] = 'default:get';
+		if ( is_object( $tag ) ) {
+			$tag->options = $options;
+		} else {
+			$tag['options'] = $options;
+		}
+		return $tag;
 	}
 
 	/**
@@ -74,11 +104,23 @@ final class Cf7Controller {
 	}
 
 	/**
+	 * Links "Datenschutzhinweise" in the consent text of the APPA forms to the current privacy page.
+	 */
+	public function link_privacy_notice( string $html ): string {
+		$form = WPCF7_ContactForm::get_current();
+		if ( ! $form instanceof WPCF7_ContactForm || ! $this->forms->is_ours( (int) $form->id() ) ) {
+			return $html;
+		}
+		$url = get_privacy_policy_url() ?: home_url( '/datenschutz/' );
+		return ConsentLink::add( $html, esc_url_raw( $url ) );
+	}
+
+	/**
 	 * Adds an invisible field that only bots fill in.
 	 */
 	public function add_honeypot( string $html ): string {
 		return $html . sprintf(
-			'<p class="bwa-form__hp" aria-hidden="true"><label>%1$s <input type="text" name="%2$s" value="" tabindex="-1" autocomplete="off"></label></p>',
+			'<p class="bw-form__hp" aria-hidden="true"><label>%1$s <input type="text" name="%2$s" value="" tabindex="-1" autocomplete="off"></label></p>',
 			esc_html__( 'Bitte leer lassen', 'bw-appa' ),
 			esc_attr( self::FIELD_HONEYPOT )
 		);
@@ -98,10 +140,10 @@ final class Cf7Controller {
 
 		$client = (string) $submission->get_meta( 'remote_ip' );
 		$texts  = array_filter( array_map( static fn( mixed $v ): string => is_array( $v ) ? implode( ' ', $v ) : (string) $v, $submission->get_posted_data() ) );
-		$config = $this->settings->get();
-		$guard  = new SpamGuard( $config['min_seconds'], $config['max_links'], $config['max_per_hour'], $this->settings->blocked_words() );
+		$guard  = ( $this->guard )();
+		$now    = time();
 
-		$reason = $guard->reason( $honeypot, $this->token->time( $token ), time(), $texts, $this->rate_limit->count( $client ) );
+		$reason = $guard->reason( $honeypot, $this->token->time( $token, $now ), $now, $texts, $this->rate_limit->count( $client ) );
 		$this->rate_limit->increment( $client );
 
 		if ( null === $reason ) {
@@ -117,17 +159,19 @@ final class Cf7Controller {
 	}
 
 	/**
-	 * Sends the APPA forms to the configured recipient.
+	 * Sends the APPA forms to the configured recipient and makes every CF7 sender name safe for mail().
 	 *
 	 * @param array<string, mixed> $components Mail components.
 	 * @return array<string, mixed>
 	 */
 	public function route_mail( array $components, WPCF7_ContactForm $form, object $mail ): array {
+		if ( isset( $components['sender'] ) && is_string( $components['sender'] ) ) {
+			$components['sender'] = MailSender::clean( $components['sender'] );
+		}
 		if ( 'mail' !== ( method_exists( $mail, 'name' ) ? $mail->name() : '' ) ) {
 			return $components;
 		}
-		$ours = array_map( 'intval', (array) get_option( FormRepository::OPTION, array() ) );
-		if ( in_array( $form->id(), $ours, true ) ) {
+		if ( $this->forms->is_ours( (int) $form->id() ) ) {
 			$components['recipient'] = $this->settings->get()['recipient'];
 		}
 		return $components;

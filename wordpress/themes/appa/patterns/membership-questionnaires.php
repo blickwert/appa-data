@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-mist","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-mist" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
+<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"},"blockGap":"var:preset|spacing|10"}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
+	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"constrained","justifyContent":"left"}} -->
 	<div class="wp-block-group">
 		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
 		<p class="is-style-eyebrow">Fragebögen im Überblick</p>
@@ -26,24 +26,32 @@ declare(strict_types=1);
 		<!-- wp:paragraph -->
 		<p>Was trägt zum Wohlbefinden bei? Wie erleben Menschen ihre psychische Gesundheit? Und wie gelingt es ihnen, ihre Zukunft aktiv zu gestalten? Unsere digitalen Fragebögen unterstützen dich dabei, diese Fragen gemeinsam zu erkunden und Entwicklungen über die Zeit sichtbar zu machen.</p>
 		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph -->
+		<p><strong>Dein Mitgliedervorteil:</strong> Mit dem Start des Toolbereichs stehen dir jeden Monat 30 Fragebogenanwendungen ohne zusätzliche Kosten zur Verfügung. Für zusätzliche Anwendungen kontaktiere unser Office unter <a href="mailto:info@appa.net">info@appa.net</a>. Außerdem zum Start vorgesehen: Eine Selbstwirksamkeitsskala und eine Resilienzskala ergänzen das Angebot. Weitere Tools folgen.</p>
+		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|6"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->
+	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|8"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->
 	<div class="wp-block-group">
-		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group is-style-card">
+		<!-- wp:group {"className":"is-style-card-plain","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group is-style-card-plain">
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">PERMA Profiler</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:paragraph {"textColor":"navy"} -->
-			<p class="has-navy-color has-text-color"><em>Wohlbefinden verstehen. Entwicklung gezielt begleiten.</em></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"textColor":"navy"} -->
+				<p class="has-navy-color has-text-color"><em>Wohlbefinden verstehen. Entwicklung gezielt begleiten.</em></p>
+				<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph -->
-			<p>Der PERMA Profiler erfasst fünf zentrale Bereiche des Wohlbefindens: positive Emotionen, Engagement, gelingende Beziehungen, Sinnerleben und das Erreichen persönlicher Ziele. Das individuelle Profil zeigt, welche Bereiche bereits gut ausgeprägt sind und wo Entwicklungsmöglichkeiten liegen. Damit erhältst du konkrete Ansatzpunkte für ressourcenorientierte Gespräche und die gemeinsame Gestaltung weiterer Schritte.</p>
-			<!-- /wp:paragraph -->
+				<!-- wp:paragraph -->
+				<p>Der PERMA Profiler erfasst fünf zentrale Bereiche des Wohlbefindens: positive Emotionen, Engagement, gelingende Beziehungen, Sinnerleben und das Erreichen persönlicher Ziele. Das individuelle Profil zeigt, welche Bereiche bereits gut ausgeprägt sind und wo Entwicklungsmöglichkeiten liegen. Damit erhältst du konkrete Ansatzpunkte für ressourcenorientierte Gespräche und die gemeinsame Gestaltung weiterer Schritte.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:paragraph {"fontSize":"xs"} -->
 			<p class="has-xs-font-size">Quelle: Wammerl et al. (2019)</p>
@@ -51,19 +59,23 @@ declare(strict_types=1);
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group is-style-card">
+		<!-- wp:group {"className":"is-style-card-plain","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group is-style-card-plain">
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">PERMA Profiler.kids</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:paragraph {"textColor":"navy"} -->
-			<p class="has-navy-color has-text-color"><em>Jungen Menschen eine Stimme für ihr Wohlbefinden geben.</em></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"textColor":"navy"} -->
+				<p class="has-navy-color has-text-color"><em>Jungen Menschen eine Stimme für ihr Wohlbefinden geben.</em></p>
+				<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph -->
-			<p>Wie erleben Kinder und Jugendliche ihr Wohlbefinden? Der PERMA Profiler.kids macht ihre eigene Perspektive zugänglich. Die altersgerecht angepasste Fassung orientiert sich am PERMA-Modell und unterstützt dich dabei, Ressourcen und Entwicklungsbedürfnisse besser zu verstehen. Wiederholte Erhebungen helfen, Veränderungen zu verfolgen und mit jungen Menschen über das ins Gespräch zu kommen, was sie stärkt.</p>
-			<!-- /wp:paragraph -->
+				<!-- wp:paragraph -->
+				<p>Wie erleben Kinder und Jugendliche ihr Wohlbefinden? Der PERMA Profiler.kids macht ihre eigene Perspektive zugänglich. Die altersgerecht angepasste Fassung orientiert sich am PERMA-Modell und unterstützt dich dabei, Ressourcen und Entwicklungsbedürfnisse besser zu verstehen. Wiederholte Erhebungen helfen, Veränderungen zu verfolgen und mit jungen Menschen über das ins Gespräch zu kommen, was sie stärkt.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:paragraph {"fontSize":"xs"} -->
 			<p class="has-xs-font-size">Quelle: Wammerl &amp; Lichtinger (2025)</p>
@@ -71,19 +83,23 @@ declare(strict_types=1);
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group is-style-card">
+		<!-- wp:group {"className":"is-style-card-plain","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group is-style-card-plain">
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Mental Health Continuum – Short Form</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:paragraph {"textColor":"navy"} -->
-			<p class="has-navy-color has-text-color"><em>Psychische Gesundheit umfassender verstehen.</em></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"textColor":"navy"} -->
+				<p class="has-navy-color has-text-color"><em>Psychische Gesundheit umfassender verstehen.</em></p>
+				<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph -->
-			<p>Das Mental Health Continuum erfasst emotionales, psychologisches und soziales Wohlbefinden. Es beleuchtet, wie Menschen sich fühlen, ihr Leben gestalten und ihre Zugehörigkeit zur Gemeinschaft erleben. Die Kurzform unterstützt einen differenzierten Blick auf positive psychische Gesundheit und bietet Anknüpfungspunkte, um Ressourcen zu besprechen und Veränderungen im Verlauf der Begleitung nachzuvollziehen.</p>
-			<!-- /wp:paragraph -->
+				<!-- wp:paragraph -->
+				<p>Das Mental Health Continuum erfasst emotionales, psychologisches und soziales Wohlbefinden. Es beleuchtet, wie Menschen sich fühlen, ihr Leben gestalten und ihre Zugehörigkeit zur Gemeinschaft erleben. Die Kurzform unterstützt einen differenzierten Blick auf positive psychische Gesundheit und bietet Anknüpfungspunkte, um Ressourcen zu besprechen und Veränderungen im Verlauf der Begleitung nachzuvollziehen.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:paragraph {"fontSize":"xs"} -->
 			<p class="has-xs-font-size">Quelle: Wammerl, Köstenbaumer &amp; Streit (2024)</p>
@@ -91,19 +107,23 @@ declare(strict_types=1);
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group is-style-card">
+		<!-- wp:group {"className":"is-style-card-plain","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group is-style-card-plain">
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading">Pragmatic Prospection Scale</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:paragraph {"textColor":"navy"} -->
-			<p class="has-navy-color has-text-color"><em>Von Zukunftsvorstellungen zu konkreten Schritten.</em></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group">
+				<!-- wp:paragraph {"textColor":"navy"} -->
+				<p class="has-navy-color has-text-color"><em>Von Zukunftsvorstellungen zu konkreten Schritten.</em></p>
+				<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph -->
-			<p>Die Pragmatic Prospection Scale erfasst, wie Menschen ihre Zukunft gedanklich vorbereiten und aktiv gestalten: gewünschte Ergebnisse vorstellen, sinnvolle und realistische Ziele setzen, konkrete Pläne entwickeln und diese flexibel umsetzen. Das Profil hilft dir, im Coaching oder in der therapeutischen Begleitung Ansatzpunkte für die Arbeit an Zielen, Planung und dem Umgang mit Hindernissen zu erkennen.</p>
-			<!-- /wp:paragraph -->
+				<!-- wp:paragraph -->
+				<p>Die Pragmatic Prospection Scale erfasst, wie Menschen ihre Zukunft gedanklich vorbereiten und aktiv gestalten: gewünschte Ergebnisse vorstellen, sinnvolle und realistische Ziele setzen, konkrete Pläne entwickeln und diese flexibel umsetzen. Das Profil hilft dir, im Coaching oder in der therapeutischen Begleitung Ansatzpunkte für die Arbeit an Zielen, Planung und dem Umgang mit Hindernissen zu erkennen.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:paragraph {"fontSize":"xs"} -->
 			<p class="has-xs-font-size">Quelle: Wammerl, Köstenbaumer &amp; Streit (2023)</p>
@@ -113,47 +133,47 @@ declare(strict_types=1);
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:paragraph -->
-	<p><strong>Dein Mitgliedervorteil:</strong> Mit dem Start des Toolbereichs stehen dir jeden Monat 30 Fragebogenanwendungen ohne zusätzliche Kosten zur Verfügung. Für zusätzliche Anwendungen kontaktiere unser Office unter <a href="mailto:info@appa.net">info@appa.net</a>. Außerdem zum Start vorgesehen: Eine Selbstwirksamkeitsskala und eine Resilienzskala ergänzen das Angebot. Weitere Tools folgen.</p>
-	<!-- /wp:paragraph -->
-
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
-	<div class="wp-block-group">
+	<!-- wp:group {"className":"bw-half","style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
+	<div class="wp-block-group bw-half">
 		<!-- wp:heading {"level":3} -->
 		<h3 class="wp-block-heading">Wissenschaftliche Grundlagen</h3>
 		<!-- /wp:heading -->
 
-		<!-- wp:details -->
-		<details class="wp-block-details"><summary>PERMA Profiler</summary>
-			<!-- wp:paragraph -->
-			<p>Wammerl, M., Jaunig, J., Mairunteregger, T., &amp; Streit, P. (2019). The German Version of the PERMA-Profiler: Evidence for Construct and Convergent Validity of the PERMA Theory of Well-Being in German Speaking Countries. Journal of Well-Being Assessment, 3, 75–96.</p>
-			<!-- /wp:paragraph -->
-		</details>
-		<!-- /wp:details -->
+		<!-- wp:group {"className":"bw-accordion","style":{"spacing":{"blockGap":"var:preset|spacing|0"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group bw-accordion">
+			<!-- wp:details -->
+			<details class="wp-block-details"><summary>PERMA Profiler</summary>
+				<!-- wp:paragraph -->
+				<p>Wammerl, M., Jaunig, J., Mairunteregger, T., &amp; Streit, P. (2019). The German Version of the PERMA-Profiler: Evidence for Construct and Convergent Validity of the PERMA Theory of Well-Being in German Speaking Countries. Journal of Well-Being Assessment, 3, 75–96.</p>
+				<!-- /wp:paragraph -->
+			</details>
+			<!-- /wp:details -->
 
-		<!-- wp:details -->
-		<details class="wp-block-details"><summary>PERMA Profiler.kids</summary>
-			<!-- wp:paragraph -->
-			<p>Wammerl, M., &amp; Lichtinger, U. (2025). The PERMA.kids Profiler: A new tool for assessing and fostering well-being in children and adolescents. Vortrag beim 9th World Congress on Positive Psychology, Brisbane, Australien.</p>
-			<!-- /wp:paragraph -->
-		</details>
-		<!-- /wp:details -->
+			<!-- wp:details -->
+			<details class="wp-block-details"><summary>PERMA Profiler.kids</summary>
+				<!-- wp:paragraph -->
+				<p>Wammerl, M., &amp; Lichtinger, U. (2025). The PERMA.kids Profiler: A new tool for assessing and fostering well-being in children and adolescents. Vortrag beim 9th World Congress on Positive Psychology, Brisbane, Australien.</p>
+				<!-- /wp:paragraph -->
+			</details>
+			<!-- /wp:details -->
 
-		<!-- wp:details -->
-		<details class="wp-block-details"><summary>Mental Health Continuum – Short Form</summary>
-			<!-- wp:paragraph -->
-			<p>Wammerl, M., Köstenbaumer, D., &amp; Streit, P. (2024). The validation of the Mental Health Continuum Short Form (MHC-SF) in a representative German-speaking sample. Posterpräsentation bei der European Conference on Positive Psychology, Innsbruck, Österreich.</p>
-			<!-- /wp:paragraph -->
-		</details>
-		<!-- /wp:details -->
+			<!-- wp:details -->
+			<details class="wp-block-details"><summary>Mental Health Continuum – Short Form</summary>
+				<!-- wp:paragraph -->
+				<p>Wammerl, M., Köstenbaumer, D., &amp; Streit, P. (2024). The validation of the Mental Health Continuum Short Form (MHC-SF) in a representative German-speaking sample. Posterpräsentation bei der European Conference on Positive Psychology, Innsbruck, Österreich.</p>
+				<!-- /wp:paragraph -->
+			</details>
+			<!-- /wp:details -->
 
-		<!-- wp:details -->
-		<details class="wp-block-details"><summary>Pragmatic Prospection Scale</summary>
-			<!-- wp:paragraph -->
-			<p>Wammerl, M., Köstenbaumer, D., &amp; Streit, P. (2023). Validation of the German version of the Pragmatic Prospection Scale (PPS) in a representative German-speaking sample. Posterpräsentation beim 8th World Congress on Positive Psychology, Vancouver, Kanada.</p>
-			<!-- /wp:paragraph -->
-		</details>
-		<!-- /wp:details -->
+			<!-- wp:details -->
+			<details class="wp-block-details"><summary>Pragmatic Prospection Scale</summary>
+				<!-- wp:paragraph -->
+				<p>Wammerl, M., Köstenbaumer, D., &amp; Streit, P. (2023). Validation of the German version of the Pragmatic Prospection Scale (PPS) in a representative German-speaking sample. Posterpräsentation beim 8th World Congress on Positive Psychology, Vancouver, Kanada.</p>
+				<!-- /wp:paragraph -->
+			</details>
+			<!-- /wp:details -->
+		</div>
+		<!-- /wp:group -->
 	</div>
 	<!-- /wp:group -->
 </section>

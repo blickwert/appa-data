@@ -37,6 +37,7 @@ final class BlockController {
 			BW_APPA_DIR . '/blocks/form',
 			array( 'render_callback' => array( $this, 'render' ) )
 		);
+		wp_set_script_translations( generate_block_asset_handle( 'bw-appa/form', 'editorScript' ), 'bw-appa', BW_APPA_DIR . '/languages' );
 	}
 
 	/**
@@ -49,13 +50,13 @@ final class BlockController {
 		$form = $this->forms->find( $key );
 		if ( null === $form ) {
 			return current_user_can( 'edit_pages' )
-				? '<p class="bwa-form-missing">' . esc_html__( 'Formular nicht verfügbar: Bitte Contact Form 7 aktivieren.', 'bw-appa' ) . '</p>'
+				? '<p class="bw-form-missing">' . esc_html__( 'Formular nicht verfügbar: Bitte Contact Form 7 aktivieren.', 'bw-appa' ) . '</p>'
 				: '';
 		}
 		return sprintf(
 			'<div %1$s>%2$s</div>',
-			get_block_wrapper_attributes( array( 'class' => 'bwa-form-block' ) ),
-			do_shortcode( sprintf( '[contact-form-7 id="%s" html_class="bwa-cf7"]', esc_attr( $form->hash() ) ) )
+			get_block_wrapper_attributes( array( 'class' => 'bw-form-block' ) ),
+			do_shortcode( sprintf( '[contact-form-7 id="%s" html_class="bw-cf7"]', esc_attr( $form->hash() ) ) )
 		);
 	}
 }

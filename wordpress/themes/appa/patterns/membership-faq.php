@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","anchor":"fragen","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","anchor":"fragen","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section id="fragen" class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
-	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"constrained","contentSize":"47.5rem"}} -->
-	<div class="wp-block-group">
+	<!-- wp:group {"className":"bw-half","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
+	<div class="wp-block-group bw-half">
 		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
 		<p class="is-style-eyebrow">Häufige Fragen</p>
 		<!-- /wp:paragraph -->
@@ -23,12 +23,12 @@ declare(strict_types=1);
 		<h2 class="wp-block-heading">Gut zu wissen</h2>
 		<!-- /wp:heading -->
 
-		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|0"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-group">
+		<!-- wp:group {"className":"bw-accordion","style":{"spacing":{"blockGap":"var:preset|spacing|0"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-group bw-accordion">
 			<!-- wp:details -->
 			<details class="wp-block-details"><summary>Wer kann Mitglied werden?</summary>
 				<!-- wp:paragraph -->
-				<p>Die Mitgliedschaft steht grundsätzlich allen natürlichen und juristischen Personen offen, die den Vereinszweck unterstützen. Du brauchst kein Psychologiestudium. Menschen aus anderen Fachrichtungen und interessierte Personen sind ebenso willkommen. Über Aufnahmeanträge entscheidet der Vorstand.</p>
+				<p>Die Mitgliedschaft steht grundsätzlich allen natürlichen und juristischen Personen offen, die den Vereinszweck unterstützen. Du brauchst kein Psychologiestudium. Menschen aus anderen Fachrichtungen und interessierte Personen sind ebenso willkommen. Du trittst direkt online bei; Organisationen melden sich über das Kontaktformular.</p>
 				<!-- /wp:paragraph -->
 			</details>
 			<!-- /wp:details -->

@@ -12,7 +12,8 @@ Stand: 24. November 2026. Die APPA-Website wird ohne Elementor als eigenes **Blo
 | Formulare | Contact Form 7 + eigener Spamschutz (Honeypot, Mindestausfüllzeit mit signiertem Zeitstempel, Ratenbegrenzung, Link- und Wortfilter); Cloudflare Turnstile über die CF7-Integration |
 | Schrift | Inter (variabel, latin + latin-ext) lokal im Theme, Lizenz OFL |
 | Zielinstallation | neue Dev-Installation `2603b-appa`; `2603-appa` (Elementor) bleibt zum Vergleich |
-| Navigation | Hauptmenü: Über uns · Positive Psychologie · Veranstaltungen · Mitgliedschaft. Kontakt, Impressum, Datenschutz im Footer |
+| Navigation | Hauptmenü wie Elementor/Mockup: Home · Über uns · Positive Psychologie · Veranstaltungen · Mitgliedschaft · Mitgliederbereich (David, 24. 11. 2026). Kontakt, Impressum, Datenschutz im Footer |
+| Layout und Typografie | Layout (Abschnitte, Raster, Hintergründe, Inhaltsbreite 1104 px, Seitenköpfe mit Foto) 1:1 wie die Elementor-Seite `2603-appa` bzw. das Mockup. Typografie bleibt die ruhige des Block-Themes (wenige Größen, Zeilenhöhe 1.6), nicht die der Elementor-Seite (David, 24. 11. 2026). Korrekte Überschriften-Hierarchie: je Seite eine H1, keine Sprünge |
 
 ## Designsystem
 
@@ -25,11 +26,12 @@ Stand: 24. November 2026. Die APPA-Website wird ohne Elementor als eigenes **Blo
 
 | Bereich | Inhalt |
 |---|---|
-| Vorlagen | `front-page`, `page`, `page-full` (Seite ohne Titel, aus Abschnitten), `single`, `index`, `404`, `archive-appa_event`, `single-appa_event` |
-| Vorlagenteile | `header` (Logo, Navigation, Handy-Menü), `footer` (Navy, Logo-Farbstreifen, Links) |
-| Blockstile | Gruppe: Abschnitt Hellblau/Grau/Grün/Navy, Karte, Karte flach · Absatz: Eyebrow, Lead, Schlagworte · Button: Sekundär, Link mit Pfeil · Zitat: groß |
+| Vorlagen | `front-page`, `page`, `page-full` (Seite ohne Titel, aus Abschnitten), `page-member` (Mitgliederbereich: Anmeldung), `page-member-dashboard` (Mitgliederbereich: Übersicht mit Seitenleiste), `single`, `index`, `404`, `archive-appa_event`, `single-appa_event` |
+| Vorlagenteile | `header` (Logo, Navigation, Handy-Menü), `footer` (Navy: Name, Adresse, Links, Copyright – wie Elementor), `header-member`, `footer-member`, `header-dashboard`, `member-sidebar` (Seitenleiste; auf dem Handy Leiste unten) |
+| Blockstile | Gruppe: Abschnitt Hellblau/Grau/Grün/Navy, Karte, Karte flach, Karte weiß ohne Rahmen, Karte ohne Fläche, Karte hellblau, Karte grau, Karte hervorgehoben · Absatz: Eyebrow, Lead, Schlagworte · Button: Sekundär, Link mit Pfeil · Zitat: groß |
 | Patterns | 41 Abschnitte (Kategorie „APPA – Abschnitte“) und 7 Seiteninhalte (Startseite, Über uns, Positive Psychologie, Mitgliedschaft, Kontakt, Impressum, Datenschutz; erscheinen beim Anlegen einer neuen Seite) |
-| Eigener Block | `bw/icon` (Symbol aus `assets/icons/`, Größe, Farbe; serverseitig) |
+| Eigener Block | `bw/icon` (Lucide-Symbol aus `assets/icons/`, Größe, Farbe, Form: nur Symbol / Kreis / Quadrat / Kachel; serverseitig) |
+| Mitgliederbereich | Seiten `mitgliederbereich` (Anmeldung mit `core/loginout`) und `mitgliederbereich-uebersicht` (statische Vorschau wie Elementor). Schutz der Übersicht, echte Mitgliedsdaten und Weiterleitung nach dem Login kommen mit dem Plugin `bw-woo-membership` |
 | CSS | `base.css` (global, klein) + je Core-Block eine Datei, die nur geladen wird, wenn der Block auf der Seite vorkommt |
 
 ## Plugin `bw-appa`
@@ -45,6 +47,8 @@ Stand: 24. November 2026. Die APPA-Website wird ohne Elementor als eigenes **Blo
 - Einstellungen → „APPA Formulare“: Empfänger, Mindestausfüllzeit, max. Links, max. Einsendungen pro Stunde, Sperrwörter.
 
 ## Übertragung auf `2603b-appa`
+
+Erledigt am 24. 11. 2026, Stand siehe `docs/NAECHSTE-SESSION.md`.
 
 1. WordPress 7.x mit Sprache Deutsch, Permalinks „Beitragsname“.
 2. Plugins: Contact Form 7 (mit deutscher Übersetzung, **vor** `bw-appa`, damit die CF7-Meldungen deutsch angelegt werden), BW WP Bridge.
@@ -63,7 +67,6 @@ WordPress 7.1 + SQLite lokal, Theme und Plugin verlinkt:
 
 ## Offen
 
-- Dev-Installation `2603b-appa` und Zugangsdaten für die Bridge (Umgebungsvariablen `WP_APPA2_*`).
 - Turnstile-Schlüssel, endgültiger Empfänger (`info@appa.net`?), Datenschutzerklärung, Statuten-PDF, ZVR-Zahl und Vereinsbehörde im Impressum.
 - Mitgliederbereich und Mitgliedschaft mit Zahlung: eigenes Plugin `bw-woo-membership` (WooCommerce Subscriptions), siehe Konzept.
 - Mehr Gelb im Design (Meeting 9. Oktober) – mit David abstimmen, wo.

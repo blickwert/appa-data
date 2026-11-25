@@ -80,18 +80,23 @@ theme = {
             "fontSizes": font_sizes,
         },
         "spacing": {
-            "units": ["px", "rem", "%"], "defaultSpacingSizes": False, "spacingSizes": spacing,
+            # No px: patterns use rem and % only; sizes come from the presets.
+            "units": ["rem", "%"], "defaultSpacingSizes": False, "spacingSizes": spacing,
             "customSpacingSize": False,
         },
         "shadow": {"defaultPresets": False,
                    "presets": [{"slug": s, "name": v["name"], "shadow": v["value"]} for s, v in T["shadow"].items()]},
-        "border": {"color": True, "radius": True, "style": True, "width": True},
+        # appearanceTools would allow free borders per block; the design sets borders only through
+        # block styles (styles/blocks/*.json) and elements, which stay unaffected by these switches.
+        "border": {"color": False, "radius": False, "style": False, "width": False},
         "custom": {
             "radius": {k: px(v) if v < 999 else "999px" for k, v in T["radius"].items()},
             "border-width": {k: f"{v}px" for k, v in T["border_width"].items()},
             "line-height": lh,
             "letter-spacing": T["letter_spacing"],
             "transition": "150ms ease",
+            # Width of the member area (header and two-column layout), wider than the content sections.
+            "layout": {"dashboard": px(T["layout"]["dashboard"])},
         },
         "blocks": {
             "core/button": {"border": {"radius": False}},
@@ -108,8 +113,9 @@ theme = {
             "h2": {"typography": {"fontSize": FS("xxx-large")}},
             "h3": {"typography": {"fontSize": FS("xl"), "lineHeight": str(lh["snug"])}},
             "h4": {"typography": {"fontSize": FS("base"), "lineHeight": str(lh["snug"])}},
-            "link": {"color": {"text": C("red")}, "typography": {"textDecoration": "underline"},
-                     ":hover": {"color": {"text": C("red-dark")}},
+            # Darker red for text links: plain red is too weak on the light section colours (WCAG 1.4.3).
+            "link": {"color": {"text": C("red-dark")}, "typography": {"textDecoration": "underline"},
+                     ":hover": {"color": {"text": C("navy")}},
                      ":focus-visible": focus},
             "button": {
                 "color": {"background": C("red"), "text": C("white")},
@@ -147,9 +153,15 @@ theme = {
     "templateParts": [
         {"name": "header", "title": "Header", "area": "header"},
         {"name": "footer", "title": "Footer", "area": "footer"},
+        {"name": "header-member", "title": "Header Mitgliederbereich (Login)", "area": "header"},
+        {"name": "footer-member", "title": "Footer Mitgliederbereich", "area": "footer"},
+        {"name": "header-dashboard", "title": "Header Mitgliederbereich (Übersicht)", "area": "header"},
+        {"name": "member-sidebar", "title": "Mitgliederbereich: Navigation", "area": "uncategorized"},
     ],
     "customTemplates": [
         {"name": "page-full", "title": "Seite ohne Titel (Abschnitte)", "postTypes": ["page"]},
+        {"name": "page-member", "title": "Mitgliederbereich: Login", "postTypes": ["page"]},
+        {"name": "page-member-dashboard", "title": "Mitgliederbereich: Übersicht", "postTypes": ["page"]},
     ],
 }
 

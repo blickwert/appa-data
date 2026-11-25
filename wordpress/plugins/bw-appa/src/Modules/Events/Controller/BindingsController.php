@@ -36,6 +36,34 @@ final class BindingsController {
 	public function register(): void {
 		add_action( 'init', array( $this, 'register_source' ) );
 		add_filter( 'render_block', array( $this, 'hide_empty_bound_blocks' ), 10, 3 );
+		add_filter( 'render_block_core/button', array( $this, 'label_call_to_action' ), 10, 3 );
+	}
+
+	/**
+	 * Gives event buttons bound to the call to action ("Jetzt anmelden", "Mehr erfahren") a unique accessible
+	 * name with the event title, because a list shows the same visible text many times.
+	 *
+	 * @param string               $content Rendered block.
+	 * @param array<string, mixed> $parsed  Parsed block.
+	 */
+	public function label_call_to_action( string $content, array $parsed, WP_Block $block ): string {
+		$binding = $parsed['attrs']['metadata']['bindings']['text'] ?? array();
+		if ( '' === $content || self::SOURCE !== ( $binding['source'] ?? '' ) || 'cta' !== ( $binding['args']['key'] ?? '' ) ) {
+			return $content;
+		}
+		$post_id = (int) ( $block->context['postId'] ?? get_the_ID() );
+		$label   = (string) $this->value( array( 'key' => 'cta' ), $block );
+		// set_attribute() escapes itself, so the already escaped texts are decoded first.
+		$title = $post_id > 0 ? html_entity_decode( wp_strip_all_tags( get_the_title( $post_id ) ), ENT_QUOTES, 'UTF-8' ) : '';
+		if ( '' === $label || '' === $title ) {
+			return $content;
+		}
+		$tags = new \WP_HTML_Tag_Processor( $content );
+		if ( $tags->next_tag( array( 'class_name' => 'wp-block-button__link' ) ) && null === $tags->get_attribute( 'aria-label' ) ) {
+			/* translators: 1: button text, 2: event title */
+			$tags->set_attribute( 'aria-label', sprintf( __( '%1$s: %2$s', 'bw-appa' ), html_entity_decode( $label, ENT_QUOTES, 'UTF-8' ), $title ) );
+		}
+		return $tags->get_updated_html();
 	}
 
 	/**
@@ -63,9 +91,17 @@ final class BindingsController {
 			return null;
 		}
 		$event = $this->events->find( $post_id );
+		$key   = (string) ( $args['key'] ?? '' );
+		if ( in_array( $key, array( 'access', 'zoom_link' ), true ) && ! PrivacyController::private_visible( $post_id ) ) {
+			return '';
+		}
 
-		return match ( $args['key'] ?? '' ) {
+		return match ( $key ) {
 			'when'      => esc_html( $this->formatter->when( $event ) ),
+			'place'     => esc_html( $this->formatter->place( $event ) ),
+			'badge'     => esc_html( $this->formatter->badge( $event ) ),
+			'cta'       => esc_html( $this->formatter->call_to_action( $event ) ),
+			'url'       => esc_url_raw( (string) get_permalink( $post_id ) . ( $event->registration ? '#anmeldung' : '' ) ),
 			'access'    => esc_html( $this->formatter->access( $event ) ),
 			'zoom_link' => esc_url_raw( $event->zoom_link ),
 			default     => null,

@@ -25,6 +25,11 @@ interface Module {
 	public function name(): string;
 
 	/**
+	 * One sentence on what the module does (may be empty).
+	 */
+	public function description(): string;
+
+	/**
 	 * IDs of modules this module depends on.
 	 *
 	 * @return string[]

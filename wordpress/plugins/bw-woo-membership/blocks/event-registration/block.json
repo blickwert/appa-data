@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bw-woo-membership/event-registration",
+	"title": "Veranstaltung: Anmeldung",
+	"category": "widgets",
+	"icon": "tickets-alt",
+	"description": "Preise, freie Plätze und Anmelde-Button einer Veranstaltung (Vorlage „Veranstaltung“).",
+	"textdomain": "bw-woo-membership",
+	"attributes": {},
+	"usesContext": [
+		"postId",
+		"postType"
+	],
+	"supports": {
+		"html": false,
+		"multiple": false
+	},
+	"editorScript": "bw-wm-blocks",
+	"style": "bw-wm-dashboard"
+}

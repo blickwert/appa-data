@@ -1,0 +1,52 @@
+{
+  "_comment": "SEO-Titel und -Beschreibungen (Yoast SEO). Einspielen: python3 scripts/apply_seo.py (gleiche Umgebungsvariablen wie import_pages.py). Veranstaltungen ohne eigenen Eintrag: Titel \"{Titel} – APPA\", Beschreibung aus Auszug + Termin (Plugin bw-appa, Modul seo).",
+  "pages": {
+    "startseite": {
+      "title": "APPA – Positive Psychologie in Österreich",
+      "description": "Die APPA verbindet Menschen, die Positive Psychologie in Österreich erforschen und anwenden. Werde Gründungsmitglied und gestalte mit!",
+      "focus": "Positive Psychologie Österreich"
+    },
+    "ueber-uns": {
+      "title": "Über uns: Mission, Fachgruppen & Vorstand – APPA",
+      "description": "Wer steht hinter der APPA? Mission, sechs Fachgruppen, Vorstand, Kooperationen und Statuten der Austrian Positive Psychology Association.",
+      "focus": "Austrian Positive Psychology Association"
+    },
+    "positive-psychologie": {
+      "title": "Was ist Positive Psychologie? Fakten & Grenzen – APPA",
+      "description": "Positive Psychologie ist Wissenschaft, kein „Denk positiv“: was sie ausmacht, was sie nicht ist, das PERMA-Modell und weiterführende Quellen.",
+      "focus": "Was ist Positive Psychologie"
+    },
+    "mitgliedschaft": {
+      "title": "Mitglied werden: Gründungsmitgliedschaft – APPA",
+      "description": "Werde Gründungsmitglied der APPA: Fachgruppen mitgestalten, Fragebögen wie den PERMA Profiler nutzen, mitentscheiden. Jetzt online beitreten!",
+      "focus": "APPA Mitgliedschaft"
+    },
+    "kontakt": {
+      "title": "Kontakt – APPA Austrian Positive Psychology Association",
+      "description": "Fragen zu Mitgliedschaft, Fachgruppen oder Kooperationen? Schreib der APPA in Graz über das Kontaktformular oder an info@appa.net.",
+      "focus": "APPA Kontakt"
+    },
+    "impressum": {
+      "title": "Impressum – APPA",
+      "description": "Impressum der APPA – Austrian Positive Psychology Association: Medieninhaber, Vereinsdaten, vertretungsbefugte Organe und Kontakt in Graz."
+    },
+    "datenschutz": {
+      "title": "Datenschutzerklärung – APPA",
+      "description": "Wie die APPA personenbezogene Daten auf dieser Website verarbeitet: Kontaktformular, Mitgliedschaft, Zahlungen, Spamschutz und deine Rechte."
+    },
+    "mitgliederbereich": { "noindex": true },
+    "mitgliederbereich-uebersicht": { "noindex": true },
+    "studiennachweis": { "noindex": true },
+    "mein-konto": { "noindex": true },
+    "warenkorb": { "noindex": true },
+    "kasse": { "noindex": true },
+    "shop": { "noindex": true }
+  },
+  "events": {
+    "die-erste-appa-fachtagung": {
+      "title": "Erste APPA-Fachtagung 2027 in Österreich – APPA",
+      "description": "8.–9. Oktober 2027: zwei Tage Vorträge, Workshops und Austausch zu Forschung und Praxis der Positiven Psychologie. Jetzt Platz sichern!",
+      "focus": "Fachtagung Positive Psychologie"
+    }
+  }
+}

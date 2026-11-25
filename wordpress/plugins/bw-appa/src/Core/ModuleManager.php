@@ -11,6 +11,7 @@ namespace BW\Appa\Core;
 
 use BW\Appa\Modules\Events\EventsModule;
 use BW\Appa\Modules\Forms\FormsModule;
+use BW\Appa\Modules\Seo\SeoModule;
 
 /**
  * Collects the modules and registers those whose dependencies are met.
@@ -30,7 +31,7 @@ final class ModuleManager {
 	 * @return array<string, Module>
 	 */
 	public function discover(): array {
-		$modules = array( new EventsModule(), new FormsModule() );
+		$modules = array( new EventsModule(), new FormsModule(), new SeoModule() );
 
 		/**
 		 * Filters the list of modules.

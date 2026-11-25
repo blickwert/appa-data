@@ -14,8 +14,8 @@
 
 declare(strict_types=1);
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky","style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|16"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
-<section class="wp-block-group alignfull is-style-section-sky" style="padding-top:var(--wp--preset--spacing--16);padding-bottom:var(--wp--preset--spacing--16)">
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-sky bw-page-header","style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|16"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
+<section class="wp-block-group alignfull is-style-section-sky bw-page-header" style="padding-top:var(--wp--preset--spacing--16);padding-bottom:var(--wp--preset--spacing--16)">
 	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group">
 		<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
@@ -34,74 +34,68 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|section","bottom":"var:preset|spacing|section"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--section);padding-bottom:var(--wp--preset--spacing--section)">
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}}} -->
 	<div class="wp-block-columns">
-		<!-- wp:column {"width":"40%"} -->
-		<div class="wp-block-column" style="flex-basis:40%">
-			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
-			<div class="wp-block-group">
+		<!-- wp:column {"width":"36%"} -->
+		<div class="wp-block-column" style="flex-basis:36%">
+			<!-- wp:group {"className":"bw-contact","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group bw-contact">
 				<!-- wp:heading -->
-				<h2 class="wp-block-heading">APPA</h2>
+				<h2 class="wp-block-heading">So erreichst du uns</h2>
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph {"textColor":"navy"} -->
-				<p class="has-navy-color has-text-color"><strong>Austrian Positive Psychology Association</strong></p>
+				<p class="has-navy-color has-text-color"><strong>APPA – Austrian Positive Psychology Association</strong></p>
 				<!-- /wp:paragraph -->
 
 				<!-- wp:paragraph -->
-				<p>Für Fragen zur Mitgliedschaft, zu unseren Fachgruppen und zu Kooperationen erreichst du uns hier:</p>
+				<p>Für Fragen zur Mitgliedschaft, zu unseren Fachgruppen und zu Kooperationen erreichst du uns hier:<br>E-Mail: <a href="mailto:info@appa.net">info@appa.net</a></p>
 				<!-- /wp:paragraph -->
 
-				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left","verticalAlignment":"center"}} -->
-				<div class="wp-block-group">
-					<!-- wp:bw/icon {"icon":"mail","size":"s"} /-->
-
-					<!-- wp:paragraph -->
-					<p><a href="mailto:info@appa.net">info@appa.net</a></p>
-					<!-- /wp:paragraph -->
+				<!-- wp:buttons -->
+				<div class="wp-block-buttons">
+					<!-- wp:button {"className":"is-style-arrow"} -->
+					<div class="wp-block-button is-style-arrow"><a class="wp-block-button__link wp-element-button" href="mailto:info@appa.net">E-Mail schreiben</a></div>
+					<!-- /wp:button -->
 				</div>
-				<!-- /wp:group -->
+				<!-- /wp:buttons -->
 
-				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left","verticalAlignment":"center"}} -->
+				<!-- wp:separator {"className":"is-style-wide"} -->
+				<hr class="wp-block-separator has-alpha-channel-opacity is-style-wide"/>
+				<!-- /wp:separator -->
+
+				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left","verticalAlignment":"top"}} -->
 				<div class="wp-block-group">
-					<!-- wp:bw/icon {"icon":"globe","size":"s"} /-->
+					<!-- wp:bw/icon {"icon":"map-pin","size":"s","tone":"green"} /-->
 
 					<!-- wp:paragraph -->
-					<p>www.appa.net</p>
+					<p><strong>Vereinssitz und Postanschrift</strong><br>APPA<br>Austrian Positive Psychology Association<br>Plüddemanngasse 104<br>8042 Graz<br>Österreich</p>
 					<!-- /wp:paragraph -->
 				</div>
 				<!-- /wp:group -->
 
 				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|3"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left","verticalAlignment":"top"}} -->
 				<div class="wp-block-group">
-					<!-- wp:bw/icon {"icon":"map-pin","size":"s"} /-->
+					<!-- wp:bw/icon {"icon":"mail","size":"s","tone":"green"} /-->
 
 					<!-- wp:paragraph -->
-					<p><strong>Vereinssitz und Postanschrift</strong><br>APPA – Austrian Positive Psychology Association<br>Plüddemanngasse 104<br>8042 Graz, Österreich</p>
+					<p><strong>Website und Redaktion</strong><br>info@appa.net</p>
 					<!-- /wp:paragraph -->
 				</div>
 				<!-- /wp:group -->
-
-				<!-- wp:buttons -->
-				<div class="wp-block-buttons">
-					<!-- wp:button {"className":"is-style-secondary"} -->
-					<div class="wp-block-button is-style-secondary"><a class="wp-block-button__link wp-element-button" href="mailto:info@appa.net">E-Mail schreiben</a></div>
-					<!-- /wp:button -->
-				</div>
-				<!-- /wp:buttons -->
 			</div>
 			<!-- /wp:group -->
 		</div>
 		<!-- /wp:column -->
 
-		<!-- wp:column {"width":"60%"} -->
-		<div class="wp-block-column" style="flex-basis:60%">
-			<!-- wp:group {"className":"is-style-card","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
-			<div class="wp-block-group is-style-card">
-				<!-- wp:heading {"level":3} -->
-				<h3 class="wp-block-heading">Deine Nachricht</h3>
+		<!-- wp:column {"width":"64%"} -->
+		<div class="wp-block-column" style="flex-basis:64%">
+			<!-- wp:group {"className":"is-style-card-mist","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
+			<div class="wp-block-group is-style-card-mist">
+				<!-- wp:heading {"fontSize":"xl"} -->
+				<h2 class="wp-block-heading has-xl-font-size">Deine Nachricht</h2>
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph {"fontSize":"sm"} -->
@@ -118,10 +112,10 @@ declare(strict_types=1);
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-green","style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|12"}}},"layout":{"type":"constrained","contentSize":"72rem"}} -->
+<!-- wp:group {"tagName":"section","align":"full","className":"is-style-section-green","style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|12"}}},"layout":{"type":"constrained","contentSize":"69rem"}} -->
 <section class="wp-block-group alignfull is-style-section-green" style="padding-top:var(--wp--preset--spacing--12);padding-bottom:var(--wp--preset--spacing--12)">
-	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
-	<div class="wp-block-group">
+	<!-- wp:group {"className":"bw-cta__row","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+	<div class="wp-block-group bw-cta__row">
 		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|2"}},"layout":{"type":"default"}} -->
 		<div class="wp-block-group">
 			<!-- wp:heading {"fontSize":"xx-large"} -->
