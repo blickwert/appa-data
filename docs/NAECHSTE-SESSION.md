@@ -31,6 +31,7 @@ Zugang: Bridge-Client `tools/wp_bridge.py` aus `blickwert/bw-wp-bridge`, `--site
 - Die CF7-Formulare legt `bw-appa` bei `admin_init` an. Ohne Anmeldung auslösen: `…/wp-admin/admin-ajax.php?action=bw_noop` aufrufen (ohne `action` endet admin-ajax vor `admin_init`).
 - Empfänger: Standard = Admin-E-Mail `bw-cms@blickwert.at` (Einstellungen › APPA Formulare ist noch leer). Umstellen auf `info@appa.net` im Backend.
 - Drei Beispiel-Veranstaltungen (Fachtagung 8. 10. 2027, zwei Online-Termine mit Platzhalter-Zoom-Link `zoom.us/j/0000000000`).
+- Keine Shop-Seite (David, 25. 11.): `/shop/`, Produktarchive und Produktseiten leiten weiter (Veranstaltung bzw. `/mitgliedschaft/`), „Zurück zum Shop“ heißt „Zu den Veranstaltungen“ (`ShopController`). Auf der Seite `warenkorb` (ID 45) ist „Neu im Shop“ entfernt.
 - Sprachpakete: Die Bridge installiert keine Übersetzungen. Fehlen welche, im Backend „Dashboard › Aktualisierungen › Übersetzungen aktualisieren“.
 - Eine Mail mit einem Absendernamen wie dem Dev-Titel „@dev 2603b-appa“ lehnt `mail()` dort ab; deshalb bereinigt `bw-appa` ab 0.1.1 den Absendernamen.
 
