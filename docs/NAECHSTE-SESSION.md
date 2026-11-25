@@ -49,7 +49,10 @@ zip -qr <scratchpad>/bw-woo-membership.zip bw-woo-membership -x 'bw-woo-membersh
 - Stripe verbinden (Live-Schlüssel), Karte und SEPA-Lastschrift aktivieren; **Banküberweisung deaktivieren** (Entscheidung David, 24. 11.).
 - WooCommerce Subscriptions: Lizenz kaufen und offizielle Version einspielen (auf 2603b läuft die GitHub-Kopie); „Manuelle Verlängerung“ aus, sobald nur Stripe; Zahlungsbestätigung als PDF.
 - Rechtstexte prüfen lassen und als Seiten anlegen (`docs/rechtstexte/README.md`); Statuten an den Beitritt ohne Vorstandsfreigabe anpassen.
-- nginx-Regel für `bw-member-docs` und `bw-member-proofs` auf dem Live-Server (T3).
+- Geschützte Dateien (T3, Review #3), eines von beiden:
+  - `define( 'BW_WM_PRIVATE_DIR', '/pfad/ausserhalb/des/webroots/appa-private' );` in die `wp-config.php` und vorhandene Dateien verschieben (Anleitung im README von `bw-woo-membership`, „Geschützte Dateien“), oder
+  - nginx-Regel im `server`-Block: `location ~* /wp-content/uploads/(bw-member-docs|bw-member-proofs)/ { deny all; return 404; }`
+  - Danach Werkzeuge → Website-Zustand: Test „Studiennachweise und Mitglieder-Dokumente sind geschützt“ muss „gut“ zeigen.
 - „Shop demnächst verfügbar“ aus, Testpreise der Fachtagung durch echte ersetzen, Testdaten löschen.
 - AGB/Beitragsordnung und Datenschutzseite in WooCommerce hinterlegen.
 

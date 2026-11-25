@@ -20,6 +20,7 @@ foreach ( array( 'administrator', 'shop_manager' ) as $bw_wm_role_name ) {
 
 delete_option( 'bw_wm_version' );
 delete_option( 'bw_wm_number_lock' );
+delete_transient( 'bw_wm_storage_health' );
 wp_clear_scheduled_hook( 'bw_wm_daily' );
 
 global $wpdb;

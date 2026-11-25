@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace BW\WooMembership\Modules\Membership\Controller;
 
 use BW\WooMembership\Core\Setup;
+use BW\WooMembership\Core\StorageHealth;
 use BW\WooMembership\Modules\Membership\Repository\MemberRepository;
 use BW\WooMembership\Modules\Membership\Repository\ProofRepository;
 use BW\WooMembership\Modules\Membership\Service\MemberAdminService;
@@ -48,6 +49,7 @@ final class AdminPageController {
 		add_action( 'admin_post_bw_wm_export', array( $this, 'export' ) );
 		add_action( 'admin_post_bw_wm_journal', array( $this, 'journal' ) );
 		add_action( 'admin_post_bw_wm_proof_file', array( $this, 'proof_file' ) );
+		add_action( 'admin_notices', array( $this, 'storage_notice' ) );
 		add_filter( 'bw_wm_admin_menu_parent', static fn(): string => self::SLUG );
 		// The menu counts change when a status or proof is written (upload, decision, sync) or a user is deleted.
 		foreach ( array( 'added_user_meta', 'updated_user_meta', 'deleted_user_meta' ) as $hook ) {
@@ -186,6 +188,16 @@ final class AdminPageController {
 		}
 		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		exit;
+	}
+
+	/**
+	 * Warns on the members page when proofs or documents can be opened directly (cached Site Health check).
+	 */
+	public function storage_notice(): void {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		if ( $screen && 'toplevel_page_' . self::SLUG === $screen->id ) {
+			( new StorageHealth() )->render_notice();
+		}
 	}
 
 	/**

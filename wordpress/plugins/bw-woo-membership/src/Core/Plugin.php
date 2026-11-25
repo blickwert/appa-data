@@ -35,6 +35,7 @@ final class Plugin {
 	 */
 	public function boot(): void {
 		Setup::register();
+		( new StorageHealth() )->register();
 		$this->modules = ( new ModuleManager() )->discover();
 		foreach ( $this->modules as $module ) {
 			$module->register();

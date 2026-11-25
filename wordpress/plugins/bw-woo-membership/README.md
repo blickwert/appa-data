@@ -7,7 +7,7 @@ Mitgliederbereich der APPA auf Basis von WooCommerce. PHP 8.3, WordPress 7.x, Wo
 | Modul | Inhalt |
 |---|---|
 | `membership` | Mitgliedsstatus (manuell › WooCommerce Subscriptions › Bestellung), Mitgliedsnummer und „Mitglied seit“ bei der ersten Zahlung, Produktfeld „Mitgliedsart“, Schutz der Übersicht und Login-Weiterleitung, Blöcke `user`, `overview`, `events`, `profile`, Profil-Formular, druckbare Mitgliedsbestätigung (`?bw_wm_confirmation=1`) |
-| `documents` | Beitragstyp „Mitglieder-Dokumente“ (`bw_member_doc`) mit Kategorien, Datei und Sichtbarkeit; Uploads in `uploads/bw-member-docs/` mit Zufallsnamen; Download nur über `?bw_wm_doc=<ID>` nach Prüfung; Block `documents` |
+| `documents` | Beitragstyp „Mitglieder-Dokumente“ (`bw_member_doc`) mit Kategorien, Datei und Sichtbarkeit; Uploads in `uploads/bw-member-docs/` bzw. `<BW_WM_PRIVATE_DIR>/docs/` mit Zufallsnamen; Download nur über `?bw_wm_doc=<ID>` nach Prüfung; Block `documents` |
 | `events` | Anmeldung zu Veranstaltungen (`appa_event` aus `bw-appa`) über ein verstecktes, virtuelles WooCommerce-Produkt je Veranstaltung; Mitgliederpreis, Plätze als Bestand, Block `event-registration`, „Meine Anmeldungen“, Spalte „Anmeldungen“ und Teilnehmerliste (CSV) |
 
 ## Mitgliedschaft
@@ -38,7 +38,7 @@ Konten mit Redaktionsrechten (`edit_posts`) können dort nicht bearbeitet werden
 
 ## Studiennachweis
 
-Studierende laden den Nachweis im Mitgliederbereich hoch (PDF/JPG/PNG, max. 5 MB, Ordner `uploads/bw-member-proofs/`). Das Office gibt frei oder lehnt ab; die Datei wird danach gelöscht, gespeichert bleiben Status, gültig bis, Prüfdatum und Prüfer:in. 28 Tage vor Ablauf kommt eine Erinnerung. Ohne gültigen Nachweis kann die studentische Mitgliedschaft nicht verlängert werden.
+Studierende laden den Nachweis im Mitgliederbereich hoch (PDF/JPG/PNG, max. 5 MB, Ordner `uploads/bw-member-proofs/` bzw. `<BW_WM_PRIVATE_DIR>/proofs/`, siehe „Geschützte Dateien“). Das Office gibt frei oder lehnt ab; die Datei wird danach gelöscht, gespeichert bleiben Status, gültig bis, Prüfdatum und Prüfer:in. 28 Tage vor Ablauf kommt eine Erinnerung. Ohne gültigen Nachweis kann die studentische Mitgliedschaft nicht verlängert werden.
 
 ## Veranstaltungen
 
@@ -88,17 +88,52 @@ Die Anmeldeseite ist die Seite mit der Theme-Vorlage `page-member`, die Übersic
 | `bw_wm_template` | Filter | Vorlagendatei; Theme-Überschreibung unter `bw-woo-membership/dashboard/<name>.php` |
 | `bw_wm_page_url` | Filter | Adresse fester Seiten (`$url`, `$page`: `area` = `/mitgliederbereich-uebersicht/`, `membership` = `/mitgliedschaft/`, `events` = `/veranstaltungen/`); zentral in `MemberPages` |
 | `bw_wm_shop_replacement_url` | Filter | Ziel statt der WooCommerce-Shopseite (Standard: Veranstaltungen) |
+| `bw_wm_private_dir` | Filter | privater Ordner für Nachweise und Dokumente (Standard: Konstante `BW_WM_PRIVATE_DIR` oder leer = unter `uploads/`) |
 
-## Geschützte Dateien unter nginx
+## Geschützte Dateien (Studiennachweise, Mitglieder-Dokumente)
 
-nginx liest keine `.htaccess`. Die Dateinamen sind zufällig, die Adresse ist also nicht zu erraten; für echten Schutz in der Server-Konfiguration ergänzen:
+Nachweise und Dokumente werden nur über PHP ausgeliefert (Nachweise: `admin-post.php?action=bw_wm_proof_file` für das Office, Dokumente: `?bw_wm_doc=<ID>` nach Prüfung von Anmeldung und Mitgliedschaft). Die Dateien selbst müssen deshalb für direkte Aufrufe gesperrt sein. Zwei Wege, einer genügt:
 
-```nginx
-location ^~ /wp-content/uploads/bw-member-docs/ { deny all; return 403; }
-location ^~ /wp-content/uploads/bw-member-proofs/ { deny all; return 403; }
+**A) Ordner außerhalb des Web-Roots (empfohlen).** In der `wp-config.php` vor `require_once ABSPATH . 'wp-settings.php';`:
+
+```php
+define( 'BW_WM_PRIVATE_DIR', '/pfad/ausserhalb/des/webroots/appa-private' );
 ```
 
-Bei Unterverzeichnis-Installationen den Pfad anpassen (z. B. `/wp/2603b-appa/wp-content/uploads/bw-member-docs/`).
+Alternativ Filter `bw_wm_private_dir`. Der Ordner wird angelegt, wenn möglich; PHP muss darin schreiben dürfen (bei `open_basedir` den Pfad freigeben). Neue Nachweise landen dann in `<ordner>/proofs/`, neue Dokumente in `<ordner>/docs/`. Gespeichert wird der absolute Pfad (Nachweis: Benutzer-Meta `bw_wm_proof[file]`, Dokument: `_wp_attached_file` des Anhangs), deshalb funktionieren vorhandene Dateien unter `uploads/` weiter. Ist der Ordner nicht beschreibbar, bleibt alles unter `uploads/` und der Website-Zustand meldet das.
+
+Vorhandene Dateien werden nicht automatisch verschoben. Von Hand mit WP-CLI (Pfade anpassen, vorher sichern):
+
+```bash
+PRIV=/pfad/ausserhalb/des/webroots/appa-private   # = BW_WM_PRIVATE_DIR
+UP=/pfad/zu/wp-content/uploads
+mkdir -p "$PRIV/docs" "$PRIV/proofs"
+# Dokumente: Datei verschieben, Pfad am Anhang auf den absoluten Pfad setzen
+for ID in $(wp post list --post_type=attachment --post_status=any --format=ids); do
+  F=$(wp post meta get $ID _wp_attached_file)
+  case "$F" in bw-member-docs/*) mv "$UP/$F" "$PRIV/docs/" && wp post meta update $ID _wp_attached_file "$PRIV/docs/$(basename "$F")";; esac
+done
+# Offene Studiennachweise (Dateiname nachweis-<Benutzer-ID>-…): verschieben und Pfad ändern.
+# Alternativ erst alle offenen Nachweise prüfen – danach werden die Dateien ohnehin gelöscht.
+for F in "$UP"/bw-member-proofs/nachweis-*; do
+  [ -e "$F" ] || continue; B=$(basename "$F"); U=$(echo "$B" | cut -d- -f2)
+  mv "$F" "$PRIV/proofs/" && wp user meta patch update "$U" bw_wm_proof file "$PRIV/proofs/$B"
+done
+ls -A "$UP/bw-member-docs" "$UP/bw-member-proofs"   # nur noch .htaccess und index.html? Dann löschen:
+rm -r "$UP/bw-member-docs" "$UP/bw-member-proofs"
+```
+
+Liegen noch Dateien in den alten Ordnern, prüft der Website-Zustand sie weiter.
+
+**B) Server-Regel.** Apache beachtet die `.htaccess`, die das Plugin in jeden Ordner legt. nginx liest keine `.htaccess`; dort im `server`-Block vor der PHP-Regel ergänzen und nginx neu laden:
+
+```nginx
+location ~* /wp-content/uploads/(bw-member-docs|bw-member-proofs)/ { deny all; return 404; }
+```
+
+Die Regel greift auch bei Unterverzeichnis-Installationen (`/wp/2603b-appa/wp-content/uploads/…`). Die Dateinamen sind zusätzlich zufällig.
+
+**Prüfung.** Werkzeuge → Website-Zustand enthält den Test „Studiennachweise und Mitglieder-Dokumente sind geschützt“ (`Core\StorageHealth`): Für jeden Ordner mit öffentlicher Adresse (unter `uploads/` oder im WordPress-Ordner) wird eine Testdatei mit Zufallsnamen geschrieben, per HTTP abgerufen und wieder gelöscht. Abrufbar → „kritisch“ mit der nginx-Regel; nicht abrufbar oder außerhalb des Web-Roots → „gut“. Das Ergebnis wird 12 Stunden zwischengespeichert (Transient `bw_wm_storage_health`); solange es kritisch ist, zeigt die Seite „Mitglieder“ einen Hinweis.
 
 ## Entwicklung
 
