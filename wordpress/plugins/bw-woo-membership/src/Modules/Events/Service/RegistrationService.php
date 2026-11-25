@@ -154,7 +154,8 @@ final class RegistrationService {
 			'paid'         => null !== $registration && $registration->is_paid(),
 			'refusal'      => null !== $registration ? '' : $refusal,
 			'book_url'     => '' === $refusal && $product_id && function_exists( 'wc_get_checkout_url' ) ? add_query_arg( 'add-to-cart', $product_id, wc_get_checkout_url() ) : '',
-			'login_url'    => $user_id > 0 ? '' : wp_login_url( (string) get_permalink( $event_id ) ),
+			// Back to the event after the login (the member-area login page always leads to the dashboard).
+			'login_url'    => $user_id > 0 ? '' : wp_login_url( (string) get_permalink( $event_id ) . '#anmeldung' ),
 			'join_url'     => home_url( '/mitgliedschaft/' ),
 			'area_url'     => home_url( '/mitgliederbereich-uebersicht/#veranstaltungen' ),
 		);

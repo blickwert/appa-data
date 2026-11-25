@@ -22,6 +22,7 @@ final class MemberRepository {
 	public const META_CONSENT      = 'bw_wm_directory_consent';
 	public const META_PROFILE      = 'bw_wm_profile';
 	public const OPTION_SEQUENCE   = 'bw_wm_number_sequence';
+	public const OPTION_LOCK       = 'bw_wm_number_lock';
 
 	// Snapshot of the resolved membership, kept up to date by MembershipSync (list, filters, export).
 	public const META_STATUS      = 'bw_wm_status';
@@ -102,15 +103,48 @@ final class MemberRepository {
 
 	/**
 	 * Assigns number and start date once; both stay when a member leaves and rejoins.
+	 *
+	 * @param callable(int): string $format Formats a sequence value (MemberNumber::format).
 	 */
-	public function ensure_number( int $user_id, string $formatted_next, string $today ): void {
-		if ( '' === $this->number( $user_id ) ) {
-			update_user_meta( $user_id, self::META_NUMBER, $formatted_next );
-			update_option( self::OPTION_SEQUENCE, $this->sequence() + 1, false );
+	public function ensure_number( int $user_id, callable $format, string $today ): void {
+		if ( '' === $this->number( $user_id ) && $this->lock() ) {
+			try {
+				// Read again inside the lock: two payments at the same time must not get the same number.
+				wp_cache_delete( self::OPTION_SEQUENCE, 'options' );
+				wp_cache_delete( 'alloptions', 'options' );
+				clean_user_cache( $user_id );
+				if ( '' === $this->number( $user_id ) ) {
+					$next = $this->sequence() + 1;
+					update_option( self::OPTION_SEQUENCE, $next, false );
+					update_user_meta( $user_id, self::META_NUMBER, (string) $format( $next ) );
+				}
+			} finally {
+				delete_option( self::OPTION_LOCK );
+			}
 		}
 		if ( null === $this->since( $user_id ) ) {
 			update_user_meta( $user_id, self::META_SINCE, $today );
 		}
+	}
+
+	/**
+	 * Short lock for the number sequence: add_option() only succeeds for one request (unique option name).
+	 * A lock older than 30 seconds is stale (request died) and is taken over.
+	 */
+	private function lock(): bool {
+		for ( $try = 0; $try < 50; $try++ ) {
+			if ( add_option( self::OPTION_LOCK, (string) time(), '', false ) ) {
+				return true;
+			}
+			wp_cache_delete( self::OPTION_LOCK, 'options' );
+			$since = (int) get_option( self::OPTION_LOCK, 0 );
+			if ( $since > 0 && time() - $since > 30 ) {
+				delete_option( self::OPTION_LOCK );
+				continue;
+			}
+			usleep( 100000 );
+		}
+		return false;
 	}
 
 	/**

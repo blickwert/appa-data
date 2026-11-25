@@ -66,7 +66,7 @@ html {
 
 /* Same size and colour for both icons; the links keep a comfortable tap area. */
 .bw-site-header__end .wc-block-customer-account__link,
-.bw-site-header__end .wc-block-mini-cart__button {
+.bw-site-header__end .bw-cart-link {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -77,9 +77,29 @@ html {
 }
 
 .bw-site-header__end .wc-block-customer-account__account-icon,
-.bw-site-header__end .wc-block-mini-cart__icon {
+.bw-site-header__end .bw-cart-link__icon {
 	inline-size: 1.5rem;
 	block-size: 1.5rem;
+}
+
+/* Cart link (blocks/cart-link): number of items as a small badge */
+.bw-cart-link {
+	position: relative;
+}
+
+.bw-cart-link__count {
+	position: absolute;
+	inset-block-start: 0;
+	inset-inline-end: 0;
+	min-inline-size: 1.125rem;
+	padding-inline: 0.25rem;
+	border-radius: var(--wp--custom--radius--pill);
+	background: var(--wp--preset--color--navy);
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: 700;
+	line-height: 1.125rem;
+	text-align: center;
 }
 
 @media (max-width: 600px) {
@@ -108,8 +128,11 @@ html {
 	font-weight: 700;
 }
 
+/* White on navy (red on navy is too weak, WCAG 1.4.3) */
 .bw-site-footer .bw-site-footer__mail {
-	color: var(--wp--preset--color--red);
+	color: var(--wp--preset--color--white);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
 }
 
 .bw-footer-links {

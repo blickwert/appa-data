@@ -299,3 +299,10 @@
 		font-weight: 600;
 	}
 }
+
+/* Links inside running text are underlined, not only coloured (WCAG 1.4.1) */
+.bwm-section p a:not([class]),
+.wp-block-post-content p a:not([class]) {
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+}

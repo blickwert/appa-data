@@ -60,7 +60,7 @@ $bwm_exclusive = 'members' === $data['audience'];
 			<p><button class="bwm-button" type="submit">Jetzt anmelden</button></p>
 		</form>
 	<?php elseif ( '' !== $data['book_url'] ) : ?>
-		<p><a class="bwm-button" href="<?php echo esc_url( $data['book_url'] ); ?>">Jetzt anmelden</a></p>
+		<p><a class="bwm-button" href="<?php echo esc_url( $data['book_url'] ); ?>" rel="nofollow">Jetzt anmelden</a></p>
 		<p class="bwm-sub">Die Bestätigung kommt per E-Mail, eine Erinnerung vor dem Termin.<?php if ( '' !== $data['paid_until'] && ( '' !== $data['member_price'] || '' !== $data['public_price'] ) ) : ?> Kostenlose Abmeldung mit voller Rückerstattung bis <?php echo esc_html( $data['paid_until'] ); ?>.<?php endif; ?></p>
 		<?php if ( ! $data['is_member'] && ! $bwm_exclusive && '' !== $data['member_price'] ) : ?>
 			<p class="bwm-sub">Mitglied? <?php if ( '' !== $data['login_url'] ) : ?><a href="<?php echo esc_url( $data['login_url'] ); ?>">Melde dich an</a>, um den Mitgliederpreis zu erhalten.<?php else : ?>Der Mitgliederpreis gilt mit aktiver Mitgliedschaft.<?php endif; ?></p>

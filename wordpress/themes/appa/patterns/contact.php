@@ -20,15 +20,15 @@ declare(strict_types=1);
 			<!-- wp:group {"className":"bw-contact","style":{"spacing":{"blockGap":"var:preset|spacing|4"}},"layout":{"type":"default"}} -->
 			<div class="wp-block-group bw-contact">
 				<!-- wp:heading -->
-				<h2 class="wp-block-heading">APPA</h2>
+				<h2 class="wp-block-heading">So erreichst du uns</h2>
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph {"textColor":"navy"} -->
-				<p class="has-navy-color has-text-color"><strong>Austrian Positive Psychology Association</strong></p>
+				<p class="has-navy-color has-text-color"><strong>APPA – Austrian Positive Psychology Association</strong></p>
 				<!-- /wp:paragraph -->
 
 				<!-- wp:paragraph -->
-				<p>Für Fragen zur Mitgliedschaft, zu unseren Fachgruppen und zu Kooperationen erreichst du uns hier:<br>E-Mail: <a href="mailto:info@appa.net">info@appa.net</a><br>Website: www.appa.net</p>
+				<p>Für Fragen zur Mitgliedschaft, zu unseren Fachgruppen und zu Kooperationen erreichst du uns hier:<br>E-Mail: <a href="mailto:info@appa.net">info@appa.net</a></p>
 				<!-- /wp:paragraph -->
 
 				<!-- wp:buttons -->

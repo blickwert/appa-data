@@ -21,7 +21,9 @@ declare(strict_types=1);
 
 		<!-- wp:group {"className":"bw-site-header__end","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right"}} -->
 		<div class="wp-block-group bw-site-header__end">
-			<!-- wp:navigation {"overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"right"},"style":{"spacing":{"blockGap":"var:preset|spacing|7"}}} /-->
+			<!-- wp:navigation {"ariaLabel":"Hauptmenü","overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"right"},"style":{"spacing":{"blockGap":"var:preset|spacing|7"}}} /-->
+
+			<!-- wp:bw/cart-link /-->
 		</div>
 		<!-- /wp:group -->
 	</div>

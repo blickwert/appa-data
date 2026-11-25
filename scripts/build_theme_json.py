@@ -108,8 +108,9 @@ theme = {
             "h2": {"typography": {"fontSize": FS("xxx-large")}},
             "h3": {"typography": {"fontSize": FS("xl"), "lineHeight": str(lh["snug"])}},
             "h4": {"typography": {"fontSize": FS("base"), "lineHeight": str(lh["snug"])}},
-            "link": {"color": {"text": C("red")}, "typography": {"textDecoration": "underline"},
-                     ":hover": {"color": {"text": C("red-dark")}},
+            # Darker red for text links: plain red is too weak on the light section colours (WCAG 1.4.3).
+            "link": {"color": {"text": C("red-dark")}, "typography": {"textDecoration": "underline"},
+                     ":hover": {"color": {"text": C("navy")}},
                      ":focus-visible": focus},
             "button": {
                 "color": {"background": C("red"), "text": C("white")},

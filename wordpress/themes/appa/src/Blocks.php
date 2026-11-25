@@ -20,6 +20,18 @@ final class Blocks {
 	public function register(): void {
 		add_action( 'init', array( $this, 'register_blocks' ) );
 		add_filter( 'pre_get_avatar', array( $this, 'account_icon' ), 10, 3 );
+		add_filter( 'hooked_block_types', array( $this, 'no_mini_cart' ), 20, 4 );
+	}
+
+	/**
+	 * WooCommerce hooks its mini cart after the navigation; the header has the theme's own cart link instead
+	 * (accessible, without the drawer scripts).
+	 *
+	 * @param string[] $hooked_blocks Block types hooked at this position.
+	 * @return string[]
+	 */
+	public function no_mini_cart( mixed $hooked_blocks ): array {
+		return array_values( array_diff( (array) $hooked_blocks, array( 'woocommerce/mini-cart' ) ) );
 	}
 
 	/**
@@ -40,6 +52,7 @@ final class Blocks {
 	 */
 	public function register_blocks(): void {
 		register_block_type( get_theme_file_path( 'blocks/icon' ) );
+		register_block_type( get_theme_file_path( 'blocks/cart-link' ) );
 		wp_add_inline_script(
 			'bw-icon-editor-script',
 			'window.bwAppaIcons = ' . wp_json_encode( Icons::names() ) . ';',

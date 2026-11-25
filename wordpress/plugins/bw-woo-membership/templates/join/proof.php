@@ -10,7 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <section class="bwm-section bwm-proof bwm-join-proof" id="nachweis" aria-labelledby="bwm-join-proof">
-	<h2 id="bwm-join-proof" class="screen-reader-text">Studiennachweis hochladen</h2>
+	<h2 id="bwm-join-proof" class="screen-reader-text">Datei auswählen und hochladen</h2>
 	<?php if ( '' !== $data['error'] ) : ?>
 		<p class="bwm-saved bwm-saved--error" role="alert"><?php echo esc_html( $data['error'] ); ?></p>
 	<?php endif; ?>

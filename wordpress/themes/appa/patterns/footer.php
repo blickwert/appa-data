@@ -38,7 +38,7 @@ $bw_links = array(
 	<!-- /wp:group -->
 
 	<!-- wp:html -->
-	<nav aria-label="<?php esc_attr_e( 'Footer', 'appa' ); ?>">
+	<nav aria-label="<?php esc_attr_e( 'Fußzeilenmenü', 'appa' ); ?>">
 		<ul class="bw-footer-links">
 			<?php foreach ( $bw_links as $bw_path => $bw_label ) : ?>
 				<li><a href="<?php echo esc_url( home_url( '/' . $bw_path ) ); ?>"><?php echo esc_html( $bw_label ); ?></a></li>

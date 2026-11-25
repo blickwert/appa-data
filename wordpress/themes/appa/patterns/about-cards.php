@@ -108,7 +108,7 @@ declare(strict_types=1);
 			<!-- wp:bw/icon {"icon":"sparkles","tone":"green"} /-->
 
 			<!-- wp:heading {"level":3} -->
-			<h3 class="wp-block-heading">Hier kannst du mitgestalten</h3>
+			<h3 class="wp-block-heading">Unsere Fachgruppen</h3>
 			<!-- /wp:heading -->
 
 			<!-- wp:paragraph -->

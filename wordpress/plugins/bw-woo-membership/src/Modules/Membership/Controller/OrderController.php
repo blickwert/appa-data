@@ -48,7 +48,7 @@ final class OrderController {
 			return;
 		}
 		$user_id = $order->get_customer_id();
-		$this->members->ensure_number( $user_id, MemberNumber::format( $this->members->sequence() + 1 ), current_time( 'Y-m-d' ) );
+		$this->members->ensure_number( $user_id, array( MemberNumber::class, 'format' ), current_time( 'Y-m-d' ) );
 
 		/**
 		 * Fires when a membership order is paid.

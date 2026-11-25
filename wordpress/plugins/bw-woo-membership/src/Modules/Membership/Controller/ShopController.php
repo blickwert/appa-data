@@ -85,7 +85,7 @@ final class ShopController {
 			};
 		}
 		if ( '' !== $target ) {
-			wp_safe_redirect( $target, 302, 'APPA' );
+			wp_safe_redirect( $target, 301, 'APPA' ); // Permanent: the shop is gone for good.
 			exit;
 		}
 	}

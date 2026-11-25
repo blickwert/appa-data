@@ -215,7 +215,7 @@ final class MemberAdminService {
 			$until = 1 === preg_match( '/^\d{4}-\d{2}-\d{2}$/', $until ) ? $until : '';
 			$this->members->set_manual( $user_id, MembershipTypes::exists( $type ) ? $type : '', $until );
 			if ( MembershipTypes::exists( $type ) ) {
-				$this->members->ensure_number( $user_id, MemberNumber::format( $this->members->sequence() + 1 ), current_time( 'Y-m-d' ) );
+				$this->members->ensure_number( $user_id, array( MemberNumber::class, 'format' ), current_time( 'Y-m-d' ) );
 			}
 		}
 		if ( isset( $data['profile'] ) && is_array( $data['profile'] ) ) {

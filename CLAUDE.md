@@ -21,6 +21,8 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 - Texte und Abschnitte der Seiten stehen in `scripts/build_patterns.py`; die Pattern-Dateien sind erzeugt (`cd scripts && python3 build_patterns.py`).
 - Keine Schriften oder Skripte von fremden Servern (Ausnahme: Turnstile im Formular).
 - Keine Schlüssel oder Passwörter ins Repo.
+- Sprache: Die Website ist nur deutsch. Abweichend von den Skills dürfen die Grundtexte (msgids) deutsch sein; sichtbare Texte trotzdem über `__()` & Co. übersetzbar halten (David, 25. 11. 2026).
+- SEO: Titel/Beschreibungen in `scripts/seo.json` (Einspielen mit `scripts/apply_seo.py`), Einstellungen im Modul `seo` von `bw-appa`.
 
 ## Arbeitsweise im Repo
 

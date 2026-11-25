@@ -33,6 +33,7 @@ final class Theme {
 		( new Assets() )->register();
 		( new Patterns() )->register();
 		( new Blocks() )->register();
+		( new Images() )->register();
 	}
 
 	/**

@@ -605,3 +605,14 @@
 	padding: 0;
 	background: none;
 }
+
+/* Placeholder while the registration box loads (event-box.js): about the final height, so nothing jumps (CLS) */
+.bwm-register--loading {
+	min-block-size: 21rem;
+}
+
+@media (min-width: 782px) {
+	.bwm-register--loading {
+		min-block-size: 17.5rem;
+	}
+}

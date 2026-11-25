@@ -38,6 +38,8 @@ final class EventRepository {
 	public const META_EVENT         = '_bw_wm_event_id';
 	/** Order item meta: the person cancelled this registration (the order itself may hold more items). */
 	public const ITEM_CANCELLED     = '_bw_wm_cancelled';
+	/** Event meta: IDs of the orders that contain the event (index, see order_ids()). */
+	public const META_ORDERS        = '_bw_wm_order_ids';
 	public const REGISTERED_STATUSES = array( 'wc-processing', 'wc-completed', 'wc-on-hold', 'wc-pending' );
 	/** Statuses that hold a place: WooCommerce reduces the stock for these (not for pending). */
 	public const HOLDING_STATUSES = array( 'processing', 'completed', 'on-hold' );
@@ -106,18 +108,59 @@ final class EventRepository {
 	 */
 	public function registration_orders( int $event_id, ?int $customer_id = null ): array {
 		if ( ! isset( $this->cache[ $event_id ] ) ) {
-			$product_id                 = $this->product_id( $event_id );
-			$this->cache[ $event_id ] = $product_id && function_exists( 'wc_get_orders' ) ? array_values(
-				array_filter(
-					wc_get_orders( array( 'status' => self::REGISTERED_STATUSES, 'limit' => -1, 'type' => 'shop_order' ) ),
-					fn( $order ): bool => $order instanceof WC_Order && $this->contains( $order, $product_id )
-				)
-			) : array();
+			$product_id = $this->product_id( $event_id );
+			$statuses   = array_map( static fn( string $s ): string => substr( $s, 3 ), self::REGISTERED_STATUSES );
+			$orders     = array();
+			foreach ( $product_id && function_exists( 'wc_get_order' ) ? $this->order_ids( $event_id ) : array() as $order_id ) {
+				$order = wc_get_order( $order_id );
+				if ( $order instanceof WC_Order && 'shop_order' === $order->get_type() && in_array( $order->get_status(), $statuses, true ) && $this->contains( $order, $product_id ) ) {
+					$orders[] = $order;
+				}
+			}
+			usort( $orders, static fn( WC_Order $a, WC_Order $b ): int => $b->get_id() <=> $a->get_id() );
+			$this->cache[ $event_id ] = $orders;
 		}
 		if ( null === $customer_id ) {
 			return $this->cache[ $event_id ];
 		}
 		return array_values( array_filter( $this->cache[ $event_id ], static fn( WC_Order $order ): bool => $order->get_customer_id() === $customer_id ) );
+	}
+
+	/**
+	 * IDs of the orders that ever contained the event (index on the event, kept by remember_order()). Built once by
+	 * scanning the orders when it does not exist yet, so the page views never load all orders of the shop.
+	 *
+	 * @return int[]
+	 */
+	public function order_ids( int $event_id ): array {
+		$stored = get_post_meta( $event_id, self::META_ORDERS, true );
+		if ( is_array( $stored ) ) {
+			return array_map( 'intval', $stored );
+		}
+		$product_id = $this->product_id( $event_id );
+		$ids        = array();
+		if ( $product_id && function_exists( 'wc_get_orders' ) ) {
+			foreach ( wc_get_orders( array( 'limit' => -1, 'type' => 'shop_order', 'return' => 'ids' ) ) as $order_id ) {
+				$order = wc_get_order( $order_id );
+				if ( $order instanceof WC_Order && $this->contains( $order, $product_id, true ) ) {
+					$ids[] = (int) $order_id;
+				}
+			}
+		}
+		update_post_meta( $event_id, self::META_ORDERS, $ids );
+		return $ids;
+	}
+
+	/**
+	 * Adds an order to the index of an event.
+	 */
+	public function remember_order( int $event_id, int $order_id ): void {
+		$ids = $this->order_ids( $event_id );
+		if ( ! in_array( $order_id, $ids, true ) ) {
+			$ids[] = $order_id;
+			update_post_meta( $event_id, self::META_ORDERS, $ids );
+		}
+		unset( $this->cache[ $event_id ] );
 	}
 
 	/**
@@ -177,7 +220,7 @@ final class EventRepository {
 			return array();
 		}
 		$out = array();
-		foreach ( wc_get_orders( array( 'customer_id' => $customer_id, 'status' => self::REGISTERED_STATUSES, 'limit' => 50, 'type' => 'shop_order' ) ) as $order ) {
+		foreach ( wc_get_orders( array( 'customer_id' => $customer_id, 'status' => self::REGISTERED_STATUSES, 'limit' => -1, 'type' => 'shop_order' ) ) as $order ) {
 			if ( ! $order instanceof WC_Order ) {
 				continue;
 			}
@@ -230,9 +273,9 @@ final class EventRepository {
 	/**
 	 * Whether an order contains a product.
 	 */
-	private function contains( WC_Order $order, int $product_id ): bool {
+	private function contains( WC_Order $order, int $product_id, bool $with_cancelled = false ): bool {
 		foreach ( $order->get_items() as $item ) {
-			if ( method_exists( $item, 'get_product_id' ) && (int) $item->get_product_id() === $product_id && ! $item->get_meta( self::ITEM_CANCELLED ) ) {
+			if ( method_exists( $item, 'get_product_id' ) && (int) $item->get_product_id() === $product_id && ( $with_cancelled || ! $item->get_meta( self::ITEM_CANCELLED ) ) ) {
 				return true;
 			}
 		}

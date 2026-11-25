@@ -46,7 +46,7 @@ declare(strict_types=1);
 		<!-- wp:column {"width":"50%","verticalAlignment":"center"} -->
 		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%">
 			<!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"bw-image--landscape"} -->
-			<figure class="wp-block-image size-full bw-image--landscape"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/membership.webp' ) ); ?>" alt="Zwei Menschen im Gespräch"/></figure>
+			<figure class="wp-block-image size-full bw-image--landscape"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/membership.webp' ) ); ?>" alt="Zwei Menschen tauschen sich über Positive Psychologie aus"/></figure>
 			<!-- /wp:image -->
 		</div>
 		<!-- /wp:column -->

@@ -189,7 +189,7 @@ ABOUT_CARDS = card_grid([
     icon_card("handshake", "gold", "Gemeinsam weiterkommen", "Du möchtest mit deiner Hochschule, Einrichtung oder Organisation "
               "etwas zur Positiven Psychologie beitragen? Lass uns ins Gespräch kommen.",
               ("Kooperation anfragen", "#kooperationen")),
-    icon_card("sparkles", "green", "Hier kannst du mitgestalten", "Sechs Fachgruppen, viele Perspektiven und Raum für deine "
+    icon_card("sparkles", "green", "Unsere Fachgruppen", "Sechs Fachgruppen, viele Perspektiven und Raum für deine "
               "Ideen. Finde dein Thema und gestalte von Anfang an mit.", ("Fachgruppen entdecken", "#fachgruppen")),
     icon_card("file-text", "red", "Unsere Statuten", "Wofür die APPA steht, wie der Verein organisiert ist und welche Rechte "
               "Mitglieder haben.", ("Zu den Statuten", "#statuten")),
@@ -387,7 +387,7 @@ MEMBER_INTRO = section(columns(
                  "auf digitale Tools, die deine Arbeit in Coaching, Pädagogik und Therapie unterstützen.",
                  variation="lead"),
                buttons(button("Gründungsmitglied werden", "#beitrag"))), gap="5"),
-    image(asset("assets/images/membership.webp"), "Zwei Menschen im Gespräch", cls="bw-image--landscape"),
+    image(asset("assets/images/membership.webp"), "Zwei Menschen tauschen sich über Positive Psychologie aus", cls="bw-image--landscape"),
     widths=["50%", "50%"], valign="center"), pad=("16", "16"))
 
 BENEFITS = [("Fachgruppen mitgestalten", "Themen einbringen, Ideen gemeinsam entwickeln und erste Projekte auf den Weg "
@@ -560,10 +560,10 @@ def contact_item(icon_name, text):
 
 CONTACT_MAIN = section(columns(
     stack(join(
-        heading("APPA"),
-        p("<strong>Austrian Positive Psychology Association</strong>", color="navy"),
+        heading("So erreichst du uns"),
+        p("<strong>APPA – Austrian Positive Psychology Association</strong>", color="navy"),
         p("Für Fragen zur Mitgliedschaft, zu unseren Fachgruppen und zu Kooperationen erreichst du uns hier:<br>"
-          "E-Mail: <a href=\"mailto:info@appa.net\">info@appa.net</a><br>Website: www.appa.net"),
+          "E-Mail: <a href=\"mailto:info@appa.net\">info@appa.net</a>"),
         arrow("E-Mail schreiben", MAIL),
         separator(wide=True),
         contact_item("map-pin", "<strong>Vereinssitz und Postanschrift</strong><br>APPA<br>Austrian Positive Psychology "

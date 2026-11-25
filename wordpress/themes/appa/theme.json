@@ -399,14 +399,14 @@
 			},
 			"link": {
 				"color": {
-					"text": "var(--wp--preset--color--red)"
+					"text": "var(--wp--preset--color--red-dark)"
 				},
 				"typography": {
 					"textDecoration": "underline"
 				},
 				":hover": {
 					"color": {
-						"text": "var(--wp--preset--color--red-dark)"
+						"text": "var(--wp--preset--color--navy)"
 					}
 				},
 				":focus-visible": {

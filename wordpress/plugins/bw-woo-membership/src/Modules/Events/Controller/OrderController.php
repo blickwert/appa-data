@@ -34,6 +34,21 @@ final class OrderController {
 	public function register(): void {
 		add_filter( 'woocommerce_payment_complete_order_status', array( $this, 'complete_registrations' ), 10, 3 );
 		add_action( 'bw_wm_daily_after_sync', array( $this, 'cancel_unpaid' ) );
+		add_action( 'woocommerce_new_order_item', array( $this, 'index_item' ), 10, 3 );
+	}
+
+	/**
+	 * Keeps the order index of an event (EventRepository::order_ids()) when an event is added to an order.
+	 *
+	 * @param int            $item_id  Item ID.
+	 * @param \WC_Order_Item $item     Item.
+	 * @param int            $order_id Order ID.
+	 */
+	public function index_item( $item_id, $item, $order_id ): void {
+		$event_id = $item instanceof \WC_Order_Item_Product ? $this->events->event_id( (int) $item->get_product_id() ) : 0;
+		if ( $event_id && (int) $order_id > 0 ) {
+			$this->events->remember_order( $event_id, (int) $order_id );
+		}
 	}
 
 	/**

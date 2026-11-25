@@ -9,7 +9,7 @@
 	"styles": {
 		"color": {
 			"background": "transparent",
-			"text": "var(--wp--preset--color--red)"
+			"text": "var(--wp--preset--color--red-dark)"
 		},
 		"spacing": {
 			"padding": {
@@ -22,7 +22,7 @@
 		":hover": {
 			"color": {
 				"background": "transparent",
-				"text": "var(--wp--preset--color--red-dark)"
+				"text": "var(--wp--preset--color--navy)"
 			}
 		}
 	}

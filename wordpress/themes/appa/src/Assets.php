@@ -33,7 +33,7 @@ final class Assets {
 	 */
 	public function register(): void {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_base' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_woocommerce' ), 20 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_woocommerce' ), 99 );
 		add_action( 'init', array( $this, 'enqueue_block_styles' ) );
 		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
 	}
@@ -65,7 +65,23 @@ final class Assets {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
+		if ( ! self::is_shop_page() ) {
+			// Pages without shop parts load none of the WooCommerce styles and scripts (render-blocking, jQuery).
+			foreach ( array( 'woocommerce', 'wc-add-to-cart', 'wc-cart-fragments', 'sourcebuster-js', 'wc-order-attribution', 'woocommerce-general', 'woocommerce-layout', 'woocommerce-smallscreen', 'woocommerce-blocktheme', 'wcs-view-subscription', 'wc-blocks-style' ) as $handle ) {
+				wp_dequeue_script( $handle );
+				wp_dequeue_style( $handle );
+			}
+			return;
+		}
 		wp_enqueue_style( 'bw-appa-woocommerce', get_theme_file_uri( 'assets/css/woocommerce.css' ), array( 'bw-appa-base' ), Theme::version() );
+	}
+
+	/**
+	 * Cart, checkout, account and the (redirecting) shop pages.
+	 */
+	private static function is_shop_page(): bool {
+		return ( function_exists( 'is_woocommerce' ) && is_woocommerce() )
+			|| ( function_exists( 'is_cart' ) && ( is_cart() || is_checkout() || is_account_page() ) );
 	}
 
 	/**

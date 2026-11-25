@@ -173,6 +173,8 @@
 
 .woocommerce form .show-password-input {
 	inset-inline-end: var(--wp--preset--spacing--4);
+	min-inline-size: 1.5rem;
+	min-block-size: 1.5rem;
 	opacity: 0.6;
 }
 
