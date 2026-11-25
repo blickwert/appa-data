@@ -39,6 +39,24 @@ final class SubscriptionController {
 		add_filter( 'gettext_woocommerce-subscriptions', array( $this, 'texts' ), 10, 2 );
 		add_filter( 'woocommerce_get_item_data', array( $this, 'renewal_line' ), 20, 2 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'script_texts' ) );
+		add_filter( 'woocommerce_account_menu_items', array( $this, 'account_menu' ), 20 );
+	}
+
+	/**
+	 * "Mein Konto": the subscription is the membership fee; there are no downloads.
+	 *
+	 * @param array<string, string> $items Menu items.
+	 * @return array<string, string>
+	 */
+	public function account_menu( $items ) {
+		if ( ! is_array( $items ) ) {
+			return $items;
+		}
+		unset( $items['downloads'] );
+		if ( isset( $items['subscriptions'] ) ) {
+			$items['subscriptions'] = 'Mitgliedsbeitrag';
+		}
+		return $items;
 	}
 
 	/**

@@ -33,6 +33,7 @@ final class Assets {
 	 */
 	public function register(): void {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_base' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_woocommerce' ), 20 );
 		add_action( 'init', array( $this, 'enqueue_block_styles' ) );
 		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
 	}
@@ -55,6 +56,16 @@ final class Assets {
 		if ( is_page_template( array( 'page-member', 'page-member-dashboard' ) ) ) {
 			wp_enqueue_style( 'bw-appa-member', get_theme_file_uri( 'assets/css/member.css' ), array( 'bw-appa-base' ), Theme::version() );
 		}
+	}
+
+	/**
+	 * WooCommerce account pages and forms in the look of the member area. Runs after WooCommerce's own styles.
+	 */
+	public function enqueue_woocommerce(): void {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return;
+		}
+		wp_enqueue_style( 'bw-appa-woocommerce', get_theme_file_uri( 'assets/css/woocommerce.css' ), array( 'bw-appa-base' ), Theme::version() );
 	}
 
 	/**
