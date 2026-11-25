@@ -120,21 +120,15 @@
 
 ## 10. Stornierung durch Teilnehmende
 
-10.1 Du kannst deine Anmeldung per E-Mail an info@appa.net stornieren. Es gilt:
+10.1 Du kannst dich selbst abmelden – auf der Seite der Veranstaltung oder unter „Meine Anmeldungen“ im Mitgliederbereich – oder per E-Mail an info@appa.net.
 
-| Zeitpunkt der Stornierung | Stornogebühr |
-|---|---|
-| bis [Platzhalter: X] Tage vor der Veranstaltung | [Platzhalter: kostenlos / Bearbeitungsgebühr in €] |
-| danach bis [Platzhalter: Y] Tage vor der Veranstaltung | [Platzhalter: z. B. 50 % der Teilnahmegebühr] |
-| später oder bei Nichterscheinen | [Platzhalter: z. B. volle Teilnahmegebühr] |
+10.2 Kostenlose Anmeldungen kannst du bis zum Tag der Veranstaltung abmelden.
 
-10.2 [Platzhalter: Ersatzperson zulassen? z. B. „Du kannst eine Ersatzperson nennen; sie meldet sich mit eigenem Konto an, eine Stornogebühr fällt dann nicht an.“]
-
-10.3 Du kannst nachweisen, dass uns kein oder ein geringerer Schaden entstanden ist. Kann der frei gewordene Platz über die Warteliste nachbesetzt werden, [Platzhalter: „erstatten wir die volle Gebühr abzüglich [Betrag]“].
+10.3 Kostenpflichtige Anmeldungen kannst du bis 14 Tage vor der Veranstaltung kostenlos abmelden; du bekommst die volle Teilnahmegebühr zurück. Bei einzelnen Veranstaltungen kann eine andere Frist gelten; sie steht dann auf der Seite der Veranstaltung und in deiner Anmeldebestätigung. Nach Ablauf der Frist oder bei Nichterscheinen wird die Teilnahmegebühr nicht erstattet.
 
 10.4 Erstattungen erfolgen über die ursprünglich verwendete Zahlungsart.
 
-> **Prüfhinweis:** Stornogebühren in Konsumentenverträgen unterliegen der Inhaltskontrolle (§ 879 Abs 3 ABGB, § 6 KSchG, richterliches Mäßigungsrecht bei Konventionalstrafen § 1336 ABGB). Staffel angemessen wählen.
+> **Prüfhinweis:** Entscheidung David, 25. 11. 2026: keine Storno-Staffel – bis 14 Tage vorher volle Erstattung, danach keine. Der Verfall der vollen Gebühr unterliegt der Inhaltskontrolle (§ 879 Abs 3 ABGB, § 6 KSchG, Mäßigungsrecht § 1336 ABGB); bitte prüfen lassen, ob bei Nachbesetzung über die Warteliste erstattet werden muss.
 
 ## 11. Absage und Änderungen durch die APPA
 
