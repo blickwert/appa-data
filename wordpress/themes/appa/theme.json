@@ -215,7 +215,6 @@
 		},
 		"spacing": {
 			"units": [
-				"px",
 				"rem",
 				"%"
 			],
@@ -310,10 +309,10 @@
 			]
 		},
 		"border": {
-			"color": true,
-			"radius": true,
-			"style": true,
-			"width": true
+			"color": false,
+			"radius": false,
+			"style": false,
+			"width": false
 		},
 		"custom": {
 			"radius": {

@@ -80,12 +80,15 @@ theme = {
             "fontSizes": font_sizes,
         },
         "spacing": {
-            "units": ["px", "rem", "%"], "defaultSpacingSizes": False, "spacingSizes": spacing,
+            # No px: patterns use rem and % only; sizes come from the presets.
+            "units": ["rem", "%"], "defaultSpacingSizes": False, "spacingSizes": spacing,
             "customSpacingSize": False,
         },
         "shadow": {"defaultPresets": False,
                    "presets": [{"slug": s, "name": v["name"], "shadow": v["value"]} for s, v in T["shadow"].items()]},
-        "border": {"color": True, "radius": True, "style": True, "width": True},
+        # appearanceTools would allow free borders per block; the design sets borders only through
+        # block styles (styles/blocks/*.json) and elements, which stay unaffected by these switches.
+        "border": {"color": False, "radius": False, "style": False, "width": False},
         "custom": {
             "radius": {k: px(v) if v < 999 else "999px" for k, v in T["radius"].items()},
             "border-width": {k: f"{v}px" for k, v in T["border_width"].items()},
