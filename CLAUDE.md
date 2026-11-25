@@ -29,7 +29,7 @@ Sprache mit dem Auftraggeber: Deutsch. Auftraggeber: David (blickwert, Graz). Ku
 - Pro Änderung: Branch, Commit, Pull Request.
 - Sichtbare Änderungen lokal prüfen (WordPress + SQLite, Chromium/Playwright, 1440 px und 390 px) und im Block-Editor auf ungültige Blöcke prüfen.
 - Plugins: `composer install && composer test` (PHPUnit), `composer lint` – je Plugin-Ordner.
-- `bw-woo-membership`: Backend-App mit `npm install && npm run build` bauen, bevor das ZIP entsteht (`build/` ist nicht im Git).
+- `bw-woo-membership`: Backend-App (TypeScript) mit `npm install && npm run typecheck && npm run build` prüfen und bauen, bevor das ZIP entsteht (`build/` ist nicht im Git).
 
 ## Wichtige Dateien
 

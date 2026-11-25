@@ -30,7 +30,7 @@ Mitgliederbereich der APPA auf Basis von WooCommerce. PHP 8.3, WordPress 7.x, Wo
 
 ## Verwaltung (Backend)
 
-Menü **Mitglieder** (Berechtigung `bw_wm_manage_members`, vergeben an Administrator und Shop-Manager): Mitgliederliste mit Filter und Suche, Mitglied bearbeiten (Art, gültig bis, manuelle Mitgliedschaft), Ehren- und institutionelle Mitglieder anlegen, CSV-Export, Unterseite **Nachweise prüfen**. Die Oberfläche ist eine React-App (`src-js/admin.js`, gebaut mit `@wordpress/scripts`) auf der REST-Schnittstelle `bw-wm/v1`.
+Menü **Mitglieder** (Berechtigung `bw_wm_manage_members`, vergeben an Administrator und Shop-Manager): Mitgliederliste mit Filter und Suche, Mitglied bearbeiten (Art, gültig bis, manuelle Mitgliedschaft), Ehren- und institutionelle Mitglieder anlegen, CSV-Export, Unterseite **Nachweise prüfen**. Die Oberfläche ist eine React-App in TypeScript (`src-js/admin.tsx`, Datentypen in `src-js/types.ts`, gebaut mit `@wordpress/scripts`) auf der REST-Schnittstelle `bw-wm/v1`; CSS in `assets/admin.css`, Präfix `bwm-`, alles innerhalb von `.bwm-app`.
 
 Konten mit Redaktionsrechten (`edit_posts`) können dort nicht bearbeitet werden.
 
@@ -104,4 +104,4 @@ Bei Unterverzeichnis-Installationen den Pfad anpassen (z. B. `/wp/2603b-appa/wp-
 
 `composer install`, `composer test` (PHPUnit + Brain Monkey), `composer lint`.
 
-Backend-App: `npm install`, `npm run build` (erzeugt `build/`, nicht im Git). Vor jedem ZIP bauen; ins ZIP gehören `build/`, nicht aber `node_modules/`, `src-js/`, `tests/`, `vendor/`.
+Backend-App: `npm install`, `npm run typecheck` (TypeScript-Prüfung, `tsc --noEmit`), `npm run build` (erzeugt `build/admin.js` und `build/admin.asset.php`, nicht im Git; Babel entfernt die Typen nur, darum vorher `typecheck`). `npm run start` baut bei jeder Änderung neu. Vor jedem ZIP bauen; ins ZIP gehören `build/`, nicht aber `node_modules/`, `src-js/`, `tests/`, `vendor/`.

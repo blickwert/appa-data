@@ -3,6 +3,7 @@
  * WordPress packages only; data via the REST routes bw-wm/v1.
  */
 import { createRoot, useEffect, useState, useCallback } from '@wordpress/element';
+import type { ReactNode } from 'react';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
 import { __, sprintf } from '@wordpress/i18n';
@@ -19,22 +20,37 @@ import {
 	TextControl,
 	TextareaControl,
 } from '@wordpress/components';
+import type {
+	AdminConfig,
+	MemberCounts,
+	MemberCreate,
+	MemberDetail,
+	MemberList as MemberListData,
+	MemberListQuery,
+	MemberStatus,
+	MemberUpdate,
+	PendingProof,
+	ProofDecision,
+	ProofDecisionResult,
+} from './types';
 
-const config = window.bwWmAdmin || {};
+type Go = ( next: string ) => void;
+
+const config: Partial< AdminConfig > = window.bwWmAdmin || {};
 const field = { __next40pxDefaultSize: true, __nextHasNoMarginBottom: true };
 
 /* Routing: ?page=bw-wm-members&path=/… – the same address PHP builds, no reload inside the app. */
-function currentPath() {
+function currentPath(): string {
 	return new URLSearchParams( window.location.search ).get( 'path' ) || '/';
 }
-function useRoute() {
+function useRoute(): [ string, Go ] {
 	const [ path, setPath ] = useState( currentPath() );
 	useEffect( () => {
 		const onPop = () => setPath( currentPath() );
 		window.addEventListener( 'popstate', onPop );
 		return () => window.removeEventListener( 'popstate', onPop );
 	}, [] );
-	const go = useCallback( ( next ) => {
+	const go = useCallback( ( next: string ) => {
 		window.history.pushState( {}, '', addQueryArgs( config.page, next === '/' ? {} : { path: next } ) );
 		setPath( next );
 		window.scrollTo( 0, 0 );
@@ -42,25 +58,30 @@ function useRoute() {
 	return [ path, go ];
 }
 
-function Header( { title, children } ) {
+/** Message of a failed apiFetch (WP_Error answer or network error). */
+function errorMessage( e: unknown ): string {
+	return ( e as { message?: string } | null )?.message ?? '';
+}
+
+function Header( { title, children }: { title: string; children?: ReactNode } ) {
 	return (
-		<div className="bwo-header">
+		<div className="bwm-header">
 			<h1 className="wp-heading-inline">{ title }</h1>
-			<div className="bwo-header__actions">{ children }</div>
+			<div className="bwm-header__actions">{ children }</div>
 		</div>
 	);
 }
 
-function StatusBadge( { status, label } ) {
-	return <span className={ `bwo-badge bwo-badge--${ status }` }>{ label }</span>;
+function StatusBadge( { status, label }: { status: MemberStatus; label: string } ) {
+	return <span className={ `bwm-badge bwm-badge--${ status }` }>{ label }</span>;
 }
 
-function ErrorNotice( { error } ) {
+function ErrorNotice( { error }: { error: string } ) {
 	return error ? <Notice status="error" isDismissible={ false }>{ error }</Notice> : null;
 }
 
 /* ── List ──────────────────────────────────────────────────────────────── */
-const STATUS_FILTERS = [
+const STATUS_FILTERS: Array< [ MemberListQuery[ 'status' ], string, keyof MemberCounts ] > = [
 	[ '', __( 'Alle', 'bw-woo-membership' ), 'all' ],
 	[ 'active', __( 'Aktiv', 'bw-woo-membership' ), 'active' ],
 	[ 'pending', __( 'Zahlung offen', 'bw-woo-membership' ), 'pending' ],
@@ -72,7 +93,7 @@ const STATUS_FILTERS = [
  * Fee journal of a period for the bookkeeping (CSV download); default: previous month.
  */
 function JournalExport() {
-	const day = ( d ) => `${ d.getFullYear() }-${ String( d.getMonth() + 1 ).padStart( 2, '0' ) }-${ String( d.getDate() ).padStart( 2, '0' ) }`;
+	const day = ( d: Date ): string => `${ d.getFullYear() }-${ String( d.getMonth() + 1 ).padStart( 2, '0' ) }-${ String( d.getDate() ).padStart( 2, '0' ) }`;
 	const now = new Date();
 	const [ from, setFrom ] = useState( day( new Date( now.getFullYear(), now.getMonth() - 1, 1 ) ) );
 	const [ to, setTo ] = useState( day( new Date( now.getFullYear(), now.getMonth(), 0 ) ) );
@@ -81,34 +102,35 @@ function JournalExport() {
 		setTo( `${ now.getFullYear() - 1 }-12-31` );
 	};
 	return (
-		<span className="bwo-journal">
-			<span className="bwo-journal__label">{ __( 'Beitragsjournal', 'bw-woo-membership' ) }</span>
-			<label htmlFor="bwo-journal-from">{ __( 'von', 'bw-woo-membership' ) }</label>
-			<input id="bwo-journal-from" type="date" value={ from } max={ to } onChange={ ( e ) => setFrom( e.target.value ) } />
-			<label htmlFor="bwo-journal-to">{ __( 'bis', 'bw-woo-membership' ) }</label>
-			<input id="bwo-journal-to" type="date" value={ to } min={ from } onChange={ ( e ) => setTo( e.target.value ) } />
+		<span className="bwm-journal">
+			<span className="bwm-journal__label">{ __( 'Beitragsjournal', 'bw-woo-membership' ) }</span>
+			<label htmlFor="bwm-journal-from">{ __( 'von', 'bw-woo-membership' ) }</label>
+			<input id="bwm-journal-from" type="date" value={ from } max={ to } onChange={ ( e ) => setFrom( e.target.value ) } />
+			<label htmlFor="bwm-journal-to">{ __( 'bis', 'bw-woo-membership' ) }</label>
+			<input id="bwm-journal-to" type="date" value={ to } min={ from } onChange={ ( e ) => setTo( e.target.value ) } />
 			<Button variant="link" onClick={ lastYear }>{ __( 'Vorjahr', 'bw-woo-membership' ) }</Button>
 			<Button variant="secondary" href={ addQueryArgs( config.journalUrl, { from, to } ) }>{ __( 'Herunterladen (CSV)', 'bw-woo-membership' ) }</Button>
 		</span>
 	);
 }
 
-function MemberList( { go } ) {
-	const [ status, setStatus ] = useState( '' );
-	const [ type, setType ] = useState( '' );
+function MemberList( { go }: { go: Go } ) {
+	const [ status, setStatus ] = useState< MemberListQuery[ 'status' ] >( '' );
+	const [ type, setType ] = useState< MemberListQuery[ 'type' ] >( '' );
 	const [ search, setSearch ] = useState( '' );
 	const [ page, setPage ] = useState( 1 );
-	const [ data, setData ] = useState( null );
+	const [ data, setData ] = useState< MemberListData | null >( null );
 	const [ error, setError ] = useState( '' );
 
 	useEffect( () => {
 		const timer = setTimeout( () => {
-			apiFetch( { path: addQueryArgs( '/bw-wm/v1/members', { status, type, search, page, per_page: 50 } ) } )
+			const query: MemberListQuery = { status, type, search, page, per_page: 50 };
+			apiFetch< MemberListData >( { path: addQueryArgs( '/bw-wm/v1/members', query ) } )
 				.then( ( result ) => {
 					setData( result );
 					setError( '' );
 				} )
-				.catch( ( e ) => setError( e.message ) );
+				.catch( ( e: unknown ) => setError( errorMessage( e ) ) );
 		}, 250 );
 		return () => clearTimeout( timer );
 	}, [ status, type, search, page ] );
@@ -129,7 +151,7 @@ function MemberList( { go } ) {
 					<Button variant="link" onClick={ () => go( '/proofs' ) }>{ __( 'Nachweise prüfen', 'bw-woo-membership' ) }</Button>
 				</Notice>
 			) }
-			<div className="bwo-toolbar">
+			<div className="bwm-toolbar">
 				<ul className="subsubsub">
 					{ STATUS_FILTERS.map( ( [ value, label, key ], index ) => (
 						<li key={ key }>
@@ -140,7 +162,7 @@ function MemberList( { go } ) {
 						</li>
 					) ) }
 				</ul>
-				<div className="bwo-filters">
+				<div className="bwm-filters">
 					<SelectControl
 						label={ __( 'Mitgliedsart', 'bw-woo-membership' ) }
 						hideLabelFromVision
@@ -173,13 +195,13 @@ function MemberList( { go } ) {
 						</tr>
 					</thead>
 					<tbody>
-						{ data.items.length === 0 && <tr><td colSpan="8">{ __( 'Keine Mitglieder gefunden.', 'bw-woo-membership' ) }</td></tr> }
+						{ data.items.length === 0 && <tr><td colSpan={ 8 }>{ __( 'Keine Mitglieder gefunden.', 'bw-woo-membership' ) }</td></tr> }
 						{ data.items.map( ( m ) => (
 							<tr key={ m.id }>
 								<td>{ m.number || '–' }</td>
 								<td>
 									<Button variant="link" onClick={ () => go( `/member/${ m.id }` ) }><strong>{ m.name }</strong></Button>
-									<div className="bwo-muted">{ m.email }</div>
+									<div className="bwm-muted">{ m.email }</div>
 								</td>
 								<td>{ m.type || '–' }</td>
 								<td><StatusBadge status={ m.status } label={ m.status_l } /></td>
@@ -193,7 +215,7 @@ function MemberList( { go } ) {
 				</table>
 			) }
 			{ data && pages > 1 && (
-				<div className="bwo-pager">
+				<div className="bwm-pager">
 					<Button variant="secondary" size="compact" disabled={ page <= 1 } onClick={ () => setPage( page - 1 ) }>{ __( '‹ Zurück', 'bw-woo-membership' ) }</Button>
 					<span>{ /* translators: 1: page, 2: number of pages */ sprintf( __( 'Seite %1$d von %2$d', 'bw-woo-membership' ), page, pages ) }</span>
 					<Button variant="secondary" size="compact" disabled={ page >= pages } onClick={ () => setPage( page + 1 ) }>{ __( 'Weiter ›', 'bw-woo-membership' ) }</Button>
@@ -204,20 +226,20 @@ function MemberList( { go } ) {
 }
 
 /* ── Member details ───────────────────────────────────────────────────── */
-function MemberEdit( { id, go } ) {
-	const [ member, setMember ] = useState( null );
-	const [ form, setForm ] = useState( null );
+function MemberEdit( { id, go }: { id: string; go: Go } ) {
+	const [ member, setMember ] = useState< MemberDetail | null >( null );
+	const [ form, setForm ] = useState< MemberUpdate | null >( null );
 	const [ error, setError ] = useState( '' );
 	const [ saved, setSaved ] = useState( false );
 	const [ busy, setBusy ] = useState( false );
 
 	const load = useCallback( () => {
-		apiFetch( { path: `/bw-wm/v1/members/${ id }` } )
+		apiFetch< MemberDetail >( { path: `/bw-wm/v1/members/${ id }` } )
 			.then( ( m ) => {
 				setMember( m );
 				setForm( { first: m.first, last: m.last, email: m.email, manual: m.manual, profile: m.profile, directory: m.row.directory } );
 			} )
-			.catch( ( e ) => setError( e.message ) );
+			.catch( ( e: unknown ) => setError( errorMessage( e ) ) );
 	}, [ id ] );
 	useEffect( load, [ load ] );
 
@@ -227,20 +249,20 @@ function MemberEdit( { id, go } ) {
 	if ( ! member || ! form ) {
 		return <Spinner />;
 	}
-	const set = ( key ) => ( value ) => setForm( { ...form, [ key ]: value } );
-	const setProfile = ( key ) => ( value ) => setForm( { ...form, profile: { ...form.profile, [ key ]: value } } );
-	const toggleGroup = ( key ) => ( on ) => setProfile( 'groups' )( on ? [ ...form.profile.groups, key ] : form.profile.groups.filter( ( g ) => g !== key ) );
+	const set = < K extends keyof MemberUpdate >( key: K ) => ( value: MemberUpdate[ K ] ) => setForm( { ...form, [ key ]: value } );
+	const setProfile = < K extends keyof MemberUpdate[ 'profile' ] >( key: K ) => ( value: MemberUpdate[ 'profile' ][ K ] ) => setForm( { ...form, profile: { ...form.profile, [ key ]: value } } );
+	const toggleGroup = ( key: string ) => ( on: boolean ) => setProfile( 'groups' )( on ? [ ...form.profile.groups, key ] : form.profile.groups.filter( ( g ) => g !== key ) );
 
 	const save = () => {
 		setBusy( true );
 		setSaved( false );
-		apiFetch( { path: `/bw-wm/v1/members/${ id }`, method: 'POST', data: form } )
+		apiFetch< MemberDetail >( { path: `/bw-wm/v1/members/${ id }`, method: 'POST', data: form } )
 			.then( ( m ) => {
 				setMember( m );
 				setSaved( true );
 				setError( '' );
 			} )
-			.catch( ( e ) => setError( e.message ) )
+			.catch( ( e: unknown ) => setError( errorMessage( e ) ) )
 			.finally( () => setBusy( false ) );
 	};
 
@@ -248,16 +270,16 @@ function MemberEdit( { id, go } ) {
 	return (
 		<>
 			<Header title={ /* translators: %s: member name */ sprintf( __( 'Mitglied bearbeiten: %s', 'bw-woo-membership' ), row.name ) }>
-				<span className="bwo-muted">{ row.number ? /* translators: %s: membership number */ sprintf( __( 'Nr. %s', 'bw-woo-membership' ), row.number ) : __( 'noch keine Nummer', 'bw-woo-membership' ) }</span>
+				<span className="bwm-muted">{ row.number ? /* translators: %s: membership number */ sprintf( __( 'Nr. %s', 'bw-woo-membership' ), row.number ) : __( 'noch keine Nummer', 'bw-woo-membership' ) }</span>
 				<Button variant="link" onClick={ () => go( '/' ) }>{ __( '← Alle Mitglieder', 'bw-woo-membership' ) }</Button>
 			</Header>
 			<ErrorNotice error={ error } />
 			{ saved && <Notice status="success" onRemove={ () => setSaved( false ) }>{ __( 'Gespeichert.', 'bw-woo-membership' ) }</Notice> }
-			<div className="bwo-columns">
-				<div className="bwo-main">
+			<div className="bwm-columns">
+				<div className="bwm-main">
 					<Card>
 						<CardHeader><h2>{ __( 'Kontaktdaten', 'bw-woo-membership' ) }</h2></CardHeader>
-						<CardBody className="bwo-grid">
+						<CardBody className="bwm-grid">
 							<TextControl label={ __( 'Vorname', 'bw-woo-membership' ) } value={ form.first } onChange={ set( 'first' ) } { ...field } />
 							<TextControl label={ __( 'Nachname', 'bw-woo-membership' ) } value={ form.last } onChange={ set( 'last' ) } { ...field } />
 							<TextControl label={ __( 'E-Mail', 'bw-woo-membership' ) } type="email" value={ form.email } onChange={ set( 'email' ) } { ...field } />
@@ -265,7 +287,7 @@ function MemberEdit( { id, go } ) {
 					</Card>
 					<Card>
 						<CardHeader><h2>{ __( 'Profil im öffentlichen Mitgliederverzeichnis', 'bw-woo-membership' ) }</h2></CardHeader>
-						<CardBody className="bwo-stack">
+						<CardBody className="bwm-stack">
 							<CheckboxControl
 								label={ __( 'Im Verzeichnis anzeigen', 'bw-woo-membership' ) }
 								help={ __( 'Nur mit Einwilligung des Mitglieds – normalerweise schaltet das Mitglied selbst im Mitgliederbereich um.', 'bw-woo-membership' ) }
@@ -276,7 +298,7 @@ function MemberEdit( { id, go } ) {
 							<TextControl label={ __( 'Titel / akademischer Grad', 'bw-woo-membership' ) } value={ form.profile.title } onChange={ setProfile( 'title' ) } { ...field } />
 							<TextControl label={ __( 'Website', 'bw-woo-membership' ) } type="url" value={ form.profile.website } onChange={ setProfile( 'website' ) } { ...field } />
 							<TextControl label={ __( 'Fachliche Schwerpunkte', 'bw-woo-membership' ) } value={ form.profile.focus } onChange={ setProfile( 'focus' ) } { ...field } />
-							<fieldset className="bwo-checks">
+							<fieldset className="bwm-checks">
 								<legend>{ __( 'Fachgruppen', 'bw-woo-membership' ) }</legend>
 								{ Object.entries( member.groups ).map( ( [ key, label ] ) => (
 									<CheckboxControl key={ key } label={ label } checked={ form.profile.groups.includes( key ) } onChange={ toggleGroup( key ) } __nextHasNoMarginBottom />
@@ -289,7 +311,7 @@ function MemberEdit( { id, go } ) {
 						<Card>
 							<CardHeader><h2>{ __( 'Angaben beim Beitritt', 'bw-woo-membership' ) }</h2></CardHeader>
 							<CardBody>
-								<dl className="bwo-facts">
+								<dl className="bwm-facts">
 									<dt>{ __( 'Beruf / Studienrichtung', 'bw-woo-membership' ) }</dt>
 									<dd>{ member.application.occupation || '–' }</dd>
 									<dt>{ __( 'Statuten bestätigt', 'bw-woo-membership' ) }</dt>
@@ -319,15 +341,15 @@ function MemberEdit( { id, go } ) {
 						</CardBody>
 					</Card>
 				</div>
-				<div className="bwo-side">
+				<div className="bwm-side">
 					<Card>
 						<CardHeader><h2>{ __( 'Speichern', 'bw-woo-membership' ) }</h2></CardHeader>
 						<CardBody><Button variant="primary" isBusy={ busy } disabled={ busy } onClick={ save }>{ __( 'Aktualisieren', 'bw-woo-membership' ) }</Button></CardBody>
 					</Card>
 					<Card>
 						<CardHeader><h2>{ __( 'Mitgliedschaft', 'bw-woo-membership' ) }</h2></CardHeader>
-						<CardBody className="bwo-stack">
-							<dl className="bwo-facts">
+						<CardBody className="bwm-stack">
+							<dl className="bwm-facts">
 								<dt>{ __( 'Status', 'bw-woo-membership' ) }</dt><dd><StatusBadge status={ row.status } label={ row.status_l } /></dd>
 								<dt>{ __( 'Mitgliedsart', 'bw-woo-membership' ) }</dt><dd>{ row.type || '–' }</dd>
 								<dt>{ __( 'Mitglied seit', 'bw-woo-membership' ) }</dt><dd>{ row.since || '–' }</dd>
@@ -350,7 +372,7 @@ function MemberEdit( { id, go } ) {
 					<Card>
 						<CardHeader><h2>{ __( 'Studiennachweis', 'bw-woo-membership' ) }</h2></CardHeader>
 						<CardBody>
-							<dl className="bwo-facts">
+							<dl className="bwm-facts">
 								<dt>{ __( 'Status', 'bw-woo-membership' ) }</dt><dd>{ member.proof.label }</dd>
 								{ member.proof.uploaded && <><dt>{ __( 'Hochgeladen', 'bw-woo-membership' ) }</dt><dd>{ member.proof.uploaded }</dd></> }
 								{ member.proof.valid_until && <><dt>{ __( 'Gültig bis', 'bw-woo-membership' ) }</dt><dd>{ member.proof.valid_until }</dd></> }
@@ -367,16 +389,16 @@ function MemberEdit( { id, go } ) {
 }
 
 /* ── New manual member ────────────────────────────────────────────────── */
-function MemberNew( { go } ) {
-	const [ form, setForm ] = useState( { first: '', last: '', email: '', type: 'honorary', until: '' } );
+function MemberNew( { go }: { go: Go } ) {
+	const [ form, setForm ] = useState< MemberCreate >( { first: '', last: '', email: '', type: 'honorary', until: '' } );
 	const [ error, setError ] = useState( '' );
 	const [ busy, setBusy ] = useState( false );
-	const set = ( key ) => ( value ) => setForm( { ...form, [ key ]: value } );
+	const set = < K extends keyof MemberCreate >( key: K ) => ( value: MemberCreate[ K ] ) => setForm( { ...form, [ key ]: value } );
 	const create = () => {
 		setBusy( true );
-		apiFetch( { path: '/bw-wm/v1/members', method: 'POST', data: form } )
+		apiFetch< MemberDetail >( { path: '/bw-wm/v1/members', method: 'POST', data: form } )
 			.then( ( m ) => go( `/member/${ m.row.id }` ) )
-			.catch( ( e ) => setError( e.message ) )
+			.catch( ( e: unknown ) => setError( errorMessage( e ) ) )
 			.finally( () => setBusy( false ) );
 	};
 	return (
@@ -386,8 +408,8 @@ function MemberNew( { go } ) {
 			</Header>
 			<p>{ __( 'Ordentliche und studentische Mitglieder entstehen automatisch beim Bezahlen über die Website. Hier legst du Mitglieder ohne Bezahlung über die Website an; sie bekommen eine E-Mail, um ihr Passwort zu setzen.', 'bw-woo-membership' ) }</p>
 			<ErrorNotice error={ error } />
-			<Card className="bwo-narrow">
-				<CardBody className="bwo-stack">
+			<Card className="bwm-narrow">
+				<CardBody className="bwm-stack">
 					<TextControl label={ __( 'Vorname', 'bw-woo-membership' ) } value={ form.first } onChange={ set( 'first' ) } { ...field } />
 					<TextControl label={ __( 'Nachname bzw. Organisation', 'bw-woo-membership' ) } value={ form.last } onChange={ set( 'last' ) } { ...field } />
 					<TextControl label={ __( 'E-Mail', 'bw-woo-membership' ) } type="email" value={ form.email } onChange={ set( 'email' ) } { ...field } />
@@ -401,28 +423,29 @@ function MemberNew( { go } ) {
 }
 
 /* ── Proof review ─────────────────────────────────────────────────────── */
-function ProofRow( { item, onDone } ) {
+function ProofRow( { item, onDone }: { item: PendingProof; onDone: () => void } ) {
 	const [ until, setUntil ] = useState( item.proof.suggested );
 	const [ reason, setReason ] = useState( '' );
 	const [ busy, setBusy ] = useState( false );
 	const [ error, setError ] = useState( '' );
-	const decide = ( decision ) => {
+	const decide = ( decision: ProofDecision[ 'decision' ] ) => {
+		const data: ProofDecision = { decision, valid_until: until, reason };
 		setBusy( true );
-		apiFetch( { path: `/bw-wm/v1/proofs/${ item.id }`, method: 'POST', data: { decision, valid_until: until, reason } } )
+		apiFetch< ProofDecisionResult >( { path: `/bw-wm/v1/proofs/${ item.id }`, method: 'POST', data } )
 			.then( onDone )
-			.catch( ( e ) => setError( e.message ) )
+			.catch( ( e: unknown ) => setError( errorMessage( e ) ) )
 			.finally( () => setBusy( false ) );
 	};
 	return (
 		<Card>
-			<CardBody className="bwo-proof">
+			<CardBody className="bwm-proof-review">
 				<div>
-					<strong>{ item.name }</strong> <span className="bwo-muted">{ item.email } · { item.number || __( 'ohne Nr.', 'bw-woo-membership' ) }</span>
-					<div className="bwo-muted">{ item.type } · { /* translators: %s: upload date */ sprintf( __( 'hochgeladen %s', 'bw-woo-membership' ), item.proof.uploaded ) }</div>
+					<strong>{ item.name }</strong> <span className="bwm-muted">{ item.email } · { item.number || __( 'ohne Nr.', 'bw-woo-membership' ) }</span>
+					<div className="bwm-muted">{ item.type } · { /* translators: %s: upload date */ sprintf( __( 'hochgeladen %s', 'bw-woo-membership' ), item.proof.uploaded ) }</div>
 					<p><a href={ addQueryArgs( config.proofUrl, { user: item.id } ) } target="_blank" rel="noreferrer">{ /* translators: %s: file name */ sprintf( __( 'Nachweis ansehen (%s)', 'bw-woo-membership' ), item.proof.name ) }</a></p>
 					<ErrorNotice error={ error } />
 				</div>
-				<div className="bwo-proof__actions">
+				<div className="bwm-proof-review__actions">
 					<TextControl label={ __( 'Gültig bis', 'bw-woo-membership' ) } type="date" value={ until } onChange={ setUntil } { ...field } />
 					<Button variant="primary" isBusy={ busy } disabled={ busy } onClick={ () => decide( 'approve' ) }>{ __( 'Freigeben', 'bw-woo-membership' ) }</Button>
 					<TextControl label={ __( 'Grund bei Ablehnung', 'bw-woo-membership' ) } value={ reason } onChange={ setReason } { ...field } />
@@ -433,11 +456,11 @@ function ProofRow( { item, onDone } ) {
 	);
 }
 
-function Proofs( { go } ) {
-	const [ items, setItems ] = useState( null );
+function Proofs( { go }: { go: Go } ) {
+	const [ items, setItems ] = useState< PendingProof[] | null >( null );
 	const [ error, setError ] = useState( '' );
 	const load = useCallback( () => {
-		apiFetch( { path: '/bw-wm/v1/proofs' } ).then( setItems ).catch( ( e ) => setError( e.message ) );
+		apiFetch< PendingProof[] >( { path: '/bw-wm/v1/proofs' } ).then( setItems ).catch( ( e: unknown ) => setError( errorMessage( e ) ) );
 	}, [] );
 	useEffect( load, [ load ] );
 	return (
@@ -448,7 +471,7 @@ function Proofs( { go } ) {
 			<p>{ __( 'Freigeben schickt dem Mitglied eine Bestätigung, Ablehnen eine Bitte um einen neuen Nachweis. Die Datei wird danach gelöscht.', 'bw-woo-membership' ) }</p>
 			<ErrorNotice error={ error } />
 			{ ! items ? <Spinner /> : items.length === 0 ? <Notice status="success" isDismissible={ false }>{ __( 'Keine Nachweise offen.', 'bw-woo-membership' ) }</Notice> : (
-				<div className="bwo-stack">{ items.map( ( item ) => <ProofRow key={ item.id } item={ item } onDone={ load } /> ) }</div>
+				<div className="bwm-stack">{ items.map( ( item ) => <ProofRow key={ item.id } item={ item } onDone={ load } /> ) }</div>
 			) }
 		</>
 	);
