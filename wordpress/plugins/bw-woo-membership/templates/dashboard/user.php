@@ -7,6 +7,8 @@
  * @var array{name: string, type: string, initials: string} $data
  */
 
+declare(strict_types=1);
+
 defined( 'ABSPATH' ) || exit;
 ?>
 <div class="bwm-user">

@@ -53,7 +53,7 @@ final class SyncController {
 	 *
 	 * @param \WC_Order $subscription Subscription object.
 	 */
-	public function on_subscription( $subscription ): void {
+	public function on_subscription( mixed $subscription ): void {
 		if ( is_object( $subscription ) && method_exists( $subscription, 'get_customer_id' ) && $subscription->get_customer_id() > 0 ) {
 			$this->sync->sync( (int) $subscription->get_customer_id() );
 		}

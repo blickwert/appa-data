@@ -86,6 +86,8 @@ Die Anmeldeseite ist die Seite mit der Theme-Vorlage `page-member`, die Übersic
 | `bw_wm_join_proof_page` | Filter | Seite mit dem Upload des Studiennachweises beim Beitritt |
 | `bw_wm_unpaid_registration_days` | Filter | Tage bis zur Stornierung unbezahlter Anmeldungen (Standard 7) |
 | `bw_wm_template` | Filter | Vorlagendatei; Theme-Überschreibung unter `bw-woo-membership/dashboard/<name>.php` |
+| `bw_wm_page_url` | Filter | Adresse fester Seiten (`$url`, `$page`: `area` = `/mitgliederbereich-uebersicht/`, `membership` = `/mitgliedschaft/`, `events` = `/veranstaltungen/`); zentral in `MemberPages` |
+| `bw_wm_shop_replacement_url` | Filter | Ziel statt der WooCommerce-Shopseite (Standard: Veranstaltungen) |
 
 ## Geschützte Dateien unter nginx
 

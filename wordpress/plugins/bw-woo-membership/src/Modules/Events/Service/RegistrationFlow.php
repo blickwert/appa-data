@@ -43,7 +43,7 @@ final class RegistrationFlow {
 	 */
 	public function register_free( int $event_id, int $user_id ): string {
 		if ( ! $this->lock( $event_id ) ) {
-			return 'Gerade melden sich viele an. Bitte versuche es gleich noch einmal.';
+			return __( 'Gerade melden sich viele an. Bitte versuche es gleich noch einmal.', 'bw-woo-membership' );
 		}
 		try {
 			// Checked inside the lock: two clicks at the same time must not take the last place twice.
@@ -51,10 +51,10 @@ final class RegistrationFlow {
 			$refusal = $this->registrations->refusal( $event_id, $user_id );
 			$price   = $this->registrations->price( $event_id, $user_id );
 			if ( '' !== $refusal || null === $price || $price > 0 ) {
-				return '' !== $refusal ? $refusal : 'Für diese Veranstaltung ist die Anmeldung über die Kasse nötig.';
+				return '' !== $refusal ? $refusal : __( 'Für diese Veranstaltung ist die Anmeldung über die Kasse nötig.', 'bw-woo-membership' );
 			}
 			$order = $this->create_order( $event_id, $user_id );
-			return $order ? 'Du bist angemeldet. Die Bestätigung haben wir dir per E-Mail geschickt.' : 'Die Anmeldung hat nicht geklappt. Bitte versuche es noch einmal.';
+			return $order ? __( 'Du bist angemeldet. Die Bestätigung haben wir dir per E-Mail geschickt.', 'bw-woo-membership' ) : __( 'Die Anmeldung hat nicht geklappt. Bitte versuche es noch einmal.', 'bw-woo-membership' );
 		} finally {
 			$this->unlock( $event_id );
 		}
@@ -64,9 +64,11 @@ final class RegistrationFlow {
 	 * Creates a registration order: 0 € is completed right away (the confirmation follows), an amount leaves the order
 	 * "on hold" with a payment link (registrations added by the office).
 	 *
-	 * @param bool $notify Send the confirmation (free) or the payment link (amount).
+	 * @param string $note   Order note ('' = free registration on the event page).
+	 * @param bool   $notify Send the confirmation (free) or the payment link (amount).
 	 */
-	public function create_order( int $event_id, int $user_id, float $amount = 0.0, string $note = 'Kostenlose Anmeldung über die Veranstaltungsseite.', bool $notify = true ): ?WC_Order {
+	public function create_order( int $event_id, int $user_id, float $amount = 0.0, string $note = '', bool $notify = true ): ?WC_Order {
+		$note    = '' !== $note ? $note : __( 'Kostenlose Anmeldung über die Veranstaltungsseite.', 'bw-woo-membership' );
 		$product = wc_get_product( $this->events->product_id( $event_id ) );
 		if ( ! $product ) {
 			return null;
@@ -100,7 +102,7 @@ final class RegistrationFlow {
 				return $order;
 			}
 			$order->update_meta_data( self::ADDED_BY_OFFICE, '1' );
-			$order->set_status( 'on-hold', 'Zahlung offen.' ); // Holds the place; payable through the link.
+			$order->set_status( 'on-hold', __( 'Zahlung offen.', 'bw-woo-membership' ) ); // Holds the place; payable through the link.
 			$order->save();
 			wc_maybe_reduce_stock_levels( $order->get_id() );
 			if ( $notify ) {
@@ -120,29 +122,31 @@ final class RegistrationFlow {
 		$order = $this->events->registration_of( $event_id, $user_id );
 		$item  = $order ? $this->events->item_for( $order, $event_id ) : null;
 		if ( ! $order || ! $item ) {
-			return 'Wir haben keine Anmeldung gefunden.';
+			return __( 'Wir haben keine Anmeldung gefunden.', 'bw-woo-membership' );
 		}
 		$f      = $this->events->fields( $event_id );
 		$amount = (float) $item->get_total();
 		$paid   = $order->is_paid() && $amount > 0;
 		if ( ! RegistrationRules::can_cancel( $f['date'], $f['cancel_days'], $paid, current_time( 'Y-m-d' ) ) ) {
-			return sprintf( 'Eine Abmeldung über die Website ist nicht mehr möglich. Bitte schreib uns an %s.', $this->mails->office() );
+			/* translators: %s: e-mail address of the office */
+			return sprintf( __( 'Eine Abmeldung über die Website ist nicht mehr möglich. Bitte schreib uns an %s.', 'bw-woo-membership' ), $this->mails->office() );
 		}
 		$refunded = $paid ? $this->refund( $order, $item, $amount ) : '';
 		if ( 1 === count( $order->get_items() ) ) {
 			// The order is only this registration: cancel it (a full refund already set it to "refunded").
 			if ( ! $paid && ! $order->has_status( array( 'cancelled', 'refunded' ) ) ) {
-				$order->update_status( 'cancelled', 'Von der Person selbst abgemeldet.' );
+				$order->update_status( 'cancelled', __( 'Von der Person selbst abgemeldet.', 'bw-woo-membership' ) );
 			}
 		} else {
 			$item->update_meta_data( EventRepository::ITEM_CANCELLED, current_time( 'mysql' ) );
 			$item->save();
-			$order->add_order_note( sprintf( 'Abmeldung von „%s“ durch die Person.', get_the_title( $event_id ) ) );
+			/* translators: %s: event title */
+			$order->add_order_note( sprintf( __( 'Abmeldung von „%s“ durch die Person.', 'bw-woo-membership' ), get_the_title( $event_id ) ) );
 		}
 		$this->events->forget();
 		$this->sync->sync( $event_id );
 		$this->mails->cancellation( $order, $event_id, $f, $refunded );
-		return 'Du bist abgemeldet.' . ( '' !== $refunded ? ' ' . $refunded : '' );
+		return __( 'Du bist abgemeldet.', 'bw-woo-membership' ) . ( '' !== $refunded ? ' ' . $refunded : '' );
 	}
 
 	/**
@@ -206,7 +210,7 @@ final class RegistrationFlow {
 	private function refund( WC_Order $order, WC_Order_Item_Product $item, float $amount ): string {
 		$args    = array(
 			'amount'     => $amount,
-			'reason'     => 'Abmeldung durch die Person',
+			'reason'     => __( 'Abmeldung durch die Person', 'bw-woo-membership' ),
 			'order_id'   => $order->get_id(),
 			'line_items' => array( $item->get_id() => array( 'qty' => 1, 'refund_total' => $amount ) ),
 		);
@@ -214,18 +218,20 @@ final class RegistrationFlow {
 		if ( $gateway && $gateway->supports( 'refunds' ) ) {
 			$refund = wc_create_refund( $args + array( 'refund_payment' => true ) );
 			if ( ! is_wp_error( $refund ) ) {
-				return sprintf( 'Den Betrag von %s erstatten wir auf dein Zahlungsmittel zurück.', wp_strip_all_tags( wc_price( $amount ) ) );
+				/* translators: %s: amount */
+				return sprintf( __( 'Den Betrag von %s erstatten wir auf dein Zahlungsmittel zurück.', 'bw-woo-membership' ), wp_strip_all_tags( wc_price( $amount ) ) );
 			}
 			self::log( 'Automatische Erstattung fehlgeschlagen: ' . $refund->get_error_message(), array( 'order' => $order->get_id() ) );
 		}
 		// Bank transfer or a failed automatic refund: recorded, the office pays back.
 		$refund = wc_create_refund( $args + array( 'refund_payment' => false ) );
 		if ( is_wp_error( $refund ) ) {
-			$order->add_order_note( 'Abmeldung: Erstattung konnte nicht angelegt werden – bitte manuell erstatten.' );
+			$order->add_order_note( __( 'Abmeldung: Erstattung konnte nicht angelegt werden – bitte manuell erstatten.', 'bw-woo-membership' ) );
 			self::log( 'Erstattung konnte nicht angelegt werden: ' . $refund->get_error_message(), array( 'order' => $order->get_id() ) );
 		}
 		$this->mails->manual_refund( $order, $amount );
-		return sprintf( 'Den Betrag von %s überweisen wir dir in den nächsten Tagen zurück.', wp_strip_all_tags( wc_price( $amount ) ) );
+		/* translators: %s: amount */
+		return sprintf( __( 'Den Betrag von %s überweisen wir dir in den nächsten Tagen zurück.', 'bw-woo-membership' ), wp_strip_all_tags( wc_price( $amount ) ) );
 	}
 
 	/**

@@ -48,7 +48,7 @@ final class ProductSyncController {
 	 * @param string    $to       New status.
 	 * @param \WC_Order $order    Order.
 	 */
-	public function on_order_status( int $order_id, string $from, string $to, $order ): void {
+	public function on_order_status( int $order_id, string $from, string $to, mixed $order ): void {
 		if ( ! $order instanceof \WC_Order ) {
 			return;
 		}
@@ -76,5 +76,4 @@ final class ProductSyncController {
 			$this->sync->hide( $this->events->product_id( $post_id ) );
 		}
 	}
-
 }

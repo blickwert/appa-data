@@ -91,8 +91,9 @@ final class ProofService {
 		$user = get_userdata( $user_id );
 		$this->mailer->send(
 			$this->mailer->office(),
-			'Neuer Studiennachweis zur Prüfung',
-			sprintf( "%s hat einen Studiennachweis hochgeladen.\n\nPrüfen: %s", $user ? $user->display_name : '#' . $user_id, admin_url( 'admin.php?page=bw-wm-members&path=/proofs' ) )
+			__( 'Neuer Studiennachweis zur Prüfung', 'bw-woo-membership' ),
+			/* translators: 1: member name, 2: review address */
+			sprintf( __( "%1\$s hat einen Studiennachweis hochgeladen.\n\nPrüfen: %2\$s", 'bw-woo-membership' ), $user ? $user->display_name : '#' . $user_id, admin_url( 'admin.php?page=bw-wm-members&path=/proofs' ) )
 		);
 	}
 
@@ -119,19 +120,19 @@ final class ProofService {
 	 */
 	private function store( array $file, string $prefix ): array|WP_Error {
 		if ( UPLOAD_ERR_OK !== (int) $file['error'] || ! is_uploaded_file( $file['tmp_name'] ) ) {
-			return new WP_Error( 'bw_wm_proof', 'Die Datei konnte nicht hochgeladen werden.' );
+			return new WP_Error( 'bw_wm_proof', __( 'Die Datei konnte nicht hochgeladen werden.', 'bw-woo-membership' ) );
 		}
 		if ( (int) $file['size'] > ProofRules::MAX_BYTES ) {
-			return new WP_Error( 'bw_wm_proof', 'Die Datei ist größer als 5 MB.' );
+			return new WP_Error( 'bw_wm_proof', __( 'Die Datei ist größer als 5 MB.', 'bw-woo-membership' ) );
 		}
 		$check = wp_check_filetype_and_ext( $file['tmp_name'], $file['name'], ProofRules::MIME_TYPES );
 		if ( empty( $check['ext'] ) || empty( $check['type'] ) ) {
-			return new WP_Error( 'bw_wm_proof', 'Bitte lade eine PDF-, JPG- oder PNG-Datei hoch.' );
+			return new WP_Error( 'bw_wm_proof', __( 'Bitte lade eine PDF-, JPG- oder PNG-Datei hoch.', 'bw-woo-membership' ) );
 		}
 		$dir    = ProtectedFolder::ensure( (string) wp_upload_dir( null, false )['basedir'], self::SUBDIR );
 		$target = $dir . '/' . $prefix . '-' . wp_generate_password( 16, false ) . '.' . $check['ext'];
 		if ( ! move_uploaded_file( $file['tmp_name'], $target ) ) {
-			return new WP_Error( 'bw_wm_proof', 'Die Datei konnte nicht gespeichert werden.' );
+			return new WP_Error( 'bw_wm_proof', __( 'Die Datei konnte nicht gespeichert werden.', 'bw-woo-membership' ) );
 		}
 		return array( 'file' => $target, 'name' => sanitize_file_name( $file['name'] ) );
 	}
@@ -144,7 +145,7 @@ final class ProofService {
 	public function decide( int $user_id, bool $approve, string $valid_until, string $reason, int $reviewer ): bool|WP_Error {
 		$proof = $this->proofs->get( $user_id );
 		if ( 'pending' !== $proof['status'] ) {
-			return new WP_Error( 'bw_wm_proof', 'Für dieses Mitglied wartet kein Nachweis auf Prüfung.', array( 'status' => 409 ) );
+			return new WP_Error( 'bw_wm_proof', __( 'Für dieses Mitglied wartet kein Nachweis auf Prüfung.', 'bw-woo-membership' ), array( 'status' => 409 ) );
 		}
 		$today = current_time( 'Y-m-d' );
 		if ( $approve ) {
@@ -164,13 +165,22 @@ final class ProofService {
 		);
 		$user = get_userdata( $user_id );
 		if ( $user ) {
-			$area = home_url( '/mitgliederbereich-uebersicht/' );
+			$area = MemberPages::area_url();
+			$name = $user->first_name ?: $user->display_name;
+			if ( $approve ) {
+				/* translators: 1: first name, 2: valid until */
+				$text = sprintf( __( "Hallo %1\$s,\n\ndanke! Dein Studiennachweis ist bestätigt und gilt bis %2\$s.\nDeine studentische Mitgliedschaft bleibt damit bestehen.", 'bw-woo-membership' ), $name, MembershipPeriod::format( $valid_until ) );
+			} elseif ( '' !== $reason ) {
+				/* translators: 1: first name, 2: reason, 3: address of the member area */
+				$text = sprintf( __( "Hallo %1\$s,\n\nwir konnten deinen Studiennachweis leider nicht bestätigen (%2\$s).\nBitte lade eine aktuelle Inskriptionsbestätigung im Mitgliederbereich hoch: %3\$s", 'bw-woo-membership' ), $name, sanitize_text_field( $reason ), $area );
+			} else {
+				/* translators: 1: first name, 2: address of the member area */
+				$text = sprintf( __( "Hallo %1\$s,\n\nwir konnten deinen Studiennachweis leider nicht bestätigen.\nBitte lade eine aktuelle Inskriptionsbestätigung im Mitgliederbereich hoch: %2\$s", 'bw-woo-membership' ), $name, $area );
+			}
 			$this->mailer->send(
 				$user->user_email,
-				$approve ? 'Dein Studiennachweis ist bestätigt' : 'Dein Studiennachweis: bitte neu hochladen',
-				$approve
-					? sprintf( "Hallo %s,\n\ndanke! Dein Studiennachweis ist bestätigt und gilt bis %s.\nDeine studentische Mitgliedschaft bleibt damit bestehen.", $user->first_name ?: $user->display_name, MembershipPeriod::format( $valid_until ) )
-					: sprintf( "Hallo %s,\n\nwir konnten deinen Studiennachweis leider nicht bestätigen%s.\nBitte lade eine aktuelle Inskriptionsbestätigung im Mitgliederbereich hoch: %s", $user->first_name ?: $user->display_name, '' !== $reason ? ' (' . sanitize_text_field( $reason ) . ')' : '', $area )
+				$approve ? __( 'Dein Studiennachweis ist bestätigt', 'bw-woo-membership' ) : __( 'Dein Studiennachweis: bitte neu hochladen', 'bw-woo-membership' ),
+				$text
 			);
 		}
 		return true;
@@ -192,8 +202,9 @@ final class ProofService {
 			$user = get_userdata( $user_id );
 			if ( $user && $this->mailer->send(
 				$user->user_email,
-				'Bitte Studiennachweis für das nächste Jahr hochladen',
-				sprintf( "Hallo %s,\n\ndeine studentische Mitgliedschaft läuft bis %s. Damit sie zum ermäßigten Beitrag weiterläuft, lade bitte eine aktuelle Inskriptionsbestätigung hoch: %s\n\nOhne gültigen Nachweis verlängerst du als ordentliches Mitglied.", $user->first_name ?: $user->display_name, MembershipPeriod::format( $membership->valid_until ), home_url( '/mitgliederbereich-uebersicht/#nachweis' ) )
+				__( 'Bitte Studiennachweis für das nächste Jahr hochladen', 'bw-woo-membership' ),
+				/* translators: 1: first name, 2: end of the membership, 3: upload address */
+				sprintf( __( "Hallo %1\$s,\n\ndeine studentische Mitgliedschaft läuft bis %2\$s. Damit sie zum ermäßigten Beitrag weiterläuft, lade bitte eine aktuelle Inskriptionsbestätigung hoch: %3\$s\n\nOhne gültigen Nachweis verlängerst du als ordentliches Mitglied.", 'bw-woo-membership' ), $user->first_name ?: $user->display_name, MembershipPeriod::format( $membership->valid_until ), MemberPages::area_url( 'nachweis' ) )
 			) ) {
 				$this->proofs->update( $user_id, array( 'reminded' => (string) $membership->valid_until ) );
 				++$sent;

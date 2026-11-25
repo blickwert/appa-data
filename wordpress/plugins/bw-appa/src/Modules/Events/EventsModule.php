@@ -42,6 +42,13 @@ final class EventsModule extends AbstractModule {
 	/**
 	 * {@inheritDoc}
 	 */
+	public function description(): string {
+		return __( 'Beitragstyp Veranstaltung mit Terminfeldern, Abfrage kommender Termine und Block-Bindungen.', 'bw-appa' );
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function register(): void {
 		$repository = new EventRepository();
 		( new PostTypeController() )->register();

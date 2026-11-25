@@ -39,6 +39,13 @@ final class DocumentsModule extends AbstractModule {
 	/**
 	 * {@inheritDoc}
 	 */
+	public function description(): string {
+		return __( 'Geschützte Dokumente zum Herunterladen für Mitglieder.', 'bw-woo-membership' );
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function requires(): array {
 		return array( 'membership' );
 	}

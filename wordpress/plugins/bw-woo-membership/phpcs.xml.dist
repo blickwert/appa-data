@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<ruleset name="bw-woo-membership">
+	<description>WordPress-Extra (without purely stylistic alignment/array/file-name sniffs) for bw-woo-membership (PHP 8.3). German msgids are allowed (see CLAUDE.md).</description>
+
+	<file>.</file>
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/tests/*</exclude-pattern>
+	<exclude-pattern>/build/*</exclude-pattern>
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+	<exclude-pattern>*.asset.php</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="basepath" value="."/>
+	<arg name="parallel" value="8"/>
+	<arg value="ps"/>
+
+	<config name="testVersion" value="8.3-"/>
+	<config name="minimum_wp_version" value="6.8"/>
+
+	<rule ref="PHPCompatibilityWP">
+		<!-- Misreads ternaries inside match arms; PHP 8 itself refuses unparenthesised nested ternaries (php -l). -->
+		<exclude name="PHPCompatibility.Operators.RemovedTernaryAssociativity"/>
+	</rule>
+
+	<rule ref="WordPress-Extra">
+		<!-- PSR-4 class files (src/Core/Plugin.php) instead of class-*.php. -->
+		<exclude name="WordPress.Files.FileName"/>
+		<!-- Short ternary and ?: are used on purpose (PHP 8.3 code base). -->
+		<exclude name="Universal.Operators.DisallowShortTernary"/>
+		<!-- Arrays: long array() syntax stays; multi-item single-line arrays are part of the existing style. -->
+		<exclude name="WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound"/>
+		<exclude name="WordPress.Arrays.MultipleStatementAlignment"/>
+		<exclude name="WordPress.WhiteSpace.OperatorSpacing.SpacingBefore"/>
+		<exclude name="Generic.Formatting.MultipleStatementAlignment"/>
+		<!-- Constructor property promotion and first-class closures read better on one line. -->
+		<exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames"/>
+		<!-- Templates: mixed HTML/PHP keeps the markup readable. -->
+		<exclude name="Squiz.PHP.EmbeddedPhp"/>
+		<exclude name="Generic.WhiteSpace.ScopeIndent"/>
+		<exclude name="PEAR.Functions.FunctionCallSignature"/>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="bw-woo-membership"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Templates are included inside View::render(), so their variables are local, not global. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound">
+		<exclude-pattern>/templates/*</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="bw_wm"/><element value="BW\WooMembership"/><element value="BW_WM"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

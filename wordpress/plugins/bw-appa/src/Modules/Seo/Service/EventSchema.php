@@ -68,7 +68,7 @@ final class EventSchema {
 		}
 		if ( $event->registration ) {
 			$offers = array();
-			foreach ( array( 'Mitglieder' => $page['price_member'], 'Nichtmitglieder' => 'members' === $event->audience ? '' : $page['price_public'] ) as $name => $price ) {
+			foreach ( array( __( 'Mitglieder', 'bw-appa' ) => $page['price_member'], __( 'Nichtmitglieder', 'bw-appa' ) => 'members' === $event->audience ? '' : $page['price_public'] ) as $name => $price ) {
 				if ( '' !== $price ) {
 					$offers[] = array(
 						'@type'         => 'Offer',

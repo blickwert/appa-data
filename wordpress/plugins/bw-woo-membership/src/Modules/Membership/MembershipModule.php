@@ -60,6 +60,13 @@ final class MembershipModule extends AbstractModule {
 	/**
 	 * {@inheritDoc}
 	 */
+	public function description(): string {
+		return __( 'Mitgliedschaft auf Basis von WooCommerce: Status, Nummer, Zugang, Mitgliederbereich und Verwaltung.', 'bw-woo-membership' );
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function register(): void {
 		$members     = new MemberRepository();
 		$orders      = new MembershipOrderRepository();

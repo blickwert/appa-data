@@ -77,10 +77,10 @@ final class SeoController {
 				'title-page'                   => '%%title%% %%sep%% ' . self::SHORT_NAME,
 				'title-post'                   => '%%title%% %%sep%% ' . self::SHORT_NAME,
 				'title-' . EventRepository::POST_TYPE => '%%title%% %%sep%% ' . self::SHORT_NAME,
-				'title-ptarchive-' . EventRepository::POST_TYPE => 'Veranstaltungen zur Positiven Psychologie %%sep%% ' . self::SHORT_NAME,
-				'metadesc-ptarchive-' . EventRepository::POST_TYPE => 'Online-Impulse, Fachgruppen-Abende und die erste APPA-Fachtagung: Entdecke kommende Termine zur Positiven Psychologie und melde dich an.',
-				'title-search-wpseo'           => 'Suche: %%searchphrase%% %%sep%% ' . self::SHORT_NAME,
-				'title-404-wpseo'              => 'Seite nicht gefunden %%sep%% ' . self::SHORT_NAME,
+				'title-ptarchive-' . EventRepository::POST_TYPE => __( 'Veranstaltungen zur Positiven Psychologie', 'bw-appa' ) . ' %%sep%% ' . self::SHORT_NAME,
+				'metadesc-ptarchive-' . EventRepository::POST_TYPE => self::archive_description(),
+				'title-search-wpseo'           => __( 'Suche:', 'bw-appa' ) . ' %%searchphrase%% %%sep%% ' . self::SHORT_NAME,
+				'title-404-wpseo'              => __( 'Seite nicht gefunden', 'bw-appa' ) . ' %%sep%% ' . self::SHORT_NAME,
 				'disable-author'               => true,
 				'disable-date'                 => true,
 				'noindex-tax-category'         => true,
@@ -115,7 +115,7 @@ final class SeoController {
 		$data['alternateName'] = self::SHORT_NAME;
 		$data['email']         = 'info@appa.net';
 		$data['areaServed']    = 'AT';
-		$data['knowsAbout']    = 'Positive Psychologie';
+		$data['knowsAbout']    = __( 'Positive Psychologie', 'bw-appa' );
 		$data['address']       = array(
 			'@type'           => 'PostalAddress',
 			'streetAddress'   => 'Plüddemanngasse 104',
@@ -131,13 +131,20 @@ final class SeoController {
 	}
 
 	/**
+	 * Description of the event list.
+	 */
+	private static function archive_description(): string {
+		return __( 'Online-Impulse, Fachgruppen-Abende und die erste APPA-Fachtagung: Entdecke kommende Termine zur Positiven Psychologie und melde dich an.', 'bw-appa' );
+	}
+
+	/**
 	 * Title of the event list.
 	 *
 	 * @param mixed $title Title Yoast built.
 	 * @return mixed
 	 */
 	public function archive_title( mixed $title ): mixed {
-		return is_post_type_archive( EventRepository::POST_TYPE ) ? 'Veranstaltungen zur Positiven Psychologie – ' . self::SHORT_NAME : $title;
+		return is_post_type_archive( EventRepository::POST_TYPE ) ? __( 'Veranstaltungen zur Positiven Psychologie', 'bw-appa' ) . ' – ' . self::SHORT_NAME : $title;
 	}
 
 	/**
@@ -168,7 +175,7 @@ final class SeoController {
 			return $description;
 		}
 		if ( is_post_type_archive( EventRepository::POST_TYPE ) ) {
-			return 'Online-Impulse, Fachgruppen-Abende und die erste APPA-Fachtagung: Entdecke kommende Termine zur Positiven Psychologie und melde dich an.';
+			return self::archive_description();
 		}
 		if ( ! is_singular( EventRepository::POST_TYPE ) ) {
 			return $description;

@@ -38,6 +38,13 @@ final class SeoModule extends AbstractModule {
 	/**
 	 * {@inheritDoc}
 	 */
+	public function description(): string {
+		return __( 'SEO-Einstellungen für Yoast und strukturierte Daten der Veranstaltungen.', 'bw-appa' );
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function requires(): array {
 		return array( 'events' );
 	}

@@ -16,7 +16,7 @@
 				}
 			} )
 			.catch( () => {
-				slot.querySelector( '.bwm-sub' ).textContent = 'Die Anmeldung konnte nicht geladen werden. Bitte lade die Seite neu.';
+				slot.querySelector( '.bwm-sub' ).textContent = config.error || '';
 			} );
 	} );
 } )();

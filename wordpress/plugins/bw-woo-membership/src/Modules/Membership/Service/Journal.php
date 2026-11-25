@@ -18,7 +18,28 @@ use DateTimeZone;
  */
 final class Journal {
 
-	public const HEADER = array( 'Zahlungsdatum', 'Bestellung', 'Art', 'Mitgliedsnummer', 'Vorname', 'Nachname', 'E-Mail', 'Betrag', 'Erstattet', 'Zahlungsart', 'Stripe-Gebühr', 'Netto', 'Transaktions-ID' );
+	/**
+	 * Column titles of the journal.
+	 *
+	 * @return list<string>
+	 */
+	public static function header(): array {
+		return array(
+			__( 'Zahlungsdatum', 'bw-woo-membership' ),
+			__( 'Bestellung', 'bw-woo-membership' ),
+			__( 'Art', 'bw-woo-membership' ),
+			__( 'Mitgliedsnummer', 'bw-woo-membership' ),
+			__( 'Vorname', 'bw-woo-membership' ),
+			__( 'Nachname', 'bw-woo-membership' ),
+			__( 'E-Mail', 'bw-woo-membership' ),
+			__( 'Betrag', 'bw-woo-membership' ),
+			__( 'Erstattet', 'bw-woo-membership' ),
+			__( 'Zahlungsart', 'bw-woo-membership' ),
+			__( 'Stripe-Gebühr', 'bw-woo-membership' ),
+			__( 'Netto', 'bw-woo-membership' ),
+			__( 'Transaktions-ID', 'bw-woo-membership' ),
+		);
+	}
 
 	/**
 	 * First and last second of a month ("Y-m"); an invalid value means the previous month.

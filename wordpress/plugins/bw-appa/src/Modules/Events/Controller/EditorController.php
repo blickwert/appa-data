@@ -34,10 +34,11 @@ final class EditorController {
 		wp_enqueue_script(
 			'bw-appa-event-panel',
 			plugins_url( 'assets/js/event-panel.js', BW_APPA_FILE ),
-			array( 'wp-components', 'wp-core-data', 'wp-data', 'wp-editor', 'wp-edit-post', 'wp-element', 'wp-hooks', 'wp-plugins' ),
+			array( 'wp-components', 'wp-core-data', 'wp-data', 'wp-editor', 'wp-edit-post', 'wp-element', 'wp-hooks', 'wp-i18n', 'wp-plugins' ),
 			BW_APPA_VERSION,
 			array( 'in_footer' => true )
 		);
+		wp_set_script_translations( 'bw-appa-event-panel', 'bw-appa', BW_APPA_DIR . '/languages' );
 		wp_localize_script(
 			'bw-appa-event-panel',
 			'bwAppaEvent',
@@ -60,7 +61,7 @@ final class EditorController {
 					'reminder'     => EventRepository::META_REMINDER,
 					'cancel'       => EventRepository::META_CANCEL,
 				),
-				'audiences' => EventRepository::AUDIENCES,
+				'audiences' => EventRepository::audiences(),
 				/**
 				 * Registration figures for the editor sidebar (answered by the plugin "APPA Mitgliedschaft"):
 				 * enabled, registered, capacity, left, waitlist, url (participants page).
@@ -69,7 +70,7 @@ final class EditorController {
 				 * @param int                  $post_id Event.
 				 */
 				'info'      => apply_filters( 'bw_appa_event_editor_info', array(), (int) get_the_ID() ),
-				'formats'   => EventRepository::FORMATS,
+				'formats'   => EventRepository::formats(),
 			)
 		);
 	}

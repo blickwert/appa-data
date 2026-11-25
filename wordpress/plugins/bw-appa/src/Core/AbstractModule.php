@@ -17,6 +17,13 @@ abstract class AbstractModule implements Module {
 	/**
 	 * {@inheritDoc}
 	 */
+	public function description(): string {
+		return '';
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function requires(): array {
 		return array();
 	}

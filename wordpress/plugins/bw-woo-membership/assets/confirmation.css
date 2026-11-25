@@ -1,8 +1,15 @@
-/* Printable membership confirmation. */
+/* Printable membership confirmation. Stand-alone page without wp_head(): the presets only apply if the theme's
+   variables are present, otherwise the fallbacks; raw values only here. */
 body.bwm-print {
+	--bwm-navy: var(--wp--preset--color--navy, #12345a);
+	--bwm-text: var(--wp--preset--color--slate, #52677a);
+	--bwm-accent: var(--wp--preset--color--red, #d93629);
+	--bwm-mist: var(--wp--preset--color--mist, #f4f7f8);
+	--bwm-surface: var(--wp--preset--color--white, #fff);
+	--bwm-on-accent: var(--wp--preset--color--white, #fff);
 	margin: 0;
-	background: #f4f7f8;
-	color: #12345a;
+	background: var(--bwm-mist);
+	color: var(--bwm-navy);
 	font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
@@ -11,7 +18,7 @@ body.bwm-print {
 	max-inline-size: 42rem;
 	margin: 2rem auto;
 	padding: 3rem;
-	background: #fff;
+	background: var(--bwm-surface);
 }
 
 .bwm-print__brand {
@@ -21,12 +28,12 @@ body.bwm-print {
 }
 
 .bwm-print__brand span {
-	color: #d93629;
+	color: var(--bwm-accent);
 }
 
 .bwm-print__org {
 	margin: 0 0 2.5rem;
-	color: #52677a;
+	color: var(--bwm-text);
 	font-size: 0.875rem;
 }
 
@@ -47,7 +54,7 @@ body.bwm-print {
 }
 
 .bwm-print dt {
-	color: #52677a;
+	color: var(--bwm-text);
 }
 
 .bwm-print dd {
@@ -56,7 +63,7 @@ body.bwm-print {
 }
 
 .bwm-print__note {
-	color: #52677a;
+	color: var(--bwm-text);
 	font-size: 0.875rem;
 }
 
@@ -64,8 +71,8 @@ body.bwm-print {
 	padding: 0.75rem 1.5rem;
 	border: 0;
 	border-radius: 12px;
-	background: #d93629;
-	color: #fff;
+	background: var(--bwm-accent);
+	color: var(--bwm-on-accent);
 	font: inherit;
 	font-weight: 600;
 	cursor: pointer;
@@ -73,7 +80,7 @@ body.bwm-print {
 
 @media print {
 	body.bwm-print {
-		background: #fff;
+		background: var(--bwm-surface);
 	}
 
 	.bwm-print__page {

@@ -41,7 +41,7 @@ final class View {
 			return '';
 		}
 		ob_start();
-		( static function ( string $bw_wm_file, array $data ): void {
+		( static function ( string $bw_wm_file, array $data ): void { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- $data is used by the template.
 			include $bw_wm_file;
 		} )( $file, $data );
 		return (string) ob_get_clean();

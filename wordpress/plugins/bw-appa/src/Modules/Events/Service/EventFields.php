@@ -50,15 +50,15 @@ final class EventFields {
 	 * Single-line plain text.
 	 */
 	public static function text( string $value ): string {
-		return trim( (string) preg_replace( '/\s+/', ' ', strip_tags( $value ) ) );
+		return trim( (string) preg_replace( '/\s+/', ' ', strip_tags( $value ) ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags -- pure function, tested without WordPress.
 	}
 
 	/**
-	 * Kind of event: one of EventRepository::AUDIENCES, default "open".
+	 * Kind of event: one of EventRepository::audiences(), default "open".
 	 */
 	public static function audience( string $value ): string {
 		$value = trim( $value );
-		return array_key_exists( $value, EventRepository::AUDIENCES ) ? $value : 'open';
+		return array_key_exists( $value, EventRepository::audiences() ) ? $value : 'open';
 	}
 
 	/**
@@ -86,7 +86,7 @@ final class EventFields {
 	 */
 	public static function format( string $value ): string {
 		$value = trim( $value );
-		return array_key_exists( $value, EventRepository::FORMATS ) ? $value : '';
+		return array_key_exists( $value, EventRepository::formats() ) ? $value : '';
 	}
 
 	/**

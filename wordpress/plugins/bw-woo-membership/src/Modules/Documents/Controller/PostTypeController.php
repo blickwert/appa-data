@@ -108,7 +108,7 @@ final class PostTypeController {
 		<p>
 			<label for="bw-wm-doc-visibility"><strong><?php esc_html_e( 'Sichtbar für', 'bw-woo-membership' ); ?></strong></label><br>
 			<select id="bw-wm-doc-visibility" name="bw_wm_doc_visibility">
-				<?php foreach ( DocumentRepository::VISIBILITIES as $key => $label ) : ?>
+				<?php foreach ( DocumentRepository::visibilities() as $key => $label ) : ?>
 					<option value="<?php echo esc_attr( $key ); ?>"<?php selected( $this->documents->visibility( $post->ID ), $key ); ?>><?php echo esc_html( $label ); ?></option>
 				<?php endforeach; ?>
 			</select>
@@ -145,7 +145,8 @@ final class PostTypeController {
 			return;
 		}
 		wp_enqueue_media();
-		wp_enqueue_script( 'bw-wm-doc-admin', plugins_url( 'assets/document-admin.js', BW_WM_FILE ), array( 'jquery', 'media-editor' ), BW_WM_VERSION, true );
+		wp_enqueue_script( 'bw-wm-doc-admin', plugins_url( 'assets/document-admin.js', BW_WM_FILE ), array( 'jquery', 'media-editor', 'wp-i18n' ), BW_WM_VERSION, true );
+		wp_set_script_translations( 'bw-wm-doc-admin', 'bw-woo-membership', BW_WM_DIR . '/languages' );
 	}
 
 	/**
@@ -172,7 +173,7 @@ final class PostTypeController {
 			$file = (string) get_attached_file( $this->documents->file_id( $post_id ) );
 			echo esc_html( '' !== $file && $this->documents->file_id( $post_id ) ? basename( $file ) . ' · ' . DocumentFormatter::label( $file, (int) @filesize( $file ) ) : '–' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 		} elseif ( 'bw_wm_visibility' === $column ) {
-			echo esc_html( DocumentRepository::VISIBILITIES[ $this->documents->visibility( $post_id ) ] );
+			echo esc_html( DocumentRepository::visibilities()[ $this->documents->visibility( $post_id ) ] );
 		} elseif ( 'bw_wm_downloads' === $column ) {
 			echo esc_html( (string) $this->documents->downloads( $post_id ) );
 		}

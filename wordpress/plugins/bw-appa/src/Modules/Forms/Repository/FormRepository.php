@@ -38,6 +38,13 @@ final class FormRepository {
 	}
 
 	/**
+	 * Whether a CF7 form is one of the forms this plugin created.
+	 */
+	public function is_ours( int $form_id ): bool {
+		return $form_id > 0 && in_array( $form_id, array_map( 'intval', (array) get_option( self::OPTION, array() ) ), true );
+	}
+
+	/**
 	 * Creates missing forms. Existing forms are never overwritten, so edits in CF7 stay.
 	 */
 	public function ensure_all(): void {

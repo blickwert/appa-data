@@ -33,20 +33,21 @@ final class ParticipantService {
 	 */
 	public function add( int $event_id, string $email, string $first, string $last, float $amount, bool $notify, string $by ): string {
 		if ( ! is_email( $email ) ) {
-			return 'Bitte eine gültige E-Mail-Adresse eintragen.';
+			return __( 'Bitte eine gültige E-Mail-Adresse eintragen.', 'bw-woo-membership' );
 		}
 		if ( ! $this->events->product_id( $event_id ) || ! $this->events->fields( $event_id )['registration'] ) {
-			return 'Für diese Veranstaltung ist die Anmeldung nicht eingeschaltet.';
+			return __( 'Für diese Veranstaltung ist die Anmeldung nicht eingeschaltet.', 'bw-woo-membership' );
 		}
 		$user = get_user_by( 'email', $email );
 		if ( ! $user ) {
 			if ( '' === $first || '' === $last ) {
-				return 'Für eine neue Person bitte Vor- und Nachname eintragen.';
+				return __( 'Für eine neue Person bitte Vor- und Nachname eintragen.', 'bw-woo-membership' );
 			}
 			// New customer account; WooCommerce mails the access (set a password) to the person.
 			$user_id = wc_create_new_customer( $email, '', '', array( 'first_name' => $first, 'last_name' => $last ) );
 			if ( is_wp_error( $user_id ) ) {
-				return 'Das Konto konnte nicht angelegt werden: ' . $user_id->get_error_message();
+				/* translators: %s: error message */
+				return sprintf( __( 'Das Konto konnte nicht angelegt werden: %s', 'bw-woo-membership' ), $user_id->get_error_message() );
 			}
 			$customer = new \WC_Customer( $user_id );
 			$customer->set_billing_first_name( $first );
@@ -58,20 +59,31 @@ final class ParticipantService {
 			wp_update_user( array( 'ID' => $user->ID, 'first_name' => $first, 'last_name' => $last ) );
 		}
 		if ( ! $user ) {
-			return 'Das Konto konnte nicht angelegt werden.';
+			return __( 'Das Konto konnte nicht angelegt werden.', 'bw-woo-membership' );
 		}
 		$existing = $this->events->registration_of( $event_id, $user->ID );
 		if ( null !== $existing && EventRepository::holds_place( $existing ) ) {
-			return sprintf( '%s ist bereits angemeldet.', $email );
+			/* translators: %s: e-mail address */
+			return sprintf( __( '%s ist bereits angemeldet.', 'bw-woo-membership' ), $email );
 		}
-		$order = $this->flow->create_order( $event_id, $user->ID, $amount, sprintf( 'Von %s im Backend angemeldet.', $by ), $notify );
+		/* translators: %s: name of the office user */
+		$order = $this->flow->create_order( $event_id, $user->ID, $amount, sprintf( __( 'Von %s im Backend angemeldet.', 'bw-woo-membership' ), $by ), $notify );
 		if ( ! $order ) {
-			return 'Die Anmeldung konnte nicht angelegt werden.';
+			return __( 'Die Anmeldung konnte nicht angelegt werden.', 'bw-woo-membership' );
 		}
 		$this->waitlist->remove( $event_id, $user->ID );
-		return $amount > 0
-			? sprintf( '%s ist angemeldet (Zahlung offen%s).', $email, $notify ? ', Zahlungslink per E-Mail verschickt' : '' )
-			: sprintf( '%s ist angemeldet%s.', $email, $notify ? ', die Bestätigung ist verschickt' : '' );
+		if ( $amount > 0 ) {
+			return $notify
+				/* translators: %s: e-mail address */
+				? sprintf( __( '%s ist angemeldet (Zahlung offen, Zahlungslink per E-Mail verschickt).', 'bw-woo-membership' ), $email )
+				/* translators: %s: e-mail address */
+				: sprintf( __( '%s ist angemeldet (Zahlung offen).', 'bw-woo-membership' ), $email );
+		}
+		return $notify
+			/* translators: %s: e-mail address */
+			? sprintf( __( '%s ist angemeldet, die Bestätigung ist verschickt.', 'bw-woo-membership' ), $email )
+			/* translators: %s: e-mail address */
+			: sprintf( __( '%s ist angemeldet.', 'bw-woo-membership' ), $email );
 	}
 
 	/**

@@ -36,6 +36,7 @@ final class BlocksController {
 	public function register_blocks(): void {
 		$asset = require BW_WM_DIR . '/blocks/editor.asset.php';
 		wp_register_script( 'bw-wm-blocks', plugins_url( 'blocks/editor.js', BW_WM_FILE ), $asset['dependencies'], $asset['version'], true );
+		wp_set_script_translations( 'bw-wm-blocks', 'bw-woo-membership', BW_WM_DIR . '/languages' );
 		wp_register_style( 'bw-wm-dashboard', plugins_url( 'assets/dashboard.css', BW_WM_FILE ), array(), BW_WM_VERSION );
 
 		$callbacks = array(

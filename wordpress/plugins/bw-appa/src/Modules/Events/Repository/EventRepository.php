@@ -38,22 +38,30 @@ final class EventRepository {
 	public const META_CANCEL       = 'bw_appa_event_cancel_days';
 
 	/**
-	 * Formats of an event.
+	 * Formats of an event, with visible labels.
+	 *
+	 * @return array<string, string>
 	 */
-	public const FORMATS = array(
-		'onsite' => 'Vor Ort',
-		'online' => 'Online',
-		'hybrid' => 'Vor Ort und online',
-	);
+	public static function formats(): array {
+		return array(
+			'onsite' => __( 'Vor Ort', 'bw-appa' ),
+			'online' => __( 'Online', 'bw-appa' ),
+			'hybrid' => __( 'Vor Ort und online', 'bw-appa' ),
+		);
+	}
 
 	/**
-	 * Kinds of events (meeting 9 October 2026).
+	 * Kinds of events (meeting 9 October 2026), with visible labels.
+	 *
+	 * @return array<string, string>
 	 */
-	public const AUDIENCES = array(
-		'open'         => 'Offen – Mitglieder ermäßigt',
-		'members'      => 'Nur für Mitglieder',
-		'free_members' => 'Für Mitglieder gratis',
-	);
+	public static function audiences(): array {
+		return array(
+			'open'         => __( 'Offen – Mitglieder ermäßigt', 'bw-appa' ),
+			'members'      => __( 'Nur für Mitglieder', 'bw-appa' ),
+			'free_members' => __( 'Für Mitglieder gratis', 'bw-appa' ),
+		);
+	}
 
 	/**
 	 * Loads the event fields of a post.

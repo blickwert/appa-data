@@ -2,7 +2,7 @@
 /**
  * Plugin Name: APPA Mitgliedschaft
  * Description: Mitgliederbereich der APPA auf Basis von WooCommerce: Mitgliedsstatus, Mitgliedsnummer, geschützte Übersicht, Mitglieder-Dokumente und Profil fürs Mitgliederverzeichnis. Nutzt WooCommerce Subscriptions, sobald es aktiv ist.
- * Version:           0.12.0
+ * Version:           0.13.0
  * Requires at least: 6.8
  * Requires PHP: 8.3
  * Requires Plugins: woocommerce
@@ -10,6 +10,7 @@
  * Author URI: https://blickwert.at
  * License: GPL-2.0-or-later
  * Text Domain: bw-woo-membership
+ * Domain Path: /languages
  *
  * @package BW\WooMembership
  */
@@ -18,7 +19,7 @@ declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
-const BW_WM_VERSION = '0.12.0';
+const BW_WM_VERSION = '0.13.0';
 const BW_WM_FILE    = __FILE__;
 define( 'BW_WM_DIR', __DIR__ );
 

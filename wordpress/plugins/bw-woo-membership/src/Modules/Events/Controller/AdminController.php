@@ -62,9 +62,16 @@ final class AdminController {
 			return;
 		}
 		$count = $this->events->count_registrations( $event_id );
-		echo '<strong>' . esc_html( '' !== $fields['capacity'] ? sprintf( '%d von %s', $count, $fields['capacity'] ) : sprintf( '%d angemeldet', $count ) ) . '</strong>';
+		echo '<strong>' . esc_html(
+			'' !== $fields['capacity']
+				/* translators: 1: registrations, 2: capacity */
+				? sprintf( __( '%1$d von %2$s', 'bw-woo-membership' ), $count, $fields['capacity'] )
+				/* translators: %d: registrations */
+				: sprintf( __( '%d angemeldet', 'bw-woo-membership' ), $count )
+		) . '</strong>';
 		if ( '' !== $fields['capacity'] ) {
-			echo '<br>' . esc_html( sprintf( 'frei: %d', max( 0, (int) $fields['capacity'] - $count ) ) );
+			/* translators: %d: free places */
+			echo '<br>' . esc_html( sprintf( __( 'frei: %d', 'bw-woo-membership' ), max( 0, (int) $fields['capacity'] - $count ) ) );
 		}
 		$waiting = $this->waitlist->count( $event_id );
 		if ( $waiting > 0 ) {
@@ -89,7 +96,7 @@ final class AdminController {
 		header( 'Content-Disposition: attachment; filename="teilnehmer-' . sanitize_title( get_the_title( $event_id ) ) . '.csv"' );
 		$out = fopen( 'php://output', 'w' );
 		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- streaming the export.
-		fputcsv( $out, array( 'Vorname', 'Nachname', 'E-Mail', 'Mitglied', 'Betrag (EUR)', 'Status', 'Bestellung', 'Datum' ), ';' );
+		fputcsv( $out, array( __( 'Vorname', 'bw-woo-membership' ), __( 'Nachname', 'bw-woo-membership' ), __( 'E-Mail', 'bw-woo-membership' ), __( 'Mitglied', 'bw-woo-membership' ), __( 'Betrag (EUR)', 'bw-woo-membership' ), __( 'Status', 'bw-woo-membership' ), __( 'Bestellung', 'bw-woo-membership' ), __( 'Datum', 'bw-woo-membership' ) ), ';' );
 		foreach ( $this->events->registration_orders( $event_id ) as $order ) {
 			$item = $this->events->item_for( $order, $event_id ); // The event's own line, also in orders with more items.
 			if ( ! $item ) {
@@ -104,7 +111,7 @@ final class AdminController {
 						$order->get_billing_first_name(),
 						$order->get_billing_last_name(),
 						$order->get_billing_email(),
-						'member' === $basis ? 'ja' : 'nein',
+						'member' === $basis ? __( 'ja', 'bw-woo-membership' ) : __( 'nein', 'bw-woo-membership' ),
 						number_format( (float) $item->get_total(), 2, ',', '' ),
 						wc_get_order_status_name( $order->get_status() ),
 						(string) $order->get_order_number(),

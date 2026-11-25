@@ -12,6 +12,7 @@ namespace BW\WooMembership\Modules\Events\Controller;
 use BW\WooMembership\Core\View;
 use BW\WooMembership\Modules\Events\Repository\EventRepository;
 use BW\WooMembership\Modules\Events\Service\RegistrationService;
+use BW\WooMembership\Modules\Membership\Service\MemberPages;
 use BW\WooMembership\Support\NoCache;
 use WP_Block;
 
@@ -56,10 +57,13 @@ final class BlockController {
 			return '';
 		}
 		wp_enqueue_script( 'bw-wm-event-box', plugins_url( 'assets/event-box.js', BW_WM_FILE ), array(), BW_WM_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
-		wp_add_inline_script( 'bw-wm-event-box', 'window.bwWmEventBox = ' . wp_json_encode( array( 'url' => admin_url( 'admin-ajax.php' ) ) ) . ';', 'before' );
+		wp_add_inline_script( 'bw-wm-event-box', 'window.bwWmEventBox = ' . wp_json_encode( array( 'url' => admin_url( 'admin-ajax.php' ), 'error' => __( 'Die Anmeldung konnte nicht geladen werden. Bitte lade die Seite neu.', 'bw-woo-membership' ) ) ) . ';', 'before' );
 		return sprintf(
-			'<div class="bwm-section bwm-register bwm-register--loading" data-bwm-event="%d" aria-live="polite"><h2 class="bwm-register__title">Anmeldung</h2><p class="bwm-sub">Preise und freie Plätze werden geladen …</p><noscript><p>Bitte aktiviere JavaScript, um dich anzumelden.</p></noscript></div>',
-			$event_id
+			'<div class="bwm-section bwm-register bwm-register--loading" data-bwm-event="%1$d" aria-live="polite"><h2 class="bwm-register__title">%2$s</h2><p class="bwm-sub">%3$s</p><noscript><p>%4$s</p></noscript></div>',
+			$event_id,
+			esc_html__( 'Anmeldung', 'bw-woo-membership' ),
+			esc_html__( 'Preise und freie Plätze werden geladen …', 'bw-woo-membership' ),
+			esc_html__( 'Bitte aktiviere JavaScript, um dich anzumelden.', 'bw-woo-membership' )
 		);
 	}
 
@@ -86,7 +90,7 @@ final class BlockController {
 	public function render_my_registrations(): void {
 		$items = $this->registrations->registrations( get_current_user_id() );
 		if ( $items ) {
-			echo View::render( 'events/my-registrations', array( 'items' => $items ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the template.
+			echo View::render( 'events/my-registrations', array( 'items' => $items, 'back' => MemberPages::area_url( 'veranstaltungen' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the template.
 		}
 	}
 }

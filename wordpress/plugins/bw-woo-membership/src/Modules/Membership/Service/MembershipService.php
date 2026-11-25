@@ -58,7 +58,8 @@ final class MembershipService {
 		 */
 		$membership = apply_filters( 'bw_wm_membership', $membership, $user_id );
 
-		return $this->cache[ $user_id ] = $membership;
+		$this->cache[ $user_id ] = $membership;
+		return $membership;
 	}
 
 	/**

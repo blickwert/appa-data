@@ -161,7 +161,7 @@ final class ParticipantsController {
 		foreach ( $this->events->with_registration() as $id ) {
 			$events[] = array( 'id' => $id, 'label' => EventLabels::day( $this->events->fields( $id )['date'] ) . ' – ' . get_the_title( $id ) );
 		}
-		echo View::render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the template escapes.
+		$html = View::render(
 			'admin/participants',
 			array(
 				'notice'     => $this->notices->take( get_current_user_id() ),
@@ -176,5 +176,6 @@ final class ParticipantsController {
 				'add_action' => self::ADD,
 			)
 		);
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the template escapes.
 	}
 }

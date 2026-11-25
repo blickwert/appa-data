@@ -5,9 +5,12 @@ Only presets and block style variations are used – no raw design values.
 """
 import json
 from html import escape
+from pathlib import Path
 
 ARROW = "arrow"
-WIDE = "69rem"  # content width of page sections (1104 px, as in the Elementor/Mockup layout)
+_TOKENS = json.loads((Path(__file__).resolve().parent.parent / "tokens/tokens.json").read_text("utf-8"))
+# Content width of page sections: layout.wide (1104 px, as in the Elementor/Mockup layout) in rem, like theme.json.
+WIDE = f"{_TOKENS['layout']['wide'] / 16:g}rem"
 
 
 def _attrs(d):

@@ -41,12 +41,28 @@ final class JournalService {
 		}
 		usort( $entries, static fn( array $a, array $b ): int => array( $a['date'], $a['number'] ) <=> array( $b['date'], $b['number'] ) );
 
-		$rows = array( Journal::HEADER );
+		$rows = array( Journal::header() );
 		foreach ( $entries as $e ) {
 			$rows[] = array( $e['date_label'], $e['number'], $e['kind'], $e['member'], $e['first'], $e['last'], $e['email'], Journal::money( $e['total'] ), $e['refunded'] > 0 ? Journal::money( $e['refunded'] ) : '', $e['method'], $e['has_fee'] ? Journal::money( $e['fee'] ) : '', Journal::money( $e['net'] ), $e['transaction'] );
 		}
 		$sum    = Journal::totals( $entries );
-		$rows[] = array( 'Summe ' . $from->format( 'd.m.Y' ) . '–' . $to->format( 'd.m.Y' ), (string) count( $entries ) . ' Zahlungen', '', '', '', '', '', Journal::money( $sum['total'] ), Journal::money( $sum['refunded'] ), '', Journal::money( $sum['fee'] ), Journal::money( $sum['net'] ), '' );
+		$rows[] = array(
+			/* translators: 1: first day, 2: last day */
+			sprintf( __( 'Summe %1$s–%2$s', 'bw-woo-membership' ), $from->format( 'd.m.Y' ), $to->format( 'd.m.Y' ) ),
+			/* translators: %d: number of payments */
+			sprintf( __( '%d Zahlungen', 'bw-woo-membership' ), count( $entries ) ),
+			'',
+			'',
+			'',
+			'',
+			'',
+			Journal::money( $sum['total'] ),
+			Journal::money( $sum['refunded'] ),
+			'',
+			Journal::money( $sum['fee'] ),
+			Journal::money( $sum['net'] ),
+			'',
+		);
 		return array( 'label' => $from->format( 'Y-m-d' ) . '_' . $to->format( 'Y-m-d' ), 'rows' => $rows );
 	}
 
@@ -113,7 +129,11 @@ final class JournalService {
 		$type = $this->orders->order_type( $order );
 		if ( '' !== $type ) {
 			$renewal = function_exists( 'wcs_order_contains_renewal' ) && wcs_order_contains_renewal( $order );
-			return 'Mitgliedsbeitrag ' . MembershipTypes::label( $type ) . ( $renewal ? ' – Verlängerung' : '' );
+			return $renewal
+				/* translators: %s: membership type */
+				? sprintf( __( 'Mitgliedsbeitrag %s – Verlängerung', 'bw-woo-membership' ), MembershipTypes::label( $type ) )
+				/* translators: %s: membership type */
+				: sprintf( __( 'Mitgliedsbeitrag %s', 'bw-woo-membership' ), MembershipTypes::label( $type ) );
 		}
 		return implode( ', ', array_map( static fn( $item ): string => $item->get_name(), array_values( $order->get_items() ) ) );
 	}

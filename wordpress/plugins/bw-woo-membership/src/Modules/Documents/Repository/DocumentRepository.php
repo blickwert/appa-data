@@ -20,10 +20,18 @@ final class DocumentRepository {
 	public const META_VISIBILITY = 'bw_wm_doc_visibility';
 	public const META_PINNED     = 'bw_wm_doc_pinned';
 	public const META_DOWNLOADS  = 'bw_wm_doc_downloads';
-	public const VISIBILITIES    = array(
-		'members' => 'Alle Mitglieder',
-		'board'   => 'Nur Vorstand und Office',
-	);
+
+	/**
+	 * Who may see a document, with visible labels.
+	 *
+	 * @return array<string, string>
+	 */
+	public static function visibilities(): array {
+		return array(
+			'members' => __( 'Alle Mitglieder', 'bw-woo-membership' ),
+			'board'   => __( 'Nur Vorstand und Office', 'bw-woo-membership' ),
+		);
+	}
 
 	/**
 	 * Newest published documents, pinned ones first.
@@ -31,7 +39,7 @@ final class DocumentRepository {
 	 * @return \WP_Post[]
 	 */
 	public function latest( int $limit, bool $include_board ): array {
-		$visibility = $include_board ? array_keys( self::VISIBILITIES ) : array( 'members' );
+		$visibility = $include_board ? array_keys( self::visibilities() ) : array( 'members' );
 		$posts      = get_posts(
 			array(
 				'post_type'      => self::POST_TYPE,
@@ -71,7 +79,7 @@ final class DocumentRepository {
 	 */
 	public function visibility( int $post_id ): string {
 		$value = (string) get_post_meta( $post_id, self::META_VISIBILITY, true );
-		return isset( self::VISIBILITIES[ $value ] ) ? $value : 'members';
+		return isset( self::visibilities()[ $value ] ) ? $value : 'members';
 	}
 
 	/**
@@ -86,7 +94,7 @@ final class DocumentRepository {
 	 */
 	public function save( int $post_id, int $file_id, string $visibility, bool $pinned ): void {
 		update_post_meta( $post_id, self::META_FILE, $file_id );
-		update_post_meta( $post_id, self::META_VISIBILITY, isset( self::VISIBILITIES[ $visibility ] ) ? $visibility : 'members' );
+		update_post_meta( $post_id, self::META_VISIBILITY, isset( self::visibilities()[ $visibility ] ) ? $visibility : 'members' );
 		update_post_meta( $post_id, self::META_PINNED, $pinned ? '1' : '0' );
 	}
 

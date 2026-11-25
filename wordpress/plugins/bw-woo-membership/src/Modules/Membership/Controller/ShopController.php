@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace BW\WooMembership\Modules\Membership\Controller;
 
 use BW\WooMembership\Modules\Membership\Repository\MembershipOrderRepository;
+use BW\WooMembership\Modules\Membership\Service\MemberPages;
 
 /**
  * All products are hidden (memberships, event registrations), so the WooCommerce shop page stays empty (David,
@@ -43,16 +44,16 @@ final class ShopController {
 		/**
 		 * Filters the page that replaces the WooCommerce shop page.
 		 *
-		 * @param string $url Default /veranstaltungen/.
+		 * @param string $url Default: the event list (MemberPages::events_url()).
 		 */
-		return (string) apply_filters( 'bw_wm_shop_replacement_url', home_url( '/veranstaltungen/' ) );
+		return (string) apply_filters( 'bw_wm_shop_replacement_url', MemberPages::events_url() );
 	}
 
 	/**
 	 * Button text instead of "Zurück zum Shop".
 	 */
 	public function shop_text(): string {
-		return 'Zu den Veranstaltungen';
+		return __( 'Zu den Veranstaltungen', 'bw-woo-membership' );
 	}
 
 	/**
@@ -61,7 +62,7 @@ final class ShopController {
 	 * @param string $translation Translated text.
 	 * @param string $text        Original text.
 	 */
-	public function texts( $translation, $text ) {
+	public function texts( mixed $translation, mixed $text ): mixed {
 		return 'Return to shop' === $text ? $this->shop_text() : $translation;
 	}
 
@@ -80,7 +81,7 @@ final class ShopController {
 			$event_id   = (int) get_post_meta( $product_id, '_bw_wm_event_id', true );
 			$target     = match ( true ) {
 				$event_id > 0                                   => (string) get_permalink( $event_id ),
-				'' !== $this->orders->product_type( $product_id ) => home_url( '/mitgliedschaft/' ),
+				'' !== $this->orders->product_type( $product_id ) => MemberPages::membership_url(),
 				default                                         => $this->shop_url(),
 			};
 		}
@@ -97,7 +98,7 @@ final class ShopController {
 	 * @param string               $post_type Post type.
 	 * @return array<string, mixed>
 	 */
-	public function sitemap( $args, $post_type ) {
+	public function sitemap( mixed $args, mixed $post_type ): mixed {
 		$shop = function_exists( 'wc_get_page_id' ) ? (int) wc_get_page_id( 'shop' ) : 0;
 		if ( 'page' === $post_type && $shop > 0 ) {
 			$args['post__not_in'] = array_merge( (array) ( $args['post__not_in'] ?? array() ), array( $shop ) );

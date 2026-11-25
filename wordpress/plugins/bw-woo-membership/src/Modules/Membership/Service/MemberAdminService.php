@@ -20,19 +20,34 @@ use WP_User;
  */
 final class MemberAdminService {
 
-	public const STATUS_LABELS = array(
-		'active'  => 'Aktiv',
-		'pending' => 'Zahlung offen',
-		'on-hold' => 'Pausiert',
-		'expired' => 'Abgelaufen',
-		'none'    => 'Keine Mitgliedschaft',
-	);
-	public const PROOF_LABELS  = array(
-		'none'     => '–',
-		'pending'  => 'wartet auf Prüfung',
-		'approved' => 'bestätigt',
-		'rejected' => 'abgelehnt',
-	);
+	/**
+	 * Visible names of the membership states.
+	 *
+	 * @return array<string, string>
+	 */
+	public static function status_labels(): array {
+		return array(
+			'active'  => __( 'Aktiv', 'bw-woo-membership' ),
+			'pending' => __( 'Zahlung offen', 'bw-woo-membership' ),
+			'on-hold' => __( 'Pausiert', 'bw-woo-membership' ),
+			'expired' => __( 'Abgelaufen', 'bw-woo-membership' ),
+			'none'    => __( 'Keine Mitgliedschaft', 'bw-woo-membership' ),
+		);
+	}
+
+	/**
+	 * Visible names of the proof states.
+	 *
+	 * @return array<string, string>
+	 */
+	public static function proof_labels(): array {
+		return array(
+			'none'     => '–',
+			'pending'  => __( 'wartet auf Prüfung', 'bw-woo-membership' ),
+			'approved' => __( 'bestätigt', 'bw-woo-membership' ),
+			'rejected' => __( 'abgelehnt', 'bw-woo-membership' ),
+		);
+	}
 
 	/**
 	 * Builds the service.
@@ -54,7 +69,7 @@ final class MemberAdminService {
 	 */
 	public function list( array $args ): array {
 		$meta = array( array( 'key' => MemberRepository::META_STATUS, 'compare' => 'EXISTS' ) );
-		if ( ! empty( $args['status'] ) && isset( self::STATUS_LABELS[ $args['status'] ] ) ) {
+		if ( ! empty( $args['status'] ) && isset( self::status_labels()[ $args['status'] ] ) ) {
 			$meta[] = array( 'key' => MemberRepository::META_STATUS, 'value' => $args['status'] );
 		}
 		if ( ! empty( $args['type'] ) && MembershipTypes::exists( $args['type'] ) ) {
@@ -87,7 +102,7 @@ final class MemberAdminService {
 	 */
 	public function counts(): array {
 		$counts = array( 'all' => 0 );
-		foreach ( array_keys( self::STATUS_LABELS ) as $status ) {
+		foreach ( array_keys( self::status_labels() ) as $status ) {
 			$counts[ $status ] = count( get_users( array( 'fields' => 'ID', 'number' => -1, 'meta_key' => MemberRepository::META_STATUS, 'meta_value' => $status ) ) ); // phpcs:ignore WordPress.DB.SlowDBQuery -- few members.
 			$counts['all']    += $counts[ $status ];
 		}
@@ -111,10 +126,10 @@ final class MemberAdminService {
 			'type'      => MembershipTypes::label( $m->type ),
 			'type_key'  => $m->type,
 			'status'    => $m->status,
-			'status_l'  => self::STATUS_LABELS[ $m->status ] ?? $m->status,
+			'status_l'  => self::status_labels()[ $m->status ] ?? $m->status,
 			'since'     => MembershipPeriod::format( $m->since ),
 			'renewal'   => MembershipPeriod::format( $m->next_renewal ?? $m->valid_until ),
-			'proof'     => 'student' === $m->type || 'none' !== $proof['status'] ? ( self::PROOF_LABELS[ $proof['status'] ] ?? '' ) : '–',
+			'proof'     => 'student' === $m->type || 'none' !== $proof['status'] ? ( self::proof_labels()[ $proof['status'] ] ?? '' ) : '–',
 			'directory' => $this->members->in_directory( $user->ID ),
 			'source'    => $m->source,
 		);
@@ -162,7 +177,7 @@ final class MemberAdminService {
 			'valid'   => MembershipPeriod::format( $m->valid_until ),
 			'proof'   => array(
 				'status'      => $proof['status'],
-				'label'       => self::PROOF_LABELS[ $proof['status'] ] ?? '',
+				'label'       => self::proof_labels()[ $proof['status'] ] ?? '',
 				'uploaded'    => MembershipPeriod::format( $proof['uploaded'] ),
 				'valid_until' => MembershipPeriod::format( $proof['valid_until'] ),
 				'reviewed'    => MembershipPeriod::format( $proof['reviewed'] ),
@@ -172,7 +187,7 @@ final class MemberAdminService {
 			),
 			'orders'  => $orders,
 			'types'   => MembershipTypes::all(),
-			'groups'  => ProfileFields::GROUPS,
+			'groups'  => ProfileFields::groups(),
 		);
 	}
 
@@ -197,11 +212,11 @@ final class MemberAdminService {
 		if ( isset( $data['email'] ) ) {
 			$email = sanitize_email( (string) $data['email'] );
 			if ( ! is_email( $email ) ) {
-				return new WP_Error( 'bw_wm_email', 'Die E-Mail-Adresse ist ungültig.', array( 'status' => 400 ) );
+				return new WP_Error( 'bw_wm_email', __( 'Die E-Mail-Adresse ist ungültig.', 'bw-woo-membership' ), array( 'status' => 400 ) );
 			}
 			$owner = email_exists( $email );
 			if ( $owner && (int) $owner !== $user_id ) {
-				return new WP_Error( 'bw_wm_email', 'Diese E-Mail-Adresse gehört schon zu einem anderen Konto.', array( 'status' => 400 ) );
+				return new WP_Error( 'bw_wm_email', __( 'Diese E-Mail-Adresse gehört schon zu einem anderen Konto.', 'bw-woo-membership' ), array( 'status' => 400 ) );
 			}
 			$changes['user_email'] = $email;
 		}
@@ -239,13 +254,13 @@ final class MemberAdminService {
 		$email = sanitize_email( (string) ( $data['email'] ?? '' ) );
 		$type  = sanitize_key( (string) ( $data['type'] ?? '' ) );
 		if ( ! is_email( $email ) ) {
-			return new WP_Error( 'bw_wm_email', 'Die E-Mail-Adresse ist ungültig.', array( 'status' => 400 ) );
+			return new WP_Error( 'bw_wm_email', __( 'Die E-Mail-Adresse ist ungültig.', 'bw-woo-membership' ), array( 'status' => 400 ) );
 		}
 		if ( email_exists( $email ) ) {
-			return new WP_Error( 'bw_wm_email', 'Zu dieser E-Mail-Adresse gibt es schon ein Konto – bitte dort die Mitgliedschaft eintragen.', array( 'status' => 400 ) );
+			return new WP_Error( 'bw_wm_email', __( 'Zu dieser E-Mail-Adresse gibt es schon ein Konto – bitte dort die Mitgliedschaft eintragen.', 'bw-woo-membership' ), array( 'status' => 400 ) );
 		}
 		if ( ! MembershipTypes::exists( $type ) ) {
-			return new WP_Error( 'bw_wm_type', 'Bitte eine Mitgliedsart wählen.', array( 'status' => 400 ) );
+			return new WP_Error( 'bw_wm_type', __( 'Bitte eine Mitgliedsart wählen.', 'bw-woo-membership' ), array( 'status' => 400 ) );
 		}
 		$user_id = wp_insert_user(
 			array(
@@ -293,10 +308,23 @@ final class MemberAdminService {
 	 * @return list<list<string>>
 	 */
 	public function csv(): array {
-		$rows = array( array( 'Nr.', 'Vorname', 'Nachname', 'E-Mail', 'Mitgliedsart', 'Status', 'Mitglied seit', 'Gültig bis / Verlängerung', 'Studiennachweis', 'Verzeichnis' ) );
+		$rows = array(
+			array(
+				__( 'Nr.', 'bw-woo-membership' ),
+				__( 'Vorname', 'bw-woo-membership' ),
+				__( 'Nachname', 'bw-woo-membership' ),
+				__( 'E-Mail', 'bw-woo-membership' ),
+				__( 'Mitgliedsart', 'bw-woo-membership' ),
+				__( 'Status', 'bw-woo-membership' ),
+				__( 'Mitglied seit', 'bw-woo-membership' ),
+				__( 'Gültig bis / Verlängerung', 'bw-woo-membership' ),
+				__( 'Studiennachweis', 'bw-woo-membership' ),
+				__( 'Verzeichnis', 'bw-woo-membership' ),
+			),
+		);
 		foreach ( get_users( array( 'meta_key' => MemberRepository::META_STATUS, 'number' => -1, 'orderby' => 'display_name' ) ) as $user ) { // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- export.
 			$row    = $this->row( $user );
-			$rows[] = array( $row['number'], $user->first_name, $user->last_name, $row['email'], $row['type'], $row['status_l'], $row['since'], $row['renewal'], $row['proof'], $row['directory'] ? 'ja' : 'nein' );
+			$rows[] = array( $row['number'], $user->first_name, $user->last_name, $row['email'], $row['type'], $row['status_l'], $row['since'], $row['renewal'], $row['proof'], $row['directory'] ? __( 'ja', 'bw-woo-membership' ) : __( 'nein', 'bw-woo-membership' ) );
 		}
 		return $rows;
 	}
@@ -307,10 +335,10 @@ final class MemberAdminService {
 	private function editable_user( int $user_id ): WP_User|WP_Error {
 		$user = get_userdata( $user_id );
 		if ( ! $user ) {
-			return new WP_Error( 'bw_wm_not_found', 'Mitglied nicht gefunden.', array( 'status' => 404 ) );
+			return new WP_Error( 'bw_wm_not_found', __( 'Mitglied nicht gefunden.', 'bw-woo-membership' ), array( 'status' => 404 ) );
 		}
 		if ( user_can( $user, 'edit_posts' ) ) {
-			return new WP_Error( 'bw_wm_staff', 'Konten mit Redaktionsrechten werden unter „Benutzer“ bearbeitet.', array( 'status' => 403 ) );
+			return new WP_Error( 'bw_wm_staff', __( 'Konten mit Redaktionsrechten werden unter „Benutzer“ bearbeitet.', 'bw-woo-membership' ), array( 'status' => 403 ) );
 		}
 		return $user;
 	}

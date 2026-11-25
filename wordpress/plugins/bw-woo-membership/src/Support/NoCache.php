@@ -21,7 +21,7 @@ final class NoCache {
 	 */
 	public static function send(): void {
 		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
-			define( 'DONOTCACHEPAGE', true );
+			define( 'DONOTCACHEPAGE', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- constant read by caching plugins.
 		}
 		if ( headers_sent() ) {
 			return;

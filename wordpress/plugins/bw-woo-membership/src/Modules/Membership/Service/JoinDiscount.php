@@ -40,8 +40,8 @@ final class JoinDiscount {
 	 */
 	public static function label( int $month ): string {
 		return match ( self::share( $month ) ) {
-			0.5     => 'Beitritt ab Juni: halber Jahresbeitrag',
-			1 / 3   => 'Beitritt ab Oktober: ein Drittel des Jahresbeitrags',
+			0.5     => __( 'Beitritt ab Juni: halber Jahresbeitrag', 'bw-woo-membership' ),
+			1 / 3   => __( 'Beitritt ab Oktober: ein Drittel des Jahresbeitrags', 'bw-woo-membership' ),
 			default => '',
 		};
 	}

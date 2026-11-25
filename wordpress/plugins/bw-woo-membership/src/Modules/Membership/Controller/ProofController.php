@@ -12,6 +12,7 @@ namespace BW\WooMembership\Modules\Membership\Controller;
 use BW\WooMembership\Core\View;
 use BW\WooMembership\Modules\Membership\Repository\ProofRepository;
 use BW\WooMembership\Support\Mailer;
+use BW\WooMembership\Modules\Membership\Service\MemberPages;
 use BW\WooMembership\Modules\Membership\Service\MembershipPeriod;
 use BW\WooMembership\Modules\Membership\Service\MembershipService;
 use BW\WooMembership\Modules\Membership\Service\ProofRules;
@@ -67,10 +68,17 @@ final class ProofController {
 			return '';
 		}
 		$labels = array(
-			'none'     => array( 'Noch kein Nachweis', 'Bitte lade eine aktuelle Inskriptionsbestätigung hoch.' ),
-			'pending'  => array( 'In Prüfung', 'Danke! Wir prüfen deinen Nachweis und melden uns per E-Mail.' ),
-			'approved' => array( 'Bestätigt', 'Gültig bis ' . MembershipPeriod::format( $proof['valid_until'] ) . '.' ),
-			'rejected' => array( 'Nicht bestätigt', 'Bitte lade einen neuen Nachweis hoch.' . ( '' !== $proof['reason'] ? ' Grund: ' . $proof['reason'] : '' ) ),
+			'none'     => array( __( 'Noch kein Nachweis', 'bw-woo-membership' ), __( 'Bitte lade eine aktuelle Inskriptionsbestätigung hoch.', 'bw-woo-membership' ) ),
+			'pending'  => array( __( 'In Prüfung', 'bw-woo-membership' ), __( 'Danke! Wir prüfen deinen Nachweis und melden uns per E-Mail.', 'bw-woo-membership' ) ),
+			/* translators: %s: valid until */
+			'approved' => array( __( 'Bestätigt', 'bw-woo-membership' ), sprintf( __( 'Gültig bis %s.', 'bw-woo-membership' ), MembershipPeriod::format( $proof['valid_until'] ) ) ),
+			'rejected' => array(
+				__( 'Nicht bestätigt', 'bw-woo-membership' ),
+				'' !== $proof['reason']
+					/* translators: %s: reason */
+					? sprintf( __( 'Bitte lade einen neuen Nachweis hoch. Grund: %s', 'bw-woo-membership' ), $proof['reason'] )
+					: __( 'Bitte lade einen neuen Nachweis hoch.', 'bw-woo-membership' ),
+			),
 		);
 		$label   = $labels[ $proof['status'] ] ?? $labels['none'];
 		$message = isset( $_GET['bwm_proof'] ) ? sanitize_key( wp_unslash( $_GET['bwm_proof'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only.
@@ -82,7 +90,7 @@ final class ProofController {
 				'text'    => $label[1],
 				'can'     => 'pending' !== $proof['status'] || 'error' === $message,
 				'action'  => admin_url( 'admin-post.php' ),
-				'message' => 'ok' === $message ? 'Nachweis hochgeladen.' : ( 'error' === $message ? (string) get_transient( 'bw_wm_proof_error_' . $user_id ) : '' ),
+				'message' => 'ok' === $message ? __( 'Nachweis hochgeladen.', 'bw-woo-membership' ) : ( 'error' === $message ? (string) get_transient( 'bw_wm_proof_error_' . $user_id ) : '' ),
 				'error'   => 'error' === $message,
 			)
 		);
@@ -126,8 +134,9 @@ final class ProofController {
 		if ( $user ) {
 			$this->mailer->send(
 				$user->user_email,
-				'Willkommen bei der APPA – bitte Studiennachweis hochladen',
-				sprintf( "Hallo %s,\n\nschön, dass du dabei bist! Für die studentische Mitgliedschaft brauchen wir eine aktuelle Inskriptionsbestätigung. Bitte lade sie im Mitgliederbereich hoch: %s", $user->first_name ?: $user->display_name, home_url( '/mitgliederbereich-uebersicht/#nachweis' ) )
+				__( 'Willkommen bei der APPA – bitte Studiennachweis hochladen', 'bw-woo-membership' ),
+				/* translators: 1: first name, 2: upload address */
+				sprintf( __( "Hallo %1\$s,\n\nschön, dass du dabei bist! Für die studentische Mitgliedschaft brauchen wir eine aktuelle Inskriptionsbestätigung. Bitte lade sie im Mitgliederbereich hoch: %2\$s", 'bw-woo-membership' ), $user->first_name ?: $user->display_name, MemberPages::area_url( 'nachweis' ) )
 			);
 		}
 	}

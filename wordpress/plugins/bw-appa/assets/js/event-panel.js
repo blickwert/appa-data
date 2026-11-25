@@ -4,6 +4,7 @@
  */
 ( function ( wp, config ) {
 	const { createElement: el, Fragment, useEffect } = wp.element;
+	const { __, sprintf } = wp.i18n;
 	const editor = wp.editor || {};
 	const editPost = wp.editPost || {};
 	const PluginSidebar = editor.PluginSidebar || editPost.PluginSidebar;
@@ -36,16 +37,21 @@
 		if ( ! info.enabled ) {
 			return null;
 		}
-		const places = '' === info.capacity ? 'unbegrenzt' : info.capacity;
+		const places = '' === info.capacity ? __( 'unbegrenzt', 'bw-appa' ) : info.capacity;
 		return el(
 			PanelBody,
-			{ title: 'Teilnehmende', initialOpen: true },
+			{ title: __( 'Teilnehmende', 'bw-appa' ), initialOpen: true },
 			el( 'p', { style: { fontSize: '15px', margin: '0 0 8px' } },
-				el( 'strong', null, info.registered + ' angemeldet' ),
-				' · Plätze: ' + places + ( null !== info.left ? ' · frei: ' + info.left : '' )
+				/* translators: %s: number of registrations */
+				el( 'strong', null, sprintf( __( '%s angemeldet', 'bw-appa' ), info.registered ) ),
+				/* translators: %s: number of places */
+				' · ' + sprintf( __( 'Plätze: %s', 'bw-appa' ), places ) +
+					/* translators: %s: free places */
+					( null !== info.left ? ' · ' + sprintf( __( 'frei: %s', 'bw-appa' ), info.left ) : '' )
 			),
-			info.waitlist > 0 && el( 'p', { style: { margin: '0 0 8px' } }, 'Warteliste: ' + info.waitlist ),
-			el( Button, { variant: 'secondary', href: info.url }, 'Teilnehmende ansehen und hinzufügen' )
+			/* translators: %s: people on the waiting list */
+			info.waitlist > 0 && el( 'p', { style: { margin: '0 0 8px' } }, sprintf( __( 'Warteliste: %s', 'bw-appa' ), info.waitlist ) ),
+			el( Button, { variant: 'secondary', href: info.url }, __( 'Teilnehmende ansehen und hinzufügen', 'bw-appa' ) )
 		);
 	}
 
@@ -63,32 +69,32 @@
 		return el(
 			Fragment,
 			null,
-			! value( 'date' ) && el( Notice, { status: 'warning', isDismissible: false }, 'Bitte ein Datum eintragen – erst dann erscheint die Veranstaltung auf der Website.' ),
+			! value( 'date' ) && el( Notice, { status: 'warning', isDismissible: false }, __( 'Bitte ein Datum eintragen – erst dann erscheint die Veranstaltung auf der Website.', 'bw-appa' ) ),
 			el( Participants ),
-			el( PanelBody, { title: 'Termin', initialOpen: true },
+			el( PanelBody, { title: __( 'Termin', 'bw-appa' ), initialOpen: true },
 				grid(
-					field( 'date', 'Datum', 'date', 'Termine ab heute werden auf der Website angezeigt.' ),
-					field( 'time', 'Beginn', 'time' ),
-					field( 'endTime', 'Ende', 'time' ),
-					field( 'endDate', 'Letzter Tag (bei mehrtägigen Veranstaltungen)', 'date' ),
+					field( 'date', __( 'Datum', 'bw-appa' ), 'date', __( 'Termine ab heute werden auf der Website angezeigt.', 'bw-appa' ) ),
+					field( 'time', __( 'Beginn', 'bw-appa' ), 'time' ),
+					field( 'endTime', __( 'Ende', 'bw-appa' ), 'time' ),
+					field( 'endDate', __( 'Letzter Tag (bei mehrtägigen Veranstaltungen)', 'bw-appa' ), 'date' ),
 					el( SelectControl, {
-						label: 'Format',
+						label: __( 'Format', 'bw-appa' ),
 						value: format,
-						options: [ { value: '', label: '– bitte wählen –' } ].concat(
+						options: [ { value: '', label: __( '– bitte wählen –', 'bw-appa' ) } ].concat(
 							Object.keys( config.formats ).map( ( k ) => ( { value: k, label: config.formats[ k ] } ) )
 						),
 						onChange: set( 'format' ),
 						...common,
 					} ),
-					'online' !== format && field( 'location', 'Ort', 'text', 'Zum Beispiel: Universität Graz, Hörsaal 12.' ),
-					online && field( 'link', 'Zoom-Link', 'url', 'Nie in Übersichten. Sehen nur Angemeldete (ohne Anmeldung: Mitglieder) auf der Veranstaltungsseite, in „Meine Anmeldungen“ und in der Erinnerungs-E-Mail.' ),
-					online && field( 'access', 'Zoom-Zugangsdaten', 'text', 'Zum Beispiel Meeting-ID und Kenncode.' )
+					'online' !== format && field( 'location', __( 'Ort', 'bw-appa' ), 'text', __( 'Zum Beispiel: Universität Graz, Hörsaal 12.', 'bw-appa' ) ),
+					online && field( 'link', __( 'Zoom-Link', 'bw-appa' ), 'url', __( 'Nie in Übersichten. Sehen nur Angemeldete (ohne Anmeldung: Mitglieder) auf der Veranstaltungsseite, in „Meine Anmeldungen“ und in der Erinnerungs-E-Mail.', 'bw-appa' ) ),
+					online && field( 'access', __( 'Zoom-Zugangsdaten', 'bw-appa' ), 'text', __( 'Zum Beispiel Meeting-ID und Kenncode.', 'bw-appa' ) )
 				)
 			),
-			el( PanelBody, { title: 'Anmeldung und Preise', initialOpen: true },
+			el( PanelBody, { title: __( 'Anmeldung und Preise', 'bw-appa' ), initialOpen: true },
 				grid(
 					el( SelectControl, {
-						label: 'Art der Veranstaltung',
+						label: __( 'Art der Veranstaltung', 'bw-appa' ),
 						value: audience,
 						// "Für Mitglieder gratis" is not offered at the moment (answer V4); kept for events that use it.
 						options: Object.keys( config.audiences )
@@ -98,18 +104,18 @@
 						...common,
 					} ),
 					el( ToggleControl, {
-						label: 'Anmeldung über die Website',
-						help: 'Anmeldung mit Bestätigung, Erinnerung und Abmeldung; kostenpflichtig über die Kasse.',
+						label: __( 'Anmeldung über die Website', 'bw-appa' ),
+						help: __( 'Anmeldung mit Bestätigung, Erinnerung und Abmeldung; kostenpflichtig über die Kasse.', 'bw-appa' ),
 						checked: registration,
 						onChange: ( on ) => set( 'registration' )( on ? '1' : '' ),
 						__nextHasNoMarginBottom: true,
 					} ),
-					registration && field( 'priceMember', 'Preis für Mitglieder (€)', 'text', '0 = kostenlos (Anmeldung mit einem Klick).' ),
-					registration && 'members' !== audience && field( 'pricePublic', 'Preis für Nichtmitglieder (€)', 'text' ),
-					registration && field( 'capacity', 'Plätze (maximal)', 'number', 'Leer = unbegrenzt. Ist alles ausgebucht, können sich Interessierte auf die Warteliste setzen.' ),
-					registration && field( 'deadline', 'Anmeldeschluss', 'date', 'Letzter Tag der Anmeldung. Leer = bis zum Termin.' ),
-					registration && field( 'reminder', 'Erinnerung (Tage vorher)', 'number', 'E-Mail an alle Angemeldeten. Leer = 2 Tage, 0 = keine Erinnerung.' ),
-					registration && field( 'cancel', 'Selbst abmelden bis (Tage vorher)', 'number', 'Bei kostenpflichtigen Anmeldungen mit voller Rückerstattung. Leer = 14 Tage. Kostenlose Anmeldungen können bis zum Termin abgemeldet werden.' )
+					registration && field( 'priceMember', __( 'Preis für Mitglieder (€)', 'bw-appa' ), 'text', __( '0 = kostenlos (Anmeldung mit einem Klick).', 'bw-appa' ) ),
+					registration && 'members' !== audience && field( 'pricePublic', __( 'Preis für Nichtmitglieder (€)', 'bw-appa' ), 'text' ),
+					registration && field( 'capacity', __( 'Plätze (maximal)', 'bw-appa' ), 'number', __( 'Leer = unbegrenzt. Ist alles ausgebucht, können sich Interessierte auf die Warteliste setzen.', 'bw-appa' ) ),
+					registration && field( 'deadline', __( 'Anmeldeschluss', 'bw-appa' ), 'date', __( 'Letzter Tag der Anmeldung. Leer = bis zum Termin.', 'bw-appa' ) ),
+					registration && field( 'reminder', __( 'Erinnerung (Tage vorher)', 'bw-appa' ), 'number', __( 'E-Mail an alle Angemeldeten. Leer = 2 Tage, 0 = keine Erinnerung.', 'bw-appa' ) ),
+					registration && field( 'cancel', __( 'Selbst abmelden bis (Tage vorher)', 'bw-appa' ), 'number', __( 'Bei kostenpflichtigen Anmeldungen mit voller Rückerstattung. Leer = 14 Tage. Kostenlose Anmeldungen können bis zum Termin abgemeldet werden.', 'bw-appa' ) )
 				)
 			)
 		);
@@ -141,13 +147,13 @@
 		return el(
 			Fragment,
 			null,
-			PluginSidebarMoreMenuItem && el( PluginSidebarMoreMenuItem, { target: 'bw-appa-event-sidebar', icon: 'calendar-alt' }, 'Veranstaltung: Termin und Anmeldung' ),
-			el( PluginSidebar, { name: 'bw-appa-event-sidebar', title: 'Termin und Anmeldung', icon: 'calendar-alt' }, el( Fields, { meta, setMeta } ) ),
+			PluginSidebarMoreMenuItem && el( PluginSidebarMoreMenuItem, { target: 'bw-appa-event-sidebar', icon: 'calendar-alt' }, __( 'Veranstaltung: Termin und Anmeldung', 'bw-appa' ) ),
+			el( PluginSidebar, { name: 'bw-appa-event-sidebar', title: __( 'Termin und Anmeldung', 'bw-appa' ), icon: 'calendar-alt' }, el( Fields, { meta, setMeta } ) ),
 			PluginDocumentSettingPanel && el(
 				PluginDocumentSettingPanel,
-				{ name: 'bw-appa-event-link', title: 'Termin und Anmeldung' },
-				el( 'p', null, 'Datum, Ort, Preise, Plätze und Teilnehmende bearbeitest du in der eigenen Seitenleiste (Kalender-Symbol oben rechts).' ),
-				el( Button, { variant: 'primary', onClick: openSidebar }, 'Termin und Anmeldung öffnen' )
+				{ name: 'bw-appa-event-link', title: __( 'Termin und Anmeldung', 'bw-appa' ) },
+				el( 'p', null, __( 'Datum, Ort, Preise, Plätze und Teilnehmende bearbeitest du in der eigenen Seitenleiste (Kalender-Symbol oben rechts).', 'bw-appa' ) ),
+				el( Button, { variant: 'primary', onClick: openSidebar }, __( 'Termin und Anmeldung öffnen', 'bw-appa' ) )
 			)
 		);
 	}

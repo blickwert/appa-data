@@ -96,7 +96,7 @@ final class JoinProof {
 		$session = WC()->session;
 		if ( ! $session ) {
 			wp_delete_file( $stored['file'] );
-			return new WP_Error( 'bw_wm_proof', 'Bitte aktiviere Cookies und versuche es noch einmal.' );
+			return new WP_Error( 'bw_wm_proof', __( 'Bitte aktiviere Cookies und versuche es noch einmal.', 'bw-woo-membership' ) );
 		}
 		$old = $this->stashed();
 		if ( null !== $old ) {

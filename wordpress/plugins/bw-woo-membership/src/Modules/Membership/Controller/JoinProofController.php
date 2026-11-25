@@ -85,7 +85,7 @@ final class JoinProofController {
 			return;
 		}
 		if ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_bw_wm_join_proof'] ) ), self::NONCE ) ) {
-			$this->proof->remember_error( 'Die Sitzung ist abgelaufen. Bitte lade die Datei noch einmal hoch.' );
+			$this->proof->remember_error( __( 'Die Sitzung ist abgelaufen. Bitte lade die Datei noch einmal hoch.', 'bw-woo-membership' ) );
 			wp_safe_redirect( $this->proof->page_url() );
 			exit;
 		}

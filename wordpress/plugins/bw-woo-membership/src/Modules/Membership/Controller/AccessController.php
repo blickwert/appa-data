@@ -67,7 +67,7 @@ final class AccessController {
 	 * @param string           $requested   Raw requested target.
 	 * @param WP_User|\WP_Error $user        User or error.
 	 */
-	public function login_redirect( string $redirect_to, string $requested, $user ): string {
+	public function login_redirect( string $redirect_to, string $requested, mixed $user ): string {
 		if ( ! $user instanceof WP_User || user_can( $user, 'edit_posts' ) ) {
 			return $redirect_to;
 		}
@@ -78,7 +78,7 @@ final class AccessController {
 	/**
 	 * Same for the WooCommerce login form ("Mein Konto").
 	 */
-	public function woocommerce_login_redirect( string $redirect, $user ): string {
+	public function woocommerce_login_redirect( string $redirect, mixed $user ): string {
 		if ( ! $user instanceof WP_User || user_can( $user, 'edit_posts' ) ) {
 			return $redirect;
 		}

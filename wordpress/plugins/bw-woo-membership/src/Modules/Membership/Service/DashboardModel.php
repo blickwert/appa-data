@@ -13,6 +13,7 @@ use BW\WooMembership\Modules\Membership\Model\Membership;
 use BW\WooMembership\Modules\Membership\Repository\MemberRepository;
 use BW\WooMembership\Modules\Membership\Repository\MembershipOrderRepository;
 use BW\WooMembership\Modules\Membership\Repository\ProofRepository;
+use BW\WooMembership\Support\Months;
 
 /**
  * Prepares the values the member area templates print (texts, dates, URLs).
@@ -27,14 +28,6 @@ final class DashboardModel {
 	private const EVENT_TIME      = 'bw_appa_event_time';
 	private const EVENT_LINK      = 'bw_appa_event_zoom_link';
 	private const EVENT_AUDIENCE  = 'bw_appa_event_audience';
-	private const MONTHS_SHORT    = array( 'JÄN', 'FEB', 'MÄR', 'APR', 'MAI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DEZ' );
-	private const STATUS_LABELS   = array(
-		Membership::STATUS_ACTIVE  => array( 'Aktiv', 'Mitgliedschaft aktiv' ),
-		Membership::STATUS_PENDING => array( 'Zahlung offen', 'Beitrag noch offen' ),
-		Membership::STATUS_ON_HOLD => array( 'Pausiert', 'Zahlung offen' ),
-		Membership::STATUS_EXPIRED => array( 'Abgelaufen', 'Mitgliedschaft abgelaufen' ),
-		Membership::STATUS_NONE    => array( 'Keine Mitgliedschaft', 'Noch kein Mitglied' ),
-	);
 
 	/**
 	 * Builds the model.
@@ -45,6 +38,21 @@ final class DashboardModel {
 		private readonly MembershipOrderRepository $orders,
 		private readonly ProofRepository $proofs,
 	) {
+	}
+
+	/**
+	 * Card value and badge text per status.
+	 *
+	 * @return array{0: string, 1: string}
+	 */
+	private static function status_labels( string $status ): array {
+		return match ( $status ) {
+			Membership::STATUS_ACTIVE  => array( __( 'Aktiv', 'bw-woo-membership' ), __( 'Mitgliedschaft aktiv', 'bw-woo-membership' ) ),
+			Membership::STATUS_PENDING => array( __( 'Zahlung offen', 'bw-woo-membership' ), __( 'Beitrag noch offen', 'bw-woo-membership' ) ),
+			Membership::STATUS_ON_HOLD => array( __( 'Pausiert', 'bw-woo-membership' ), __( 'Zahlung offen', 'bw-woo-membership' ) ),
+			Membership::STATUS_EXPIRED => array( __( 'Abgelaufen', 'bw-woo-membership' ), __( 'Mitgliedschaft abgelaufen', 'bw-woo-membership' ) ),
+			default                    => array( __( 'Keine Mitgliedschaft', 'bw-woo-membership' ), __( 'Noch kein Mitglied', 'bw-woo-membership' ) ),
+		};
 	}
 
 	/**
@@ -62,7 +70,7 @@ final class DashboardModel {
 		$initials   = strtoupper( implode( '', array_map( static fn( string $p ): string => mb_substr( $p, 0, 1 ), array_slice( $parts, 0, 2 ) ) ) );
 		return array(
 			'name'     => $name,
-			'type'     => '' !== $membership->type ? MembershipTypes::label( $membership->type ) : self::STATUS_LABELS[ Membership::STATUS_NONE ][1],
+			'type'     => '' !== $membership->type ? MembershipTypes::label( $membership->type ) : self::status_labels( Membership::STATUS_NONE )[1],
 			'initials' => $initials,
 		);
 	}
@@ -75,19 +83,21 @@ final class DashboardModel {
 	public function overview( int $user_id ): array {
 		$m      = $this->memberships->for_user( $user_id );
 		$user   = get_userdata( $user_id );
-		$labels = self::STATUS_LABELS[ $m->status ] ?? self::STATUS_LABELS[ Membership::STATUS_NONE ];
-		$since  = null !== $m->since ? 'Mitglied seit ' . substr( $m->since, 0, 4 ) : '';
-		$number = '' !== $m->number ? 'Nr. ' . $m->number : '';
+		$labels = self::status_labels( $m->status );
+		/* translators: %s: year */
+		$since  = null !== $m->since ? sprintf( __( 'Mitglied seit %s', 'bw-woo-membership' ), substr( $m->since, 0, 4 ) ) : '';
+		/* translators: %s: membership number */
+		$number = '' !== $m->number ? sprintf( __( 'Nr. %s', 'bw-woo-membership' ), $m->number ) : '';
 
 		if ( null !== $m->next_renewal ) {
 			$renewal     = MembershipPeriod::format( $m->next_renewal );
-			$renewal_sub = $m->auto_renew ? 'Automatische Verlängerung' : 'Verlängerung per Zahlung';
+			$renewal_sub = $m->auto_renew ? __( 'Automatische Verlängerung', 'bw-woo-membership' ) : __( 'Verlängerung per Zahlung', 'bw-woo-membership' );
 		} elseif ( null !== $m->valid_until ) {
 			$renewal     = MembershipPeriod::format( $m->valid_until );
-			$renewal_sub = Membership::STATUS_ACTIVE === $m->status ? 'Gültig bis' : 'Abgelaufen am';
+			$renewal_sub = Membership::STATUS_ACTIVE === $m->status ? __( 'Gültig bis', 'bw-woo-membership' ) : __( 'Abgelaufen am', 'bw-woo-membership' );
 		} else {
 			$renewal     = '–';
-			$renewal_sub = Membership::STATUS_ACTIVE === $m->status ? 'Unbefristet' : '';
+			$renewal_sub = Membership::STATUS_ACTIVE === $m->status ? __( 'Unbefristet', 'bw-woo-membership' ) : '';
 		}
 
 		return array(
@@ -96,12 +106,12 @@ final class DashboardModel {
 			'active'       => $m->grants_access(),
 			'badge'        => $labels[1],
 			'cards'        => array(
-				array( 'label' => 'Status', 'value' => $labels[0], 'sub' => trim( $since . ( '' !== $since && '' !== $number ? ' · ' : '' ) . $number ), 'dot' => $m->grants_access() ),
-				array( 'label' => 'Mitgliedschaftsart', 'value' => '' !== $m->type ? MembershipTypes::label( $m->type ) : '–', 'sub' => $this->fee_text( $m ), 'dot' => false ),
-				array( 'label' => 'Nächste Verlängerung', 'value' => $renewal, 'sub' => $renewal_sub, 'dot' => false ),
+				array( 'label' => __( 'Status', 'bw-woo-membership' ), 'value' => $labels[0], 'sub' => trim( $since . ( '' !== $since && '' !== $number ? ' · ' : '' ) . $number ), 'dot' => $m->grants_access() ),
+				array( 'label' => __( 'Mitgliedschaftsart', 'bw-woo-membership' ), 'value' => '' !== $m->type ? MembershipTypes::label( $m->type ) : '–', 'sub' => $this->fee_text( $m ), 'dot' => false ),
+				array( 'label' => __( 'Nächste Verlängerung', 'bw-woo-membership' ), 'value' => $renewal, 'sub' => $renewal_sub, 'dot' => false ),
 			),
 			'notice'       => $this->notice( $m ),
-			'join_url'     => home_url( '/mitgliedschaft/' ),
+			'join_url'     => MemberPages::membership_url(),
 			'account_url'  => function_exists( 'wc_get_page_permalink' ) ? (string) wc_get_page_permalink( 'myaccount' ) : '',
 			'confirmation' => $m->grants_access() ? add_query_arg( 'bw_wm_confirmation', '1', home_url( '/' ) ) : '',
 			'renew_url'    => $this->renew_url( $m ),
@@ -172,13 +182,14 @@ final class DashboardModel {
 				'title'     => get_the_title( $post ),
 				'url'       => (string) get_permalink( $post ),
 				'day'       => $day ? $day->format( 'd' ) : '',
-				'month'     => $day ? self::MONTHS_SHORT[ (int) $day->format( 'n' ) - 1 ] : '',
+				'month'     => $day ? Months::short( (int) $day->format( 'n' ) ) : '',
 				'year'      => $day ? $day->format( 'Y' ) : '',
-				'meta'      => trim( ( '' !== $time ? $time . ' Uhr' : '' ) . ( '' !== $link ? ' · Online via Zoom' : '' ), ' ·' ),
+				/* translators: %s: time */
+				'meta'      => trim( ( '' !== $time ? sprintf( __( '%s Uhr', 'bw-woo-membership' ), $time ) : '' ) . ( '' !== $link ? ' · ' . __( 'Online via Zoom', 'bw-woo-membership' ) : '' ), ' ·' ),
 				'online'    => '' !== $link,
 				'exclusive' => 'members' === get_post_meta( $post->ID, self::EVENT_AUDIENCE, true ),
 				/** This filter is documented in the plugin bw-appa (PrivacyController). */
-				'zoom'      => '' !== $link && apply_filters( 'bw_appa_event_private_visible', true, $post->ID, $user_id ) ? $link : '',
+				'zoom'      => '' !== $link && apply_filters( 'bw_appa_event_private_visible', true, $post->ID, $user_id ) ? $link : '', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- hook of bw-appa.
 				'registration' => '1' === get_post_meta( $post->ID, 'bw_appa_event_registration', true ),
 			);
 		}
@@ -194,7 +205,7 @@ final class DashboardModel {
 		return array(
 			'visible' => $this->members->in_directory( $user_id ),
 			'fields'  => $this->members->profile( $user_id ),
-			'groups'  => ProfileFields::GROUPS,
+			'groups'  => ProfileFields::groups(),
 			'action'  => admin_url( 'admin-post.php' ),
 			'saved'   => isset( $_GET['bwm'] ) && 'saved' === $_GET['bwm'], // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only.
 			'active'  => $this->memberships->for_user( $user_id )->grants_access(),
@@ -224,8 +235,8 @@ final class DashboardModel {
 	 */
 	private function fee_text( Membership $m ): string {
 		return match ( $m->status ) {
-			Membership::STATUS_ACTIVE  => 'manual' === $m->source ? 'Beitragsfrei' : 'Jahresbeitrag entrichtet',
-			Membership::STATUS_PENDING, Membership::STATUS_ON_HOLD => 'Jahresbeitrag offen',
+			Membership::STATUS_ACTIVE  => 'manual' === $m->source ? __( 'Beitragsfrei', 'bw-woo-membership' ) : __( 'Jahresbeitrag entrichtet', 'bw-woo-membership' ),
+			Membership::STATUS_PENDING, Membership::STATUS_ON_HOLD => __( 'Jahresbeitrag offen', 'bw-woo-membership' ),
 			default => '',
 		};
 	}
@@ -235,10 +246,10 @@ final class DashboardModel {
 	 */
 	private function notice( Membership $m ): string {
 		return match ( $m->status ) {
-			Membership::STATUS_PENDING => 'Dein Mitgliedsbeitrag ist noch nicht eingegangen. Sobald die Zahlung da ist, stehen dir alle Inhalte des Mitgliederbereichs zur Verfügung.',
-			Membership::STATUS_ON_HOLD => 'Die letzte Zahlung ist fehlgeschlagen. Bitte prüfe deine Zahlungsart unter „Mein Konto“; bis dahin ist der Zugang zu Dokumenten und Mitgliederveranstaltungen pausiert.',
-			Membership::STATUS_EXPIRED => 'Deine Mitgliedschaft ist abgelaufen. Verlängere sie, um wieder alle Inhalte nutzen zu können.',
-			Membership::STATUS_NONE    => 'Du hast noch keine Mitgliedschaft. Werde Mitglied, um Dokumente, Mitgliederveranstaltungen und das Mitgliederverzeichnis zu nutzen.',
+			Membership::STATUS_PENDING => __( 'Dein Mitgliedsbeitrag ist noch nicht eingegangen. Sobald die Zahlung da ist, stehen dir alle Inhalte des Mitgliederbereichs zur Verfügung.', 'bw-woo-membership' ),
+			Membership::STATUS_ON_HOLD => __( 'Die letzte Zahlung ist fehlgeschlagen. Bitte prüfe deine Zahlungsart unter „Mein Konto“; bis dahin ist der Zugang zu Dokumenten und Mitgliederveranstaltungen pausiert.', 'bw-woo-membership' ),
+			Membership::STATUS_EXPIRED => __( 'Deine Mitgliedschaft ist abgelaufen. Verlängere sie, um wieder alle Inhalte nutzen zu können.', 'bw-woo-membership' ),
+			Membership::STATUS_NONE    => __( 'Du hast noch keine Mitgliedschaft. Werde Mitglied, um Dokumente, Mitgliederveranstaltungen und das Mitgliederverzeichnis zu nutzen.', 'bw-woo-membership' ),
 			default                    => '',
 		};
 	}

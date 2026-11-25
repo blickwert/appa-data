@@ -11,7 +11,6 @@ namespace BW\Appa\Modules\Events\Controller;
 
 use BW\Appa\Modules\Events\Repository\EventRepository;
 use BW\Appa\Modules\Events\Service\UpcomingQuery;
-use WP_Block;
 use WP_Query;
 
 /**
@@ -29,7 +28,7 @@ final class QueryController {
 	 * Registers hooks.
 	 */
 	public function register(): void {
-		add_filter( 'query_loop_block_query_vars', array( $this, 'filter_query_loop' ), 10, 2 );
+		add_filter( 'query_loop_block_query_vars', array( $this, 'filter_query_loop' ) );
 		add_action( 'pre_get_posts', array( $this, 'filter_main_query' ) );
 	}
 
@@ -39,7 +38,7 @@ final class QueryController {
 	 * @param array<string, mixed> $query Query arguments.
 	 * @return array<string, mixed>
 	 */
-	public function filter_query_loop( array $query, WP_Block $block ): array {
+	public function filter_query_loop( array $query ): array {
 		if ( EventRepository::POST_TYPE !== ( $query['post_type'] ?? '' ) ) {
 			return $query;
 		}

@@ -21,10 +21,10 @@ final class MembershipTypes {
 	 */
 	public static function all(): array {
 		$types = array(
-			'regular'       => 'Ordentliche Mitgliedschaft',
-			'student'       => 'Studentische Mitgliedschaft',
-			'honorary'      => 'Ehrenmitgliedschaft',
-			'institutional' => 'Institutionelle Mitgliedschaft',
+			'regular'       => __( 'Ordentliche Mitgliedschaft', 'bw-woo-membership' ),
+			'student'       => __( 'Studentische Mitgliedschaft', 'bw-woo-membership' ),
+			'honorary'      => __( 'Ehrenmitgliedschaft', 'bw-woo-membership' ),
+			'institutional' => __( 'Institutionelle Mitgliedschaft', 'bw-woo-membership' ),
 		);
 
 		/**

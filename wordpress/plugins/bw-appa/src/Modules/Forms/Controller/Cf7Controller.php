@@ -29,12 +29,15 @@ final class Cf7Controller {
 
 	/**
 	 * Builds the controller.
+	 *
+	 * @param \Closure(): SpamGuard $guard Builds the spam guard with the current settings; called only for a submission.
 	 */
 	public function __construct(
 		private readonly FormRepository $forms,
 		private readonly SettingsRepository $settings,
 		private readonly RateLimitRepository $rate_limit,
 		private readonly FormToken $token,
+		private readonly \Closure $guard,
 	) {
 	}
 
@@ -57,7 +60,7 @@ final class Cf7Controller {
 	 * @param array<string, mixed>|object $tag Form tag.
 	 * @return array<string, mixed>|object
 	 */
-	public function prefill_subject( $tag ) {
+	public function prefill_subject( mixed $tag ): mixed {
 		$name    = is_object( $tag ) ? ( $tag->name ?? '' ) : ( $tag['name'] ?? '' );
 		$options = is_object( $tag ) ? (array) ( $tag->options ?? array() ) : (array) ( $tag['options'] ?? array() );
 		if ( 'betreff' !== $name || in_array( 'default:get', $options, true ) ) {
@@ -121,10 +124,10 @@ final class Cf7Controller {
 
 		$client = (string) $submission->get_meta( 'remote_ip' );
 		$texts  = array_filter( array_map( static fn( mixed $v ): string => is_array( $v ) ? implode( ' ', $v ) : (string) $v, $submission->get_posted_data() ) );
-		$config = $this->settings->get();
-		$guard  = new SpamGuard( $config['min_seconds'], $config['max_links'], $config['max_per_hour'], $this->settings->blocked_words() );
+		$guard  = ( $this->guard )();
+		$now    = time();
 
-		$reason = $guard->reason( $honeypot, $this->token->time( $token ), time(), $texts, $this->rate_limit->count( $client ) );
+		$reason = $guard->reason( $honeypot, $this->token->time( $token, $now ), $now, $texts, $this->rate_limit->count( $client ) );
 		$this->rate_limit->increment( $client );
 
 		if ( null === $reason ) {
@@ -152,8 +155,7 @@ final class Cf7Controller {
 		if ( 'mail' !== ( method_exists( $mail, 'name' ) ? $mail->name() : '' ) ) {
 			return $components;
 		}
-		$ours = array_map( 'intval', (array) get_option( FormRepository::OPTION, array() ) );
-		if ( in_array( $form->id(), $ours, true ) ) {
+		if ( $this->forms->is_ours( (int) $form->id() ) ) {
 			$components['recipient'] = $this->settings->get()['recipient'];
 		}
 		return $components;

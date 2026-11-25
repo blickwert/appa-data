@@ -16,15 +16,19 @@ final class ProfileFields {
 
 	/**
 	 * Specialist groups of the APPA.
+	 *
+	 * @return array<string, string>
 	 */
-	public const GROUPS = array(
-		'coaching'   => 'Positive Coaching',
-		'clinical'   => 'Positive Clinical Psychology',
-		'health'     => 'Positive Health',
-		'education'  => 'Positive Education',
-		'leadership' => 'Positive Leadership',
-		'inclusion'  => 'Positive Inclusion',
-	);
+	public static function groups(): array {
+		return array(
+			'coaching'   => __( 'Positive Coaching', 'bw-woo-membership' ),
+			'clinical'   => __( 'Positive Clinical Psychology', 'bw-woo-membership' ),
+			'health'     => __( 'Positive Health', 'bw-woo-membership' ),
+			'education'  => __( 'Positive Education', 'bw-woo-membership' ),
+			'leadership' => __( 'Positive Leadership', 'bw-woo-membership' ),
+			'inclusion'  => __( 'Positive Inclusion', 'bw-woo-membership' ),
+		);
+	}
 
 	/**
 	 * Sanitises raw input; unknown groups are dropped, texts are limited in length.
@@ -35,7 +39,7 @@ final class ProfileFields {
 	public static function sanitize( array $input ): array {
 		$text    = static fn( string $key, int $max ): string => mb_substr( sanitize_text_field( (string) ( $input[ $key ] ?? '' ) ), 0, $max );
 		$website = esc_url_raw( (string) ( $input['website'] ?? '' ), array( 'http', 'https' ) );
-		$groups  = array_values( array_intersect( array_keys( self::GROUPS ), array_map( 'strval', (array) ( $input['groups'] ?? array() ) ) ) );
+		$groups  = array_values( array_intersect( array_keys( self::groups() ), array_map( 'strval', (array) ( $input['groups'] ?? array() ) ) ) );
 		return array(
 			'title'   => $text( 'title', 80 ),
 			'website' => $website,

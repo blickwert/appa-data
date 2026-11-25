@@ -22,11 +22,11 @@ final class FormDefinitions {
 	public function all(): array {
 		return array(
 			'contact' => array(
-				'title'   => 'APPA – Kontakt',
+				'title'   => __( 'APPA – Kontakt', 'bw-appa' ),
 				'form'    => $this->contact_form(),
-				'subject' => 'Kontaktanfrage: [betreff]',
-				'body'    => "Name: [name]\nE-Mail: [email]\nBetreff: [betreff]\n\n[nachricht]\n\n-- \nGesendet über das Kontaktformular von [_site_url]",
-				'sent'    => 'Danke für deine Nachricht! Wir melden uns so bald wie möglich bei dir.',
+				'subject' => __( 'Kontaktanfrage: [betreff]', 'bw-appa' ),
+				'body'    => __( "Name: [name]\nE-Mail: [email]\nBetreff: [betreff]\n\n[nachricht]\n\n-- \nGesendet über das Kontaktformular von [_site_url]", 'bw-appa' ),
+				'sent'    => __( 'Danke für deine Nachricht! Wir melden uns so bald wie möglich bei dir.', 'bw-appa' ),
 			),
 		);
 	}
@@ -48,12 +48,12 @@ final class FormDefinitions {
 			"\n",
 			array(
 				'<div class="bwa-form">',
-				'<p class="bwa-form__field bwa-form__field--half"><label>Vor- und Nachname *<br>[text* name autocomplete:name]</label></p>',
-				'<p class="bwa-form__field bwa-form__field--half"><label>E-Mail-Adresse *<br>[email* email autocomplete:email]</label></p>',
-				'<p class="bwa-form__field"><label>Betreff *<br>[text* betreff]</label></p>',
-				'<p class="bwa-form__field"><label>Nachricht *<br>[textarea* nachricht x5]</label></p>',
-				'<p class="bwa-form__field bwa-form__consent">[acceptance datenschutz] Ich habe die Datenschutzhinweise gelesen und bin einverstanden, dass meine Angaben zur Beantwortung meiner Anfrage verarbeitet werden. [/acceptance]</p>',
-				'<p class="bwa-form__actions">[submit class:bwa-form__submit "Nachricht senden"]</p>',
+				'<p class="bwa-form__field bwa-form__field--half"><label>' . esc_html__( 'Vor- und Nachname *', 'bw-appa' ) . '<br>[text* name autocomplete:name]</label></p>',
+				'<p class="bwa-form__field bwa-form__field--half"><label>' . esc_html__( 'E-Mail-Adresse *', 'bw-appa' ) . '<br>[email* email autocomplete:email]</label></p>',
+				'<p class="bwa-form__field"><label>' . esc_html__( 'Betreff *', 'bw-appa' ) . '<br>[text* betreff]</label></p>',
+				'<p class="bwa-form__field"><label>' . esc_html__( 'Nachricht *', 'bw-appa' ) . '<br>[textarea* nachricht x5]</label></p>',
+				'<p class="bwa-form__field bwa-form__consent">[acceptance datenschutz] ' . esc_html__( 'Ich habe die Datenschutzhinweise gelesen und bin einverstanden, dass meine Angaben zur Beantwortung meiner Anfrage verarbeitet werden.', 'bw-appa' ) . ' [/acceptance]</p>',
+				'<p class="bwa-form__actions">[submit class:bwa-form__submit "' . esc_attr__( 'Nachricht senden', 'bw-appa' ) . '"]</p>',
 				'</div>',
 			)
 		);

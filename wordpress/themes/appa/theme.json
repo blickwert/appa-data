@@ -337,7 +337,10 @@
 				"eyebrow": "0.1em",
 				"label": "0.05em"
 			},
-			"transition": "150ms ease"
+			"transition": "150ms ease",
+			"layout": {
+				"dashboard": "77rem"
+			}
 		},
 		"blocks": {
 			"core/button": {

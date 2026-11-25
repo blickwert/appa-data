@@ -75,7 +75,7 @@ final class Ics {
 	private static function fold( string $line ): string {
 		$out   = '';
 		$limit = 75;
-		while ( strlen( $line ) > $limit ) {
+		while ( strlen( $line ) > $limit ) { // phpcs:ignore Squiz.PHP.DisallowSizeFunctionsInLoops.Found -- $line shrinks inside the loop.
 			$cut = $limit;
 			while ( $cut > 1 && ( ord( $line[ $cut ] ) & 0xC0 ) === 0x80 ) {
 				--$cut; // Do not split a UTF-8 character.

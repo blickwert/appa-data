@@ -61,6 +61,40 @@ final class MemberPages {
 	}
 
 	/**
+	 * Address of the member area overview, optionally with an anchor (e.g. "nachweis").
+	 */
+	public static function area_url( string $anchor = '' ): string {
+		return self::page_url( 'area', '/mitgliederbereich-uebersicht/' ) . ( '' !== $anchor ? '#' . $anchor : '' );
+	}
+
+	/**
+	 * Address of the page that explains the membership and links to joining.
+	 */
+	public static function membership_url(): string {
+		return self::page_url( 'membership', '/mitgliedschaft/' );
+	}
+
+	/**
+	 * Address of the event list.
+	 */
+	public static function events_url(): string {
+		return self::page_url( 'events', '/veranstaltungen/' );
+	}
+
+	/**
+	 * Address of a fixed page of the website; the paths can be changed with a filter.
+	 */
+	private static function page_url( string $page, string $path ): string {
+		/**
+		 * Filters the address of a fixed page the plugin links to.
+		 *
+		 * @param string $url  Address (default: home_url( $path )).
+		 * @param string $page "area" (member area overview), "membership" or "events".
+		 */
+		return (string) apply_filters( 'bw_wm_page_url', home_url( $path ), $page );
+	}
+
+	/**
 	 * Whether a page belongs to the protected member area.
 	 */
 	public function is_protected( int $page_id ): bool {

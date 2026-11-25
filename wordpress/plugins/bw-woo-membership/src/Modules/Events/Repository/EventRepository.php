@@ -93,7 +93,7 @@ final class EventRepository {
 		 * @param array|null $fields   Null when bw-appa does not answer.
 		 * @param int        $event_id Event.
 		 */
-		$data = apply_filters( 'bw_appa_event_fields', null, $event_id );
+		$data = apply_filters( 'bw_appa_event_fields', null, $event_id ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- hook of bw-appa.
 		if ( ! is_array( $data ) ) {
 			// Fallback without bw-appa: the raw meta.
 			$meta = static fn( string $key ): string => (string) get_post_meta( $event_id, $key, true );
@@ -118,7 +118,8 @@ final class EventRepository {
 		}
 		$fields                = array_intersect_key( $data, $defaults ) + $defaults;
 		$fields['registration'] = (bool) $fields['registration'];
-		return $this->fields_cache[ $event_id ] = $fields;
+		$this->fields_cache[ $event_id ] = $fields;
+		return $fields;
 	}
 
 	/**
@@ -302,7 +303,7 @@ final class EventRepository {
 				array(
 					'post_type'   => self::POST_TYPE,
 					'post_status' => array( 'publish', 'draft', 'future', 'private' ),
-					'numberposts' => 200,
+					'numberposts' => 200, // phpcs:ignore WordPress.WP.PostsPerPage.posts_per_page_numberposts -- picker in the admin; IDs only.
 					'fields'      => 'ids',
 					'meta_key'    => self::META_DATE, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- small post type.
 					'orderby'     => 'meta_value',

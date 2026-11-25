@@ -37,6 +37,7 @@ final class BlockController {
 			BW_APPA_DIR . '/blocks/form',
 			array( 'render_callback' => array( $this, 'render' ) )
 		);
+		wp_set_script_translations( generate_block_asset_handle( 'bw-appa/form', 'editorScript' ), 'bw-appa', BW_APPA_DIR . '/languages' );
 	}
 
 	/**

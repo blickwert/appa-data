@@ -61,7 +61,7 @@ final class JoinController {
 	 *
 	 * @param \WC_Cart $cart Cart.
 	 */
-	public function join_discount( $cart ): void {
+	public function join_discount( mixed $cart ): void {
 		if ( ! is_object( $cart ) || ! empty( $cart->recurring_cart_key ) ) {
 			return; // WooCommerce Subscriptions: never on the recurring cart.
 		}
@@ -137,21 +137,21 @@ final class JoinController {
 		woocommerce_register_additional_checkout_field(
 			array(
 				'id'       => self::FIELD_JOB,
-				'label'    => 'Beruf / Studienrichtung',
+				'label'    => __( 'Beruf / Studienrichtung', 'bw-woo-membership' ),
 				'location' => 'order',
 				'type'     => 'text',
 				'required' => $with_membership,
 				'hidden'   => $without_membership,
 			)
 		);
-		$options = array( array( 'value' => 'none', 'label' => 'Noch offen' ) );
-		foreach ( ProfileFields::GROUPS as $value => $label ) {
+		$options = array( array( 'value' => 'none', 'label' => __( 'Noch offen', 'bw-woo-membership' ) ) );
+		foreach ( ProfileFields::groups() as $value => $label ) {
 			$options[] = array( 'value' => $value, 'label' => $label );
 		}
 		woocommerce_register_additional_checkout_field(
 			array(
 				'id'       => self::FIELD_GROUP,
-				'label'    => 'Welche Fachgruppe interessiert dich am meisten? (weitere im Profil)',
+				'label'    => __( 'Welche Fachgruppe interessiert dich am meisten? (weitere im Profil)', 'bw-woo-membership' ),
 				'location' => 'order',
 				'type'     => 'select',
 				'options'  => $options,
@@ -162,7 +162,7 @@ final class JoinController {
 		woocommerce_register_additional_checkout_field(
 			array(
 				'id'       => self::FIELD_STATUTES,
-				'label'    => 'Ich habe die Statuten gelesen und trete der APPA bei.',
+				'label'    => __( 'Ich habe die Statuten gelesen und trete der APPA bei.', 'bw-woo-membership' ),
 				'location' => 'order',
 				'type'     => 'checkbox',
 				'required' => $with_membership,
@@ -184,7 +184,7 @@ final class JoinController {
 			update_user_meta( $user_id, self::META_JOB, $job );
 		}
 		$group = sanitize_key( (string) $order->get_meta( '_wc_other/' . self::FIELD_GROUP ) );
-		if ( isset( ProfileFields::GROUPS[ $group ] ) ) {
+		if ( isset( ProfileFields::groups()[ $group ] ) ) {
 			$profile = $this->members->profile( $user_id );
 			if ( ! in_array( $group, $profile['groups'], true ) ) {
 				$profile['groups'][] = $group;

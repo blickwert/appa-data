@@ -1,6 +1,7 @@
 /* Editor UI for the member area blocks – no build step; the blocks render on the server for the current user. */
 ( function ( wp ) {
 	const { createElement: el } = wp.element;
+	const { __ } = wp.i18n;
 	const { useBlockProps, InspectorControls } = wp.blockEditor;
 	const { PanelBody, RangeControl, Notice } = wp.components;
 	const ServerSideRender = wp.serverSideRender;
@@ -10,8 +11,8 @@
 		wp.blocks.registerBlockType( 'bw-woo-membership/' + name, {
 			edit( { attributes, setAttributes } ) {
 				const controls = attributes.limit !== undefined
-					? el( InspectorControls, null, el( PanelBody, { title: 'Anzeige' }, el( RangeControl, {
-						label: 'Anzahl',
+					? el( InspectorControls, null, el( PanelBody, { title: __( 'Anzeige', 'bw-woo-membership' ) }, el( RangeControl, {
+						label: __( 'Anzahl', 'bw-woo-membership' ),
 						min: 1,
 						max: 12,
 						value: attributes.limit,
@@ -24,7 +25,7 @@
 					'div',
 					useBlockProps(),
 					controls,
-					el( Notice, { status: 'info', isDismissible: false }, 'Vorschau mit deinen Daten – Mitglieder sehen hier ihre eigenen.' ),
+					el( Notice, { status: 'info', isDismissible: false }, __( 'Vorschau mit deinen Daten – Mitglieder sehen hier ihre eigenen.', 'bw-woo-membership' ) ),
 					el( ServerSideRender, { block: 'bw-woo-membership/' + name, attributes } )
 				);
 			},

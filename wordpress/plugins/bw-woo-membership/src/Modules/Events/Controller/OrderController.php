@@ -44,7 +44,7 @@ final class OrderController {
 	 * @param \WC_Order_Item $item     Item.
 	 * @param int            $order_id Order ID.
 	 */
-	public function index_item( $item_id, $item, $order_id ): void {
+	public function index_item( mixed $item_id, mixed $item, mixed $order_id ): void {
 		$event_id = $item instanceof \WC_Order_Item_Product ? $this->events->event_id( (int) $item->get_product_id() ) : 0;
 		if ( $event_id && (int) $order_id > 0 ) {
 			$this->events->remember_order( $event_id, (int) $order_id );
@@ -58,7 +58,7 @@ final class OrderController {
 	 * @param int           $order_id Order ID.
 	 * @param WC_Order|null $order    Order.
 	 */
-	public function complete_registrations( string $status, int $order_id, $order = null ): string {
+	public function complete_registrations( string $status, int $order_id, mixed $order = null ): string {
 		$order = $order instanceof WC_Order ? $order : wc_get_order( $order_id );
 		return $order instanceof WC_Order && $this->only_events( $order ) ? 'completed' : $status;
 	}
@@ -92,11 +92,23 @@ final class OrderController {
 			if ( ! $expired && ! $this->all_past( $order ) ) {
 				continue;
 			}
-			$order->update_status( 'cancelled', $expired ? sprintf( 'Anmeldung nach %d Tagen ohne Zahlung storniert.', $days ) : 'Anmeldung ohne Zahlung storniert: Die Veranstaltung ist vorbei.' );
+			$order->update_status(
+				'cancelled',
+				$expired
+					/* translators: %d: days without payment */
+					? sprintf( __( 'Anmeldung nach %d Tagen ohne Zahlung storniert.', 'bw-woo-membership' ), $days )
+					: __( 'Anmeldung ohne Zahlung storniert: Die Veranstaltung ist vorbei.', 'bw-woo-membership' )
+			);
 			$this->mailer->send(
 				$order->get_billing_email(),
-				'Deine Anmeldung wurde storniert',
-				sprintf( "Hallo %s,\n\nwir haben für deine Anmeldung (Bestellung %s) innerhalb von %d Tagen keine Zahlung erhalten und den Platz wieder freigegeben. Du kannst dich jederzeit neu anmelden, solange Plätze frei sind.", $order->get_billing_first_name(), $order->get_order_number(), $days )
+				__( 'Deine Anmeldung wurde storniert', 'bw-woo-membership' ),
+				sprintf(
+					/* translators: 1: first name, 2: order number, 3: days without payment */
+					__( "Hallo %1\$s,\n\nwir haben für deine Anmeldung (Bestellung %2\$s) innerhalb von %3\$d Tagen keine Zahlung erhalten und den Platz wieder freigegeben. Du kannst dich jederzeit neu anmelden, solange Plätze frei sind.", 'bw-woo-membership' ),
+					$order->get_billing_first_name(),
+					$order->get_order_number(),
+					$days
+				)
 			);
 			++$cancelled;
 		}

@@ -92,6 +92,8 @@ theme = {
             "line-height": lh,
             "letter-spacing": T["letter_spacing"],
             "transition": "150ms ease",
+            # Width of the member area (header and two-column layout), wider than the content sections.
+            "layout": {"dashboard": px(T["layout"]["dashboard"])},
         },
         "blocks": {
             "core/button": {"border": {"radius": False}},

@@ -84,7 +84,8 @@ final class CartController {
 			if ( $event_id ) {
 				$refusal = $this->registrations->refusal( $event_id, get_current_user_id() );
 				if ( '' !== $refusal ) {
-					wc_add_notice( get_the_title( $event_id ) . ': ' . $refusal, 'error' );
+					/* translators: 1: event title, 2: reason */
+					wc_add_notice( sprintf( __( '%1$s: %2$s', 'bw-woo-membership' ), get_the_title( $event_id ), $refusal ), 'error' );
 				}
 			}
 		}
@@ -97,7 +98,7 @@ final class CartController {
 	 * @param string                 $cart_key Cart item key.
 	 * @param array<string, mixed>   $values   Cart item.
 	 */
-	public function record_basis( $item, string $cart_key, array $values ): void {
+	public function record_basis( mixed $item, string $cart_key, array $values ): void {
 		$event_id = $this->events->event_id( (int) ( $values['product_id'] ?? 0 ) );
 		if ( $event_id ) {
 			$item->add_meta_data( '_bw_wm_price_basis', $this->registrations->is_member( get_current_user_id() ) ? 'member' : 'public', true );
@@ -110,7 +111,7 @@ final class CartController {
 	 *
 	 * @param \WC_Product $product Product.
 	 */
-	public function purchasable( bool $purchasable, $product ): bool {
+	public function purchasable( bool $purchasable, mixed $product ): bool {
 		$event_id = is_object( $product ) ? $this->events->event_id( (int) $product->get_id() ) : 0;
 		return $event_id ? $purchasable && ! $this->registrations->is_closed( $event_id ) : $purchasable;
 	}

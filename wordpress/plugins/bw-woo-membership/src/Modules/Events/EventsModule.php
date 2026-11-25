@@ -51,6 +51,13 @@ final class EventsModule extends AbstractModule {
 	/**
 	 * {@inheritDoc}
 	 */
+	public function description(): string {
+		return __( 'Anmeldung zu Veranstaltungen über WooCommerce mit Warteliste, Erinnerung und Abmeldung.', 'bw-woo-membership' );
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function requires(): array {
 		return array( 'membership' );
 	}

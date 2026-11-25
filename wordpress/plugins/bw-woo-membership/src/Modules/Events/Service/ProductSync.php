@@ -42,7 +42,8 @@ final class ProductSync {
 		}
 		// Base price = public price (or member price for members-only); the cart sets the price per person.
 		$base = 'members' === $fields['audience'] ? $fields['price_member'] : ( '' !== $fields['price_public'] ? $fields['price_public'] : $fields['price_member'] );
-		$product->set_name( 'Anmeldung: ' . get_the_title( $event_id ) );
+		/* translators: %s: event title */
+		$product->set_name( sprintf( __( 'Anmeldung: %s', 'bw-woo-membership' ), get_the_title( $event_id ) ) );
 		$product->set_status( 'publish' === get_post_status( $event_id ) ? 'publish' : 'private' );
 		$product->set_catalog_visibility( 'hidden' );
 		$product->set_virtual( true );

@@ -12,6 +12,7 @@ namespace BW\WooMembership\Modules\Events\Service;
 use BW\WooMembership\Modules\Events\Repository\EventRepository;
 use BW\WooMembership\Modules\Events\Repository\NoticeRepository;
 use BW\WooMembership\Modules\Events\Repository\WaitlistRepository;
+use BW\WooMembership\Modules\Membership\Service\MemberPages;
 
 /**
  * Decides price and bookability of an event for a user and prepares the registration box.
@@ -79,25 +80,25 @@ final class RegistrationService {
 	public function refusal( int $event_id, int $user_id ): string {
 		$f = $this->events->fields( $event_id );
 		if ( ! $f['registration'] || 'publish' !== get_post_status( $event_id ) ) {
-			return 'Für diese Veranstaltung ist keine Anmeldung über die Website möglich.';
+			return __( 'Für diese Veranstaltung ist keine Anmeldung über die Website möglich.', 'bw-woo-membership' );
 		}
 		if ( $this->is_past( $event_id ) ) {
-			return 'Die Anmeldung ist geschlossen.';
+			return __( 'Die Anmeldung ist geschlossen.', 'bw-woo-membership' );
 		}
 		if ( $this->is_closed( $event_id ) ) {
-			return 'Die Anmeldefrist ist abgelaufen.';
+			return __( 'Die Anmeldefrist ist abgelaufen.', 'bw-woo-membership' );
 		}
 		$existing = $user_id > 0 ? $this->events->registration_of( $event_id, $user_id ) : null;
 		// A pending order (payment failed or aborted) does not block a new attempt.
 		if ( null !== $existing && EventRepository::holds_place( $existing ) ) {
-			return 'Du bist für diese Veranstaltung bereits angemeldet.';
+			return __( 'Du bist für diese Veranstaltung bereits angemeldet.', 'bw-woo-membership' );
 		}
 		if ( null === $this->price( $event_id, $user_id ) ) {
-			return 'members' === $f['audience'] ? 'Diese Veranstaltung ist nur für Mitglieder. Bitte melde dich an oder werde Mitglied.' : 'Für diese Veranstaltung ist derzeit keine Anmeldung möglich.';
+			return 'members' === $f['audience'] ? __( 'Diese Veranstaltung ist nur für Mitglieder. Bitte melde dich an oder werde Mitglied.', 'bw-woo-membership' ) : __( 'Für diese Veranstaltung ist derzeit keine Anmeldung möglich.', 'bw-woo-membership' );
 		}
 		$left = EventPricing::places_left( $f['capacity'], $this->events->count_registrations( $event_id ) );
 		if ( 0 === $left ) {
-			return 'Die Veranstaltung ist ausgebucht.';
+			return __( 'Die Veranstaltung ist ausgebucht.', 'bw-woo-membership' );
 		}
 		return '';
 	}
@@ -158,8 +159,8 @@ final class RegistrationService {
 			'book_url'     => '' === $refusal && $product_id && function_exists( 'wc_get_checkout_url' ) ? add_query_arg( 'add-to-cart', $product_id, wc_get_checkout_url() ) : '',
 			// Back to the event after the login (the member-area login page always leads to the dashboard).
 			'login_url'    => $user_id > 0 ? '' : wp_login_url( (string) get_permalink( $event_id ) . '#anmeldung' ),
-			'join_url'     => home_url( '/mitgliedschaft/' ),
-			'area_url'     => home_url( '/mitgliederbereich-uebersicht/#veranstaltungen' ),
+			'join_url'     => MemberPages::membership_url(),
+			'area_url'     => MemberPages::area_url( 'veranstaltungen' ),
 		);
 	}
 
@@ -192,7 +193,7 @@ final class RegistrationService {
 				'when'    => EventLabels::when( $f ),
 				'past'    => '' !== $f['date'] && $f['date'] < current_time( 'Y-m-d' ),
 				'paid'    => $paid,
-				'status'  => $paid ? 'Angemeldet' : 'Angemeldet – Zahlung offen',
+				'status'  => $paid ? __( 'Angemeldet', 'bw-woo-membership' ) : __( 'Angemeldet – Zahlung offen', 'bw-woo-membership' ),
 				'pay_url' => ! $paid && ! $this->is_past( $event_id ) && $order->needs_payment() ? $order->get_checkout_payment_url() : '',
 				'zoom'    => $paid ? $f['zoom_link'] : '',
 				'access'  => $paid ? $f['zoom_access'] : '',

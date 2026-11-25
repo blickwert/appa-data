@@ -54,7 +54,7 @@ final class SubscriptionController {
 	 * @param string       $domain Text domain.
 	 * @param string       $locale Locale.
 	 */
-	public function translation_dir( $path, $domain, $locale ) {
+	public function translation_dir( mixed $path, mixed $domain, mixed $locale ): mixed {
 		if ( 'woocommerce-subscriptions' !== $domain || ! class_exists( 'WC_Subscriptions' ) || empty( \WC_Subscriptions::$plugin_file ) ) {
 			return $path;
 		}
@@ -68,7 +68,7 @@ final class SubscriptionController {
 	 *
 	 * @param string $path Path the plugin would use.
 	 */
-	public function translation_path( $path ) {
+	public function translation_path( mixed $path ): mixed {
 		return class_exists( 'WC_Subscriptions' ) && ! empty( \WC_Subscriptions::$plugin_file ) ? dirname( plugin_basename( \WC_Subscriptions::$plugin_file ) ) . '/languages' : $path;
 	}
 
@@ -78,13 +78,13 @@ final class SubscriptionController {
 	 * @param array<string, string> $items Menu items.
 	 * @return array<string, string>
 	 */
-	public function account_menu( $items ) {
+	public function account_menu( mixed $items ): mixed {
 		if ( ! is_array( $items ) ) {
 			return $items;
 		}
 		unset( $items['downloads'] );
 		if ( isset( $items['subscriptions'] ) ) {
-			$items['subscriptions'] = 'Mitgliedsbeitrag';
+			$items['subscriptions'] = __( 'Mitgliedsbeitrag', 'bw-woo-membership' );
 		}
 		return $items;
 	}
@@ -98,7 +98,12 @@ final class SubscriptionController {
 		}
 		wp_add_inline_script(
 			'wp-hooks',
-			"wp.hooks.addFilter( 'i18n.gettext_woocommerce-subscriptions', 'bw-wm/texts', function ( translation, text ) { return 'every' === text ? 'pro' : ( 'every %s' === text ? 'pro %s' : translation ); } );"
+			sprintf(
+				"wp.hooks.addFilter( 'i18n.gettext_woocommerce-subscriptions', 'bw-wm/texts', function ( translation, text ) { return 'every' === text ? %1$s : ( 'every %%s' === text ? %2$s : translation ); } );",
+				wp_json_encode( _x( 'pro', 'billing period: every', 'bw-woo-membership' ) ),
+				/* translators: %s: billing period, e.g. "Jahr" */
+				wp_json_encode( _x( 'pro %s', 'billing period: every …', 'bw-woo-membership' ) )
+			)
 		);
 	}
 
@@ -108,8 +113,9 @@ final class SubscriptionController {
 	 * @param string $translation Translated text.
 	 * @param string $text        Original text.
 	 */
-	public function texts( $translation, $text ) {
-		return 'every %s' === $text ? 'pro %s' : $translation;
+	public function texts( mixed $translation, mixed $text ): mixed {
+		/* translators: %s: billing period, e.g. "Jahr" */
+		return 'every %s' === $text ? _x( 'pro %s', 'billing period: every …', 'bw-woo-membership' ) : $translation;
 	}
 
 	/**
@@ -120,7 +126,7 @@ final class SubscriptionController {
 	 * @param array<string, mixed>             $item Cart item.
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function renewal_line( $data, $item ) {
+	public function renewal_line( mixed $data, mixed $item ): mixed {
 		$product = $item['data'] ?? null;
 		if ( ! is_array( $data ) || ! $product instanceof \WC_Product || '' === $this->orders->product_type( (int) ( $item['product_id'] ?? 0 ) ) ) {
 			return $data;
@@ -132,8 +138,9 @@ final class SubscriptionController {
 		$when = MembershipPeriod::day_month( (int) ( $sync['day'] ?? 0 ), (int) ( $sync['month'] ?? 0 ) );
 		foreach ( $data as $key => $row ) {
 			if ( '' !== $when && ! empty( $row['wcs_subscription_detail'] ) && in_array( $row['name'] ?? '', array( 'Renews', __( 'Renews', 'woocommerce-subscriptions' ) ), true ) ) { // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch -- the plugin's own label.
-				$data[ $key ]['name']  = 'Verlängerung';
-				$data[ $key ]['value'] = 'jährlich am ' . $when;
+				$data[ $key ]['name']  = __( 'Verlängerung', 'bw-woo-membership' );
+				/* translators: %s: day and month, e.g. "1. Jänner" */
+				$data[ $key ]['value'] = sprintf( __( 'jährlich am %s', 'bw-woo-membership' ), $when );
 			}
 		}
 		return $data;
@@ -144,7 +151,7 @@ final class SubscriptionController {
 	 *
 	 * @param int $subscription_id Subscription ID.
 	 */
-	public function switch_type( $subscription_id ): void {
+	public function switch_type( mixed $subscription_id ): void {
 		$subscription = function_exists( 'wcs_get_subscription' ) ? wcs_get_subscription( (int) $subscription_id ) : null;
 		if ( ! $subscription instanceof \WC_Order || ! $subscription->has_status( 'active' ) ) {
 			return;
@@ -177,7 +184,8 @@ final class SubscriptionController {
 		$subscription->calculate_totals();
 		$subscription->add_order_note(
 			sprintf(
-				'Mitgliedschaft zur Verlängerung umgestellt: %1$s → %2$s (Studiennachweis).',
+				/* translators: 1: old membership type, 2: new membership type */
+				__( 'Mitgliedschaft zur Verlängerung umgestellt: %1$s → %2$s (Studiennachweis).', 'bw-woo-membership' ),
 				MembershipTypes::label( $type ),
 				MembershipTypes::label( $target )
 			)

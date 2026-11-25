@@ -83,9 +83,11 @@ final class WaitlistController {
 			if ( $user ) {
 				$this->mailer->send(
 					$user->user_email,
-					'Ein Platz ist frei: ' . get_the_title( $event_id ),
+					/* translators: %s: event title */
+					sprintf( __( 'Ein Platz ist frei: %s', 'bw-woo-membership' ), get_the_title( $event_id ) ),
 					sprintf(
-						"Hallo %s,\n\nbei „%s“ ist ein Platz frei geworden. Du stehst auf der Warteliste – melde dich jetzt an, solange der Platz frei ist (wer zuerst bucht, bekommt ihn):\n%s",
+						/* translators: 1: first name, 2: event title, 3: event address */
+						__( "Hallo %1\$s,\n\nbei „%2\$s“ ist ein Platz frei geworden. Du stehst auf der Warteliste – melde dich jetzt an, solange der Platz frei ist (wer zuerst bucht, bekommt ihn):\n%3\$s", 'bw-woo-membership' ),
 						$user->first_name ? $user->first_name : $user->display_name,
 						get_the_title( $event_id ),
 						(string) get_permalink( $event_id )
@@ -104,7 +106,7 @@ final class WaitlistController {
 	 * @param string   $to       New status.
 	 * @param WC_Order $order    Order.
 	 */
-	public function on_registration( int $order_id, string $from, string $to, $order ): void {
+	public function on_registration( int $order_id, string $from, string $to, mixed $order ): void {
 		if ( ! $order instanceof WC_Order || ! in_array( $to, EventRepository::HOLDING_STATUSES, true ) || $order->get_customer_id() <= 0 ) {
 			return;
 		}

@@ -9,13 +9,13 @@ declare(strict_types=1);
 
 namespace BW\WooMembership\Modules\Events\Service;
 
+use BW\WooMembership\Support\Months;
+
 /**
  * Date and place of an event as text: the labels of bw-appa when available (EventRepository::fields()), otherwise a
  * fallback with the same rules.
  */
 final class EventLabels {
-
-	private const MONTHS = array( 1 => 'Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember' );
 
 	/**
 	 * "8. Oktober 2027, 9:00–17:30 Uhr" (multi-day: "8.–9. Oktober 2027, ab 9:00 Uhr").
@@ -32,12 +32,15 @@ final class EventLabels {
 		}
 		$time = '' !== $f['time'] ? self::clock( $f['time'] ) : '';
 		if ( '' !== $f['end_date'] && $f['end_date'] > $f['date'] ) {
-			return self::day( $f['date'] ) . ' – ' . self::day( $f['end_date'] ) . ( '' !== $time ? ', ab ' . $time . ' Uhr' : '' );
+			$days = self::day( $f['date'] ) . ' – ' . self::day( $f['end_date'] );
+			/* translators: 1: first and last day, 2: start time */
+			return '' !== $time ? sprintf( __( '%1$s, ab %2$s Uhr', 'bw-woo-membership' ), $days, $time ) : $days;
 		}
 		if ( '' === $time ) {
 			return $day;
 		}
-		return $day . ', ' . $time . ( '' !== $f['end_time'] ? '–' . self::clock( $f['end_time'] ) : '' ) . ' Uhr';
+		/* translators: 1: day, 2: time or time span */
+		return sprintf( __( '%1$s, %2$s Uhr', 'bw-woo-membership' ), $day, $time . ( '' !== $f['end_time'] ? '–' . self::clock( $f['end_time'] ) : '' ) );
 	}
 
 	/**
@@ -51,10 +54,10 @@ final class EventLabels {
 		}
 		$location = '' !== $f['location'] ? ': ' . $f['location'] : '';
 		return match ( $f['format'] ) {
-			'online' => 'Online via Zoom',
-			'onsite' => 'Vor Ort' . $location,
-			'hybrid' => 'Vor Ort und online' . $location,
-			default  => '' !== $f['location'] ? $f['location'] : ( '' !== $f['zoom_link'] ? 'Online via Zoom' : '' ),
+			'online' => __( 'Online via Zoom', 'bw-woo-membership' ),
+			'onsite' => __( 'Vor Ort', 'bw-woo-membership' ) . $location,
+			'hybrid' => __( 'Vor Ort und online', 'bw-woo-membership' ) . $location,
+			default  => '' !== $f['location'] ? $f['location'] : ( '' !== $f['zoom_link'] ? __( 'Online via Zoom', 'bw-woo-membership' ) : '' ),
 		};
 	}
 
@@ -74,7 +77,7 @@ final class EventLabels {
 		if ( 1 !== preg_match( '/^(\d{4})-(\d{2})-(\d{2})$/', $date, $m ) ) {
 			return '';
 		}
-		return sprintf( '%d. %s %d', (int) $m[3], self::MONTHS[ (int) $m[2] ], (int) $m[1] );
+		return sprintf( '%d. %s %d', (int) $m[3], Months::name( (int) $m[2] ), (int) $m[1] );
 	}
 
 	/**

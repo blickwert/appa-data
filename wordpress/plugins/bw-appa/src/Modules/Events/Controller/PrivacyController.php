@@ -78,7 +78,7 @@ final class PrivacyController {
 			return;
 		}
 		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
-			define( 'DONOTCACHEPAGE', true );
+			define( 'DONOTCACHEPAGE', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- constant read by caching plugins.
 		}
 		nocache_headers();
 		header( 'X-Accel-Expires: 0' );

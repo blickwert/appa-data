@@ -75,6 +75,7 @@ final class AdminPageController {
 		}
 		$asset = require $asset_file;
 		wp_enqueue_script( 'bw-wm-admin', plugins_url( 'build/admin.js', BW_WM_FILE ), $asset['dependencies'], $asset['version'], true );
+		wp_set_script_translations( 'bw-wm-admin', 'bw-woo-membership', BW_WM_DIR . '/languages' );
 		wp_enqueue_style( 'wp-components' );
 		wp_enqueue_style( 'bw-wm-admin', plugins_url( 'assets/admin.css', BW_WM_FILE ), array( 'wp-components' ), BW_WM_VERSION );
 		wp_add_inline_script(
@@ -155,5 +156,4 @@ final class AdminPageController {
 		readfile( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile -- protected file.
 		exit;
 	}
-
 }
