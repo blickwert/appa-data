@@ -324,7 +324,7 @@ function MemberEdit( { id, go }: { id: string; go: Go } ) {
 						<CardHeader><h2>{ __( 'Bestellungen', 'bw-woo-membership' ) }</h2></CardHeader>
 						<CardBody>
 							{ member.orders.length === 0 ? <p>{ __( 'Keine Bestellungen.', 'bw-woo-membership' ) }</p> : (
-								<table className="widefat striped">
+								<table className="widefat striped bwm-orders">
 									<tbody>
 										{ member.orders.map( ( o ) => (
 											<tr key={ o.id }>
